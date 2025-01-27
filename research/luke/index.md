@@ -10,6 +10,9 @@ clicking on "Open Preview".
 - Researched Ollama
 - Created a simple streaming response in Python
 
+### 27/01/2024
+- Experimented with smolagents 
+
 ## Ollama
 Ollama is a tool which allows us to manage and create local LLMs. 
 
