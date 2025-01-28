@@ -1,0 +1,2 @@
+# Never made this type of file before, is this right?
+ollama
