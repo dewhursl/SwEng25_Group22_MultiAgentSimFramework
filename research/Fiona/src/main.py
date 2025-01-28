@@ -2,6 +2,7 @@ import settings
 import utils
 import basic_test
 import basic_sim
+import sys
 
 print("Starting Program");
 
@@ -12,9 +13,21 @@ time_taken = None;
 if (settings.PROFILING_ENABLED):
     start_time = utils.current_nano_time();
 
+if (sys.argv.__len__() == 1):
+    print("Error, no argument given for test");
+    print("Try arguments: test, sim");
+    quit();
+
 # Run Test
-#basic_test.run_test();
-basic_sim.run_test();
+sysArg = sys.argv[1];
+if (sysArg == "test"):
+    basic_test.run_test();
+elif (sysArg == "sim"):
+    basic_sim.run_test();
+else:
+    print("Error, invaid argument");
+    print("Try arguments: test, sim");
+    quit();
 
 # Profiling
 if (settings.PROFILING_ENABLED):
