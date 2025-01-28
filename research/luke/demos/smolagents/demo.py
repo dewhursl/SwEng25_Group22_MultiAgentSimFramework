@@ -1,7 +1,15 @@
-# Demo Program from https://github.com/huggingface/smolagents
+from litellm import completion
 
-from smolagents import CodeAgent, DuckDuckGoSearchTool, HfApiModel
+response = completion(
+    model = "ollama/llama2",
+    messages = [{
+        "content": "Hello, how are you?",
+        "role": "user"
+    }],
+    api_base = "http://localhost:11434",
+    stream = True
+)
 
-agent = CodeAgent(tools=[DuckDuckGoSearchTool()], model=HfApiModel())
-
-agent.run("How many seconds would it take for a leopard at full speed to run through Pont des Arts?")
+for chunk in response:
+    print(chunk.choices[0].delta.content, end = '', flush = True)
+print()
