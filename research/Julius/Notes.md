@@ -32,7 +32,7 @@ Now, I'm researching:
    can change interactions.
 
 ### 🎨 Visualization Ideas
-I'm also thinking about fun ways to **visualize conversations**, like:
+I'm also thinking about ways to **visualize conversations**, like:
 - **Conversation trees** 🌳 to map out interactions.
 - **Graphs or networks** 🔗 showing connections between responses.
 - **Emotion-based heatmaps** 📊 to track tone changes.
