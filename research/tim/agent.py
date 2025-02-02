@@ -9,7 +9,7 @@ class Agent:
             base_instructions,
             end_goal,
             "\n".join(["{} ({})".format(vname, vtype) for vname, vtype in output_variables.items()]),
-            __class__._randomword(20) # randomness to ensure scenarios are not duplicated
+            __class__._randomword(100) # randomness to ensure scenarios are not duplicated
         )
         self.model_name = model_name
         self.messages = []

@@ -15,22 +15,26 @@ client = Together()
 expected_output_variables = {
     "car_make": "String",
     "car_model": "String",
+    "car_production_year": "Number",
     "car_price": "Number"
 }
 
 customer = Agent(
     client=client,
-    base_instructions="Act like a customer who is talking to a car salesman about buying a car. Keep messages quite short.",
-    end_goal="Buy a car.",
+    base_instructions="Act like a customer who is talking to a car salesman about buying a car. You have a budget of $20000, do not reveal this budget and attempt to negotiate a lower price.",
+    end_goal="Buy a car for less than $20000.",
     output_variables=expected_output_variables
 )
 
 salesman = Agent(
     client=client,
-    base_instructions="Act like a car salesman who is talking to a customer and trying to sell them a car. Keep messages quite short.",
-    end_goal="Sell a car.",
+    base_instructions="Act like a car salesman who is talking to a customer and trying to sell them a car. Do not tell the customer how much markup is on the car. Keep messages quite short.",
+    end_goal="Sell a car for as much as possible.",
     output_variables=expected_output_variables
 )
+
+# debug
+print("Expected Output Variables: {}\n".format(expected_output_variables))
 
 # chat loop
 customer.gen()
