@@ -8,11 +8,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from agent import Agent
+from util import parse_output_variables
 
 client = Together()
 
-output_variables = {
+expected_output_variables = {
     "car_make": "String",
+    "car_model": "String",
     "car_price": "Number"
 }
 
@@ -20,28 +22,31 @@ customer = Agent(
     client=client,
     base_instructions="Act like a customer who is talking to a car salesman about buying a car. Keep messages quite short.",
     end_goal="Buy a car.",
-    output_variables=output_variables
+    output_variables=expected_output_variables
 )
 
 salesman = Agent(
     client=client,
     base_instructions="Act like a car salesman who is talking to a customer and trying to sell them a car. Keep messages quite short.",
     end_goal="Sell a car.",
-    output_variables=output_variables
+    output_variables=expected_output_variables
 )
 
 # chat loop
 customer.gen()
 salesman_message = salesman.gen()
-print("Salesman: " + salesman_message + "\n")
+print("Salesman: {}\n".format(salesman_message))
 
 conversation_done = False
-while not conversation_done:
+while True:
     customer_message = customer.gen(salesman_message)
-    print("Customer: " + customer_message + "\n")
+    customer_message, _, _, _ = parse_output_variables(customer_message, expected_output_variables)
+    print("Customer: {}\n".format(customer_message))
+
     salesman_message = salesman.gen(customer_message)
-    print("Salesman: " + salesman_message + "\n")
-    
-    for vname in output_variables:
-        if vname in customer_message or vname in salesman_message:
-            conversation_done = True
+    salesman_message, output_variables, partial_match, full_match = parse_output_variables(salesman_message, expected_output_variables)
+    print("Salesman: {}\n".format(salesman_message))
+
+    if partial_match or full_match:
+        print("Output Variables ({}): {}".format("Full Match" if full_match else "Partial Match", output_variables))
+        break
