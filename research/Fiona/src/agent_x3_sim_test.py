@@ -43,8 +43,12 @@ def run_test():
     
     print("End of main conversation, asking judge for response\n");
 
-    agent_judge_init_prompt = shared_init_prompt + "You are a judge, you must determine who was the winner of this conversation between a teacher and a student. You must pick exactly one as the victor. You must directly explicitly say \"<Person> is the winner\"";
+    agent_judge_init_prompt = "You are a judge, you must determine who was the winner of this conversation between a teacher and a student. You must pick exactly one as the victor.";
+    if (settings.JUDGE_ONE_WORD_RESPONSE_ENABLED):
+        agent_judge_init_prompt += " You must have return a one word response from the following list: [ Teacher, Student ]";
+    
     agent_judge = agent_class.Agent("Judge", agent_judge_init_prompt);
-    judge_response = agent_judge.ask_agent(rolling_chain);
+    judge_response = agent_judge.ask_agent(rolling_chain, False);
     utils.print_response(judge_response);
+    return judge_response;
 

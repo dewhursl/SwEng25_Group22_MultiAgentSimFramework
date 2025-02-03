@@ -4,11 +4,12 @@ import basic_test
 import basic_sim_test
 import agent_x3_sim_test
 import parallel_test
+import parallel_agent_x3_monte_carlo_test
 import sys
 
 print("Starting Program");
 
-ALL_ARGS = "test, sim, 3sim, parallel";
+ALL_ARGS = "test, sim, 3sim, parallel, parallel3";
 
 if (sys.argv.__len__() == 1):
     print("Error, no argument given for test");
@@ -41,6 +42,8 @@ for i in range(numRuns):
         agent_x3_sim_test.run_test();
     elif (sysArg == "parallel"):
         parallel_test.run_test();
+    elif (sysArg == "parallel3"):
+        parallel_agent_x3_monte_carlo_test.run_test(3);
     else:
         print("Error, invaid argument");
         print("Try arguments: " + ALL_ARGS);

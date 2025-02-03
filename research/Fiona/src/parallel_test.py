@@ -20,6 +20,8 @@ USE_DIFFERENT_TOPICS = False;
 # 7 threads took 21s (-7s from serial, 130% faster)
 # 8 threads took 23s (-9s from serial, 140% faster)
 
+# On Desktop, 8 threads took 5.6s 
+
 def run_test():
     print("Running multiple generations in parallel");
 

@@ -7,7 +7,7 @@ class Agent:
         self.m_Init_Prompt = init_prompt;
         self.m_Rolling_Prompt = init_prompt;
     
-    def ask_agent(self, prompt: str) -> ollama.GenerateResponse:
+    def ask_agent(self, prompt: str, decorated: bool = True) -> ollama.GenerateResponse:
         if (settings.AGENT_REMINDERS_ENABLED):
             prompt = prompt + "\n\n" + self.m_Name + ", it is now your turn to respond!";
 
@@ -17,10 +17,12 @@ class Agent:
             self.m_Rolling_Prompt = prompt;
         
         response = ollama.generate(model=settings.OLLAMA_MODEL, prompt=self.m_Rolling_Prompt);
-        response['response'] += "\n";
+        if (decorated):
+            response['response'] += "\n";
 
         if (settings.AGENT_HOLD_CONTEXT_ENABLED):
             self.m_Rolling_Prompt += response['response'];
         
-        response['response'] = self.m_Name + " : " + response['response'];
+        if (decorated):
+            response['response'] = self.m_Name + " : " + response['response'];
         return response;

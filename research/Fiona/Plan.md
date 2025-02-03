@@ -9,6 +9,8 @@ Things to Try:
 - Generate stats and make graphs
 - Figure out how to use the GPU for performance boosts
 - TTS
+- Stop conditions, whatever they are
+- Try smaller models
 
 ## Get Ollama Working
 
@@ -44,10 +46,10 @@ Soon I should work on parallelizing any type of test
 
 ## Notes
 
-I see CUDA mentioned while Ollama is downloading, GPGPU time babyyyyy
+I see CUDA mentioned while Ollama is downloading
 
 Profiling a basic response from ollama on my laptop takes 38,000ms which is obviously beyond abhorrent so I need to find a way to speed this up multiple orders of magnitude if I can. Or at least utilize the downtime somehow
-    Obviously part of this is how weak my GPU is on my laptop so I'll be interested to see the speed up on my desktop but still... 38 seconds is not reasonable for any device 
+    Obviously part of this is how weak my GPU is on my laptop so I'll be interested to see the speed up on my desktop
 
 
 ## TODO
