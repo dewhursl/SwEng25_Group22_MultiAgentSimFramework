@@ -44,6 +44,25 @@ Seeing massive gains. Generally it's about 130% faster than running them seriall
 Wondering if something is off though, maybe the gains aren't coming from them actually running in parallel but instead somewhere else
 Soon I should work on parallelizing any type of test 
 
+## Monte Carlo
+
+I did this step on my desktop otherwise it would have taken a million years
+I was able to run a very large amount of agent_x3_sim_test calls in parallel and have the judge write a one-word output to a file
+Then I can easily graph the data in the form of a bar chart which you can see in the data folder
+
+## GPU Profling & Optimizations
+
+I want to try and profile the program using GPU profiling apps
+I'm familiar with NVIDIA NSight Graphics but I might see if I can use NSight Compute to profile AI programs like Ollama
+
+Here's how to profile using NSight Compute on the CLI:
+`ncu --set full --target-processes all python main.py test` 
+Make sure Ollama is using the GPU with `ollama ps` 
+Read the ollama logs in ~/AppData/Local/Ollama to get useful info. `CUDA_VISIBLE_DEVICES` should be set to 0
+
+Make sure you install the cuda toolkit that matches your cuda version (Seen with `nvidia-smi`)
+I also made a new "info" test which should be useful if you want to try the same thing. Ask me for help if I get it working
+
 ## Notes
 
 I see CUDA mentioned while Ollama is downloading
