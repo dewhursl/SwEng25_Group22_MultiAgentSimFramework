@@ -63,6 +63,17 @@ Read the ollama logs in ~/AppData/Local/Ollama to get useful info. `CUDA_VISIBLE
 Make sure you install the cuda toolkit that matches your cuda version (Seen with `nvidia-smi`)
 I also made a new "info" test which should be useful if you want to try the same thing. Ask me for help if I get it working
 
+Tried using NSight Systems instead to see any difference and it does detect something from ollama but still isn't attaching to the CUDA stuff
+Taking a break, will come back to this with a fresh mind. Need to do some research when I do 
+
+### Debugging why ncu won't attach to ollama
+
+`ollama ps` shows 100% GPU usage
+app.log shows ollama detects `CUDA_VISIBLE_DEVICES=0` 
+`nvidia-smi` shows CUDA 12.6 is installed
+I also installed the 12.6 CUDA toolkit 
+
+
 ## Notes
 
 I see CUDA mentioned while Ollama is downloading
