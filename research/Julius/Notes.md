@@ -37,3 +37,12 @@ I'm also thinking about fun ways to **visualize conversations**, like:
 - **Graphs or networks** 🔗 showing connections between responses.
 - **Emotion-based heatmaps** 📊 to track tone changes.
 
+## 🕵️ Detective-Suspect Dialogue with AutoGen + Ollama
+
+ I managed to get a **detective-suspect** AI conversation working using **Microsoft’s AutoGen** library with **Ollama** for local LLM inference. I used Sebastian's code to set it up. 
+- **Detective Agent**: Questions and analyzes answers.
+- **Suspect Agent**: Tries to remain calm and deflect.
+
+This success means Ollama is now **correctly** serving a model with an OpenAI-like interface, and AutoGen can orchestrate the dialogue.
+
+---
