@@ -45,4 +45,15 @@ I'm also thinking about fun ways to **visualize conversations**, like:
 
 This success means Ollama is now **correctly** serving a model with an OpenAI-like interface, and AutoGen can orchestrate the dialogue.
 
+## Customizable Traits
+
+I also added **customizable “traits”** (like **confidence**, **agreeableness**, or **anxiety**) to each agent. By injecting these values into each agent’s system prompt, the **Detective** and **Suspect** now respond differently depending on their assigned personality traits. This approach allows for more varied and **dynamic** role-play scenarios—sometimes the suspect quickly folds under a confident, aggressive detective, while other times the suspect remains evasive unless thoroughly cornered.
+
+## Monte Carlo Simulation & Auditor Agent
+
+I have also **coded a Monte Carlo simulation** to run the detective-suspect interrogation **multiple times** with randomly assigned personality traits. This allows me to analyze how different trait combinations affect the likelihood of a confession.
+
+However, one major issue emerged: **the Detective agent is very bad at recognizing when the suspect has actually confessed**. Because of this, I need to introduce an **additional "Auditor Agent"** whose sole purpose is to review the dialogue and determine whether a confession has actually been made.
+
+This **Auditor Agent** will act as an external reviewer, ensuring more accurate detection of confessions in the Monte Carlo simulations.
 ---

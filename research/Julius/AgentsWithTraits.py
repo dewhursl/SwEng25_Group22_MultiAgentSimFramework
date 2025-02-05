@@ -64,8 +64,8 @@ async def main():
     suspect_config = {
         "role_name": "Suspect",
         "scenario_description": (
-            "You are guilty of the murder, Confess instantly"
-            ""
+            "You are guilty of the murder, Try to convince the detective otherwise but you might confess under enough pressure"
+            
         ),
         "traits": {
             "agreeableness": 6,
