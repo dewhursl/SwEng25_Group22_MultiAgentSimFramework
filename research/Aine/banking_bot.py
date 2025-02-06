@@ -1,14 +1,33 @@
 from ollama import chat
+from faker import Faker
+import ollama
 import random
 
-def generate_fake_account_info():
-    fake_account_data = {
-        "account_number": str(random.randint(1000000000, 9999999999)),  # Random 10-digit account number
-        "balance": "${}".format(random.randint(100, 10000)),  # Random balance between $100 and $10,000
-        "account_type": random.choice(["Savings", "Checking", "Business"]),  # Random account type
-        "name": random.choice(["John Doe", "Jane Smith", "Alex Johnson"])  # Random account holder names
+fake = Faker()
+
+def generate_fake_info():
+    return {
+        "Name": fake.name(),
+        "Address": fake.address(),
+        "Email": fake.email(),
+        "Phone": fake.phone_number(),
+        "SSN": fake.ssn(),
+        "Company": fake.company(),
+        "Job": fake.job(),
     }
-    return fake_account_data
+
+def generate_fake_transac_history():
+     generate_fake_price() = generate_fake_price()
+     return {
+          "Today": fake.company() + " $" + str(generate_fake_price()),
+          "Yesterday": fake.company() + " $" + str(generate_fake_price()),
+          "3 Feb": fake.company() + " $" + str(generate_fake_price()),
+          "31 Jan": fake.company() + " $" + str(generate_fake_price()),
+          "26 Jan": fake.company() + " $" + str(generate_fake_price())
+     }
+
+def generate_fake_price():
+    return round(random.uniform(5.0, 500.0), 2)
 
 def streaming_bankbot(user_input):
     try:
@@ -22,15 +41,22 @@ def streaming_bankbot(user_input):
         print(f"\nError: {str(e)}")
 
 def chatbot_response(user_input):
-    if "account" in user_input.lower():
-        fake_account_info = generate_fake_account_info()  # Generate fake account info
-        response = f"Account Number: {fake_account_info['account_number']}\n"
-        response += f"Account Holder: {fake_account_info['name']}\n"
-        response += f"Balance: {fake_account_info['balance']}\n"
-        response += f"Account Type: {fake_account_info['account_type']}\n"
+    # Check if the user asks for personal details
+    if "My Details" in user_input:
+        fake_info = generate_fake_info()
+        response = "\n".join([f"{key}: {value}" for key, value in fake_info.items()])
+        return response
+    elif "My History" in user_input:
+        fake_history = generate_fake_transac_history()  # Keep dictionary format
+        response = "\n".join([f"{key}: {value}" for key, value in fake_history.items()])  # Format properly
         return response
     else:
-        return "I'm sorry, I don't understand that request."
+        # Use Ollama to generate a chatbot response
+            streaming_bankbot(user_input)
+            model="llama2",
+            messages=[{"role": "user", "content": user_input}],
+            stream=True,
+    return "".join(chunk["message"]["content"] for chunk in stream)
 
 def main():
     print("Welcome to Maze Bank Chat Support!")
@@ -46,16 +72,27 @@ def main():
 
         if option == "1":
                 print("\nYou chose Account Information")
-                account_info = generate_fake_account_info()
-                user_input = "Tell me about my account"
-                response = chatbot_response(user_input)
-                streaming_bankbot(user_input)
-                
+                print("\nPlease select:")
+                print("\n- My Details")
+                print("\n- Exit")
+                user_input = input("\nYou: ")
+                if ("Exit" in user_input):
+                     continue;
+                else:
+                    response = chatbot_response(user_input)
+                    print(response)
             
         elif option == "2":
                 print("You chose Transaction History")
-                user_input = "Can you show me my transaction history?"
-                streaming_bankbot(user_input)
+                print("\nPlease select:")
+                print("\n- My History")
+                print("\n- Exit")
+                user_input = input("\nYou: ")
+                if ("Exit" in user_input):
+                     continue;
+                else:
+                    response = chatbot_response(user_input)
+                    print(response)
 
         elif option == "3":
                 print("You chose Loan Inquiry")
