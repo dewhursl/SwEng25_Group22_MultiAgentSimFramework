@@ -10,10 +10,10 @@ def generate_fake_info():
         "Name": fake.name(),
         "Address": fake.address(),
         "Email": fake.email(),
-        "Phone": fake.phone_number(),
+        "Date of Birth": fake.date_of_birth(),
+        "Phone Number": fake.phone_number(),
         "SSN": fake.ssn(),
-        "Company": fake.company(),
-        "Job": fake.job(),
+        "Country": fake.country()
     }
 
 def generate_fake_transac_history():
@@ -69,7 +69,6 @@ def main():
 
     while True:
         option = input("\nHow can I assist you (please pick one of the options above by their number): ")
-
         if option == "1":
                 print("\nYou chose Account Information")
                 print("\nPlease select:")
@@ -77,11 +76,10 @@ def main():
                 print("\n- Exit")
                 user_input = input("\nYou: ")
                 if ("Exit" in user_input):
-                     continue;
+                     continue
                 else:
                     response = chatbot_response(user_input)
                     print(response)
-            
         elif option == "2":
                 print("You chose Transaction History")
                 print("\nPlease select:")
@@ -89,25 +87,29 @@ def main():
                 print("\n- Exit")
                 user_input = input("\nYou: ")
                 if ("Exit" in user_input):
-                     continue;
+                     continue
                 else:
                     response = chatbot_response(user_input)
                     print(response)
-
         elif option == "3":
                 print("You chose Loan Inquiry")
-                user_input = "Tell me about loan options."
-                streaming_bankbot(user_input)
-
+                user_input = input("\nYou: ")
+                if ("Exit" in user_input):
+                     continue
+                else:
+                     response = chatbot_response(user_input)
+                     print(response)
         elif option == "4":
                 print("You chose Report an Issue")
-                user_input = "I want to report an issue with my account."
-                streaming_bankbot(user_input)
-
+                print("\nWhat is the issue? ")
+                user_input = input("\nYou: ")
+                if ("Exit" in user_input):
+                     continue
+                else:
+                    streaming_bankbot(user_input)
         elif option.lower() == "exit":
             print("\nThank you for using Maze Bank Chatbot. Have a great day!")
             break  
-
         else:
             print("Invalid option. Please try again.")
             continue 
