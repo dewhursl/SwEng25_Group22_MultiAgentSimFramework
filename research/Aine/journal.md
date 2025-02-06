@@ -18,6 +18,7 @@
 ## Issues:
 ---
 - Haven't got banking support bot working fully - doesn't display fake account information of customer 
+- UPDATE - got fake account information working
 
 ## Note
 ---
