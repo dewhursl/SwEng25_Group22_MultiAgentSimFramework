@@ -17,13 +17,13 @@ def generate_fake_info():
     }
 
 def generate_fake_transac_history():
-     generate_fake_price() = generate_fake_price()
+     fake_price = generate_fake_price()
      return {
-          "Today": fake.company() + " $" + str(generate_fake_price()),
-          "Yesterday": fake.company() + " $" + str(generate_fake_price()),
-          "3 Feb": fake.company() + " $" + str(generate_fake_price()),
-          "31 Jan": fake.company() + " $" + str(generate_fake_price()),
-          "26 Jan": fake.company() + " $" + str(generate_fake_price())
+          "Today": fake.company() + " $" + str(fake_price),
+          "Yesterday": fake.company() + " $" + str(fake_price),
+          "3 Feb": fake.company() + " $" + str(fake_price),
+          "31 Jan": fake.company() + " $" + str(fake_price),
+          "26 Jan": fake.company() + " $" + str(fake_price)
      }
 
 def generate_fake_price():
