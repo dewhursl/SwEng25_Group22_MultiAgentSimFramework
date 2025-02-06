@@ -18,3 +18,7 @@
 ## Issues:
 ---
 - Haven't got banking support bot working fully - doesn't display fake account information of customer 
+
+## Note
+---
+I have another account called VforVersatile, which I used before I changed to using my tcd account.
