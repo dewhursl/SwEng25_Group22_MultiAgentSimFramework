@@ -4,6 +4,8 @@
 - Created basic chatbot - reference code from 
 - Created general customer support chatbot
 - Set up Autogen
+- Experimented with Autogen by using mock code from https://ollama.com/blog/openai-compatibility
+- Created a fully working debating bot where the user picks a topic and the AI debates back and forth
 
 
 ## What I want to do:
