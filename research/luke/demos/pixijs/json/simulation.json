@@ -1,0 +1,8 @@
+{
+    "agents": [
+        {
+            "texture": "spaceship.png",
+            "position": { "x": 0, "y": 0 }
+        }
+    ]
+}
