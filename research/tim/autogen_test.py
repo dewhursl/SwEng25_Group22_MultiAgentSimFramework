@@ -24,7 +24,7 @@ model_client = OpenAIChatCompletionClient(
         "vision": False,
         "function_calling": True,
         "json_output": False,
-        "family": "together",
+        "family": "llama",
     },
 )
 
