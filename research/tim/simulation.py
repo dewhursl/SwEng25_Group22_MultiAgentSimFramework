@@ -16,12 +16,13 @@ expected_output_variables = {
     "car_make": "String",
     "car_model": "String",
     "car_production_year": "Number",
-    "car_price": "Number"
+    "car_price": "Number",
+    "car_co2_emissions_grams": "Number"
 }
 
 customer = Agent(
     client=client,
-    base_instructions="Act like a customer who is talking to a car salesman about buying a car. You have a budget of $20000, do not reveal this budget and attempt to negotiate a lower price.",
+    base_instructions="Act like a customer who is talking to a car salesman about buying a car. You have a budget of $20000, do not reveal this budget and attempt to negotiate a lower price. Also ask about the car emissions.",
     end_goal="Buy a car for less than $20000.",
     output_variables=expected_output_variables
 )
