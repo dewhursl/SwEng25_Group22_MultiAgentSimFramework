@@ -9,9 +9,7 @@ def parse_output_variables(message: str, output_variables: dict) -> tuple:
     for line in lines:
         if not any(re.search(rf"{vname}\s*=", line) for vname in output_variables):
             filtered_lines.append(line)
-    
-    filtered_message = '\n'.join(filtered_lines).strip()
-    
+        
     full_match = True
     partial_match = False
 
@@ -32,4 +30,4 @@ def parse_output_variables(message: str, output_variables: dict) -> tuple:
         else:
             partial_match = True
     
-    return filtered_message, results, partial_match, full_match
+    return results, partial_match, full_match

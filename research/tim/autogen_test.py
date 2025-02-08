@@ -1,47 +1,21 @@
 import os
 import asyncio
 
-from typing import Any, Dict, List
-
 from autogen_agentchat.agents import AssistantAgent
-from autogen_agentchat.conditions import HandoffTermination, TextMentionTermination
-from autogen_agentchat.messages import HandoffMessage
-from autogen_agentchat.teams import Swarm
+from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermination
+from autogen_agentchat.teams import SelectorGroupChat
 from autogen_agentchat.ui import Console
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 
+# API key loading
 from dotenv import load_dotenv
 load_dotenv()
 
-
-# Tools
-async def get_stock_data(symbol: str) -> Dict[str, Any]:
-    """Get stock market data for a given symbol"""
-    return {"price": 180.25, "volume": 1000000, "pe_ratio": 65.4, "market_cap": "700B"}
+# Local imports
+from util import parse_output_variables
 
 
-async def get_news(query: str) -> List[Dict[str, str]]:
-    """Get recent news articles about a company"""
-    return [
-        {
-            "title": "Tesla Expands Cybertruck Production",
-            "date": "2024-03-20",
-            "summary": "Tesla ramps up Cybertruck manufacturing capacity at Gigafactory Texas, aiming to meet strong demand.",
-        },
-        {
-            "title": "Tesla FSD Beta Shows Promise",
-            "date": "2024-03-19",
-            "summary": "Latest Full Self-Driving beta demonstrates significant improvements in urban navigation and safety features.",
-        },
-        {
-            "title": "Model Y Dominates Global EV Sales",
-            "date": "2024-03-18",
-            "summary": "Tesla's Model Y becomes best-selling electric vehicle worldwide, capturing significant market share.",
-        },
-    ]
-
-
-# Model client (local llama3.2)
+# Use Llama-3.3-70B-Instruct-Turbo from together.ai
 model_client = OpenAIChatCompletionClient(
     model="meta-llama/Llama-3.3-70B-Instruct-Turbo",
     base_url="https://api.together.xyz/v1",
@@ -55,63 +29,82 @@ model_client = OpenAIChatCompletionClient(
 )
 
 
-# Agents
-planner = AssistantAgent(
-    "planner",
+customer_agent = AssistantAgent(
+    "CustomerAgent",
+    description="An agent that simulates Customer.",
     model_client=model_client,
-    handoffs=["financial_analyst", "news_analyst", "writer"],
-    system_message="""You are a research planning coordinator.
-    Coordinate market research by delegating to specialized agents:
-    - Financial Analyst: For stock data analysis
-    - News Analyst: For news gathering and analysis
-    - Writer: For compiling final report
-    Always send your plan first, then handoff to appropriate agent.
-    Always handoff to a single agent at a time.
-    Use TERMINATE when research is complete.""",
+    system_message="""
+    You are a customer at a car dealership.
+    Your budget is $25000, do not reveal this budget, try to negotiate the price as low as possible.
+    """,
 )
 
-financial_analyst = AssistantAgent(
-    "financial_analyst",
+car_salesman_agent = AssistantAgent(
+    "CarSalesmanAgent",
+    description="An agent that simulates Car Salesman.",
     model_client=model_client,
-    handoffs=["planner"],
-    tools=[get_stock_data],
-    system_message="""You are a financial analyst.
-    Analyze stock market data using the get_stock_data tool.
-    Provide insights on financial metrics.
-    Always handoff back to planner when analysis is complete.""",
+    system_message="""
+    You are a car salesman.
+    Your job is to sell a car to the customer.
+    If the customer asks about discounts, ask your manager, then relay that information to the customer.
+    """,
 )
 
-news_analyst = AssistantAgent(
-    "news_analyst",
+car_dealership_manager_agent = AssistantAgent(
+    "CarDealershipManagerAgent",
+    description="An agent that simulates Car Dealership Manager",
     model_client=model_client,
-    handoffs=["planner"],
-    tools=[get_news],
-    system_message="""You are a news analyst.
-    Gather and analyze relevant news using the get_news tool.
-    Summarize key market insights from news.
-    Always handoff back to planner when analysis is complete.""",
+    system_message="""
+    You are a manager at a car dealership.
+    Your job is to approve or deny discounts if a salesman asks about them.
+    """,
 )
 
-writer = AssistantAgent(
-    "writer",
+# Modify expected output variables here
+expected_output_variables = {
+    "car_make": "String",
+    "car_price_dollars": "Number",
+    "car_mileage_miles": "Number",
+    "car_production_year": "Number"
+}
+
+information_return_agent = AssistantAgent(
+    "InformationReturnAgent",
+    description="An agent that returns information about the conversation when the specified termination condition is reached.",
     model_client=model_client,
-    handoffs=["planner"],
-    system_message="""You are a financial report writer.
-    Compile research findings into clear, concise reports.
-    Always handoff back to planner when writing is complete.""",
+    system_message="""
+    Do not act like a human.
+    You are a system that extracts the following information from the conversation when the termination condition 'Car has been purchased' is satisfied:
+
+    ```Python
+    {}
+    ```
+
+    MAKE SURE THE OUTPUT IS GIVEN AS VALID PYTHON CODE!
+
+    After this, send 'TERMINATE'
+    """.format("\n".join(["{} # {}".format(vname, vtype) for vname, vtype in expected_output_variables.items()]))
+)
+
+team = SelectorGroupChat(
+    [
+        customer_agent,
+        car_salesman_agent,
+        car_dealership_manager_agent,
+        information_return_agent
+    ],
+    model_client=model_client,
+    termination_condition=(
+        TextMentionTermination("TERMINATE") | MaxMessageTermination(max_messages=25)
+    )
 )
 
 
-# Define termination condition
-text_termination = TextMentionTermination("TERMINATE")
-termination = text_termination
+task = "Purchase a car."
 
-research_team = Swarm(
-    participants=[planner, financial_analyst, news_analyst, writer], termination_condition=termination
+output_variables, _, _ = parse_output_variables(
+    asyncio.run(Console(team.run_stream(task=task))).messages[-1].content,
+    expected_output_variables
 )
 
-task = "Conduct market research for TSLA stock"
-
-task_result = asyncio.run(Console(research_team.run_stream(task=task)))
-
-print(dir(task_result))
+print(output_variables)
