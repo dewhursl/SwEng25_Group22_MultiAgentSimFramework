@@ -1,0 +1,20 @@
+/* Here, you can import any custom TailwindCSS classes and styles that you want */
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* For example, if you need a colour that doesn't exist in the default TailwindCSS palette, you can define it here */
+@theme {
+  --color-midnight: #110619;
+  --shadow-button: 0px 2px 8px 0px rgba(139, 92, 246, 1);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #110619;
+}
