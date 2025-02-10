@@ -7,10 +7,11 @@ import parallel_test
 import parallel_agent_x3_monte_carlo_test
 import sys
 import info_test
+import autogen_test
 
 print("Starting Program");
 
-ALL_ARGS = "test, sim, 3sim, parallel, parallel3, info";
+ALL_ARGS = "test, sim, 3sim, parallel, parallel3, info, autogen";
 
 if (sys.argv.__len__() == 1):
     print("Error, no argument given for test");
@@ -47,6 +48,8 @@ for i in range(numRuns):
         parallel_agent_x3_monte_carlo_test.run_test(3);
     elif (sysArg == "info"):
         info_test.run_test();
+    elif (sysArg == "autogen"):
+        autogen_test.run_test();
     else:
         print("Error, invaid argument");
         print("Try arguments: " + ALL_ARGS);

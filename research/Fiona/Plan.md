@@ -11,6 +11,10 @@ Things to Try:
 - TTS
 - Stop conditions, whatever they are
 - Try smaller models
+- Look into llm observability
+- Look into llm ops
+- Look into drilldowns
+- Get AutoGen working
 
 ## Get Ollama Working
 
@@ -73,6 +77,11 @@ app.log shows ollama detects `CUDA_VISIBLE_DEVICES=0`
 `nvidia-smi` shows CUDA 12.6 is installed
 I also installed the 12.6 CUDA toolkit 
 
+## LLM Observability
+
+This is complete visibility into every layer of an LLM software system (App, prompt and response)
+
+LLM Monitoring involves tracking LLM apps performance through evaluation metrics and methods. LLM Observability makes monitoring possible by providing visibility and tracing 
 
 ## Notes
 
