@@ -1,4 +1,5 @@
 /* Here, you can import any custom TailwindCSS classes and styles that you want */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 @import "tailwindcss";
 
 @tailwind base;
@@ -17,4 +18,5 @@
 
 body {
   background: #110619;
+  font-family: 'Manrope', sans-serif;
 }
