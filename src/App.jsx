@@ -1,11 +1,17 @@
 import React from "react";
-import Navbar from "./pages/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import LandingPage from "./pages/LandingPage";
+import Renderer from "./pages/Renderer";
 
 const App = () => {
   return (
-    <main className="max-w-7xl mx-auto">
-      <Navbar />
-    </main>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/renderer" element={<Renderer />} />
+      </Routes>
+    </Router>
   );
 };
 
