@@ -20,17 +20,20 @@ class Simulation:
         )
 
         # Llama-3.3-70B-Instruct-Turbo (Together.AI)
-        self.llama_model_client = OpenAIChatCompletionClient(
-            model="meta-llama/Llama-3.3-70B-Instruct-Turbo",
-            base_url="https://api.together.xyz/v1",
-            api_key=os.environ["TOGETHER_API_KEY"],
-            model_info={
-                "vision": False,
-                "function_calling": True,
-                "json_output": False,
-                "family": "llama",
-            },
-        )
+        try:
+            self.llama_model_client = OpenAIChatCompletionClient(
+                model="meta-llama/Llama-3.3-70B-Instruct-Turbo",
+                base_url="https://api.together.xyz/v1",
+                api_key=os.environ["TOGETHER_API_KEY"],
+                model_info={
+                    "vision": False,
+                    "function_calling": True,
+                    "json_output": False,
+                    "family": "llama",
+                },
+            )
+        except KeyError:
+            self.llama_model_client = self.gpt_model_client
         
         self.config = SimConfigLoader(sim_config_file_name).load()
 
