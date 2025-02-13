@@ -1,0 +1,46 @@
+{
+    "name": "Car Sale Simulation",
+    "agents": [
+        {
+            "name": "Customer",
+            "description": "Customer at a car dealership.",
+            "parameters": {
+                "budget": "$25,000"
+            },
+            "free_prompt": "Try to negotiate the price to the lowest possible amount, do not reveal your budget! Ask about discounts, car emissions and mileage."
+        },
+        {
+            "name": "CarSalesman",
+            "description": "Salesman at a car dealership.",
+            "parameters": {
+                "minium_profit": "$5000"
+            },
+            "free_prompt": "Sell a car for the highest markup possible."
+        },
+        {
+            "name": "Manager",
+            "description": "Manager at a car dealership.",
+            "parameters": {},
+            "free_prompt": "Approve or deny discounts."
+        }
+    ],
+    "termination_condition": "Car sale concluded.",
+    "output_variables": [
+        {
+            "name": "car_make",
+            "type": "String"
+        },
+        {
+            "name": "car_model",
+            "type": "String"
+        },
+        {
+            "name": "car_price_dollars",
+            "type": "Number"
+        },
+        {
+            "name": "car_mileage_kilometers",
+            "type": "Number"
+        }
+    ]
+}
