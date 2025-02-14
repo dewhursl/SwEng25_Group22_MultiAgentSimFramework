@@ -14,11 +14,14 @@ const Renderer = () => {
 
   const getScene = () => {
     switch (context) {
-      case "2d": return <Scene2D simulationData={data} />;
-      case "3d": return <Scene3D simulationData={data} />;
-      default: return <></>
+      case "2d":
+        return <Scene2D simulationData={data} />;
+      case "3d":
+        return <Scene3D simulationData={data} />;
+      default:
+        return <></>;
     }
-  }
+  };
 
   return (
     <div className="w-full items-center justify-center h-screen mx-auto">

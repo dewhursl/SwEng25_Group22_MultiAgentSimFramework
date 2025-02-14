@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GrConfigure } from "react-icons/gr";
 import { MdOutline3dRotation } from "react-icons/md";
-import { RiDashboardLine } from "react-icons/ri";
+import { MdDashboard } from "react-icons/md";
 
 export const navLinks = [
     {
@@ -21,6 +21,6 @@ export const navLinks = [
         id: 3,
         name: 'Dashboard',
         href: '/dashboard',
-        icon: RiDashboardLine,
+        icon: MdDashboard,
     },
 ];
