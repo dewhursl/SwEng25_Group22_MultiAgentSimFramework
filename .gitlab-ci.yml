@@ -6,7 +6,7 @@ image: node:latest
 
 default:
   tags:
-    - shared
+    - maven
 
 workflow:
   rules:
