@@ -35,7 +35,7 @@ const AgentMesh = ({ agent, agentRefs, state = {} }) => {
               borderRadius: "0.5rem",
               border: "1px solid #ccc",
               whiteSpace: "nowrap",
-              color: "white", // added white text for readability on a dark background
+              color: "white",
             }}
           >
             {speech}
