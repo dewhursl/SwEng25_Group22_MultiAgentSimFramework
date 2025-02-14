@@ -79,18 +79,26 @@ build_frontend:
 measure_energy:
   stage: measure_energy
   before_script:
-    - apt-get update && apt-get install -y jq
+    - apt-get update
+    - apt-get install -y jq curl
+    - which jq
+    - jq --version
   script:
+    - pwd
+    - ls -la
     - !reference [.start_measurement, script]
     - export ECO_CI_LABEL="Frontend Build"
     - !reference [.get_measurement, script]
     - !reference [.display_results, script]
+    - pwd
+    - ls -la
   artifacts:
+    when: always
     paths:
-      - eco-ci-output.txt
+      - ./eco-ci-output.txt
+      - ./*.txt
     reports:
       metrics: eco-ci-output.txt
   needs: ["build_frontend"]
   rules:
-    #- if: $CI_COMMIT_BRANCH == "main"
     - if: $CI_COMMIT_BRANCH == "frontend"
