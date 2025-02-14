@@ -25,6 +25,7 @@ cache:
     files:
       - frontend/package-lock.json
   paths:
+    - frontend/.npm/
     - frontend/node_modules/
   policy: pull-push
 
@@ -50,9 +51,14 @@ install_dependencies:
   script:
     - cd frontend
     - npm ci
-  artifacts:
+  cache:
+    key:
+      files:
+        - frontend/package-lock.json
     paths:
+      - frontend/.npm/
       - frontend/node_modules/
+    policy: pull-push
 
 lint_frontend:
   stage: lint
@@ -93,5 +99,5 @@ measure_energy:
       metrics: eco-ci-output.txt
   needs: ["build_frontend"]
   rules:
-    # - if: $CI_COMMIT_BRANCH == "main"
+    #- if: $CI_COMMIT_BRANCH == "main"
     - if: $CI_COMMIT_BRANCH == "frontend"
