@@ -2,11 +2,16 @@
 include:
   remote: "https://raw.githubusercontent.com/green-coding-solutions/eco-ci-energy-estimation/main/eco-ci-gitlab.yml"
 
-image: node:latest
+image: node:22
+
+default:
+  before_script:
+    - node --version
+    - npm --version
 
 workflow:
   rules:
-    # - if: $CI_COMMIT_BRANCH == "main"
+    #- if: $CI_COMMIT_BRANCH == "main"
     - if: $CI_COMMIT_BRANCH == "frontend"
     - if: $CI_MERGE_REQUEST_ID
 
@@ -44,7 +49,10 @@ variables:
 install_dependencies:
   stage: install
   script:
+    - pwd
+    - ls -la
     - cd frontend
+    - ls -la
     - npm ci
   artifacts:
     paths:
@@ -89,5 +97,5 @@ measure_energy:
       metrics: eco-ci-output.txt
   needs: ["build_frontend"]
   rules:
-    # - if: $CI_COMMIT_BRANCH == "main"
+    #- if: $CI_COMMIT_BRANCH == "main"
     - if: $CI_COMMIT_BRANCH == "frontend"
