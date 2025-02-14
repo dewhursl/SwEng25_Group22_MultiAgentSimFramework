@@ -69,9 +69,7 @@ lint_frontend:
   allow_failure: true
   needs: ["install_dependencies"]
   rules:
-    - if: $CI_COMMIT_BRANCH
-      changes:
-        - frontend/**/*
+    - if: $CI_COMMIT_BRANCH == "frontend"
 
 build_frontend:
   stage: build
@@ -87,6 +85,8 @@ build_frontend:
 
 measure_energy:
   stage: measure_energy
+  before_script:
+    - apt-get update && apt-get install -y jq
   script:
     - !reference [.start_measurement, script]
     - export ECO_CI_LABEL="Frontend Build"
