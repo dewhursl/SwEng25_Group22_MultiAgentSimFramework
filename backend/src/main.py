@@ -5,7 +5,10 @@ from sim.simulation import Simulation
 
 
 def main():
+    print("Initialising Simulation")
     sim = Simulation("car_sale_simulation.json")
+
+    print("Running Simulation")
     sim.run()
 
 
