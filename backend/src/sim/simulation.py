@@ -10,10 +10,6 @@ from autogen_agentchat.teams import SelectorGroupChat
 from autogen_agentchat.ui import Console
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 
-TEMP_AGENT_MODEL_TYPE = "Ollama" # Remove
-TEMP_INFO_MODEL_TYPE = "Ollama" # Remove
-TEMP_GC_MODEL_TYPE = "Ollama" # Remove
-
 def init_gpt_model_client():
     return OpenAIChatCompletionClient(
             model="gpt-4o",
@@ -54,14 +50,19 @@ def select_model(type: str, gpt_model, together_model, ollama_model):
         return together_model
     elif (type == "Ollama"):
         return ollama_model
-    assert(False) # Change this to throw exception, can't be bothered to look up how rn
+    raise Exception("Invalid model type: " + type)
 
 class Simulation:
-    def __init__(self, sim_config_file_name, max_messages=25):
+    def __init__(self, sim_config_file_name, max_messages=25):        
+
+        print("Loading config file: " + sim_config_file_name)
+        
+        self.config = SimConfigLoader(sim_config_file_name).load()        
 
         print("Initialising model client")
 
-        model_list = [ TEMP_AGENT_MODEL_TYPE, TEMP_INFO_MODEL_TYPE, TEMP_GC_MODEL_TYPE ]
+        models = self.config['models']
+        model_list = [ models["agent"], models["info_return_agent"], models["group_chat"]] # Can this be simplified?
         gpt_model_client = None
         together_model_client = None
         ollama_model_client = None
@@ -73,13 +74,9 @@ class Simulation:
         if (model_list.__contains__("Ollama")):
             ollama_model_client = init_ollama_model_client()
 
-        self.agent_model_client = select_model(TEMP_AGENT_MODEL_TYPE, gpt_model_client, together_model_client, ollama_model_client)
-        self.info_model_client = select_model(TEMP_INFO_MODEL_TYPE, gpt_model_client, together_model_client, ollama_model_client)
-        self.gc_model_client = select_model(TEMP_GC_MODEL_TYPE, gpt_model_client, together_model_client, ollama_model_client)
-
-        print("Loading config file: " + sim_config_file_name)
-        
-        self.config = SimConfigLoader(sim_config_file_name).load()
+        self.agent_model_client = select_model(models["agent"], gpt_model_client, together_model_client, ollama_model_client)
+        self.info_model_client = select_model(models["info_return_agent"], gpt_model_client, together_model_client, ollama_model_client)
+        self.gc_model_client = select_model(models["group_chat"], gpt_model_client, together_model_client, ollama_model_client)
 
         print("Setting up AutoGen Agents")
 

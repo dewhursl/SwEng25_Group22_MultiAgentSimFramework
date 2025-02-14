@@ -27,6 +27,7 @@ class SimConfigLoader:
 
         return {
             "name": config["name"],
+            "models": config["models"],
             "agents": formatted_agents,
             "termination_condition": config["termination_condition"],
             "output_variables": config["output_variables"]

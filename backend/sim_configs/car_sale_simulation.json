@@ -1,5 +1,10 @@
 {
     "name": "Car Sale Simulation",
+    "models": { 
+        "agent": "Ollama",
+        "info_return_agent": "Ollama",
+        "group_chat": "Ollama"
+    },
     "agents": [
         {
             "name": "Customer",
