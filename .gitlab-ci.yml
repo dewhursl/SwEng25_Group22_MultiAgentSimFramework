@@ -1,0 +1,93 @@
+# Eco-CI template
+include:
+  remote: "https://raw.githubusercontent.com/green-coding-solutions/eco-ci-energy-estimation/main/eco-ci-gitlab.yml"
+
+image: node:latest
+
+workflow:
+  rules:
+    # - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "frontend"
+    - if: $CI_MERGE_REQUEST_ID
+
+stages:
+  - install
+  - lint
+  - build
+  - measure_energy
+
+cache:
+  key:
+    files:
+      - frontend/package-lock.json
+  paths:
+    - frontend/node_modules/
+  policy: pull-push
+
+variables:
+  ECO_CI_SEND_DATA: "true"
+  ECO_CI_DISPLAY_BADGE: "true"
+  ECO_CI_DISPLAY_TABLE: "true"
+  ECO_CI_SHOW_CARBON: "true"
+  ECO_CI_FILTER_TYPE: "machine.ci"
+  ECO_CI_FILTER_PROJECT: "CI/CD"
+  ECO_CI_FILTER_MACHINE: "saas-linux-small-amd64"
+  ECO_CI_FILTER_TAGS: ""
+  ECO_CI_JSON_OUTPUT: "false"
+  ECO_CI_CALCULATE_CO2: "true"
+  ECO_CI_CLONE_BRANCH: "main"
+  ECO_CI_MACHINE_POWER_DATA: "gitlab_EPYC_7B12_saas-linux-small-amd64.sh"
+  ECO_CI_API_ENDPOINT_ADD: "https://api.green-coding.io/v2/ci/measurement/add"
+  ECO_CI_API_BADGE_GET: "https://api.green-coding.io/v1/ci/badge/get"
+  ECO_CI_DASHBOARD_URL: "https://metrics.green-coding.io"
+
+install_dependencies:
+  stage: install
+  script:
+    - cd frontend
+    - npm ci
+  artifacts:
+    paths:
+      - frontend/node_modules/
+
+lint_frontend:
+  stage: lint
+  script:
+    - cd frontend
+    - npm run lint
+    - npm run format:check
+  allow_failure: true
+  needs: ["install_dependencies"]
+  rules:
+    - if: $CI_COMMIT_BRANCH
+      changes:
+        - frontend/**/*
+
+build_frontend:
+  stage: build
+  script:
+    - cd frontend
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/dist/
+  needs: ["install_dependencies"]
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+measure_energy:
+  stage: measure_energy
+  script:
+    - !reference [.start_measurement, script]
+    - export ECO_CI_LABEL="Frontend Build"
+    - !reference [.get_measurement, script]
+    - !reference [.display_results, script]
+  artifacts:
+    paths:
+      - eco-ci-output.txt
+    reports:
+      metrics: eco-ci-output.txt
+  needs: ["build_frontend"]
+  rules:
+    # - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "frontend"
