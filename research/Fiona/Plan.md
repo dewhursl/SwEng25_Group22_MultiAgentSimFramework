@@ -77,6 +77,24 @@ app.log shows ollama detects `CUDA_VISIBLE_DEVICES=0`
 `nvidia-smi` shows CUDA 12.6 is installed
 I also installed the 12.6 CUDA toolkit 
 
+### Debugging session 2
+
+Ok this is just not working, and it's very hard to find people knowledgable about both GPU profiling and local LLMs online
+NSS is detecting ollama but not CUDA
+I made NSS profile a sample cuda program and it worked properly 
+NCU won't attach to ollama at all, detects nothing 
+As I've noticed before, `server.log` mentions "CUDA0" quite a lot
+I tried making NCU attach directly to a running instance of ollama.exe but I haven't got it working yet
+    I was thinking maybe the py script isn't the one managing the GPU commands but instead ollama.exe or ollama app.exe
+Note that I did try launching ollama.exe through NCU and it still didn't work so...
+I need to have a look at the llama.cpp code and see if I can find any clues
+What I really need though is someone to give some guidance, maybe there's a forum or something somewhere 
+Could be good if I can find some other way to check if ollama is running CUDA, then I can determine whether the problem is ollama or NCU 
+Although once I get assigned some actual tasks I might just drop this, maybe not worth the effort / I'm not quite experienced enough yet 
+
+Come back to this:
+![alt text](image.png)
+
 ## LLM Observability
 
 This is complete visibility into every layer of an LLM software system (App, prompt and response)

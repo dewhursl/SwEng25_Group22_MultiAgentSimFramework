@@ -8,8 +8,13 @@ import parallel_agent_x3_monte_carlo_test
 import sys
 import info_test
 import autogen_test
+import os
+import pathlib
 
-print("Starting Program");
+print("Starting Program. PID=" + str(os.getpid()));
+f = open("../data/PID.txt", "w");
+f.write("PID=" + str(os.getpid()));
+f.close();
 
 ALL_ARGS = "test, sim, 3sim, parallel, parallel3, info, autogen";
 
