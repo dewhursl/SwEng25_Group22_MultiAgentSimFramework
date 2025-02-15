@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SIMULATION_DATA } from "../constants/simulationData";
 import Scene2D from "./components/Scene2D";
 import Scene3D from "./components/Scene3D";
@@ -9,8 +9,15 @@ const Renderer = () => {
   // We are using mock data here
   const data = SIMULATION_DATA;
 
+
+
   // Mock rendering context
-  const context = "3d";
+  const [context, setContext] = useState("3d");
+
+  // Toggle context
+  const toggleContext = () => {
+    setContext((prev) => (prev === "2d" ? "3d" : "2d"));
+  };
 
   const getScene = () => {
     switch (context) {
@@ -24,11 +31,17 @@ const Renderer = () => {
   };
 
   return (
-    <div className="w-full items-center justify-center h-screen mx-auto">
-      {/* <Scene3D simulationData={data} /> */}
+    <div className="w-full flex flex-col items-center justify-center h-screen mx-auto">
+      <button
+        onClick={toggleContext}
+        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+      >
+        {context === "2d" ? "3D" : "2D"} Render
+      </button>
       {getScene()}
     </div>
   );
 };
 
 export default Renderer;
+
