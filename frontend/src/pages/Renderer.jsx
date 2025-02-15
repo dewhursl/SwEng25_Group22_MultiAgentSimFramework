@@ -9,10 +9,8 @@ const Renderer = () => {
   // We are using mock data here
   const data = SIMULATION_DATA;
 
-
-
   // Mock rendering context
-  const [context, setContext] = useState("3d");
+  const [context, setContext] = useState("2d");
 
   // Toggle context
   const toggleContext = () => {
