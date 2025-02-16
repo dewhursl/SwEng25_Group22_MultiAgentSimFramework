@@ -47,9 +47,12 @@ export default function Renderer({ simulationData }) {
 
   const printText = (x, y, message) => {
     const text = new PIXI.Text(message, {
-      fontSize: 24,
+      fontSize: 15,
       fill: "white",
+      background: "white",
       align: "center",
+      wordWrap: true,          // Enable word wrapping
+      wordWrapWidth: 200,      // Set maximum width before going to new line 
     });
   
     text.x = x - text.width / 2; // Center horizontally around the sprite position
@@ -116,7 +119,7 @@ export default function Renderer({ simulationData }) {
           agent.name
         );
       });
-      printText(app.screen.width/2, app.screen.height / 2, "Simulation starting"); 
+      printText(app.screen.width/2, app.screen.height / 2-100, "Simulation starting"); 
       printConversation();
       
       
@@ -129,3 +132,4 @@ export default function Renderer({ simulationData }) {
 
   return <div ref={containerRef} />;
 }
+
