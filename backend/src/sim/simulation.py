@@ -99,7 +99,7 @@ class Simulation:
                 f"Do not act like a human.\n"
                 f"You are a system that extracts the following information from the conversation when the termination condition: \"{self.config['termination_condition']}\" is satisfied:\n\n"
                 f"{'\n'.join([f'{v['name']} # {v['type']}' for v in self.config['output_variables']])}\n\n"
-                f"Make sure the output is valid python code, and the variables are assigned to exact values (not expessions).\n\n"
+                f"Make sure the output is valid python code, and the variables are assigned to exact values (not expessions). Also, make sure that variables that contain information on the unit (e.g. kilometers) are assigned appropriate values, do a calculation if you have to.\n\n"
                 f"After this, send 'TERMINATE'\n"
             )
         )
