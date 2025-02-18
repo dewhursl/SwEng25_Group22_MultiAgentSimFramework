@@ -1,5 +1,5 @@
-import React from "react";
-import { navLinks } from "../../constants/index";
+import React from 'react';
+import { navLinks } from '../../constants/index';
 
 const Navbar = () => {
   const NavItems = () => {
@@ -28,11 +28,7 @@ const Navbar = () => {
       <div className="bg-midnight shadow-lg shadow-violet-600/60">
         <div className="max-w-7xl mx-auto flex justify-between items-center py-5">
           <div className="flex items-center">
-            <img
-              src="../assets/quantexa-logo-white.svg"
-              alt="logo"
-              className="w-34 h-6"
-            />
+            <img src="../assets/quantexa-logo-white.svg" alt="logo" className="w-34 h-6" />
           </div>
           <nav className="sm:flex hidden">
             <NavItems />
