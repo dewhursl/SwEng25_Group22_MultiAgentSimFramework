@@ -19,8 +19,8 @@ OPENAI_API_KEY="..."
 ```json
 {
   "id": "<ID (sim_id)>",
-  "num_runs": <Number>,
-  "num_agents": <Number>,
+  "num_runs": "<Number>",
+  "num_agents": "<Number>",
   "agents": [
     {
       "name": "<String>",
@@ -48,7 +48,7 @@ OPENAI_API_KEY="..."
 ```json
 [
   {
-    "num_messages": <Number>,
+    "num_messages": "<Number>",
     "chat_log": [
       {
         "agent": "<String>",
