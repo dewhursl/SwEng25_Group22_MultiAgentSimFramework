@@ -1,13 +1,15 @@
 from util.config import SimConfigLoader
 
-
 import re
 import os
 import asyncio
-
-from airflow import DAG
-from airflow.operators.python import PythonOperator
 from datetime import datetime
+
+AIRFLOW_ENABLED = False
+
+if (AIRFLOW_ENABLED):
+    from airflow import DAG
+    from airflow.operators.python import PythonOperator
 
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermination
@@ -133,17 +135,18 @@ class Simulation:
     def run(self):
         asyncio.run(Console(self.gc.run_stream()))
 
-    with DAG(
-    "simulation_task",
-    schedule_interval=None,  
-    start_date=datetime(2025, 2, 18),  
-    catchup=False,
-    ) as dag:
-        sim_task = PythonOperator(
-        task_id="sim_task",
-        python_callable=run,
-    )
-    sim_task  
+    if (AIRFLOW_ENABLED):
+        with DAG(
+        "simulation_task",
+        schedule_interval=None,  
+        start_date=datetime(2025, 2, 18),  
+        catchup=False,
+        ) as dag:
+            sim_task = PythonOperator(
+            task_id="sim_task",
+            python_callable=run,
+        )
+        sim_task  
 
 
 

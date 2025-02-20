@@ -1,7 +1,7 @@
 {
     "name": "Car Sale Simulation",
     "models": { 
-        "agent": "Together",
+        "agent": "GPT",
         "info_return_agent": "GPT",
         "group_chat": "GPT"
     },
