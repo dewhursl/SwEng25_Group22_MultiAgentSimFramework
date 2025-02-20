@@ -1,6 +1,5 @@
 from util.config import SimConfigLoader
 
-
 import re
 import os
 import asyncio
@@ -110,14 +109,6 @@ class Simulation:
                 f"After this, send 'TERMINATE'\n"
             )
         )
-            
-            #system_message=(
-            #    f"Do not act like a human.\n"
-            #    f"You are a system that extracts the following information from the conversation when the termination condition: \"{self.config['termination_condition']}\" is satisfied:\n\n"
-            #    f"{'\n'.join([f'{v["name"]} # {v["type"]}' for v in self.config['output_variables']])}\n\n"
-            #    f"Make sure the output is valid python code, and the variables are assigned to exact values (not expessions). Also, make sure that variables that contain information on the unit (e.g. kilometers) are assigned appropriate values, do a calculation if you have to.\n\n"
-            #    f"After this, send 'TERMINATE'\n"
-            #)
 
         self.agents.append(information_return_agent)
 
@@ -134,18 +125,19 @@ class Simulation:
     def run(self):
         asyncio.run(Console(self.gc.run_stream()))
 
-    with DAG(
-    "simulation_task",
-    schedule_interval=None,  
-    start_date=datetime(2025, 2, 18),  
-    catchup=False,
-    ) as dag:
-        sim_task = PythonOperator(
-        task_id="sim_task",
-        python_callable=run,
-    )
-    sim_task  
-
+    #def run_airflow_task(self):
+    #    with DAG(
+    #        "simulation_task",
+    #        schedule_interval=None,  
+    #        start_date=datetime(2025, 2, 18),  
+    #        catchup=False,
+    #    ) as dag:
+    #        sim_task = PythonOperator(
+    #            task_id="sim_task",
+    #            python_callable=run
+    #        )
+    #    sim_task
+        import ipdb; ipdb.set_trace()
 
 
     # def parse_output_variables(self):
