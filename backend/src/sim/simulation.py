@@ -42,7 +42,6 @@ def init_ollama_model_client():
             },
         )
 
-
 def select_model(type: str, gpt_model, together_model, ollama_model):
     if (type == "GPT"):
         return gpt_model
