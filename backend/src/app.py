@@ -28,8 +28,7 @@ def remove_chat_log(data):
     elif isinstance(data, list):
         data = [remove_chat_log(item) for item in data]
     return data
-
-# TODO: Add optional GET parameters 
+ 
 @app.route('/report/output')
 def report_output():
     sim_id = request.args.get('id')
