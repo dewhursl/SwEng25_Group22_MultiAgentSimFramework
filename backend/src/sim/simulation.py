@@ -1,8 +1,13 @@
 from util.config import SimConfigLoader
 
+
 import re
 import os
 import asyncio
+
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime
 
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermination
@@ -90,6 +95,8 @@ class Simulation:
         
         print("Setting up InformationReturnAgent")
 
+        output_variables_str="\n".join([f"{v['name']} # {v['type']}" for v in self.config['output_variables']])
+
         information_return_agent = AssistantAgent(
             "InformationReturnAgent",
             description="An agent that returns information about the conversation when the specified termination condition is reached.",
@@ -97,11 +104,20 @@ class Simulation:
             system_message=(
                 f"Do not act like a human.\n"
                 f"You are a system that extracts the following information from the conversation when the termination condition: \"{self.config['termination_condition']}\" is satisfied:\n\n"
-                f"{'\n'.join([f'{v['name']} # {v['type']}' for v in self.config['output_variables']])}\n\n"
-                f"Make sure the output is valid python code, and the variables are assigned to exact values (not expessions).\n\n"
+                f"{output_variables_str}\n\n"
+                f"Make sure the output is valid Python code, and the variables are assigned to exact values (not expressions). Also, make sure that variables that contain information on the unit (e.g. kilometers) are assigned appropriate values, do a calculation if you have to.\n\n"
                 f"After this, send 'TERMINATE'\n"
             )
         )
+            
+            #system_message=(
+            #    f"Do not act like a human.\n"
+            #    f"You are a system that extracts the following information from the conversation when the termination condition: \"{self.config['termination_condition']}\" is satisfied:\n\n"
+            #    f"{'\n'.join([f'{v["name"]} # {v["type"]}' for v in self.config['output_variables']])}\n\n"
+            #    f"Make sure the output is valid python code, and the variables are assigned to exact values (not expessions). Also, make sure that variables that contain information on the unit (e.g. kilometers) are assigned appropriate values, do a calculation if you have to.\n\n"
+            #    f"After this, send 'TERMINATE'\n"
+            #)
+
         self.agents.append(information_return_agent)
 
         print("Setting up SelectorGroupChat")
@@ -116,6 +132,20 @@ class Simulation:
 
     def run(self):
         asyncio.run(Console(self.gc.run_stream()))
+
+    with DAG(
+    "simulation_task",
+    schedule_interval=None,  
+    start_date=datetime(2025, 2, 18),  
+    catchup=False,
+    ) as dag:
+        sim_task = PythonOperator(
+        task_id="sim_task",
+        python_callable=run,
+    )
+    sim_task  
+
+
 
     # def parse_output_variables(self):
     #     results = {}
