@@ -3,10 +3,13 @@ from util.config import SimConfigLoader
 import re
 import os
 import asyncio
-
-from airflow import DAG
-from airflow.operators.python import PythonOperator
 from datetime import datetime
+
+AIRFLOW_ENABLED = False
+
+if (AIRFLOW_ENABLED):
+    from airflow import DAG
+    from airflow.operators.python import PythonOperator
 
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermination
@@ -45,7 +48,6 @@ def init_ollama_model_client():
                 "family": "llama", 
             },
         )
-
 
 def select_model(type: str, gpt_model, together_model, ollama_model):
     if (type == "GPT"):
@@ -138,6 +140,21 @@ class Simulation:
     #        )
     #    sim_task
         import ipdb; ipdb.set_trace()
+
+    if (AIRFLOW_ENABLED):
+        with DAG(
+        "simulation_task",
+        schedule_interval=None,  
+        start_date=datetime(2025, 2, 18),  
+        catchup=False,
+        ) as dag:
+            sim_task = PythonOperator(
+            task_id="sim_task",
+            python_callable=run,
+        )
+        sim_task  
+
+    print("this is my local change with remote changes")
 
 
     # def parse_output_variables(self):
