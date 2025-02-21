@@ -1,8 +1,9 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import LandingPage from "./pages/LandingPage";
-import Renderer from "./pages/Renderer";
+import LandingPage from './pages/LandingPage';
+import Renderer from './pages/Renderer';
+import Dashboard from './pages/Dashboard';
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/renderer" element={<Renderer />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

@@ -1,10 +1,13 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import Tilt from 'react-parallax-tilt';
 
 import HeroScene3D from './components/HeroScene3D';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+
+import { features } from '../constants/index';
 
 const LandingPage = () => {
   return (
@@ -20,13 +23,32 @@ const LandingPage = () => {
           </Canvas>
         </div>
       </section>
-      <section>
-        <div className="max-w-7xl mx-auto py-20">
-          <h1 className="text-4xl font-bold text-center text-white">FEATURES</h1>
-          <p className="text-lg text-center text-gray-500 mt-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros
-            elementum tristique.
-          </p>
+      <section className="py-12 mb-20">
+        <div className="container mx-auto px-4">
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl text-white font-bold mb-2">Key Features</h2>
+            <p className="text-gray-300 max-w-xl mx-auto">
+              Our framework makes it easy to create and analyze complex multi-agent simulations
+              powered by open-source LLMs.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {features.map((feature) => (
+              <Tilt>
+                <div
+                  key={feature.title}
+                  className="rounded-2xl border border-violet-600 shadow p-6 hover:shadow-md transition"
+                >
+                  <div className="flex items-center mb-4">
+                    {/* Icon */}
+                    <feature.icon className="h-8 w-8 text-violet-600 mr-3" />
+                    <h3 className="text-xl text-white font-semibold">{feature.title}</h3>
+                  </div>
+                  <p className="text-violet-400">{feature.description}</p>
+                </div>
+              </Tilt>
+            ))}
+          </div>
         </div>
       </section>
       <Footer />
