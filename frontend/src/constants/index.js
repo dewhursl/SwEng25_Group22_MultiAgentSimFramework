@@ -24,3 +24,24 @@ export const navLinks = [
         icon: MdDashboard,
     },
 ];
+
+export const features = [
+    {
+        title: 'Agent Configurator',
+        description:
+            'Define roles, goals, and hyperparameters. Quickly tweak parameters for repeated simulations.',
+        icon: GrConfigure,
+    },
+    {
+        title: '3D Simulation Renderer',
+        description:
+            'Visualize multi-agent interactions in real-time, including adversarial or partial-information scenarios.',
+        icon: MdOutline3dRotation,
+    },
+    {
+        title: 'Analytics & Insights',
+        description:
+            'Track performance metrics, outcome distributions, and refine your approach with continuous feedback.',
+        icon: MdDashboard,
+    },
+];
