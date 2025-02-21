@@ -46,21 +46,25 @@ OPENAI_API_KEY="..."
 
 **Response Format:**
 ```json
-[
-  {
-    "num_messages": "<Number>",
-    "chat_log": [
-      {
-        "agent": "<String>",
-        "message": "<String>"
-      }
-    ],
-    "output_variables": [
-      {
-        "name": "<String>",
-        "value": "<String | Number>"
-      }
-    ]
-  }
-]
+{
+  "id": "<ID (sim_id)>",
+  "num_runs" : "<Number>",
+  "runs": [
+    {
+      "num_messages": "<Number>",
+      "chat_log": [
+        {
+          "agent": "<String>",
+          "message": "<String>"
+        }
+      ],
+      "output_variables": [
+        {
+          "name": "<String>",
+          "value": "<String | Number>"
+        }
+      ]
+    }
+  ]        
+}   
 ```

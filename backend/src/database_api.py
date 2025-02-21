@@ -1,0 +1,28 @@
+from pymongo import MongoClient
+
+class DataBaseAPI:
+    def __init__(self, port: str):
+        self.m_client = MongoClient("mongodb://localhost:" + port + "/")
+        self.m_database = self.m_client.sweng22_database
+        self.m_coll_config = self.m_database.config
+        self.m_coll_output = self.m_database.output
+
+    def insert_config(self, json):
+        if (self.m_coll_config.find_one({"id": json["id"]})):
+            return
+        
+        result = self.m_coll_config.insert_one(json)
+        print("Inserted document ID:", result.inserted_id)
+
+    def query_config(self, id: str):
+        return self.m_coll_config.find_one({"id": id})
+    
+    def insert_output(self, json):
+        if (self.m_coll_output.find_one({"id": json["id"]})):
+            return
+        
+        result = self.m_coll_output.insert_one(json)
+        print("Inserted document ID:", result.inserted_id)
+
+    def query_output(self, id: str):
+        return self.m_coll_output.find_one({"id": id})

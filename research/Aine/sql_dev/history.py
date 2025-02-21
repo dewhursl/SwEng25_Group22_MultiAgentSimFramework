@@ -1,32 +1,12 @@
 import sqlite3
-from ollama import chat
 
 # Connect to SQLite database (creates it if it doesn't exist)
 conn = sqlite3.connect("chat_history.db")
 cursor = conn.cursor()
 
-def streaming_chat(user_input):
-    try:
-        print("\nAI: ", end="", flush=True)
-        stream = chat(model='llama3.2', messages=[{'role': 'user', 'content': user_input}], stream=True)
-
-        ai_response = ""  # Store AI response
-        for chunk in stream:
-            content = chunk['message']['content']
-            print(content, end='', flush=True)
-            ai_response += content  # Append AI response
-        
-        print()  
-        save_message("AI", ai_response)  # Save AI response
-
-    except Exception as e:
-        print(f"\nError: {str(e)}")
-
+# Function to insert a message
 def save_message(sender, message):
-    """Save a chat message to the database, except exit/quit."""
-    if message.lower() in {"exit", "quit"}:
-        return  # Do not save exit commands
-
+    """Save a chat message to the database."""
     conn = sqlite3.connect("chat_history.db")
     cursor = conn.cursor()
     
@@ -43,6 +23,7 @@ def save_message(sender, message):
     conn.commit()
     conn.close()
 
+# Function to retrieve chat history
 def get_chat_history(limit=10):
     """Retrieve the last few chat messages."""
     conn = sqlite3.connect("chat_history.db")
@@ -54,21 +35,35 @@ def get_chat_history(limit=10):
     conn.close()
     return history
 
-def main():
-    print("Welcome to Customer Support! How may I help you?")
+# Example Usage
+def chat_with_ai():
+    """Simple chatbot loop that stores user & AI messages in history."""
+    import random  # Replace with an actual AI model later
+    
+    responses = ["Hello!", "How can I help?", "Tell me more!", "That's interesting!", "Can you elaborate?"]
+
+    print("Chatbot started! Type 'exit' to quit.\n")
+    
     while True:
         user_input = input("You: ")
-
-        if user_input.lower() in {"exit", "quit"}:
-            print("Goodbye!")
-            break  # Exit without saving
-
-        save_message("User", user_input)  # Save only valid user input
-        streaming_chat(user_input)
+        if user_input.lower() == "exit":
+            break
+        
+        # Save user's message
+        save_message("User", user_input)
+        
+        # Generate AI response
+        ai_response = random.choice(responses)  # Replace with an AI model
+        print(f"AI: {ai_response}")
+        
+        # Save AI's response
+        save_message("AI", ai_response)
 
     print("\nChat history:")
     for sender, message, timestamp in reversed(get_chat_history()):
         print(f"[{timestamp}] {sender}: {message}")
 
 if __name__ == "__main__":
-    main()
+    chat_with_ai()
+
+get_chat_history()
