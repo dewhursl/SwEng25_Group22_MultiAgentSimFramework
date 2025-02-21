@@ -69,18 +69,6 @@ class Simulation:
     async def run(self):
         return await Console(self.gc.run_stream())
 
-    #with DAG(
-    #"simulation_task",
-    #schedule_interval=None,  
-    #start_date=datetime(2025, 2, 18),  
-    #catchup=False,
-   # ) as dag:
-    #    sim_task = PythonOperator(
-    #    task_id="sim_task",
-    #    python_callable=run,
-    #)
-    #sim_task
-
     #def run_airflow_task(self):
     #    with DAG(
     #        "simulation_task",
