@@ -34,7 +34,7 @@ export class OverworldMap {
 
     drawLowerImage(ctx, cameraPerson) {
         if(this.lowerImageLoaded) {
-            console.log("Drawing lower image...");
+            //console.log("Drawing lower image...");
             ctx.drawImage(
                 this.lowerImage, 
                 utils.withGrid(10.5) - cameraPerson.x,
@@ -45,7 +45,7 @@ export class OverworldMap {
 
     drawUpperImage(ctx, cameraPerson) {
         if(this.upperImageLoaded) {
-            console.log("Drawing upper image...");
+            //console.log("Drawing upper image...");
             ctx.drawImage(
                 this.upperImage, 
                 utils.withGrid(10.5) - cameraPerson.x,
@@ -91,10 +91,15 @@ window.OverworldMaps = {
                 x: utils.withGrid(5),
                 y: utils.withGrid(6),
             }),
-            npc1: new Person({
+            salesman: new Person({
                 x: utils.withGrid(7),
                 y: utils.withGrid(9),
                 src: "placeholderImages/characters/people/npc1.png"
+            }),
+            customer: new Person({
+                x: utils.withGrid(5),
+                y: utils.withGrid(9),
+                src: "placeholderImages/characters/people/npc3.png"
             })
         },
         walls: {

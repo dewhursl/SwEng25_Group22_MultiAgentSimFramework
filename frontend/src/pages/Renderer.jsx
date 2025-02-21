@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { SIMULATION_DATA } from "../constants/simulationData";
 import Scene2D from "./components/Scene2D";
 import Scene3D from "./components/Scene3D";
-//import Scene2D2 from "./components/2D2/index";
+import Scene2D2 from "./components/2D2/index";
 
 const Renderer = () => {
   // Here, we can fetch data from an API in future
@@ -21,7 +21,7 @@ const Renderer = () => {
   const getScene = () => {
     switch (context) {
       case "2d":
-        return <Scene2D />;
+        return <Scene2D2 />;
       case "3d":
         return <Scene3D simulationData={data} />;
       default:

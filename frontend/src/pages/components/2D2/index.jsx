@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import "./styles.css";
 import { Overworld } from "./Overworld"; // Import Overworld directly for better React integration
+import { Application } from "pixi.js";
 
 const Scene2D2 = () => {
   useEffect(() => {
