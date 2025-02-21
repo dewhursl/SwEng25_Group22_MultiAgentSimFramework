@@ -3,8 +3,6 @@ from util.config import SimConfigLoader
 import re
 import asyncio
 
-#from airflow import DAG
-#from airflow.operators.python import PythonOperator
 from datetime import datetime
 
 AIRFLOW_ENABLED = False
