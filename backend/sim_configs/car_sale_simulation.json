@@ -3,7 +3,7 @@
     "models": { 
         "agent": "GPT",
         "info_return_agent": "GPT",
-        "group_chat": "GPT"
+        "group_chat": "Together"
     },
     "agents": [
         {

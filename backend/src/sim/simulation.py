@@ -2,6 +2,9 @@ from util.config import SimConfigLoader
 
 import re
 import asyncio
+
+#from airflow import DAG
+#from airflow.operators.python import PythonOperator
 from datetime import datetime
 
 AIRFLOW_ENABLED = False
@@ -12,7 +15,7 @@ if (AIRFLOW_ENABLED):
 
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermination
-from autogen_agentchat.teams import SelectorGroupChat
+from autogen_agentchat.teams import SelectorGroupChat # type: ignore
 from autogen_agentchat.ui import Console
 
 import model_client
@@ -63,8 +66,20 @@ class Simulation:
             )
         )
 
-    def run(self):
-        asyncio.run(Console(self.gc.run_stream()))
+    async def run(self):
+        return await Console(self.gc.run_stream())
+
+    #with DAG(
+    #"simulation_task",
+    #schedule_interval=None,  
+    #start_date=datetime(2025, 2, 18),  
+    #catchup=False,
+   # ) as dag:
+    #    sim_task = PythonOperator(
+    #    task_id="sim_task",
+    #    python_callable=run,
+    #)
+    #sim_task
 
     #def run_airflow_task(self):
     #    with DAG(
@@ -78,7 +93,7 @@ class Simulation:
     #            python_callable=run
     #        )
     #    sim_task
-        import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
 
     if (AIRFLOW_ENABLED):
         with DAG(
@@ -91,39 +106,4 @@ class Simulation:
             task_id="sim_task",
             python_callable=run,
         )
-        sim_task  
-
-    print("this is my local change with remote changes")
-
-
-    # def parse_output_variables(self):
-    #     results = {}
-        
-    #     lines = message.splitlines()
-    #     filtered_lines = []
-        
-    #     for line in lines:
-    #         if not any(re.search(rf"{vname}\s*=", line) for vname in output_variables):
-    #             filtered_lines.append(line)
-            
-    #     full_match = True
-    #     partial_match = False
-
-    #     for vname, vtype in output_variables.items():
-    #         str_pattern = rf"{vname}\s*=\s*\"(.*?)\""
-    #         num_pattern = rf"{vname}\s*=\s*(\d+)"
-            
-    #         str_match = re.search(str_pattern, message)
-    #         num_match = re.search(num_pattern, message)
-            
-    #         if vtype == "String":
-    #             results[vname] = str_match.group(1) if str_match else None
-    #         elif vtype == "Number":
-    #             results[vname] = int(num_match.group(1)) if num_match else None
-
-    #         if results[vname] == None:
-    #             full_match = False
-    #         else:
-    #             partial_match = True
-        
-    #     return results, partial_match, full_match
+        sim_task
