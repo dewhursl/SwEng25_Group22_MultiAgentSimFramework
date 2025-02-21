@@ -1,0 +1,90 @@
+{
+    "simulation_id": "sim_001",
+    "simulation_count": 1000,
+    "execution_time_seconds": 12.34,
+    "agents": {
+      "customer": {
+        "name": "John Doe",
+        "budget": 15000,
+        "cut_off_price": 14000,
+        "strategy": "Minimize cost while staying within budget"
+      },
+      "salesman": {
+        "name": "Mark Smith",
+        "car_value": 13000,
+        "lowest_acceptable_price": 13500,
+        "strategy": "Maximize profit while ensuring sale"
+      }
+    },
+    "simulation_log": [
+      {
+        "turn": 1,
+        "agent": "salesman",
+        "action": "Initial offer",
+        "details": {
+          "offered_price": 16000,
+          "reasoning": "Start high to leave room for negotiation."
+        }
+      },
+      {
+        "turn": 2,
+        "agent": "customer",
+        "action": "Counter offer",
+        "details": {
+          "offered_price": 13500,
+          "reasoning": "Offer close to the cut-off price but within budget."
+        }
+      },
+      {
+        "turn": 3,
+        "agent": "salesman",
+        "action": "Revised offer",
+        "details": {
+          "offered_price": 14500,
+          "reasoning": "Meet halfway to test willingness to pay."
+        }
+      },
+      {
+        "turn": 4,
+        "agent": "customer",
+        "action": "Final offer",
+        "details": {
+          "offered_price": 14000,
+          "reasoning": "Reach cut-off price, testing salesman’s flexibility."
+        }
+      },
+      {
+        "turn": 5,
+        "agent": "salesman",
+        "action": "Accept offer",
+        "details": {
+          "accepted_price": 14000,
+          "reasoning": "Close deal as price is above minimum acceptable."
+        }
+      }
+    ],
+    "outcomes": [
+      {
+        "simulation_id": "sim_001_001",
+        "final_price": 14000,
+        "customer_satisfaction": "High",
+        "salesman_satisfaction": "Moderate",
+        "remarks": "Negotiation was successful with both parties compromising within acceptable limits."
+      },
+      {
+        "simulation_id": "sim_001_002",
+        "final_price": 13800,
+        "customer_satisfaction": "Moderate",
+        "salesman_satisfaction": "High",
+        "remarks": "Customer negotiated lower than usual cut-off."
+      },
+      {
+        "simulation_id": "sim_001_003",
+        "final_price": 14500,
+        "customer_satisfaction": "Low",
+        "salesman_satisfaction": "High",
+        "remarks": "Salesman achieved favorable deal."
+      }
+    ]
+  }
+  
