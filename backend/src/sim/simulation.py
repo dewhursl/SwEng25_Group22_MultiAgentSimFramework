@@ -1,7 +1,6 @@
 from util.config import SimConfigLoader
 
 import re
-import os
 import asyncio
 from datetime import datetime
 

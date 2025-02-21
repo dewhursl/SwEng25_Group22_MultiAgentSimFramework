@@ -1,4 +1,5 @@
 from autogen_ext.models.openai import OpenAIChatCompletionClient
+import os
 
 import simulation
 
