@@ -1,4 +1,5 @@
 import { utils } from "./utils";
+import { GameObject } from "./GameObject";
 
 export class Sprite {
     constructor(config) {
@@ -31,7 +32,7 @@ export class Sprite {
             "walk-up"   : [ [1,2],[0,2],[3,2],[0,2] ],
             "walk-left" : [ [1,3],[0,3],[3,3],[0,3] ]
         }
-        this.currentAnimation = config.currentAnimation || "idle-down";
+        this.currentAnimation = "idle-right"; //config.currentAnimation || "idle-down";
         this.currentAnimationFrame = 0;
 
         this.animationFrameLimit = config.animationFrameLimit || 8;

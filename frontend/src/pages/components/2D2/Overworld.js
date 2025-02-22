@@ -1,5 +1,7 @@
 import { OverworldMap } from "./OverworldMap.js";
 import { DirectionInput } from "./DirectionInput.js";
+import { GameObject } from "./GameObject.js";
+import { Sprite } from "./Sprite.js";
 
 export class Overworld {
     constructor(config) {
@@ -22,7 +24,7 @@ export class Overworld {
             Object.values(this.map.gameObjects).forEach(object => {
                 object.update({
                 arrow: this.directionInput.direction,
-                map: this.map
+                map: this.map,
                 })
             })
 
@@ -30,7 +32,9 @@ export class Overworld {
             this.map.drawLowerImage(this.ctx, cameraPerson);
 
             //Draw Game Objects
-            Object.values(this.map.gameObjects).forEach(object => {
+            Object.values(this.map.gameObjects).sort((a,b) => {
+                return a.y - b.y;
+            }).forEach(object => {
                 object.sprite.draw(this.ctx, cameraPerson);
             })
 
@@ -53,6 +57,14 @@ export class Overworld {
         this.directionInput.init();
 
         this.startGameLoop();
+
+        this.map.startCutscene([
+            { who: "hero", type: "walk", direction: "down" },
+            { who: "hero", type: "walk", direction: "down" },
+            { who: "salesman", type: "walk", direction: "left" },
+            { who: "salesman", type: "walk", direction: "left" },
+            { who: "salesman", type: "stand", direction: "up", time: 800 },
+        ])
     }
 
 }

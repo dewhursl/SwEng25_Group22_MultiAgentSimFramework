@@ -1,6 +1,7 @@
 import  { Person } from "./Person.js";
 import { utils } from "./utils.js";
 import { GameObject } from "./GameObject.js";
+import { OverworldEvent } from "./OverworldEvent.js";
 
 export class OverworldMap {
     constructor(config) {
@@ -30,6 +31,8 @@ export class OverworldMap {
           this.lowerImage.onerror = () => {
             console.error(`Failed to load image: ${config.upperSrc}`);
           };
+
+          this.isCutscenePlaying = false;
     }
 
     drawLowerImage(ctx, cameraPerson) {
@@ -60,11 +63,28 @@ export class OverworldMap {
     }
 
     mountObjects() {
-        Object.values(this.gameObjects).forEach(o => {
+        Object.keys(this.gameObjects).forEach(key => {
+
+            let object = this.gameObjects[key];
+            object.id = key;
 
             //T0T0: determine if this object should actually mount
-            o.mount(this);
+            object.mount(this);
         })
+    }
+
+    async startCutscene(events) {
+        this.isCutscenePlaying = true;
+
+        for(let i = 0; i < events.length; i++) {
+            const eventHandler = new OverworldEvent({
+                event: events[i],
+                map: this,
+            })
+            await eventHandler.init();
+        }
+
+        this.isCutscenePlaying = false;
     }
 
     addWall(x,y) {
@@ -94,13 +114,27 @@ window.OverworldMaps = {
             salesman: new Person({
                 x: utils.withGrid(7),
                 y: utils.withGrid(9),
-                src: "placeholderImages/characters/people/npc1.png"
+                src: "placeholderImages/characters/people/npc1.png",
+                behaviourLoop: [
+                    { type: "stand", direction: "left", time: 800 },
+                    { type: "stand", direction: "up", time: 800 },
+                    { type: "stand", direction: "right", time: 1200 },
+                    { type: "stand", direction: "up", time: 300 },
+                ]
+                
             }),
             customer: new Person({
-                x: utils.withGrid(5),
-                y: utils.withGrid(9),
-                src: "placeholderImages/characters/people/npc3.png"
-            })
+                x: utils.withGrid(3),
+                y: utils.withGrid(7),
+                src: "placeholderImages/characters/people/npc3.png",
+                behaviourLoop: [
+                    { type: "walk", direction: "left" },
+                     { type: "stand", direction: "up", time: 800 },
+                    { type: "walk", direction: "up" },
+                    { type: "walk", direction: "right" },
+                    { type: "walk", direction: "down" },
+                ]
+            }),
         },
         walls: {
             [utils.asGridCoord(7,6)] : true,
