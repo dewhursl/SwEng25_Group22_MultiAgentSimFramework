@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import database_api
+import util.database_api as database_api
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ def report_config():
     if not sim_id:
         return jsonify({"error": "Missing 'id' parameter"}), 400
     
-    config_data = db.query_config(str(sim_id))
+    config_data = db.query_config(sim_id)
 
     if (not config_data):
         return jsonify({"error": "Requested data not in database"}), 400
@@ -39,7 +39,7 @@ def report_output():
     if not sim_id:
         return jsonify({"error": "Missing 'id' parameter"}), 400
 
-    output_data = db.query_output(str(sim_id))
+    output_data = db.query_output(sim_id)
 
     if (not output_data):
         return jsonify({"error": "Requested data not in database"}), 400
