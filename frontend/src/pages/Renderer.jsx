@@ -3,8 +3,11 @@ import { SIMULATION_DATA } from "../constants/simulationData";
 import Scene2D from "./components/Scene2D";
 import Scene3D from "./components/Scene3D";
 import Scene2D2 from "./components/2D2/index";
+import Navbar from './components/Navbar';
+
 
 const Renderer = () => {
+  
   // Here, we can fetch data from an API in future
 
   // We are using mock data here
@@ -31,12 +34,15 @@ const Renderer = () => {
 
   return (
     <div className="w-full flex flex-col items-center justify-center h-screen mx-auto">
+      <Navbar />
+      
       <button
         onClick={toggleContext}
-        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+        className="absolute top-25 left-1/2 transform -translate-x-1/2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center z-10"
       >
         {context === "2d" ?  "Switch to 3D" : "Switch to 2D"} Render
       </button>
+      
       {getScene()}
     </div>
   );

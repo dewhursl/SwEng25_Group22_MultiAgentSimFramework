@@ -2,6 +2,7 @@ import  { Person } from "./Person.js";
 import { utils } from "./utils.js";
 import { GameObject } from "./GameObject.js";
 import { OverworldEvent } from "./OverworldEvent.js";
+import { NPC } from "./NPC.js";
 
 export class OverworldMap {
     constructor(config) {
@@ -111,9 +112,13 @@ window.OverworldMaps = {
                 x: utils.withGrid(5),
                 y: utils.withGrid(6),
             }),
-            salesman: new Person({
+            salesman: new NPC({
                 x: utils.withGrid(7),
                 y: utils.withGrid(9),
+                npcConfig: {
+                    dialogueQueue: [{ text: "test" }],
+                    // other NPC-specific configurations can go here
+                },
                 src: "placeholderImages/characters/people/npc1.png",
                 behaviourLoop: [
                     { type: "stand", direction: "left", time: 800 },
@@ -123,9 +128,14 @@ window.OverworldMaps = {
                 ]
                 
             }),
-            customer: new Person({
+            customer: new NPC({
                 x: utils.withGrid(3),
                 y: utils.withGrid(7),
+                npcConfig: {
+                    dialogueQueue: [{ text: "test" }],
+                    // other NPC-specific configurations can go here
+                },
+                
                 src: "placeholderImages/characters/people/npc3.png",
                 behaviourLoop: [
                     { type: "walk", direction: "left" },
@@ -156,10 +166,13 @@ window.OverworldMaps = {
                 y: 6,
                 src: "placeholderImages/characters/people/npc2.png"
             }),
-            npcB: new GameObject({
+            npcB: new NPC({
                 x: 10,
                 y: 8,
-                src: "placeholderImages/characters/people/npc3.png"
+                src: "placeholderImages/characters/people/npc3.png",
+                npcConfig: {
+                    dialogueQueue: [{ text: "test" }]
+                }
             })
         }
     },
