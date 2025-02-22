@@ -18,6 +18,8 @@ class MonteCarloSimulator:
         tasks = [self.run_single_simulation(i) for i in range(self.num_runs)]
         self.results = await asyncio.gather(*tasks)
         return self.results
+    
+    # Is this zombie code below being used? Remove?
 
     # def analyze_results(self):
     #     success_rate = 100
@@ -27,6 +29,7 @@ class MonteCarloSimulator:
 
     #     return {"num_runs": self.num_runs, "success_rate": success_rate}
 
+    # Deprecated? Remove?
     def parse_output_variables(self):
         results = {}
         
@@ -58,6 +61,8 @@ class MonteCarloSimulator:
                 partial_match = True
         
         return results, partial_match, full_match
+    
+# Is this zombie code below being used? Remove?
 
 # async def main():
 #     monte_carlo = MonteCarloSimulator("car_sale_simulation.json", num_runs=1)

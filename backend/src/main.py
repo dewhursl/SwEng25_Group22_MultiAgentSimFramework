@@ -15,7 +15,7 @@ from sim.simulation import Simulation
 import database_api
 db = database_api.DataBaseAPI("27017")
 
-NUM_RUNS = 10
+NUM_RUNS = 1
 
 def log_sim_results(results):
     for (i, result) in enumerate(results):
@@ -38,7 +38,8 @@ def is_json(json_str):
     return False
   return True
 
-def insert_sim_results_to_db(results, sim_id):
+# Move this function somewhere else? 
+def sim_results_to_json(results, sim_id):
     runs_contents = ""
     num_runs_count = 0
     for result in results:
@@ -72,8 +73,7 @@ def insert_sim_results_to_db(results, sim_id):
     json_output_str = "{" + id + "," + num_runs + "," + runs + "}"
     #print("\n\n\n\n\n\n" + json_output_str)
 
-    json_output_obj = json.loads(json_output_str)
-    db.insert_output(json_output_obj)
+    return json.loads(json_output_str)    
 
 def main():
     monte_carlo = MonteCarloSimulator("car_sale_simulation.json", num_runs=NUM_RUNS)
@@ -82,10 +82,9 @@ def main():
 
     log_sim_results(results)
 
-    TEMP_SIM_ID = 95 # What will determine the sim ID? Is it an input from the frontend?
-    insert_sim_results_to_db(results, TEMP_SIM_ID)
-
-    
+    TEMP_SIM_ID = 900 # What will determine the sim ID? Is it an input from the frontend?
+    json_output_obj = sim_results_to_json(results, TEMP_SIM_ID)
+    db.insert_output(json_output_obj)
 
 if __name__ == "__main__":
     main()
