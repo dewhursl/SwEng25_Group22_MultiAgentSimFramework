@@ -16,7 +16,7 @@ from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermi
 from autogen_agentchat.teams import SelectorGroupChat # type: ignore
 from autogen_agentchat.ui import Console
 
-import model_client
+import sim.model_client as model_client
 
 class Simulation:
     def __init__(self, sim_config_file_name, max_messages=25):        

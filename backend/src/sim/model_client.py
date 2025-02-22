@@ -1,8 +1,6 @@
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 import os
 
-import simulation
-
 def init_gpt_model_client():
     return OpenAIChatCompletionClient(
             model="gpt-4o",
@@ -44,7 +42,7 @@ def select_model(type: str, gpt_model, together_model, ollama_model):
         return ollama_model
     raise Exception("Invalid model type: " + type)
 
-def init_model_clients(sim: simulation.Simulation):
+def init_model_clients(sim):
     models = sim.config['models']
     model_list = [ models["agent"], models["info_return_agent"], models["group_chat"]]
     gpt_model_client = None
