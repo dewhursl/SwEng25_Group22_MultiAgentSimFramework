@@ -48,7 +48,8 @@ class Simulation:
                 f"Do not act like a human.\n"
                 f"You are a system that extracts the following information from the conversation when the termination condition: \"{self.config['termination_condition']}\" is satisfied:\n\n"
                 f"{output_variables_str}\n\n"
-                f"Make sure the output is valid Python code, and the variables are assigned to exact values (not expressions). Also, make sure that variables that contain information on the unit (e.g. kilometers) are assigned appropriate values, do a calculation if you have to.\n\n"
+                #f"Make sure the output is valid Python code, and the variables are assigned to exact values (not expressions). Also, make sure that variables that contain information on the unit (e.g. kilometers) are assigned appropriate values, do a calculation if you have to.\n\n"
+                f"Return only the output in valid JSON format. Make sure all variables are assigned exact values (not expressions). There should only be one instance of each output variable.\n\n"
                 f"After this, send 'TERMINATE'\n"
             )
         )
@@ -66,20 +67,6 @@ class Simulation:
 
     async def run(self):
         return await Console(self.gc.run_stream())
-
-    #def run_airflow_task(self):
-    #    with DAG(
-    #        "simulation_task",
-    #        schedule_interval=None,  
-    #        start_date=datetime(2025, 2, 18),  
-    #        catchup=False,
-    #    ) as dag:
-    #        sim_task = PythonOperator(
-    #            task_id="sim_task",
-    #            python_callable=run
-    #        )
-    #    sim_task
-    # import ipdb; ipdb.set_trace()
 
     if (AIRFLOW_ENABLED):
         with DAG(
