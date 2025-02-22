@@ -1,6 +1,7 @@
 import  { Person } from "./Person.js";
 import { utils } from "./utils.js";
 import { GameObject } from "./GameObject.js";
+import { NPC } from "./NPC.js";
 
 export class OverworldMap {
     constructor(config) {
@@ -91,14 +92,23 @@ window.OverworldMaps = {
                 x: utils.withGrid(5),
                 y: utils.withGrid(6),
             }),
-            salesman: new Person({
+            salesman: new NPC({
                 x: utils.withGrid(7),
                 y: utils.withGrid(9),
+                npcConfig: {
+                    dialogueQueue: [{ text: "test" }],
+                    // other NPC-specific configurations can go here
+                },
                 src: "placeholderImages/characters/people/npc1.png"
             }),
-            customer: new Person({
+            customer: new NPC({
                 x: utils.withGrid(5),
                 y: utils.withGrid(9),
+                npcConfig: {
+                    dialogueQueue: [{ text: "test" }],
+                    // other NPC-specific configurations can go here
+                },
+                
                 src: "placeholderImages/characters/people/npc3.png"
             })
         },
@@ -122,10 +132,13 @@ window.OverworldMaps = {
                 y: 6,
                 src: "placeholderImages/characters/people/npc2.png"
             }),
-            npcB: new GameObject({
+            npcB: new NPC({
                 x: 10,
                 y: 8,
-                src: "placeholderImages/characters/people/npc3.png"
+                src: "placeholderImages/characters/people/npc3.png",
+                npcConfig: {
+                    dialogueQueue: [{ text: "test" }]
+                }
             })
         }
     },
