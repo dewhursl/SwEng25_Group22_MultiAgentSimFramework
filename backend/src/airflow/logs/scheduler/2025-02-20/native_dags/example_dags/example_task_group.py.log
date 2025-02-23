@@ -1,0 +1,175 @@
+[2025-02-20T00:02:40.297+0000] {processor.py:186} INFO - Started process (PID=7307) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:02:40.297+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T00:02:40.299+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:02:40.299+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:02:40.307+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:02:40.320+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:02:40.320+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T00:02:40.330+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:02:40.330+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T00:02:40.352+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.060 seconds
+[2025-02-20T00:03:35.638+0000] {processor.py:186} INFO - Started process (PID=7539) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:03:35.640+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T00:03:35.642+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:03:35.642+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:03:35.651+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:03:35.664+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:03:35.663+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T00:03:35.673+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:03:35.673+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T00:03:35.693+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.060 seconds
+[2025-02-20T00:08:31.667+0000] {processor.py:186} INFO - Started process (PID=9006) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:08:31.669+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T00:08:31.672+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:08:31.671+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:08:31.680+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:08:31.696+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:08:31.695+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T00:08:31.705+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:08:31.705+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T00:08:31.728+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.066 seconds
+[2025-02-20T00:11:33.369+0000] {processor.py:186} INFO - Started process (PID=9737) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:11:33.371+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T00:11:33.373+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:33.373+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:11:33.382+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:11:33.397+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:33.397+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T00:11:33.407+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:33.407+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T00:11:33.430+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.067 seconds
+[2025-02-20T00:12:30.677+0000] {processor.py:186} INFO - Started process (PID=9980) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:12:30.680+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T00:12:30.682+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:12:30.681+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:12:30.689+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T00:12:30.701+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:12:30.700+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T00:12:30.709+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:12:30.709+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T00:12:30.728+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.056 seconds
+[2025-02-20T12:29:58.619+0000] {processor.py:186} INFO - Started process (PID=7399) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:29:58.622+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:29:58.626+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:29:58.625+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:29:58.645+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:29:58.705+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:29:58.704+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:29:58.733+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:29:58.733+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:29:58.782+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.178 seconds
+[2025-02-20T12:31:08.308+0000] {processor.py:186} INFO - Started process (PID=7797) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:31:08.312+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:31:08.316+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:31:08.315+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:31:08.333+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:31:08.363+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:31:08.362+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:31:08.389+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:31:08.388+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:31:08.432+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.135 seconds
+[2025-02-20T12:32:21.196+0000] {processor.py:186} INFO - Started process (PID=8146) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:32:21.200+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:32:21.204+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:32:21.203+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:32:21.223+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:32:21.253+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:32:21.252+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:32:21.279+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:32:21.279+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:32:21.321+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.139 seconds
+[2025-02-20T12:33:37.545+0000] {processor.py:186} INFO - Started process (PID=8483) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:33:37.549+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:33:37.553+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:33:37.552+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:33:37.571+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:33:37.601+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:33:37.600+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:33:37.628+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:33:37.626+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:33:37.671+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.139 seconds
+[2025-02-20T12:34:55.788+0000] {processor.py:186} INFO - Started process (PID=8850) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:34:55.790+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:34:55.793+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:34:55.793+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:34:55.805+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:34:55.842+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:34:55.841+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:34:55.855+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:34:55.854+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:34:55.886+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.107 seconds
+[2025-02-20T12:36:10.114+0000] {processor.py:186} INFO - Started process (PID=9262) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:36:10.118+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:36:10.124+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:36:10.124+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:36:10.146+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:36:10.181+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:36:10.181+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:36:10.218+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:36:10.216+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:36:10.282+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.192 seconds
+[2025-02-20T12:37:26.590+0000] {processor.py:186} INFO - Started process (PID=9576) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:37:26.593+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:37:26.598+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:37:26.598+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:37:26.617+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:37:26.654+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:37:26.654+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:37:26.683+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:37:26.682+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:37:26.727+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.155 seconds
+[2025-02-20T12:38:44.386+0000] {processor.py:186} INFO - Started process (PID=9873) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:38:44.390+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:38:44.399+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:38:44.397+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:38:44.419+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:38:44.475+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:38:44.475+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:38:44.503+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:38:44.502+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:38:44.545+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.179 seconds
+[2025-02-20T12:39:57.255+0000] {processor.py:186} INFO - Started process (PID=10400) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:39:57.258+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:39:57.263+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:39:57.262+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:39:57.282+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:39:57.316+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:39:57.316+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:39:57.340+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:39:57.340+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:39:57.385+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.148 seconds
+[2025-02-20T12:41:13.596+0000] {processor.py:186} INFO - Started process (PID=10974) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:41:13.605+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:41:13.609+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:41:13.609+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:41:13.633+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:41:13.665+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:41:13.664+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:41:13.703+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:41:13.703+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:41:13.757+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.186 seconds
+[2025-02-20T12:42:33.183+0000] {processor.py:186} INFO - Started process (PID=11517) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:42:33.186+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:42:33.191+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:42:33.190+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:42:33.210+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:42:33.245+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:42:33.244+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:42:33.273+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:42:33.273+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:42:33.323+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.167 seconds
+[2025-02-20T12:43:46.181+0000] {processor.py:186} INFO - Started process (PID=11912) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:43:46.185+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:43:46.189+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:43:46.188+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:43:46.206+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:43:46.235+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:43:46.235+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:43:46.258+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:43:46.258+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:43:46.298+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.136 seconds
+[2025-02-20T12:44:59.616+0000] {processor.py:186} INFO - Started process (PID=12309) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:44:59.621+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:44:59.627+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:44:59.625+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:44:59.647+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:44:59.666+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:44:59.666+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:44:59.691+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:44:59.691+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:44:59.739+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.143 seconds
+[2025-02-20T12:46:17.062+0000] {processor.py:186} INFO - Started process (PID=12596) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:46:17.065+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:46:17.070+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:46:17.069+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:46:17.085+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:46:17.106+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:46:17.106+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:46:17.120+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:46:17.120+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:46:17.146+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.100 seconds
+[2025-02-20T12:47:22.734+0000] {processor.py:186} INFO - Started process (PID=12822) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:47:22.737+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:47:22.739+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:47:22.739+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:47:22.748+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:47:22.764+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:47:22.764+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:47:22.775+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:47:22.774+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:47:22.793+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.067 seconds
+[2025-02-20T12:48:23.152+0000] {processor.py:186} INFO - Started process (PID=13031) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:48:23.155+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:48:23.158+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:48:23.158+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:48:23.169+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:48:23.194+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:48:23.194+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:48:23.212+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:48:23.212+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:48:23.232+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.095 seconds
+[2025-02-20T12:49:23.986+0000] {processor.py:186} INFO - Started process (PID=13279) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:49:23.989+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:49:23.994+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:49:23.993+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:49:24.005+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:49:24.027+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:49:24.027+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:49:24.047+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:49:24.047+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:49:24.077+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.109 seconds
+[2025-02-20T12:50:27.153+0000] {processor.py:186} INFO - Started process (PID=13501) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:50:27.156+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T12:50:27.158+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:50:27.158+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:50:27.167+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T12:50:27.180+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:50:27.180+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:50:27.190+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:50:27.190+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T12:50:27.208+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.071 seconds
+[2025-02-20T13:00:56.742+0000] {processor.py:186} INFO - Started process (PID=13818) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T13:00:56.744+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T13:00:56.748+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:00:56.747+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T13:00:56.761+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T13:00:56.788+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:00:56.787+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T13:00:56.808+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:00:56.808+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T13:00:56.842+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.115 seconds
+[2025-02-20T13:02:16.900+0000] {processor.py:186} INFO - Started process (PID=14114) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T13:02:16.902+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2025-02-20T13:02:16.906+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:02:16.905+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T13:02:16.918+0000] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py
+[2025-02-20T13:02:16.942+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:02:16.941+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T13:02:16.956+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:02:16.956+0000] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2025-02-20T13:02:16.976+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_task_group.py took 0.085 seconds

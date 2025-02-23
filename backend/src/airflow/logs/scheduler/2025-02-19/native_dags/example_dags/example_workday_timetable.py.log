@@ -1,0 +1,21 @@
+[2025-02-19T23:50:41.966+0000] {processor.py:186} INFO - Started process (PID=4420) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py
+[2025-02-19T23:50:41.967+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py for tasks to queue
+[2025-02-19T23:50:41.969+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:50:41.968+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py
+[2025-02-19T23:50:41.974+0000] {processor.py:925} INFO - DAG(s) 'example_workday_timetable' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py
+[2025-02-19T23:50:41.984+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:50:41.984+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-19T23:50:41.998+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:50:41.998+0000] {dag.py:4180} INFO - Setting next_dagrun for example_workday_timetable to 2021-01-01 00:00:00+00:00, run_after=2021-01-02 00:00:00+00:00
+[2025-02-19T23:50:42.018+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py took 0.057 seconds
+[2025-02-19T23:51:36.190+0000] {processor.py:186} INFO - Started process (PID=4646) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py
+[2025-02-19T23:51:36.193+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py for tasks to queue
+[2025-02-19T23:51:36.195+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:51:36.195+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py
+[2025-02-19T23:51:36.200+0000] {processor.py:925} INFO - DAG(s) 'example_workday_timetable' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py
+[2025-02-19T23:51:36.212+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:51:36.212+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-19T23:51:36.229+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:51:36.229+0000] {dag.py:4180} INFO - Setting next_dagrun for example_workday_timetable to 2021-01-01 00:00:00+00:00, run_after=2021-01-02 00:00:00+00:00
+[2025-02-19T23:51:36.247+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py took 0.063 seconds
+[2025-02-19T23:54:47.644+0000] {processor.py:186} INFO - Started process (PID=5418) to work on /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py
+[2025-02-19T23:54:47.647+0000] {processor.py:914} INFO - Processing file /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py for tasks to queue
+[2025-02-19T23:54:47.649+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:54:47.648+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py
+[2025-02-19T23:54:47.654+0000] {processor.py:925} INFO - DAG(s) 'example_workday_timetable' retrieved from /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py
+[2025-02-19T23:54:47.664+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:54:47.664+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-19T23:54:47.679+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:54:47.678+0000] {dag.py:4180} INFO - Setting next_dagrun for example_workday_timetable to 2021-01-01 00:00:00+00:00, run_after=2021-01-02 00:00:00+00:00
+[2025-02-19T23:54:47.699+0000] {processor.py:208} INFO - Processing /home/aine/.local/lib/python3.10/site-packages/airflow/example_dags/example_workday_timetable.py took 0.059 seconds

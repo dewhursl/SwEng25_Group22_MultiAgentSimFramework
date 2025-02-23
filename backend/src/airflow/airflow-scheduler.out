@@ -1,0 +1,28 @@
+[2025-02-23T13:57:18.686+0000] {workday.py:41} WARNING - Could not import pandas. Holidays will not be considered.
+[2025-02-23T13:57:18.689+0000] {executor_loader.py:258} INFO - Loaded executor: SequentialExecutor
+[2025-02-23T13:57:18.720+0000] {scheduler_job_runner.py:950} INFO - Starting the scheduler
+[2025-02-23T13:57:18.721+0000] {scheduler_job_runner.py:957} INFO - Processing each file at most -1 times
+[2025-02-23T13:57:18.727+0000] {manager.py:174} INFO - Launched DagFileProcessorManager with pid: 1233
+[2025-02-23T13:57:18.729+0000] {scheduler_job_runner.py:1949} INFO - Adopting or resetting orphaned tasks for active dag runs
+[2025-02-23T13:57:18.731+0000] {settings.py:63} INFO - Configured default timezone UTC
+[2025-02-23T13:57:18.738+0000] {scheduler_job_runner.py:1972} INFO - Marked 1 SchedulerJob instances as failed
+[2025-02-23T13:57:18.753+0000] {manager.py:406} WARNING - Because we cannot use more than 1 thread (parsing_processes = 2) when using sqlite. So we set parallelism to 1.
+[2025-02-23T14:02:23.805+0000] {scheduler_job_runner.py:1949} INFO - Adopting or resetting orphaned tasks for active dag runs
+[2025-02-23T14:07:30.264+0000] {scheduler_job_runner.py:1949} INFO - Adopting or resetting orphaned tasks for active dag runs
+[2025-02-23T14:12:39.594+0000] {scheduler_job_runner.py:1949} INFO - Adopting or resetting orphaned tasks for active dag runs
+[2025-02-23T14:18:00.318+0000] {job.py:229} INFO - Heartbeat recovered after 36.69 seconds
+[2025-02-23T14:18:21.943+0000] {scheduler_job_runner.py:1949} INFO - Adopting or resetting orphaned tasks for active dag runs
+[2025-02-23T14:23:28.219+0000] {scheduler_job_runner.py:1949} INFO - Adopting or resetting orphaned tasks for active dag runs
+[2025-02-23T14:28:36.084+0000] {scheduler_job_runner.py:1949} INFO - Adopting or resetting orphaned tasks for active dag runs
+[2025-02-23T14:33:43.147+0000] {scheduler_job_runner.py:1949} INFO - Adopting or resetting orphaned tasks for active dag runs
+[2025-02-23T14:38:50.581+0000] {scheduler_job_runner.py:1949} INFO - Adopting or resetting orphaned tasks for active dag runs
+[2025-02-23T14:44:00.615+0000] {scheduler_job_runner.py:1949} INFO - Adopting or resetting orphaned tasks for active dag runs
+[2025-02-23T14:49:09.601+0000] {scheduler_job_runner.py:1949} INFO - Adopting or resetting orphaned tasks for active dag runs
+[2025-02-23T14:51:27.877+0000] {scheduler_job_runner.py:272} INFO - Exiting gracefully upon receiving signal 15
+[2025-02-23T14:51:27.954+0000] {process_utils.py:132} INFO - Sending Signals.SIGTERM to group 1233. PIDs of all processes in the group: []
+[2025-02-23T14:51:27.954+0000] {process_utils.py:87} INFO - Sending the signal Signals.SIGTERM to group 1233
+[2025-02-23T14:51:27.955+0000] {process_utils.py:101} INFO - Sending the signal Signals.SIGTERM to process 1233 as process group is missing.
+[2025-02-23T14:51:27.955+0000] {process_utils.py:132} INFO - Sending Signals.SIGTERM to group 1233. PIDs of all processes in the group: []
+[2025-02-23T14:51:27.955+0000] {process_utils.py:87} INFO - Sending the signal Signals.SIGTERM to group 1233
+[2025-02-23T14:51:27.955+0000] {process_utils.py:101} INFO - Sending the signal Signals.SIGTERM to process 1233 as process group is missing.
+[2025-02-23T14:51:27.956+0000] {scheduler_job_runner.py:1029} INFO - Exited execute loop

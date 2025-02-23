@@ -1,0 +1,35 @@
+[2025-02-19T23:49:57.601+0000] {processor.py:186} INFO - Started process (PID=4183) to work on /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:49:57.602+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/dag_test.py for tasks to queue
+[2025-02-19T23:49:57.606+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:49:57.605+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:49:57.626+0000] {processor.py:925} INFO - DAG(s) 'hello_world_dag' retrieved from /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:49:57.655+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:49:57.655+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-19T23:49:57.668+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:49:57.668+0000] {dag.py:4180} INFO - Setting next_dagrun for hello_world_dag to None, run_after=None
+[2025-02-19T23:49:57.692+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/dag_test.py took 0.097 seconds
+[2025-02-19T23:50:51.353+0000] {processor.py:186} INFO - Started process (PID=4462) to work on /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:50:51.355+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/dag_test.py for tasks to queue
+[2025-02-19T23:50:51.357+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:50:51.356+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:50:51.363+0000] {processor.py:925} INFO - DAG(s) 'hello_world_dag' retrieved from /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:50:51.378+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:50:51.378+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-19T23:50:51.390+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:50:51.390+0000] {dag.py:4180} INFO - Setting next_dagrun for hello_world_dag to None, run_after=None
+[2025-02-19T23:50:51.410+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/dag_test.py took 0.063 seconds
+[2025-02-19T23:51:38.288+0000] {processor.py:186} INFO - Started process (PID=4654) to work on /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:51:38.291+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/dag_test.py for tasks to queue
+[2025-02-19T23:51:38.293+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:51:38.292+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:51:38.298+0000] {processor.py:925} INFO - DAG(s) 'hello_world_dag' retrieved from /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:51:38.311+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:51:38.310+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-19T23:51:38.323+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:51:38.323+0000] {dag.py:4180} INFO - Setting next_dagrun for hello_world_dag to None, run_after=None
+[2025-02-19T23:51:38.343+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/dag_test.py took 0.060 seconds
+[2025-02-19T23:54:00.891+0000] {processor.py:186} INFO - Started process (PID=5209) to work on /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:54:00.894+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/dag_test.py for tasks to queue
+[2025-02-19T23:54:00.898+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:54:00.897+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:54:00.911+0000] {processor.py:925} INFO - DAG(s) 'hello_world_dag' retrieved from /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:54:00.934+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:54:00.933+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-19T23:54:00.946+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:54:00.946+0000] {dag.py:4180} INFO - Setting next_dagrun for hello_world_dag to None, run_after=None
+[2025-02-19T23:54:00.970+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/dag_test.py took 0.085 seconds
+[2025-02-19T23:54:56.416+0000] {processor.py:186} INFO - Started process (PID=5451) to work on /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:54:56.419+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/dag_test.py for tasks to queue
+[2025-02-19T23:54:56.421+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:54:56.420+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:54:56.426+0000] {processor.py:925} INFO - DAG(s) 'hello_world_dag' retrieved from /home/aine/airflow/dags/dag_test.py
+[2025-02-19T23:54:56.438+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:54:56.438+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-19T23:54:56.449+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:54:56.449+0000] {dag.py:4180} INFO - Setting next_dagrun for hello_world_dag to None, run_after=None
+[2025-02-19T23:54:56.469+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/dag_test.py took 0.057 seconds
