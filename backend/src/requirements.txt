@@ -1,0 +1,8 @@
+ipdb
+python-dotenv
+numpy
+autogen
+autogen_agentchat
+autogen_ext
+pymongo
+flask
