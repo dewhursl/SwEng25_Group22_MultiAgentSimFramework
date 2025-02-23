@@ -1,26 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SIMULATION_DATA } from "../constants/simulationData";
 import Scene2D from "./components/Scene2D";
 import Scene3D from "./components/Scene3D";
 import Scene2D2 from "./components/2D2/index";
 import Navbar from './components/Navbar';
-
+import conversationData from "../constants/conversation.json"; // Import JSON file
 
 const Renderer = () => {
-  
-  // Here, we can fetch data from an API in future
-
-  // We are using mock data here
+  // Fetch the data for simulation
   const data = SIMULATION_DATA;
 
-  // Mock rendering context
+  // State to control the current context (2D or 3D)
   const [context, setContext] = useState("2d");
 
-  // Toggle context
+  // State to hold all the conversation messages
+  const [conversation, setConversation] = useState([]);
+
+  // State to keep track of the index of the current message to show
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+
+  useEffect(() => {
+    // Flatten the conversation data
+    const formattedConversation = conversationData.runs.flatMap(run => run.chat_log);
+    setConversation(formattedConversation);
+  }, []);
+
+  useEffect(() => {
+    // Create a timer to show each message one by one
+    const messageInterval = setInterval(() => {
+      setCurrentMessageIndex(prevIndex => {
+        // If all messages are shown, stop the interval
+        if (prevIndex + 1 >= conversation.length) {
+          clearInterval(messageInterval);
+          return prevIndex;
+        }
+        return prevIndex + 1;
+      });
+    }, 3000); // 3000ms (3 seconds) interval
+
+    // Cleanup the interval when the component is unmounted
+    return () => clearInterval(messageInterval);
+  }, [conversation.length]);
+
+  // Toggle context (2D or 3D)
   const toggleContext = () => {
     setContext((prev) => (prev === "2d" ? "3d" : "2d"));
   };
 
+  // Function to render the appropriate scene
   const getScene = () => {
     switch (context) {
       case "2d":
@@ -33,20 +60,58 @@ const Renderer = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center h-screen mx-auto">
+    <div className="w-full flex flex-col h-screen mx-auto">
+      {/* Navbar at the top */}
       <Navbar />
-      
+  
+      {/* Toggle Button */}
       <button
         onClick={toggleContext}
         className="absolute top-25 left-1/2 transform -translate-x-1/2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center z-10"
       >
-        {context === "2d" ?  "Switch to 3D" : "Switch to 2D"} Render
+        {context === "2d" ? "Switch to 3D" : "Switch to 2D"} Render
       </button>
-      
-      {getScene()}
+  
+      {/* Main Content: Scene + Right-side Panel */}
+      <div className="flex flex-row flex-grow w-full mt-16"> {/* Added mt-16 to push below navbar */}
+        
+        {/* Scene Container (takes remaining space) */}
+        <div className="flex flex-1 justify-center items-center">
+          {getScene()}
+        </div>
+  
+        {/* Right-side Conversation Panel */}
+        <div className="w-100 max-h-screen bg-midnight p-4 overflow-y-auto border-l shadow-md">
+          <h2 className="text-lg font-bold mb-2 text-white">Conversation</h2>
+          <div className="space-y-4"> {/* Increased space between messages */}
+            {conversation.slice(0, currentMessageIndex + 1).map((msg, index) => (
+              <div key={index} className="flex items-start space-x-4">
+                
+                {/* Avatar Circle */}
+                <div className="w-8 h-8 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden">
+                  <img 
+                    src={`/images/${msg.agent === 'Salesman' ? 'salesman.png' : 'customer.png'}`} 
+                    alt={`${msg.agent} Avatar`} 
+                    className="w-full h-full object-cover" 
+                  />
+                </div>
+  
+                {/* Message */}
+                <div className="flex-grow p-2 bg-gray-800 shadow rounded">
+                  <p className="text-sm text-gray-300">
+                    <strong className="text-white-400">{msg.agent}:</strong> {msg.message}
+                  </p>
+                </div>
+  
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Renderer;  	
+export default Renderer;
+ 	
 
