@@ -1,7 +1,5 @@
 import { OverworldMap } from "./OverworldMap.js";
-import { DirectionInput } from "./DirectionInput.js";
-import { GameObject } from "./GameObject.js";
-import { Sprite } from "./Sprite.js";
+import { DirectionInput } from "./DirectionInput.js";;
 
 export class Overworld {
     constructor(config) {
@@ -10,10 +8,14 @@ export class Overworld {
         this.ctx = this.canvas.getContext("2d");
         this.map = null;
         this.lastTime = 0;
+        this.isRunning = false; //Add flag to control the game loop
     }
 
     startGameLoop() {
+        this.isRunning = true;
         const step = (timestamp) => {
+            if (!this.isRunning) return; // Stop the game loop if it's no longer running
+
             const deltaTime = timestamp - this.lastTime; // Time difference between frames
             this.lastTime = timestamp;
 
@@ -91,13 +93,31 @@ export class Overworld {
 
         this.startGameLoop();
 
-        this.map.startCutscene([
-            { who: "hero", type: "walk", direction: "down" },
-            { who: "hero", type: "walk", direction: "down" },
-            { who: "salesman", type: "walk", direction: "left" },
-            { who: "salesman", type: "walk", direction: "left" },
-            { who: "salesman", type: "stand", direction: "up", time: 800 },
-        ])
+        // this.map.startCutscene([
+        //     { who: "hero", type: "walk", direction: "down" },
+        //     { who: "hero", type: "walk", direction: "down" },
+        //     { who: "salesman", type: "walk", direction: "left" },
+        //     { who: "salesman", type: "walk", direction: "left" },
+        //     { who: "salesman", type: "stand", direction: "up", time: 800 },
+        // ])
+    }
+
+    destroy() {
+
+        console.log("Destroying Overworld instance...");
+        // Stop the game loop
+        this.isRunning = false;
+
+        // Clear the canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Reset the map and game objects
+        if (this.map) {
+            this.map.unmountObjects();
+            this.map = null;
+        }
+
+        console.log("Overworld instance destroyed and cleaned up.");
     }
 
 }

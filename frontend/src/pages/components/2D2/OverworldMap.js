@@ -69,10 +69,19 @@ export class OverworldMap {
             let object = this.gameObjects[key];
             object.id = key;
 
-            //T0T0: determine if this object should actually mount
             object.mount(this);
         })
     }
+
+    unmountObjects() {
+        Object.keys(this.gameObjects).forEach(key => {
+            let object = this.gameObjects[key];
+            if (object.unmount) {
+                object.unmount(); // Ensure each object can clean up if necessary
+            }
+        });
+        this.gameObjects = {}; // Clear all game objects
+    }   
 
     async startCutscene(events) {
         this.isCutscenePlaying = true;
@@ -95,9 +104,24 @@ export class OverworldMap {
         delete this.walls[`${x},${y}`]
     }
     moveWall(wasX, wasY, direction) {
+        console.log(`Moving wall from (${wasX}, ${wasY}) in direction: ${direction}`);
         this.removeWall(wasX, wasY);
         const {x,y} = utils.nextPosition(wasX, wasY, direction);
         this.addWall(x,y);
+    }
+
+    destroy() {
+        // Reset walls
+        this.walls = {};
+
+        // Unmount all game objects
+        this.unmountObjects();
+
+        // Reset map state
+        this.lowerImageLoaded = false;
+        this.upperImageLoaded = false;
+
+        console.log("OverworldMap instance destroyed.");
     }
 
 }
@@ -112,7 +136,7 @@ window.OverworldMaps = {
                 x: utils.withGrid(5),
                 y: utils.withGrid(6),
             }),
-            salesman: new NPC({
+            salesman: new Person({
                 x: utils.withGrid(7),
                 y: utils.withGrid(9),
                 npcConfig: {
@@ -121,14 +145,14 @@ window.OverworldMaps = {
                 },
                 src: "placeholderImages/characters/people/npc1.png",
                 behaviourLoop: [
-                    { type: "stand", direction: "left", time: 800 },
-                    { type: "stand", direction: "up", time: 800 },
-                    { type: "stand", direction: "right", time: 1200 },
-                    { type: "stand", direction: "up", time: 300 },
+                    { type: "stand", direction: "left", time: 1600 },
+                    { type: "stand", direction: "up", time: 1600 },
+                    { type: "stand", direction: "right", time: 2400 },
+                    { type: "stand", direction: "up", time: 600 },
                 ]
                 
             }),
-            customer: new NPC({
+            customer: new Person({
                 x: utils.withGrid(3),
                 y: utils.withGrid(7),
                 npcConfig: {
@@ -139,7 +163,7 @@ window.OverworldMaps = {
                 src: "placeholderImages/characters/people/npc3.png",
                 behaviourLoop: [
                     { type: "walk", direction: "left" },
-                     { type: "stand", direction: "up", time: 800 },
+                     { type: "stand", direction: "up", time: 1600 },
                     { type: "walk", direction: "up" },
                     { type: "walk", direction: "right" },
                     { type: "walk", direction: "down" },
@@ -147,10 +171,24 @@ window.OverworldMaps = {
             }),
         },
         walls: {
-            [utils.asGridCoord(7,6)] : true,
-            [utils.asGridCoord(8,6)] : true,
-            [utils.asGridCoord(7,7)] : true,
-            [utils.asGridCoord(8,7)] : true
+            [utils.asGridCoord(7,6)] : true, [utils.asGridCoord(1,3)] : true, 
+            [utils.asGridCoord(8,6)] : true, [utils.asGridCoord(2,3)] : true, 
+            [utils.asGridCoord(7,7)] : true, [utils.asGridCoord(3,4)] : true, 
+            [utils.asGridCoord(8,7)] : true, [utils.asGridCoord(4,4)] : true, 
+            [utils.asGridCoord(5,3)] : true, [utils.asGridCoord(8,10)] : true, 
+            [utils.asGridCoord(6,4)] : true, [utils.asGridCoord(7,10)] : true, 
+            [utils.asGridCoord(7,3)] : true, [utils.asGridCoord(6,10)] : true, 
+            [utils.asGridCoord(8,4)] : true, [utils.asGridCoord(5,11)] : true, 
+            [utils.asGridCoord(9,3)] : true, [utils.asGridCoord(4,10)] : true, 
+            [utils.asGridCoord(10,3)] : true, [utils.asGridCoord(3,10)] : true, 
+            [utils.asGridCoord(11,4)] : true, [utils.asGridCoord(2,10)] : true, 
+            [utils.asGridCoord(11,5)] : true, [utils.asGridCoord(1,10)] : true, 
+            [utils.asGridCoord(11,6)] : true, [utils.asGridCoord(0,9)] : true, 
+            [utils.asGridCoord(11,7)] : true, [utils.asGridCoord(0,8)] : true, 
+            [utils.asGridCoord(11,8)] : true, [utils.asGridCoord(0,7)] : true, 
+            [utils.asGridCoord(11,9)] : true, [utils.asGridCoord(0,6)] : true, 
+            [utils.asGridCoord(10,10)] : true, [utils.asGridCoord(0,5)] : true, 
+            [utils.asGridCoord(9,10)] : true, [utils.asGridCoord(0,4)] : true, 
         }
     },
     Kitchen: {

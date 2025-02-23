@@ -24,7 +24,7 @@ const Renderer = () => {
   const getScene = () => {
     switch (context) {
       case "2d":
-        return <Scene2D2 />;
+        return <Scene2D2 key={`2d-${Date.now()}`} />;
       case "3d":
         return <Scene3D simulationData={data} />;
       default:

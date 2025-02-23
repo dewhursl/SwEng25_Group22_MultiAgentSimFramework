@@ -11,7 +11,8 @@ export class DirectionInput {
             "KeyA": "left",
             "ArrowRight": "right",
             "KeyD": "right",
-        }
+        };
+
     }
 
     get direction() {
@@ -34,5 +35,4 @@ export class DirectionInput {
         })
         
     }
-
 }

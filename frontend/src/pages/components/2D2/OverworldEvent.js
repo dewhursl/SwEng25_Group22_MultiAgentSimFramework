@@ -1,9 +1,13 @@
-import { GameObject } from "./GameObject";
 
 export class OverworldEvent {
     constructor({ map, event }) {
         this.map = map;
         this.event = event;
+    }
+
+     // Helper to remove event listeners
+    removeEventListener(type, handler) {
+        document.removeEventListener(type, handler);
     }
 
     stand(resolve) {
@@ -28,6 +32,10 @@ export class OverworldEvent {
 
     walk(resolve) {
         const who = this.map.gameObjects[ this.event.who ];
+        if (!who) {
+            console.error("Invalid gameObject for 'who':", this.event.who, this.map.gameObjects);
+            throw new Error(`GameObject not found for 'who': ${this.event.who}`);
+        }
         who.startBehaviour({
             map: this.map
         }, {

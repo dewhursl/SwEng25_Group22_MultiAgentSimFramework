@@ -3,7 +3,7 @@ import { OverworldEvent } from "./OverworldEvent.js";
 
 export class GameObject{
     constructor(config) {
-        this.id = null;
+        this.id = config.id || `gameObject_${Math.random().toString(36).substr(2, 9)}`;
         this.isMounted = false;
         this.ctx=null
         this.x = config.x || 0;
@@ -21,6 +21,7 @@ export class GameObject{
     mount(map) {
         console.log("mounting!")
         this.isMounted = true;
+        map.gameObjects[this.id] = this; // Register the GameObject in the map
         map.addWall(this.x, this.y);
 
         //If we have a behaviour, kick off after a short delay
@@ -28,6 +29,24 @@ export class GameObject{
             this.doBehaviourEvent(map);
         }, 10)
 
+    }
+
+    unmount(map) {
+        console.log("Unmounting GameObject:", this.id);
+        this.isMounted = false;
+        if (map) {
+            map.removeWall(this.x, this.y);
+        }
+        // Reset any active behaviors or states
+        this.behaviourLoopIndex = 0; // Reset the behavior loop
+    }
+
+    resetState() {
+        console.log("Resetting GameObject state:", this.id);
+        this.x = this.initialX;
+        this.y = this.initialY;
+        this.direction = "down"; // Reset to default direction
+        this.behaviourLoopIndex = 0; // Reset behavior loop
     }
 
     update() {
@@ -42,7 +61,11 @@ export class GameObject{
         }
 
         //Setting up our event with relevant info
-        let eventConfig = this.behaviourLoop[this.behaviourLoopIndex];
+        const eventConfig = this.behaviourLoop[this.behaviourLoopIndex];
+        if (!eventConfig) {
+            console.error("Invalid behaviourLoop configuration:", this.behaviourLoop);
+        return;
+        }
         eventConfig.who = this.id;
 
         //Create an event instance out of our next event config

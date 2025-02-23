@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import "./styles.css";
 import { Overworld } from "./Overworld"; // Import Overworld directly for better React integration
-import { Application } from "pixi.js";
 
 const Scene2D2 = () => {
   useEffect(() => {
@@ -10,6 +9,12 @@ const Scene2D2 = () => {
       element: document.querySelector(".game-container"),
     });
     overworld.init();
+
+     // Cleanup function to reset or destroy Overworld
+     return () => {
+     overworld.destroy();
+    };
+
   }, []); // Empty dependency array ensures this runs only once on mount
 
   return (

@@ -1,7 +1,6 @@
 import { util } from "echarts";
 import { GameObject } from"./GameObject.js";
 import { utils } from "./utils.js";
-import { Sprite } from "./Sprite.js";
 
 
 export class Person extends GameObject {
@@ -19,7 +18,7 @@ export class Person extends GameObject {
         }
     }
 
-    update(state) {
+    update(state) {         
         if(this.movingProgressRemaining > 0) {
             this.updatePosition();
         } else {
@@ -45,9 +44,13 @@ export class Person extends GameObject {
 
         if(behaviour.type === "walk") {
 
+            if (!state.map) {
+                console.error("Error: state.map is undefined during startBehaviour");
+                return;
+            }
+
             //Stop here if space is not free
             if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-
                 behaviour.retry && setTimeout(() => {
                     this.startBehaviour(state, behaviour)
                 }, 10);
@@ -59,9 +62,11 @@ export class Person extends GameObject {
             state.map.moveWall(this.x, this.y, this.direction);
             this.movingProgressRemaining = 16;
             this.updateSprite(state);
+            console.log("Movement started.");
         }
 
         if(behaviour.type === "stand") {
+            console.log("Standing in place.");
             setTimeout(() => {
                 utils.emitEvent("PersonStandComplete", {
                     whoId: this.id
@@ -77,11 +82,15 @@ export class Person extends GameObject {
         this.movingProgressRemaining -= 1;
 
         if(this.movingProgressRemaining === 0) {
-            //We finished the walk!
+            // Only emit if the person is still mounted
+        if (this.isMounted) {
             utils.emitEvent("PersonWalkingComplete", {
                 whoId: this.id
-            })
+            });
+        } else {
+            console.warn(`Person ${this.id} unmounted; skipping walking complete event.`);
         }
+    }
     }
 
     updateSprite() {
