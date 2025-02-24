@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState } from 'react';
+import Navbar from './components/Navbar';
 
 const appendToStateArray = (setState, element) => {
   setState((prev) => [...prev, element]);
-}
+};
 
 const removeFromStateArray = (setState, index) => {
   setState((prev) => {
@@ -10,21 +11,21 @@ const removeFromStateArray = (setState, index) => {
     next.splice(index, 1);
     return next;
   });
-}
+};
 
 const handleInput = (setState, event) => {
   setState(event.target.value);
-}
+};
 
 const Parameter = () => {
-  const [name, setName] = useState("");
-  const [value, setValue] = useState("");
+  const [name, setName] = useState('');
+  const [value, setValue] = useState('');
 
   return (
-    <div
-      className="bg-gray-900 p-4 rounded-xl shadow-md space-y-4 text-white"
-    >
-      <label htmlFor="name" className="block text-gray-300 font-semibold">Name</label>
+    <div className="bg-gray-900 p-4 rounded-xl shadow-md space-y-4 text-white">
+      <label htmlFor="name" className="block text-gray-300 font-semibold">
+        Name
+      </label>
       <input
         className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md"
         name="name"
@@ -33,7 +34,9 @@ const Parameter = () => {
         onChange={(event) => handleInput(setName, event)}
       ></input>
 
-      <label htmlFor="value" className="block text-gray-300 font-semibold">Value</label>
+      <label htmlFor="value" className="block text-gray-300 font-semibold">
+        Value
+      </label>
       <input
         className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md"
         name="value"
@@ -43,17 +46,19 @@ const Parameter = () => {
       ></input>
     </div>
   );
-}
+};
 
 const Agent = () => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [freePrompt, setFreePrompt] = useState("");
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [freePrompt, setFreePrompt] = useState('');
   const [parameters, setParameters] = useState([]);
 
   return (
     <div className="bg-gray-900 p-4 rounded-xl shadow-md space-y-4 text-white">
-      <label htmlFor="name" className="block text-gray-300 font-semibold">Name</label>
+      <label htmlFor="name" className="block text-gray-300 font-semibold">
+        Name
+      </label>
       <input
         className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md"
         name="name"
@@ -62,7 +67,9 @@ const Agent = () => {
         onChange={(event) => handleInput(setName, event)}
       ></input>
 
-      <label htmlFor="description" className="block text-gray-300 font-semibold">Description</label>
+      <label htmlFor="description" className="block text-gray-300 font-semibold">
+        Description
+      </label>
       <input
         className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md"
         name="description"
@@ -71,7 +78,9 @@ const Agent = () => {
         onChange={(event) => handleInput(setDescription, event)}
       ></input>
 
-      <label htmlFor="free-prompt" className="block text-gray-300 font-semibold">Free Prompt</label>
+      <label htmlFor="free-prompt" className="block text-gray-300 font-semibold">
+        Free Prompt
+      </label>
       <input
         className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md"
         name="free-prompt"
@@ -89,10 +98,7 @@ const Agent = () => {
 
       <div>
         {parameters.map((parameter, index) => (
-          <div
-            className="bg-gray-800 p-2 rounded-md"
-            key={index}
-          >
+          <div className="bg-gray-800 p-2 rounded-md" key={index}>
             <div className="flex items-center justify-between">
               <p>Parameter {index}</p>
               <button
@@ -107,8 +113,8 @@ const Agent = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Simulation = () => {
   const [numRuns, setNumRuns] = useState(0);
@@ -152,13 +158,14 @@ const Simulation = () => {
       </div>
     </div>
   );
-}
+};
 
 const Configurator = () => {
   const [simulations, setSimulations] = useState([]);
 
   return (
-    <div className="p-6 bg-midnight min-h-screen h-screen overflow-y-scroll">
+    <div className="p-6 pt-28 mb-8 bg-midnight min-h-screen overflow-y-auto">
+      <Navbar />
       <button
         className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
         onClick={() => appendToStateArray(setSimulations, <Simulation />)}
@@ -184,6 +191,6 @@ const Configurator = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Configurator;

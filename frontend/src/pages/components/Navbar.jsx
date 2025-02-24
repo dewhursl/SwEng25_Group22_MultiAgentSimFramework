@@ -25,10 +25,12 @@ const Navbar = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[60]">
-      <div className="bg-midnight ">
+      <div className="bg-midnight shadow-lg shadow-violet-600/60">
         <div className="max-w-7xl mx-auto flex justify-between items-center py-5">
           <div className="flex items-center">
-            <img src="../assets/quantexa-logo-white.svg" alt="logo" className="w-34 h-6" />
+            <a href="/">
+              <img src="../assets/quantexa-logo-white.svg" alt="logo" className="w-34 h-6" />
+            </a>
           </div>
           <nav className="sm:flex hidden">
             <NavItems />

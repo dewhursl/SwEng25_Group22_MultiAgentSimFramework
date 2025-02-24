@@ -3,7 +3,6 @@ import ReactECharts from 'echarts-for-react';
 import mockData from '../constants/dashboardMockData.json';
 import Navbar from './components/Navbar';
 
-
 const Dashboard = () => {
   const [simulationData, setSimulationData] = useState(null);
   const [selectedVariable, setSelectedVariable] = useState('');
@@ -156,11 +155,9 @@ const Dashboard = () => {
   };
 
   return (
-   
     <div className="p-4">
-       <Navbar />
-     
-      <h1 className=" text-2xl text-white font-bold mb-4 mt-30">Simulation Dashboard</h1>
+      <Navbar />
+      <h1 className=" text-2xl text-white font-bold mb-4 mt-28">Simulation Dashboard</h1>
       <div className="text-white">
         <div className="p-2 bg-violet-600/5 border border-violet-400 rounded mb-4">
           <p>
