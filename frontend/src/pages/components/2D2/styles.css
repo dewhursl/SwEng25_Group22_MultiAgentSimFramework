@@ -1,14 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    background: #333;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-}
-
 .game-container {
     position: relative;
     width: 352px;
