@@ -41,8 +41,8 @@ export class OverworldMap {
             //console.log("Drawing lower image...");
             ctx.drawImage(
                 this.lowerImage, 
-                utils.withGrid(10.5) - cameraPerson.x,
-                utils.withGrid(6) - cameraPerson.y
+                0,//utils.withGrid(10.5) - cameraPerson.x,
+                0,//utils.withGrid(6) - cameraPerson.y
             )
         }
     }
@@ -52,8 +52,8 @@ export class OverworldMap {
             //console.log("Drawing upper image...");
             ctx.drawImage(
                 this.upperImage, 
-                utils.withGrid(10.5) - cameraPerson.x,
-                utils.withGrid(6) - cameraPerson.y
+                0,//utils.withGrid(10.5) - cameraPerson.x,
+                0,//utils.withGrid(6) - cameraPerson.y
             )
         }
     }
