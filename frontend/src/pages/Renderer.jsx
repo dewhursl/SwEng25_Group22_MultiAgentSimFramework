@@ -59,7 +59,7 @@ const Renderer = () => {
   };
 
   return (
-    <div className="w-full mb-8 flex flex-col h-screen mx-auto">
+    <div className="w-full mb-2 flex flex-col max-h-screen h-screen mx-auto">
       <Navbar />
 
       {/* Toggle Button */}
@@ -77,13 +77,13 @@ const Renderer = () => {
 
         {/* side Conversation Panel (only visible in 2D render) */}
         {context === '2d' && (
-          <div className="w-100 max-h-screen bg-midnight p-4 overflow-y-auto border-l shadow-md">
+          <div className="w-120 max-h-screen bg-midnight p-4 overflow-y-auto border shadow-lg shadow-violet-600/60">
             <h2 className="text-lg font-bold mt-4 mb-2 text-white">Conversation</h2>
             <div className="space-y-4">
               {conversation.slice(0, currentMessageIndex + 1).map((msg, index) => (
                 <div key={index} className="flex items-start space-x-4">
                   {/* Avatar Circle */}
-                  <div className="w-8 h-8 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden">
+                  <div className="min-w-10 w-10 h-10 flex-shrink-0 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden">
                     <img
                       src={`/images/${msg.agent === 'Salesman' ? 'salesman.png' : 'customer.png'}`}
                       alt={`${msg.agent} Avatar`}
@@ -92,9 +92,9 @@ const Renderer = () => {
                   </div>
 
                   {/* Message */}
-                  <div className="flex-grow p-2 bg-gray-800 shadow rounded">
-                    <p className="text-sm text-gray-300">
-                      <strong className="text-white-400">{msg.agent}:</strong> {msg.message}
+                  <div className="flex-grow p-2 bg-violet-950/20 border border-violet-400 rounded-lg">
+                    <p className="text-sm text-gray-200">
+                      <strong className="text-white">{msg.agent}:</strong> {msg.message}
                     </p>
                   </div>
                 </div>

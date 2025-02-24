@@ -20,7 +20,7 @@ export class Overworld {
             this.lastTime = timestamp;
 
             //Clear off the canvas
-            this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
             //console.log("Canvas Context:", this.ctx);
 
@@ -31,8 +31,8 @@ export class Overworld {
             //Update all objects
             Object.values(this.map.gameObjects).forEach(object => {
                 object.update({
-                arrow: this.directionInput.direction,
-                map: this.map,
+                    arrow: this.directionInput.direction,
+                    map: this.map,
                 })
             })
 
@@ -40,7 +40,7 @@ export class Overworld {
             this.map.drawLowerImage(this.ctx, cameraPerson);
 
             //Draw Game Objects
-            Object.values(this.map.gameObjects).sort((a,b) => {
+            Object.values(this.map.gameObjects).sort((a, b) => {
                 return a.y - b.y;
             }).forEach(object => {
                 object.sprite.draw(this.ctx, cameraPerson);
@@ -52,10 +52,10 @@ export class Overworld {
             //Update all objects
             Object.values(this.map.gameObjects).forEach(object => {
 
-                    object.update({
+                object.update({
                     arrow: this.directionInput.direction,
                     map: this.map,
-                    ctx:this.ctx,
+                    ctx: this.ctx,
                     deltaTime: deltaTime / 1000 // Convert to seconds
                 })
             })
@@ -71,12 +71,11 @@ export class Overworld {
         this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
         this.map.mountObjects();
         console.log("GameObjects in map:", this.map.gameObjects);
-        
 
         // Automatically start NPC dialogue
         const npc = this.map.gameObjects.salesman;
 
-        try  {
+        try {
             console.log("Salesman NPC:", npc);
             npc.dialogueQueue.forEach(dialogue => {
                 //console.log("dialog" +dialogue.text);
