@@ -59,7 +59,7 @@ const Renderer = () => {
   };
 
   return (
-    <div className="w-full mb-2 flex flex-col max-h-screen h-screen mx-auto">
+    <div className="w-full flex flex-col h-screen overflow-hidden">
       <Navbar />
 
       {/* Toggle Button */}
@@ -71,7 +71,7 @@ const Renderer = () => {
       </button>
 
       {/* Scene and side Panel */}
-      <div className="flex flex-row flex-grow w-full mt-16">
+      <div className="flex flex-row flex-1 w-full mt-16 overflow-hidden">
         {/* Scene Container (takes remaining space) */}
         <div className="flex flex-1 justify-center items-center">{getScene()}</div>
 
