@@ -18,7 +18,7 @@ const Scene2D2 = () => {
 
   return (
     <div className="game-container">
-      <canvas className="game-canvas" width="352" height="198"></canvas>
+      <canvas className="game-canvas"></canvas>
     </div>
   );
 };
