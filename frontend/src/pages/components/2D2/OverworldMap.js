@@ -133,27 +133,27 @@ window.OverworldMaps = {
         gameObjects: {
             hero: new Person({
                 isPlayerControlled: true,
-                x: utils.withGrid(5),
-                y: utils.withGrid(6),
+                x: utils.withGrid(7),
+                y: utils.withGrid(4),
             }),
             salesman: new Person({
-                x: utils.withGrid(7),
-                y: utils.withGrid(9),
+                x: utils.withGrid(6),
+                y: utils.withGrid(7),
                 npcConfig: {
                     dialogueQueue: [{ text: "test" }],
                     // other NPC-specific configurations can go here
                 },
                 src: "placeholderImages/characters/people/npc1.png",
                 behaviourLoop: [
-                    { type: "stand", direction: "left", time: 1600 },
-                    { type: "stand", direction: "up", time: 1600 },
-                    { type: "stand", direction: "right", time: 2400 },
-                    { type: "stand", direction: "up", time: 600 },
+                    { type: "stand", direction: "left", time: 3200 },
+                    { type: "stand", direction: "up", time: 3200 },
+                    { type: "stand", direction: "right", time: 4800 },
+                    { type: "stand", direction: "up", time: 1200 },
                 ]
                 
             }),
             customer: new Person({
-                x: utils.withGrid(3),
+                x: utils.withGrid(4),
                 y: utils.withGrid(7),
                 npcConfig: {
                     dialogueQueue: [{ text: "test" }],
@@ -162,11 +162,10 @@ window.OverworldMaps = {
                 
                 src: "placeholderImages/characters/people/npc3.png",
                 behaviourLoop: [
-                    { type: "walk", direction: "left" },
-                     { type: "stand", direction: "up", time: 1600 },
-                    { type: "walk", direction: "up" },
-                    { type: "walk", direction: "right" },
-                    { type: "walk", direction: "down" },
+                    { type: "stand", direction: "up", time: 3200 },
+                    { type: "stand", direction: "right", time: 3200 },
+                    { type: "stand", direction: "up", time: 4800 },
+                    { type: "stand", direction: "left", time: 1200 },
                 ]
             }),
         },

@@ -11,10 +11,10 @@ export class Person extends GameObject {
         this.isPlayerControlled = config.isPlayerControlled || false;
 
         this.directionUpdate = {
-            "up": ["y", -1],
-            "down": ["y", 1],
-            "left": ["x", -1],
-            "right": ["x", 1],
+            "up": ["y", -0.5],
+            "down": ["y", 0.5],
+            "left": ["x", -0.5],
+            "right": ["x", 0.5],
         }
     }
 
@@ -60,7 +60,7 @@ export class Person extends GameObject {
 
             //Ready to walk!
             state.map.moveWall(this.x, this.y, this.direction);
-            this.movingProgressRemaining = 16;
+            this.movingProgressRemaining = 32;
             this.updateSprite(state);
             console.log("Movement started.");
         }
