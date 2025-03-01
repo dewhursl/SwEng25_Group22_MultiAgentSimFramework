@@ -1,0 +1,11 @@
+stages:
+  - backend
+
+test_simulation:
+  stage: backend
+  image: python:3.13
+  setup_environment:
+    - pip install -r backend/src/requirements.txt
+    - export TOGETHER_API_KEY=$(cat backend/src/ci_cd_resources/together_api_key)
+  run_simulation:
+    - python backend/src/test_run_sim.py 2 ci_car_sale_simulation
