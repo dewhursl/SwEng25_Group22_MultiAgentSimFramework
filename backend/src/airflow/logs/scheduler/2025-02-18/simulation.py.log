@@ -1,0 +1,357 @@
+[2025-02-18T11:36:20.709+0000] {processor.py:186} INFO - Started process (PID=4893) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:36:20.711+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:36:20.714+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:36:20.714+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:36:20.726+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:36:20.724+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:36:20.727+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:36:20.752+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.053 seconds
+[2025-02-18T11:37:21.152+0000] {processor.py:186} INFO - Started process (PID=5130) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:37:21.156+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:37:21.159+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:37:21.159+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:37:21.164+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:37:21.164+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:37:21.165+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:37:21.181+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.041 seconds
+[2025-02-18T11:38:20.723+0000] {processor.py:186} INFO - Started process (PID=5389) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:38:20.726+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:38:20.728+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:38:20.728+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:38:20.733+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:38:20.732+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:38:20.733+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:38:20.761+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.045 seconds
+[2025-02-18T11:39:20.542+0000] {processor.py:186} INFO - Started process (PID=5606) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:39:20.546+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:39:20.549+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:39:20.548+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:39:20.560+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:39:20.559+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:39:20.560+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:39:20.591+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.057 seconds
+[2025-02-18T11:40:25.873+0000] {processor.py:186} INFO - Started process (PID=5886) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:40:25.875+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:40:25.879+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:40:25.879+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:40:25.884+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:40:25.883+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:40:25.885+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:40:25.910+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.047 seconds
+[2025-02-18T11:40:56.451+0000] {processor.py:186} INFO - Started process (PID=6027) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:40:56.454+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:40:56.456+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:40:56.456+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:40:56.461+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:40:56.461+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:40:56.463+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:40:56.489+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.048 seconds
+[2025-02-18T11:41:55.795+0000] {processor.py:186} INFO - Started process (PID=6305) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:41:55.798+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:41:55.801+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:41:55.800+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:41:55.805+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:41:55.804+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:41:55.805+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:41:55.823+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.038 seconds
+[2025-02-18T11:42:27.326+0000] {processor.py:186} INFO - Started process (PID=6431) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:42:27.329+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:42:27.333+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:42:27.332+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:42:27.339+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:42:27.338+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:42:27.339+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:42:27.361+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.046 seconds
+[2025-02-18T11:43:00.511+0000] {processor.py:186} INFO - Started process (PID=6722) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:43:00.514+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:43:00.518+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:43:00.517+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:43:00.526+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:43:00.524+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:43:00.527+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:43:00.566+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.076 seconds
+[2025-02-18T11:43:32.745+0000] {processor.py:186} INFO - Started process (PID=6946) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:43:32.748+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:43:32.752+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:43:32.751+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:43:32.758+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:43:32.757+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:43:32.758+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:43:32.780+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.046 seconds
+[2025-02-18T11:44:05.194+0000] {processor.py:186} INFO - Started process (PID=7137) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:44:05.197+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:44:05.201+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:44:05.200+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:44:05.206+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:44:05.205+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:44:05.207+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:44:05.231+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.051 seconds
+[2025-02-18T11:44:37.566+0000] {processor.py:186} INFO - Started process (PID=7301) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:44:37.569+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:44:37.572+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:44:37.572+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:44:37.578+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:44:37.577+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:44:37.578+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:44:37.597+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.045 seconds
+[2025-02-18T11:45:09.489+0000] {processor.py:186} INFO - Started process (PID=7450) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:45:09.493+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:45:09.497+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:45:09.497+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:45:09.505+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:45:09.503+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:45:09.506+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:45:09.541+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.065 seconds
+[2025-02-18T11:45:40.643+0000] {processor.py:186} INFO - Started process (PID=7668) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:45:40.646+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:45:40.648+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:45:40.647+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:45:40.651+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:45:40.651+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:45:40.652+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:45:40.671+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.033 seconds
+[2025-02-18T11:46:11.081+0000] {processor.py:186} INFO - Started process (PID=7807) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:46:11.085+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:46:11.089+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:46:11.088+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:46:11.094+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:46:11.094+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:46:11.095+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:46:11.114+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.048 seconds
+[2025-02-18T11:47:10.862+0000] {processor.py:186} INFO - Started process (PID=8043) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:47:10.865+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:47:10.868+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:47:10.868+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:47:10.873+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:47:10.872+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:47:10.873+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:47:10.892+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.039 seconds
+[2025-02-18T11:47:41.863+0000] {processor.py:186} INFO - Started process (PID=8163) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:47:41.867+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:47:41.870+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:47:41.870+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:47:41.875+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:47:41.875+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:47:41.876+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:47:41.898+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.048 seconds
+[2025-02-18T11:48:12.506+0000] {processor.py:186} INFO - Started process (PID=8283) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:48:12.508+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:48:12.511+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:48:12.511+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:48:12.515+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:48:12.514+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:48:12.516+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:48:12.538+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.044 seconds
+[2025-02-18T11:48:42.814+0000] {processor.py:186} INFO - Started process (PID=8406) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:48:42.816+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:48:42.822+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:48:42.821+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:48:42.826+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:48:42.825+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:48:42.826+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:48:42.854+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.046 seconds
+[2025-02-18T11:49:13.271+0000] {processor.py:186} INFO - Started process (PID=8521) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:49:13.273+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:49:13.285+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:49:13.284+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:49:13.370+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:49:13.369+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:49:13.371+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:49:13.744+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.493 seconds
+[2025-02-18T11:58:44.602+0000] {processor.py:186} INFO - Started process (PID=8711) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:58:44.605+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-18T11:58:44.610+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:58:44.609+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:58:44.619+0000] {logging_mixin.py:190} INFO - [2025-02-18T11:58:44.616+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 111
+    )
+    ^
+SyntaxError: f-string expression part cannot include a backslash
+[2025-02-18T11:58:44.620+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-18T11:58:44.646+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.055 seconds

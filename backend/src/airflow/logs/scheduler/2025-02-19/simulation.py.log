@@ -1,0 +1,70 @@
+[2025-02-19T23:49:56.425+0000] {processor.py:186} INFO - Started process (PID=4182) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:49:56.427+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-19T23:49:56.431+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:49:56.430+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:49:56.440+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:49:56.438+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 1, in <module>
+    from util.config import SimConfigLoader
+ModuleNotFoundError: No module named 'util'
+[2025-02-19T23:49:56.441+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:49:56.464+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.045 seconds
+[2025-02-19T23:50:50.405+0000] {processor.py:186} INFO - Started process (PID=4455) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:50:50.407+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-19T23:50:50.409+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:50:50.409+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:50:50.412+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:50:50.411+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 1, in <module>
+    from util.config import SimConfigLoader
+ModuleNotFoundError: No module named 'util'
+[2025-02-19T23:50:50.412+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:50:50.432+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.032 seconds
+[2025-02-19T23:51:37.143+0000] {processor.py:186} INFO - Started process (PID=4653) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:51:37.145+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-19T23:51:37.148+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:51:37.147+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:51:37.152+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:51:37.151+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 1, in <module>
+    from util.config import SimConfigLoader
+ModuleNotFoundError: No module named 'util'
+[2025-02-19T23:51:37.152+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:51:37.175+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.038 seconds
+[2025-02-19T23:53:59.726+0000] {processor.py:186} INFO - Started process (PID=5202) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:53:59.728+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-19T23:53:59.730+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:53:59.730+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:53:59.735+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:53:59.734+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 1, in <module>
+    from dags.util.config import SimConfigLoader
+ModuleNotFoundError: No module named 'dags'
+[2025-02-19T23:53:59.735+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:53:59.762+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.043 seconds
+[2025-02-19T23:54:55.248+0000] {processor.py:186} INFO - Started process (PID=5444) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:54:55.250+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-19T23:54:55.252+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:54:55.252+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:54:55.255+0000] {logging_mixin.py:190} INFO - [2025-02-19T23:54:55.255+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 1, in <module>
+    from dags.util.config import SimConfigLoader
+ModuleNotFoundError: No module named 'dags'
+[2025-02-19T23:54:55.256+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-19T23:54:55.273+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.029 seconds

@@ -1,0 +1,50 @@
+[2025-02-17T19:48:56.001+0000] {processor.py:186} INFO - Started process (PID=16928) to work on /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:48:56.003+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/dag_test.py for tasks to queue
+[2025-02-17T19:48:56.005+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:48:56.005+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:48:56.019+0000] {processor.py:925} INFO - DAG(s) 'hello_world_dag' retrieved from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:48:56.126+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:48:56.126+0000] {override.py:1930} INFO - Created Permission View: can delete on DAG:hello_world_dag
+[2025-02-17T19:48:56.137+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:48:56.137+0000] {override.py:1930} INFO - Created Permission View: can read on DAG:hello_world_dag
+[2025-02-17T19:48:56.147+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:48:56.146+0000] {override.py:1930} INFO - Created Permission View: can edit on DAG:hello_world_dag
+[2025-02-17T19:48:56.159+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:48:56.159+0000] {override.py:1930} INFO - Created Permission View: can delete on DAG Run:hello_world_dag
+[2025-02-17T19:48:56.167+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:48:56.167+0000] {override.py:1930} INFO - Created Permission View: can read on DAG Run:hello_world_dag
+[2025-02-17T19:48:56.175+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:48:56.174+0000] {override.py:1930} INFO - Created Permission View: can create on DAG Run:hello_world_dag
+[2025-02-17T19:48:56.184+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:48:56.183+0000] {override.py:1930} INFO - Created Permission View: menu access on DAG Run:hello_world_dag
+[2025-02-17T19:48:56.184+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:48:56.184+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-17T19:48:56.193+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:48:56.193+0000] {dag.py:3262} INFO - Creating ORM DAG for hello_world_dag
+[2025-02-17T19:48:56.194+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:48:56.193+0000] {dag.py:4180} INFO - Setting next_dagrun for hello_world_dag to None, run_after=None
+[2025-02-17T19:48:56.215+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/dag_test.py took 0.224 seconds
+[2025-02-17T19:49:52.485+0000] {processor.py:186} INFO - Started process (PID=17320) to work on /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:49:52.487+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/dag_test.py for tasks to queue
+[2025-02-17T19:49:52.489+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:49:52.489+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:49:52.495+0000] {processor.py:925} INFO - DAG(s) 'hello_world_dag' retrieved from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:49:52.506+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:49:52.506+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-17T19:49:52.518+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:49:52.518+0000] {dag.py:4180} INFO - Setting next_dagrun for hello_world_dag to None, run_after=None
+[2025-02-17T19:49:52.538+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/dag_test.py took 0.058 seconds
+[2025-02-17T19:50:47.334+0000] {processor.py:186} INFO - Started process (PID=17700) to work on /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:50:47.336+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/dag_test.py for tasks to queue
+[2025-02-17T19:50:47.338+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:50:47.338+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:50:47.343+0000] {processor.py:925} INFO - DAG(s) 'hello_world_dag' retrieved from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:50:47.353+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:50:47.353+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-17T19:50:47.361+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:50:47.361+0000] {dag.py:4180} INFO - Setting next_dagrun for hello_world_dag to None, run_after=None
+[2025-02-17T19:50:47.379+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/dag_test.py took 0.050 seconds
+[2025-02-17T19:51:42.292+0000] {processor.py:186} INFO - Started process (PID=18082) to work on /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:51:42.294+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/dag_test.py for tasks to queue
+[2025-02-17T19:51:42.296+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:51:42.295+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:51:42.301+0000] {processor.py:925} INFO - DAG(s) 'hello_world_dag' retrieved from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:51:42.311+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:51:42.311+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-17T19:51:42.320+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:51:42.320+0000] {dag.py:4180} INFO - Setting next_dagrun for hello_world_dag to None, run_after=None
+[2025-02-17T19:51:42.343+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/dag_test.py took 0.057 seconds
+[2025-02-17T19:52:35.353+0000] {processor.py:186} INFO - Started process (PID=18443) to work on /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:52:35.355+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/dag_test.py for tasks to queue
+[2025-02-17T19:52:35.357+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:52:35.357+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:52:35.362+0000] {processor.py:925} INFO - DAG(s) 'hello_world_dag' retrieved from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:52:35.372+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:52:35.372+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-17T19:52:35.383+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:52:35.383+0000] {dag.py:4180} INFO - Setting next_dagrun for hello_world_dag to None, run_after=None
+[2025-02-17T19:52:35.404+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/dag_test.py took 0.055 seconds
+[2025-02-17T19:53:31.674+0000] {processor.py:186} INFO - Started process (PID=18847) to work on /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:53:31.676+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/dag_test.py for tasks to queue
+[2025-02-17T19:53:31.678+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:53:31.678+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:53:31.684+0000] {processor.py:925} INFO - DAG(s) 'hello_world_dag' retrieved from /home/aine/airflow/dags/dag_test.py
+[2025-02-17T19:53:31.695+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:53:31.695+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-17T19:53:31.705+0000] {logging_mixin.py:190} INFO - [2025-02-17T19:53:31.705+0000] {dag.py:4180} INFO - Setting next_dagrun for hello_world_dag to None, run_after=None
+[2025-02-17T19:53:31.726+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/dag_test.py took 0.057 seconds

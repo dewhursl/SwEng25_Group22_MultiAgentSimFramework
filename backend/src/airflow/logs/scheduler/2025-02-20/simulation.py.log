@@ -1,0 +1,358 @@
+[2025-02-20T00:02:12.234+0000] {processor.py:186} INFO - Started process (PID=7152) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:02:12.235+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T00:02:12.237+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:02:12.237+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:02:12.242+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:02:12.242+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 14, in <module>
+    from autogen_agentchat.agents import AssistantAgent
+ModuleNotFoundError: No module named 'autogen_agentchat'
+[2025-02-20T00:02:12.243+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:02:12.262+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.035 seconds
+[2025-02-20T00:03:07.061+0000] {processor.py:186} INFO - Started process (PID=7425) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:03:07.063+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T00:03:07.065+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:03:07.065+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:03:07.068+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:03:07.068+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 14, in <module>
+    from autogen_agentchat.agents import AssistantAgent
+ModuleNotFoundError: No module named 'autogen_agentchat'
+[2025-02-20T00:03:07.069+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:03:07.085+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.030 seconds
+[2025-02-20T00:03:54.809+0000] {processor.py:186} INFO - Started process (PID=7626) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:03:54.811+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T00:03:54.814+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:03:54.814+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:03:54.818+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:03:54.817+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 14, in <module>
+    from autogen_agentchat.agents import AssistantAgent
+ModuleNotFoundError: No module named 'autogen_agentchat'
+[2025-02-20T00:03:54.818+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:03:54.834+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.030 seconds
+[2025-02-20T00:08:00.241+0000] {processor.py:186} INFO - Started process (PID=8858) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:08:00.243+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T00:08:00.245+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:08:00.245+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:08:00.491+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:08:00.491+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 18, in <module>
+    from autogen_ext.models.openai import OpenAIChatCompletionClient
+ModuleNotFoundError: No module named 'autogen_ext'
+[2025-02-20T00:08:00.492+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:08:00.511+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.276 seconds
+[2025-02-20T00:08:56.657+0000] {processor.py:186} INFO - Started process (PID=9112) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:08:56.660+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T00:08:56.662+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:08:56.662+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:08:56.826+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:08:56.826+0000] {dagbag.py:387} ERROR - Failed to import: /home/aine/airflow/dags/simulation.py
+Traceback (most recent call last):
+  File "/home/aine/.local/lib/python3.10/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/aine/airflow/dags/simulation.py", line 18, in <module>
+    from autogen_ext.models.openai import OpenAIChatCompletionClient
+ModuleNotFoundError: No module named 'autogen_ext'
+[2025-02-20T00:08:56.827+0000] {processor.py:927} WARNING - No viable dags retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:08:56.844+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.192 seconds
+[2025-02-20T00:11:02.820+0000] {processor.py:186} INFO - Started process (PID=9593) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:11:02.822+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T00:11:02.824+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:02.824+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:11:03.604+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:11:03.676+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:03.676+0000] {override.py:1930} INFO - Created Permission View: can read on DAG:simulation_task
+[2025-02-20T00:11:03.685+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:03.685+0000] {override.py:1930} INFO - Created Permission View: can edit on DAG:simulation_task
+[2025-02-20T00:11:03.693+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:03.692+0000] {override.py:1930} INFO - Created Permission View: can delete on DAG:simulation_task
+[2025-02-20T00:11:03.704+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:03.704+0000] {override.py:1930} INFO - Created Permission View: menu access on DAG Run:simulation_task
+[2025-02-20T00:11:03.712+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:03.711+0000] {override.py:1930} INFO - Created Permission View: can read on DAG Run:simulation_task
+[2025-02-20T00:11:03.719+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:03.719+0000] {override.py:1930} INFO - Created Permission View: can create on DAG Run:simulation_task
+[2025-02-20T00:11:03.726+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:03.726+0000] {override.py:1930} INFO - Created Permission View: can delete on DAG Run:simulation_task
+[2025-02-20T00:11:03.726+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:03.726+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T00:11:03.735+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:03.735+0000] {dag.py:3262} INFO - Creating ORM DAG for simulation_task
+[2025-02-20T00:11:03.736+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:11:03.735+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T00:11:03.765+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.951 seconds
+[2025-02-20T00:12:01.062+0000] {processor.py:186} INFO - Started process (PID=9854) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:12:01.065+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T00:12:01.068+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:12:01.067+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:12:01.711+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T00:12:01.724+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:12:01.723+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T00:12:01.737+0000] {logging_mixin.py:190} INFO - [2025-02-20T00:12:01.736+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T00:12:01.762+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.707 seconds
+[2025-02-20T12:29:18.154+0000] {processor.py:186} INFO - Started process (PID=7032) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:29:18.157+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:29:18.161+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:29:18.160+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:29:20.040+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:29:20.081+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:29:20.080+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:29:20.110+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:29:20.110+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:29:20.141+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 2.011 seconds
+[2025-02-20T12:30:30.367+0000] {processor.py:186} INFO - Started process (PID=7668) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:30:30.370+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:30:30.374+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:30:30.373+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:30:31.593+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:30:31.613+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:30:31.612+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:30:31.639+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:30:31.638+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:30:31.694+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.346 seconds
+[2025-02-20T12:31:09.990+0000] {processor.py:186} INFO - Started process (PID=7805) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:31:09.995+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:31:10.003+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:31:10.002+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:31:11.465+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:31:11.484+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:31:11.484+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:31:11.505+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:31:11.504+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:31:11.545+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.573 seconds
+[2025-02-20T12:31:47.497+0000] {processor.py:186} INFO - Started process (PID=7934) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:31:47.501+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:31:47.505+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:31:47.505+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:31:48.935+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:31:48.951+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:31:48.950+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:31:48.970+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:31:48.970+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:31:49.009+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.522 seconds
+[2025-02-20T12:32:22.854+0000] {processor.py:186} INFO - Started process (PID=8154) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:32:22.860+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:32:22.867+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:32:22.865+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:32:24.187+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:32:24.218+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:32:24.215+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:32:24.246+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:32:24.245+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:32:24.281+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.450 seconds
+[2025-02-20T12:33:01.843+0000] {processor.py:186} INFO - Started process (PID=8291) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:33:01.847+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:33:01.851+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:33:01.850+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:33:03.287+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:33:03.311+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:33:03.310+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:33:03.337+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:33:03.337+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:33:03.380+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.549 seconds
+[2025-02-20T12:33:40.081+0000] {processor.py:186} INFO - Started process (PID=8491) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:33:40.084+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:33:40.091+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:33:40.090+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:33:41.371+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:33:41.392+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:33:41.391+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:33:41.412+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:33:41.412+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:33:41.447+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.382 seconds
+[2025-02-20T12:34:17.944+0000] {processor.py:186} INFO - Started process (PID=8694) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:34:17.948+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:34:17.952+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:34:17.952+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:34:19.247+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:34:19.272+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:34:19.271+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:34:19.292+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:34:19.292+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:34:19.325+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.392 seconds
+[2025-02-20T12:34:57.933+0000] {processor.py:186} INFO - Started process (PID=8858) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:34:57.936+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:34:57.942+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:34:57.941+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:34:59.284+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:34:59.305+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:34:59.304+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:34:59.330+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:34:59.330+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:34:59.366+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.450 seconds
+[2025-02-20T12:35:34.922+0000] {processor.py:186} INFO - Started process (PID=9038) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:35:34.925+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:35:34.930+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:35:34.929+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:35:36.247+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:35:36.260+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:35:36.259+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:35:36.280+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:35:36.280+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:35:36.333+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.423 seconds
+[2025-02-20T12:36:12.503+0000] {processor.py:186} INFO - Started process (PID=9294) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:36:12.507+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:36:12.510+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:36:12.510+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:36:13.607+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:36:13.628+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:36:13.628+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:36:13.649+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:36:13.648+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:36:13.690+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.199 seconds
+[2025-02-20T12:36:50.842+0000] {processor.py:186} INFO - Started process (PID=9457) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:36:50.844+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:36:50.849+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:36:50.848+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:36:52.146+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:36:52.172+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:36:52.171+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:36:52.196+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:36:52.195+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:36:52.236+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.414 seconds
+[2025-02-20T12:37:28.572+0000] {processor.py:186} INFO - Started process (PID=9584) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:37:28.574+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:37:28.579+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:37:28.578+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:37:29.609+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:37:29.625+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:37:29.625+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:37:29.645+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:37:29.645+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:37:29.685+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.131 seconds
+[2025-02-20T12:38:07.561+0000] {processor.py:186} INFO - Started process (PID=9722) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:38:07.564+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:38:07.567+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:38:07.567+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:38:08.863+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:38:08.883+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:38:08.882+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:38:08.904+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:38:08.903+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:38:08.944+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.400 seconds
+[2025-02-20T12:38:46.982+0000] {processor.py:186} INFO - Started process (PID=9881) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:38:46.987+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:38:46.992+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:38:46.991+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:38:48.289+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:38:48.314+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:38:48.313+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:38:48.341+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:38:48.340+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:38:48.371+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.417 seconds
+[2025-02-20T12:39:24.116+0000] {processor.py:186} INFO - Started process (PID=10212) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:39:24.120+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:39:24.127+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:39:24.126+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:39:25.364+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:39:25.379+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:39:25.379+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:39:25.408+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:39:25.406+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:39:25.456+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.363 seconds
+[2025-02-20T12:39:59.424+0000] {processor.py:186} INFO - Started process (PID=10408) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:39:59.427+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:39:59.431+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:39:59.430+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:40:00.769+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:40:00.785+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:40:00.784+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:40:00.804+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:40:00.803+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:40:00.834+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.426 seconds
+[2025-02-20T12:40:36.465+0000] {processor.py:186} INFO - Started process (PID=10658) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:40:36.469+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:40:36.474+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:40:36.473+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:40:37.693+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:40:37.714+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:40:37.713+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:40:37.739+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:40:37.739+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:40:37.775+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.333 seconds
+[2025-02-20T12:41:16.112+0000] {processor.py:186} INFO - Started process (PID=11050) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:41:16.115+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:41:16.119+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:41:16.119+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:41:17.460+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:41:17.480+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:41:17.480+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:41:17.503+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:41:17.503+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:41:17.541+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.450 seconds
+[2025-02-20T12:41:56.111+0000] {processor.py:186} INFO - Started process (PID=11289) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:41:56.115+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:41:56.122+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:41:56.121+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:41:57.440+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:41:57.462+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:41:57.461+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:41:57.485+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:41:57.485+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:41:57.523+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.432 seconds
+[2025-02-20T12:42:34.779+0000] {processor.py:186} INFO - Started process (PID=11537) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:42:34.782+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:42:34.787+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:42:34.786+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:42:36.013+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:42:36.031+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:42:36.030+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:42:36.051+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:42:36.051+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:42:36.090+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.329 seconds
+[2025-02-20T12:43:11.906+0000] {processor.py:186} INFO - Started process (PID=11788) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:43:11.908+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:43:11.913+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:43:11.913+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:43:13.196+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:43:13.223+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:43:13.223+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:43:13.255+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:43:13.254+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:43:13.295+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.404 seconds
+[2025-02-20T12:43:48.701+0000] {processor.py:186} INFO - Started process (PID=11920) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:43:48.704+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:43:48.708+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:43:48.708+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:43:49.664+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:43:49.683+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:43:49.682+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:43:49.708+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:43:49.708+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:43:49.753+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.070 seconds
+[2025-02-20T12:44:24.352+0000] {processor.py:186} INFO - Started process (PID=12142) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:44:24.355+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:44:24.361+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:44:24.360+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:44:25.572+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:44:25.585+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:44:25.584+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:44:25.595+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:44:25.594+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:44:25.622+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.289 seconds
+[2025-02-20T12:45:02.027+0000] {processor.py:186} INFO - Started process (PID=12317) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:45:02.030+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:45:02.034+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:45:02.034+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:45:03.344+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:45:03.362+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:45:03.361+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:45:03.382+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:45:03.382+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:45:03.418+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.408 seconds
+[2025-02-20T12:45:39.477+0000] {processor.py:186} INFO - Started process (PID=12467) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:45:39.481+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:45:39.487+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:45:39.486+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:45:40.750+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:45:40.771+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:45:40.770+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:45:40.793+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:45:40.793+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:45:40.832+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 1.378 seconds
+[2025-02-20T12:46:19.307+0000] {processor.py:186} INFO - Started process (PID=12604) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:46:19.309+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:46:19.311+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:46:19.310+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:46:19.982+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:46:19.992+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:46:19.992+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:46:20.001+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:46:20.000+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:46:20.020+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.729 seconds
+[2025-02-20T12:46:53.497+0000] {processor.py:186} INFO - Started process (PID=12722) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:46:53.500+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:46:53.504+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:46:53.503+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:46:54.113+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:46:54.128+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:46:54.128+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:46:54.143+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:46:54.143+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:46:54.169+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.690 seconds
+[2025-02-20T12:47:25.055+0000] {processor.py:186} INFO - Started process (PID=12830) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:47:25.057+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:47:25.060+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:47:25.059+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:47:25.588+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:47:25.597+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:47:25.597+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:47:25.606+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:47:25.606+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:47:25.622+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.585 seconds
+[2025-02-20T12:48:24.525+0000] {processor.py:186} INFO - Started process (PID=13039) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:48:24.528+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:48:24.531+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:48:24.531+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:48:25.145+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:48:25.157+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:48:25.156+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:48:25.168+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:48:25.167+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:48:25.191+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.684 seconds
+[2025-02-20T12:48:55.289+0000] {processor.py:186} INFO - Started process (PID=13149) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:48:55.293+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:48:55.296+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:48:55.295+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:48:55.874+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:48:55.883+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:48:55.883+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:48:55.893+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:48:55.893+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:48:55.911+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.638 seconds
+[2025-02-20T12:49:26.226+0000] {processor.py:186} INFO - Started process (PID=13287) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:49:26.229+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:49:26.232+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:49:26.232+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:49:26.858+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:49:26.875+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:49:26.875+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:49:26.891+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:49:26.890+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:49:26.916+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.706 seconds
+[2025-02-20T12:49:58.189+0000] {processor.py:186} INFO - Started process (PID=13395) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:49:58.190+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:49:58.194+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:49:58.193+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:49:58.798+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:49:58.807+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:49:58.806+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:49:58.816+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:49:58.816+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:49:58.832+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.660 seconds
+[2025-02-20T12:50:29.575+0000] {processor.py:186} INFO - Started process (PID=13509) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:50:29.578+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:50:29.581+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:50:29.581+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:50:30.216+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:50:30.225+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:50:30.225+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:50:30.234+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:50:30.233+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:50:30.250+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.692 seconds
+[2025-02-20T12:51:00.529+0000] {processor.py:186} INFO - Started process (PID=13619) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:51:00.530+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T12:51:00.532+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:51:00.532+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:51:01.162+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T12:51:01.171+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:51:01.171+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T12:51:01.181+0000] {logging_mixin.py:190} INFO - [2025-02-20T12:51:01.181+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T12:51:01.201+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.681 seconds
+[2025-02-20T13:00:59.170+0000] {processor.py:186} INFO - Started process (PID=13826) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T13:00:59.172+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T13:00:59.175+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:00:59.175+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T13:00:59.847+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T13:00:59.856+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:00:59.856+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T13:00:59.865+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:00:59.865+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T13:00:59.882+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.722 seconds
+[2025-02-20T13:01:45.637+0000] {processor.py:186} INFO - Started process (PID=13988) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T13:01:45.639+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T13:01:45.642+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:01:45.641+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T13:01:46.383+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T13:01:46.392+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:01:46.392+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T13:01:46.401+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:01:46.401+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T13:01:46.422+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.795 seconds
+[2025-02-20T13:02:19.316+0000] {processor.py:186} INFO - Started process (PID=14129) to work on /home/aine/airflow/dags/simulation.py
+[2025-02-20T13:02:19.319+0000] {processor.py:914} INFO - Processing file /home/aine/airflow/dags/simulation.py for tasks to queue
+[2025-02-20T13:02:19.322+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:02:19.321+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/aine/airflow/dags/simulation.py
+[2025-02-20T13:02:19.952+0000] {processor.py:925} INFO - DAG(s) 'simulation_task' retrieved from /home/aine/airflow/dags/simulation.py
+[2025-02-20T13:02:19.972+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:02:19.971+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-02-20T13:02:19.994+0000] {logging_mixin.py:190} INFO - [2025-02-20T13:02:19.994+0000] {dag.py:4180} INFO - Setting next_dagrun for simulation_task to None, run_after=None
+[2025-02-20T13:02:20.018+0000] {processor.py:208} INFO - Processing /home/aine/airflow/dags/simulation.py took 0.714 seconds

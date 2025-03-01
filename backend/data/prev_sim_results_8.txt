@@ -1,0 +1,2 @@
+TaskResult(messages=[
+TextMessage(source='InformationReturnAgent', models_usage=RequestUsage(prompt_tokens=95, completion_tokens=42), content='{"car_make": "Toyota", "car_model": "Camry", "car_price_dollars": 20000, "car_mileage_kilometers": 50000} \n\nTERMINATE', type='TextMessage')], stop_reason="Text 'TERMINATE' mentioned")
