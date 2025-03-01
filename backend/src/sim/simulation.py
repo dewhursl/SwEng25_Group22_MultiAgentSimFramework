@@ -129,8 +129,8 @@ class Simulation:
             )
         )
 
-    def run(self):
-        asyncio.run(Console(self.gc.run_stream()))
+    async def run(self):
+        return await Console(self.gc.run_stream())
 
     #def run_airflow_task(self):
     #    with DAG(
