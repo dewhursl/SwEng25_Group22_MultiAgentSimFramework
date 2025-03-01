@@ -1,2 +1,0 @@
-TaskResult(messages=[
-TextMessage(source='InformationReturnAgent', models_usage=RequestUsage(prompt_tokens=106, completion_tokens=47), content='{\n    "car_make": "Toyota",\n    "car_model": "Corolla",\n    "car_price_dollars": 15000,\n    "car_mileage_kilometers": 50000\n}\nTERMINATE', type='TextMessage')], stop_reason="Text 'TERMINATE' mentioned")
