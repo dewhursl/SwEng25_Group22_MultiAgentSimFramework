@@ -8,7 +8,7 @@
 TOGETHER_API_KEY="..."
 OPENAI_API_KEY="..."
 ```
-- Inside `backend/src` run `python run_sim.py <num_runs>`
+- Inside `backend/src` run `python run_sim.py <int: num_runs> <str: sim_config_name>`
 
 ## Running API
 

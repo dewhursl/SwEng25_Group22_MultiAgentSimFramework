@@ -68,9 +68,9 @@ class Simulation:
 
         print("Loading config file: " + sim_config_file_name)
         
-        self.config = SimConfigLoader(sim_config_file_name).load()        
+        self.config = SimConfigLoader(sim_config_file_name).load()
 
-        print("Initialising model client")
+        print("Initialising model client...")
 
         models = self.config['models']
         model_list = [ models["agent"], models["info_return_agent"], models["group_chat"]] # Can this be simplified?
@@ -102,7 +102,7 @@ class Simulation:
         
         print("Setting up InformationReturnAgent")
 
-        output_variables_str="\n".join([f"{v['name']} # {v['type']}" for v in self.config['output_variables']])
+        output_variables_str="{\n" + "\n".join([f"\"{v['name']}\": <{v['type']}>" for v in self.config['output_variables']]) + "\n}"
 
         information_return_agent = AssistantAgent(
             "InformationReturnAgent",
@@ -112,7 +112,7 @@ class Simulation:
                 f"Do not act like a human.\n"
                 f"You are a system that extracts the following information from the conversation when the termination condition: \"{self.config['termination_condition']}\" is satisfied:\n\n"
                 f"{output_variables_str}\n\n"
-                f"Make sure the output is valid Python code, and the variables are assigned to exact values (not expressions). Also, make sure that variables that contain information on the unit (e.g. kilometers) are assigned appropriate values, do a calculation if you have to.\n\n"
+                f"Make sure the output is valid JSON. Make sure that variables that contain information on the unit (e.g. kilometers) are assigned appropriate values, do a calculation if you have to.\n\n"
                 f"After this, send 'TERMINATE'\n"
             )
         )
