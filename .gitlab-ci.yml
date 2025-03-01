@@ -2,8 +2,8 @@ image: python:3.10
 
 test_backend:
   script:
-  - apt-get update -q -y
-  - apt-get install -y python-pip
+  - sudo apt-get update -q -y
+  - sudo apt-get install -y python-pip
   - python -V
   - export TOGETHER_API_KEY=$(cat backend/src/ci_cd_resources/together_api_key)
   - pip install -r backend/src/requirements.txt
