@@ -1,22 +1,7 @@
-image: python:3.10  # Use a Python Docker image
-
-stages:
-  - test_backend
-
-variables:
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-
-cache:
-  paths:
-    - .cache/pip
-
-before_script:
-  - python -V
-  - pip install --upgrade pip
-  - pip install -r backend/src/requirements.txt
-
-test:
-  stage: test_backend
+test_backend:
   script:
-    - export TOGETHER_API_KEY=$(cat backend/src/ci_cd_resources/together_api_key)
-    - python backend/src/test_run_sim.py 2 ci_car_sale_simulation
+  - export TOGETHER_API_KEY=$(cat backend/src/ci_cd_resources/together_api_key)
+  - apt-get update -qy
+  - apt-get install -y python-dev python-pip
+  - pip install -r backend/src/requirements.txt
+  - python backend/src/test_run_sim.py 2 ci_car_sale_simulation
