@@ -1,3 +1,5 @@
+image: python:latest
+
 variables:
   TOGETHER_API_KEY: "tgp_v1_HTdcpSSkqtin6P49hS2JYbZZ6xWMCbELOuaX54SbRW0"
 
