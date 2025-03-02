@@ -13,6 +13,7 @@ stages:
 test_simulation:
   stage: test
   before_script:
+  - python3 --version
   - pip3 install -r backend/src/requirements.txt
   - export TOGETHER_API_KEY="$TOGETHER_API_KEY"
   script:
