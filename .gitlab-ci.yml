@@ -1,0 +1,20 @@
+image: python:latest
+
+default:
+  tags:
+    - maven
+
+variables:
+  TOGETHER_API_KEY: "tgp_v1_HTdcpSSkqtin6P49hS2JYbZZ6xWMCbELOuaX54SbRW0"
+
+stages:
+  - test
+
+test_simulation:
+  stage: test
+  before_script:
+  - python3 --version
+  - pip3 install -r backend/src/requirements.txt
+  - export TOGETHER_API_KEY="$TOGETHER_API_KEY"
+  script:
+  - python3 backend/src/test_run_sim.py 2 ci_car_sale_simulation
