@@ -1,8 +1,10 @@
-ipdb
 python-dotenv
+ipdb
 numpy
+openai
 autogen
-autogen_agentchat
 autogen_ext
+autogen_core
+autogen_agentchat
 pymongo
 flask
