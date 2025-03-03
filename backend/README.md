@@ -7,13 +7,14 @@
 ```
 TOGETHER_API_KEY="..."
 OPENAI_API_KEY="..."
+DB_CONNECTION_STRING="..."
 ```
 - Inside `backend/src` run `python run_sim.py <int: num_runs> <str: sim_config_name>`
 
 ## Running API
 
-- MongoDB must be running locally @ `mongodb://localhost:27017`
-- Inside `backend/src` run `flask --app api.app run` (make sure Python modules are installed)
+- MongoDB must be available via `DB_CONNECTION_STRING` variable in .env
+- Inside `backend/src` run `flask --app api.app run` (make sure `requirements.txt` are installed)
 
 ## API Endpoints
 

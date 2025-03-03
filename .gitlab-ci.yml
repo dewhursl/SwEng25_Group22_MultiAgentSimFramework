@@ -15,6 +15,7 @@ test_simulation:
   before_script:
   - python3 --version
   - pip3 install -r backend/src/requirements.txt
+  - export CI_PIPELINE_MODE="true"
   - export TOGETHER_API_KEY="$TOGETHER_API_KEY"
   script:
-  - python3 backend/src/test_run_sim.py 2 ci_car_sale_simulation
+  - python3 backend/src/run_sim.py 2 ci_car_sale_simulation
