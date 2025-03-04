@@ -1,19 +1,37 @@
 import { useState } from 'react';
-import Navbar from './components/Navbar';
 
-const Element = ({ onRemove }) => {
-  return (
-    <>
-      <h1>I'm an element!</h1>
-      <button onClick={onRemove}>Remove</button>
-    </>
-  );
+/* 
+  **************************************************
+  UI elements used to build the configuration panels
+  ************************************************** 
+*/
+
+// Simple button wrapper with varialbe background color
+const Button = ({ children, color, onClick }) => (
+  <button
+    className={`p-1 rounded-lg min-w-20 bg-${color}-600 hover:bg-${color}-300`}
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
+
+// Displays children as a sequence with an indent line on the left
+const Sequence = ({ children }) => {
+  return <div className="pl-1 border-gray-500 border-l-1">{children}</div>;
 };
 
-const Sequence = ({}) => {
-  const [elements, setElements] = useState([]);
+// Container for sequence elements
+const SequenceElement = ({ children }) => <div className="m-1 p-1 rounded-lg">{children}</div>;
 
-  const handleRemove = (index) => {
+// A field where the user can add and remove elements from the field. The parent object contains
+// the state and provides a buidler method for building a new element
+const SequenceField = ({ children, elements, setElements, elementBuilder }) => {
+  const addElement = () => {
+    setElements((prev) => [...prev, elementBuilder()]);
+  };
+
+  const removeElement = (index) => {
     setElements((prev) => {
       const next = [...prev];
       next.splice(index, 1);
@@ -21,222 +39,126 @@ const Sequence = ({}) => {
     });
   };
 
-  const handleAdd = () => {
-    setElements((prev) => [...prev, <Element onRemove={() => handleRemove(prev.length)} />]);
-  };
+  return (
+    <div className="">
+      {children}
+      <Button color="green" onClick={() => addElement()}>
+        Add
+      </Button>
+      <Sequence>
+        {elements.map((element, index) => (
+          <SequenceElement key={index}>
+            <div className="">
+              <Button color="red" onClick={() => removeElement(index)}>
+                Remove
+              </Button>
+              {element}
+            </div>
+          </SequenceElement>
+        ))}
+      </Sequence>
+    </div>
+  );
+};
+
+// Wrapper for an input field
+const Input = ({ children, type, value, setValue }) => (
+  <label className="p-1">
+    {children}
+    <input
+      className="m-1 border bg-stale-800"
+      type={type}
+      defaultValue={value}
+      onChange={(e) => setValue(e.target.value)}
+    ></input>
+  </label>
+);
+
+// Container for a configuration panel
+const Panel = ({ children }) => <div className="flex flex-col">{children}</div>;
+
+/*
+  ****************************************
+  Definitions for the configuration panels
+  ****************************************
+*/
+
+const Parameter = () => {
+  const [name, setName] = useState('');
+  const [value, setValue] = useState('');
 
   return (
-    <>
-      <button onClick={handleAdd}>Add Element</button>
-      <div>
-        {elements.map((element, index) => (
-          <div key={index}>{element}</div>
-        ))}
-      </div>
-    </>
+    <Panel>
+      <Input type="text" value={name} setValue={setName}>
+        Name
+      </Input>
+      <Input type="text" value={value} setValue={setValue}>
+        Value
+      </Input>
+    </Panel>
+  );
+};
+
+const Agent = () => {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [freePrompt, setFreePrompt] = useState('');
+  const [parameters, setParameters] = useState([]);
+
+  return (
+    <Panel>
+      <Input type="text" value={name} setValue={setName}>
+        Name
+      </Input>
+      <Input type="text" value={description} setDescription={setDescription}>
+        Description
+      </Input>
+      <Input type="text" value={freePrompt} setValue={setFreePrompt}>
+        Free Prompt
+      </Input>
+      <SequenceField
+        elements={parameters}
+        setElements={setParameters}
+        elementBuilder={() => <Parameter />}
+      >
+        Parameters
+      </SequenceField>
+    </Panel>
+  );
+};
+
+const Simulation = () => {
+  const [numRuns, setNumRuns] = useState('');
+  const [agents, setAgents] = useState([]);
+
+  return (
+    <Panel>
+      <Input type="number" value={numRuns} setValue={setNumRuns}>
+        Number of Runs
+      </Input>
+      <SequenceField elements={agents} setElements={setAgents} elementBuilder={() => <Agent />}>
+        Agents
+      </SequenceField>
+    </Panel>
   );
 };
 
 const Configurator = () => {
+  const [simulations, setSimulations] = useState([]);
+
   return (
     <div className="text-white">
-      <Sequence />
+      <Panel>
+        <SequenceField
+          elements={simulations}
+          setElements={setSimulations}
+          elementBuilder={() => <Simulation />}
+        >
+          Simulations
+        </SequenceField>
+      </Panel>
     </div>
   );
 };
 
 export default Configurator;
-
-// const appendToStateArray = (setState, element) => {
-//   setState((prev) => [...prev, element]);
-// };
-
-// const removeFromStateArray = (setState, index) => {
-//   setState((prev) => {
-//     const next = [...prev];
-//     next.splice(index, 1);
-//     return next;
-//   });
-// };
-
-// const handleInput = (setState, event) => {
-//   setState(event.target.value);
-// };
-
-// const Parameter = () => {
-//   const [name, setName] = useState('');
-//   const [value, setValue] = useState('');
-
-//   return (
-//     <div className="bg-gray-900 p-4 rounded-xl shadow-md space-y-4 text-white">
-//       <label htmlFor="name" className="block text-gray-300 font-semibold">
-//         Name
-//       </label>
-//       <input
-//         className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md"
-//         name="name"
-//         type="text"
-//         defaultValue={name}
-//         onChange={(event) => handleInput(setName, event)}
-//       ></input>
-
-//       <label htmlFor="value" className="block text-gray-300 font-semibold">
-//         Value
-//       </label>
-//       <input
-//         className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md"
-//         name="value"
-//         type="text"
-//         defaultValue={value}
-//         onChange={(event) => handleInput(setValue, event)}
-//       ></input>
-//     </div>
-//   );
-// };
-
-// const Agent = () => {
-//   const [name, setName] = useState('');
-//   const [description, setDescription] = useState('');
-//   const [freePrompt, setFreePrompt] = useState('');
-//   const [parameters, setParameters] = useState([]);
-
-//   return (
-//     <div className="bg-gray-900 p-4 rounded-xl shadow-md space-y-4 text-white">
-//       <label htmlFor="name" className="block text-gray-300 font-semibold">
-//         Name
-//       </label>
-//       <input
-//         className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md"
-//         name="name"
-//         type="text"
-//         defaultValue={name}
-//         onChange={(event) => handleInput(setName, event)}
-//       ></input>
-
-//       <label htmlFor="description" className="block text-gray-300 font-semibold">
-//         Description
-//       </label>
-//       <input
-//         className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md"
-//         name="description"
-//         type="text"
-//         defaultBalue={description}
-//         onChange={(event) => handleInput(setDescription, event)}
-//       ></input>
-
-//       <label htmlFor="free-prompt" className="block text-gray-300 font-semibold">
-//         Free Prompt
-//       </label>
-//       <input
-//         className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md"
-//         name="free-prompt"
-//         type="text"
-//         defaulValue={freePrompt}
-//         onChange={(event) => handleInput(setFreePrompt, event)}
-//       ></input>
-
-//       <button
-//         className="block px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
-//         onClick={() => appendToStateArray(setParameters, <Parameter />)}
-//       >
-//         Add Parameter
-//       </button>
-
-//       <div>
-//         {parameters.map((parameter, index) => (
-//           <div className="bg-gray-800 p-2 rounded-md" key={index}>
-//             <div className="flex items-center justify-between">
-//               <p>Parameter {index}</p>
-//               <button
-//                 className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-//                 onClick={() => removeFromStateArray(setParameters, index)}
-//               >
-//                 Remove
-//               </button>
-//             </div>
-//             {parameter}
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// const Simulation = () => {
-//   const [numRuns, setNumRuns] = useState(0);
-//   const [agents, setAgents] = useState([]);
-
-//   return (
-//     <div className="bg-gray-900 p-4 rounded-xl shadow-md space-y-4">
-//       <label htmlFor="num-runs" className="block text-gray-300 font-semibold">
-//         Number of Runs
-//       </label>
-//       <input
-//         className="w-full p-2 border border-gray-600 bg-gray-800 text-white rounded-md"
-//         name="num-runs"
-//         type="number"
-//         defaultValue={numRuns}
-//         onChange={(event) => handleInput(setNumRuns, event)}
-//       />
-
-//       <button
-//         className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
-//         onClick={() => appendToStateArray(setAgents, <Agent />)}
-//       >
-//         Add Agent
-//       </button>
-
-//       <div className="">
-//         {agents.map((agent, index) => (
-//           <div key={index} className="bg-gray-800 p-2 rounded-md">
-//             <div className="flex items-center justify-between">
-//               <p className="text-white">Agent {index}</p>
-//               <button
-//                 className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-//                 onClick={() => removeFromStateArray(setAgents, index)}
-//               >
-//                 Remove
-//               </button>
-//             </div>
-//             {agent}
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// const Configurator = () => {
-//   const [simulations, setSimulations] = useState([]);
-
-//   return (
-//     <div className="p-6 pt-28 mb-8 bg-midnight min-h-screen overflow-y-auto">
-//       <Navbar />
-//       <button
-//         className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
-//         onClick={() => appendToStateArray(setSimulations, <Simulation />)}
-//       >
-//         Add Simulation
-//       </button>
-
-//       <div className="mt-4 space-y-4">
-//         {simulations.map((simulation, index) => (
-//           <div key={index} className="bg-gray-800 p-4 rounded-xl shadow-md">
-//             <div className="flex items-center justify-between mb-2">
-//               <p className="text-white font-semibold">Simulation {index}</p>
-//               <button
-//                 className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-//                 onClick={() => removeFromStateArray(setSimulations, index)}
-//               >
-//                 Remove
-//               </button>
-//             </div>
-//             {simulation}
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Configurator;
