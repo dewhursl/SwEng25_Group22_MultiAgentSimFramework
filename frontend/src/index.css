@@ -1,0 +1,41 @@
+/* Here, you can import any custom TailwindCSS classes and styles that you want */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* For example, if you need a colour that doesn't exist in the default TailwindCSS palette, you can define it here */
+@theme {
+  --color-midnight: #110619;
+  --shadow-button: 0px 2px 8px 0px rgba(139, 92, 246, 1);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #110619;
+  font-family: 'Manrope', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #110619;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.7);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.9);
+}

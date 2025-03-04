@@ -1,0 +1,105 @@
+import { util } from "echarts";
+import { GameObject } from"./GameObject.js";
+import { utils } from "./utils.js";
+
+
+export class Person extends GameObject {
+    constructor(config) {
+        super(config);
+        this.movingProgressRemaining = 0;
+
+        this.isPlayerControlled = config.isPlayerControlled || false;
+
+        this.directionUpdate = {
+            "up": ["y", -0.5],
+            "down": ["y", 0.5],
+            "left": ["x", -0.5],
+            "right": ["x", 0.5],
+        }
+    }
+
+    update(state) {         
+        if(this.movingProgressRemaining > 0) {
+            this.updatePosition();
+        } else {
+
+            //More cases for starting to walk will come here
+            //
+            //
+
+            //Case: We're keyboard ready and have an arrow pressed
+            if(!state.map.isCutscenePlaying && this.isPlayerControlled && state.arrow) {
+                this.startBehaviour(state, {
+                    type: "walk",
+                    direction: state.arrow
+                })
+            }
+            this.updateSprite(state);
+        }
+    }
+
+    startBehaviour(state, behaviour) {
+        //Set character direction to whatever behaviour has
+        this.direction = behaviour.direction;
+
+        if(behaviour.type === "walk") {
+
+            if (!state.map) {
+                console.error("Error: state.map is undefined during startBehaviour");
+                return;
+            }
+
+            //Stop here if space is not free
+            if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+                behaviour.retry && setTimeout(() => {
+                    this.startBehaviour(state, behaviour)
+                }, 10);
+
+                return;
+            }
+
+            //Ready to walk!
+            state.map.moveWall(this.x, this.y, this.direction);
+            this.movingProgressRemaining = 32;
+            this.updateSprite(state);
+            console.log("Movement started.");
+        }
+
+        if(behaviour.type === "stand") {
+            console.log("Standing in place.");
+            setTimeout(() => {
+                utils.emitEvent("PersonStandComplete", {
+                    whoId: this.id
+                })
+            }, behaviour.time)
+        }
+
+    }
+
+    updatePosition() {
+        const [property, change] = this.directionUpdate[this.direction];
+        this[property] += change;
+        this.movingProgressRemaining -= 1;
+
+        if(this.movingProgressRemaining === 0) {
+            // Only emit if the person is still mounted
+        if (this.isMounted) {
+            utils.emitEvent("PersonWalkingComplete", {
+                whoId: this.id
+            });
+        } else {
+            console.warn(`Person ${this.id} unmounted; skipping walking complete event.`);
+        }
+    }
+    }
+
+    updateSprite() {
+
+        if(this.movingProgressRemaining > 0) {
+            this.sprite.setAnimation("walk-"+ this.direction);
+            return;
+        }
+        this.sprite.setAnimation("idle-"+this.direction);
+    }
+
+}
