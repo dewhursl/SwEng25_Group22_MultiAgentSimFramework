@@ -1,20 +1,74 @@
-image: python:latest
+.backend_template: &backend_template
+  image: python:latest
+  tags:
+    - maven
 
-default:
+.frontend_template: &frontend_template
+  image: node:alpine
   tags:
     - maven
 
 variables:
   TOGETHER_API_KEY: "tgp_v1_HTdcpSSkqtin6P49hS2JYbZZ6xWMCbELOuaX54SbRW0"
 
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_MERGE_REQUEST_ID
+
 stages:
+  - install
   - test
+  - lint
+  - build
+
+cache:
+  key:
+    files:
+      - frontend/package-lock.json
+  paths:
+    - frontend/.npm/
+    - frontend/node_modules/
+  policy: pull-push
 
 test_simulation:
+  <<: *backend_template
   stage: test
   before_script:
-  - python3 --version
-  - pip3 install -r backend/src/requirements.txt
-  - export TOGETHER_API_KEY="$TOGETHER_API_KEY"
+    - python3 --version
+    - pip3 install -r backend/src/requirements.txt
+    - export TOGETHER_API_KEY="$TOGETHER_API_KEY"
   script:
-  - python3 backend/src/test_run_sim.py 2 ci_car_sale_simulation
+    - python3 backend/src/test_run_sim.py 2 ci_car_sale_simulation
+
+install_dependencies:
+  <<: *frontend_template
+  stage: install
+  script:
+    - cd frontend
+    - npm ci --no-audit --progress=false
+    - npm cache clean --force # Clean npm cache to save space
+
+lint_frontend:
+  <<: *frontend_template
+  stage: lint
+  script:
+    - cd frontend
+    - npm run lint
+    - npm run format:check
+  allow_failure: true
+  needs: ["install_dependencies"]
+
+build_frontend:
+  <<: *frontend_template
+  stage: build
+  script:
+    - cd frontend
+    - npm ci --no-audit --progress=false
+    - npm run build
+    - npm cache clean --force # Clean npm cache to save space
+  artifacts:
+    paths:
+      - frontend/dist/
+    expire_in: 1 week # Set expiration to save storage space
+  needs: ["install_dependencies"]
