@@ -6,12 +6,15 @@ import { useState } from 'react';
   ************************************************** 
 */
 
-// Simple button wrapper with varialbe background color
-const Button = ({ children, color, onClick }) => (
-  <button
-    className={`p-1 rounded-lg min-w-20 bg-${color}-600 hover:bg-${color}-300`}
-    onClick={onClick}
-  >
+// Simple button wrappers with varialbe background color
+const AddButton = ({ children, onClick }) => (
+  <button className="p-1 rounded-lg min-w-20 bg-green-600 hover:bg-green-300" onClick={onClick}>
+    {children}
+  </button>
+);
+
+const RemoveButton = ({ children, onClick }) => (
+  <button className="p-1 rounded-lg min-w-20 bg-red-600 hover:bg-red-300" onClick={onClick}>
     {children}
   </button>
 );
@@ -42,16 +45,12 @@ const SequenceField = ({ children, elements, setElements, elementBuilder }) => {
   return (
     <div className="">
       {children}
-      <Button color="green" onClick={() => addElement()}>
-        Add
-      </Button>
+      <AddButton onClick={() => addElement()}>Add</AddButton>
       <Sequence>
         {elements.map((element, index) => (
           <SequenceElement key={index}>
             <div className="">
-              <Button color="red" onClick={() => removeElement(index)}>
-                Remove
-              </Button>
+              <RemoveButton onClick={() => removeElement(index)}>Remove</RemoveButton>
               {element}
             </div>
           </SequenceElement>
