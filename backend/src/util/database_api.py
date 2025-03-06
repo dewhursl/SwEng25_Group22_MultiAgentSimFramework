@@ -1,8 +1,8 @@
 from pymongo import MongoClient
 
 class DataBaseAPI:
-    def __init__(self, port: str):
-        self.m_client = MongoClient("mongodb://localhost:" + port + "/")
+    def __init__(self, conn_str):
+        self.m_client = MongoClient(conn_str)
         self.m_database = self.m_client.sweng22_database
         self.m_coll_config = self.m_database.config
         self.m_coll_output = self.m_database.output

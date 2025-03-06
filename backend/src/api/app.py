@@ -1,9 +1,14 @@
+import os
 from flask import Flask, request, jsonify
+
+from dotenv import load_dotenv
+load_dotenv()
+
 import util.database_api as database_api
 
 app = Flask(__name__)
 
-db = database_api.DataBaseAPI("27017")
+db = database_api.DataBaseAPI(os.environ['DB_CONNECTION_STRING'])
 
 @app.route('/report/config')
 def report_config():
