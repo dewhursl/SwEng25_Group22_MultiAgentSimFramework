@@ -1,9 +1,0 @@
-[2025-02-23 13:57:18 +0000] [1231] [INFO] Starting gunicorn 23.0.0
-[2025-02-23 13:57:18 +0000] [1231] [INFO] Listening at: http://[::]:8793 (1231)
-[2025-02-23 13:57:18 +0000] [1231] [INFO] Using worker: sync
-[2025-02-23 13:57:18 +0000] [1232] [INFO] Booting worker with pid: 1232
-[2025-02-23 13:57:18 +0000] [1234] [INFO] Booting worker with pid: 1234
-[2025-02-23 14:51:27 +0000] [1231] [INFO] Handling signal: term
-[2025-02-23 14:51:27 +0000] [1234] [INFO] Worker exiting (pid: 1234)
-[2025-02-23 14:51:27 +0000] [1232] [INFO] Worker exiting (pid: 1232)
-[2025-02-23 14:51:28 +0000] [1231] [INFO] Shutting down: Master

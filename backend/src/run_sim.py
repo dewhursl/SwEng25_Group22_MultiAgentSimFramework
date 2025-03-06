@@ -1,3 +1,4 @@
+import os
 import sys
 import uuid
 import asyncio
@@ -30,15 +31,19 @@ def main():
         print(f'File {sim_config_file} doesn\'t exist in sim_configs!')
         sys.exit(1)
 
-    db = DataBaseAPI('27017')
+    ci_pipeline_mode = True if ('CI_PIPELINE_MODE' in os.environ and os.environ['CI_PIPELINE_MODE'] == 'true') else False
 
     results = asyncio.run(sim.run_monte_carlo())
 
-    SimResultsHandler.log_sim_results(results)
-
     sim_id = str(uuid.uuid4())[:8]
     json_results = SimResultsHandler.sim_results_to_json(results, sim_id)
-    db.insert_output(json_results)
+
+    if not ci_pipeline_mode:
+        SimResultsHandler.log_sim_results(results)
+        db = DataBaseAPI(os.environ['DB_CONNECTION_STRING'])
+        db.insert_output(json_results)
+    else:
+        print(json_results)
 
     print(f'\nSimulation ID: {sim_id}')
 
