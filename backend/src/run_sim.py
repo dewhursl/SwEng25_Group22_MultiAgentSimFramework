@@ -39,7 +39,6 @@ def main():
     json_results = SimResultsHandler.sim_results_to_json(results, sim_id)
 
     if not ci_pipeline_mode:
-        SimResultsHandler.log_sim_results(results)
         db = DataBaseAPI(os.environ['DB_CONNECTION_STRING'])
         db.insert_output(json_results)
     else:
