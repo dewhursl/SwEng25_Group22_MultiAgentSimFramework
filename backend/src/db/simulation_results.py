@@ -1,0 +1,39 @@
+from db.base import MongoBase
+
+class SimulationResults(MongoBase):
+    def __init__(self, mongo_client):
+        super().__init__(mongo_client)
+        self.results_collection = self.db["results"]
+
+    def insert(self, simulation_id, results):
+        # validate simulation results
+        if "messages" in results and "output_variables" in results:
+            for message in results["messages"]:
+                if "agent" in message and message["agent"] and \
+                    "message" in message and message["message"]:
+                    continue
+                else:
+                    return None
+                
+            for variable in results["output_variables"]:
+                if "name" in variable and variable["name"] and \
+                    "value" in variable and variable["value"]:
+                    continue
+                else:
+                    return None
+        else:
+            return None
+        
+        # insert into database
+        self.results_collection.insert_one({
+            "simulation_id": simulation_id,
+            "messages": results["messages"],
+            "output_variables": results["output_variables"]
+        })
+
+        return simulation_id
+    
+    def retrieve(self, simulation_id):
+        # retrieve all results of provided simulation
+        query = {"simulation_id": simulation_id}
+        return self.results_collection.find(query)

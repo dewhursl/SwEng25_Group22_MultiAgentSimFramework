@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from db.simulation_queue import SimulationQueue
+from db.simulation_results import SimulationResults
 
 mongo_client = MongoClient(os.environ["DB_CONNECTION_STRING"])
 queue = SimulationQueue(mongo_client)
@@ -50,8 +51,25 @@ test_config = {
     ]
 }
 
-# print(queue.insert(test_config, 10))
+#print(queue.insert(test_config, 5))
 
-retrieved_config = queue.retrieve_next()
-for agent in retrieved_config["agents"]:
-    print(agent["prompt"])
+#retrieved_config = queue.retrieve_next()
+#for agent in retrieved_config["agents"]:
+#    print(agent["prompt"])
+
+results = SimulationResults(mongo_client)
+
+print(results.insert("f85d1053", {
+    "messages": [
+        {
+            "agent": "test",
+            "message": "test"
+        }
+    ],
+    "output_variables": [
+        {
+            "name": "test",
+            "value": 999
+        }
+    ]
+}))
