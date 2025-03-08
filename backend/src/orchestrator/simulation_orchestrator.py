@@ -73,6 +73,8 @@ def start_simulation(simulation_id, simulation_config):
     loop.run_until_complete(run_simulation(simulation_id, simulation_config))
 
 def orchestrator(max_threads=4):
+    print("Listening for simulations...")
+
     global executor
     signal.signal(signal.SIGINT, signal_handler)
     executor = concurrent.futures.ThreadPoolExecutor(max_workers=max_threads)
@@ -92,7 +94,3 @@ def orchestrator(max_threads=4):
             time.sleep(5)
     except SystemExit:
         pass
-
-if __name__ == "__main__":
-    print("Listening for simulations...")
-    orchestrator(max_threads=4)

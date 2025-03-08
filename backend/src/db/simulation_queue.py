@@ -15,7 +15,7 @@ class SimulationQueue(MongoBase):
     
     def insert_with_id(self, simulation_id, config, num_runs):
         # validate simulation config
-        if "name" in config and config["name"] and \
+        if config and "name" in config and config["name"] and \
             "agents" in config and len(config["agents"]) >= 2 and \
             "termination_condition" in config and config["termination_condition"] and \
             "output_variables" in config and len(config["output_variables"]) >= 1:
@@ -70,3 +70,7 @@ class SimulationQueue(MongoBase):
         config = oldest_object["config"]
 
         return simulation_id, config
+    
+    def is_in_queue(self, simulation_id):
+        query = {"simulation_id": simulation_id}
+        return self.queue_collection.find_one(query) is not None

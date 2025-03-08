@@ -7,7 +7,7 @@ class SimulationResults(MongoBase):
 
     def insert(self, simulation_id, results):
         # validate simulation results
-        if "messages" in results and "output_variables" in results:
+        if results and "messages" in results and "output_variables" in results:
             for message in results["messages"]:
                 if "agent" in message and message["agent"] and "message" in message:
                     continue
