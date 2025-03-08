@@ -1,7 +1,5 @@
-import os
 import uuid
 import time
-import json
 
 from db.base import MongoBase
 
@@ -67,14 +65,5 @@ class SimulationQueue(MongoBase):
 
         # extract simulation config
         config = oldest_object["config"]
-
-        # add InformationReturnAgent
-        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "config", "InformationReturnAgent.json"), "r", encoding="utf-8") as file:
-            information_return_agent = json.load(file)
-            information_return_agent["prompt"] = information_return_agent["prompt"].format(
-                output_variables_str=('{\n' + ",\n".join(f'"{v["name"]}": {"\"STRING\"" if v["type"] == "String" else "NUMBER"}' for v in config["output_variables"]) + '\n}'),
-                termination_condition=config["termination_condition"]
-            )
-            config["agents"].append(information_return_agent)
 
         return config

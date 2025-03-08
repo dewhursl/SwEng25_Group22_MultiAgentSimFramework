@@ -1,4 +1,5 @@
 import os
+import asyncio
 from time import sleep
 from pymongo import MongoClient
 
@@ -7,27 +8,25 @@ load_dotenv()
 
 from db.simulation_queue import SimulationQueue
 from db.simulation_results import SimulationResults
+from engine.simulation import SelectorGCSimulation
 
-mongo_client = MongoClient(os.environ["DB_CONNECTION_STRING"])
-queue = SimulationQueue(mongo_client)
-
-test_config = {
+TEST_CONFIG = {
     "name": "Car Sale Simulation",
     "agents": [
         {
             "name": "Customer",
             "description": "Customer at a car dealership.",
-            "prompt": "You are a customer at a car dealership. Try to buy a car within your budget of $25000, ask about discounts and make sure the car has a reasonable mileage. Do not reveal your budget! Try to settle at the lowest possible price. You need to know the make and model of the car."
+            "prompt": "You are a customer at a car dealership trying to buy a car today. Your budget is $25000. Do not reveal your budget to the salesman. Ask about the car's make, model, mileage and price. Keep the conversation moving to a logical conclusion."
         },
         {
             "name": "CarSalesman",
             "description": "Salesman at a car dealership.",
-            "prompt": "You are a salesman at a car dealership. Sell a car to the customer, do not reveal how much profit you are making to the customer. Only your manager can approve or deny discounts."
+            "prompt": "You are a salesman at a car dealership. Sell a car to the customer, answer any questions the customer may have. Ask your manager to approve or deny any discounts that the customer requests. Keep the conversation moving to a logical conclusion."
         },
         {
             "name": "Manager",
             "description": "Manager at a car dealership.",
-            "prompt": "You are a manager at a car dealership. Your job is to approve or deny discounts, only approve reasonable discount requests."
+            "prompt": "You are a manager at a car dealership. Your job is to approve or deny discounts, only approve reasonable discount requests. Keep the conversation moving to a logical conclusion."
         }
     ],
     "termination_condition": "Car sale concluded.",
@@ -51,28 +50,11 @@ test_config = {
     ]
 }
 
-#print(queue.insert(test_config, 5))
-
-#retrieved_config = queue.retrieve_next()
-#for agent in retrieved_config["agents"]:
-#    print(agent["prompt"])
-
+mongo_client = MongoClient(os.environ["DB_CONNECTION_STRING"])
+queue = SimulationQueue(mongo_client)
 results = SimulationResults(mongo_client)
-"""
-print(results.insert("a85d1053", {
-    "messages": [
-        {
-            "agent": "test2",
-            "message": "test2"
-        }
-    ],
-    "output_variables": [
-        {
-            "name": "test2",
-            "value": 111
-        }
-    ]
-}))"
-"""
 
-print(results.retrieve("f85d1053"))
+queue.insert(TEST_CONFIG, 1)
+
+sim = SelectorGCSimulation(queue.retrieve_next())
+asyncio.run(sim.run())
