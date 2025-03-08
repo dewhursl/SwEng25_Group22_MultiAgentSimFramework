@@ -15,13 +15,14 @@ class SelectorGCSimulation:
         self.config_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "config")
 
         # inject InformationReturnAgent into config
-        with open(os.path.join(self.config_directory, "InformationReturnAgent.json"), "r", encoding="utf-8") as file:
-            information_return_agent = json.load(file)
-            information_return_agent["prompt"] = information_return_agent["prompt"].format(
-                output_variables_str=('{\n' + ",\n".join(f'"{v["name"]}": {"\"STRING\"" if v["type"] == "String" else "NUMBER"}' for v in self.config["output_variables"]) + '\n}'),
-                termination_condition=self.config["termination_condition"]
-            )
-            self.config["agents"].append(information_return_agent)
+        if not any(agent["name"] == "InformationReturnAgent" for agent in self.config["agents"]): # check if InformationReturnAgent is there already
+            with open(os.path.join(self.config_directory, "InformationReturnAgent.json"), "r", encoding="utf-8") as file:
+                information_return_agent = json.load(file)
+                information_return_agent["prompt"] = information_return_agent["prompt"].format(
+                    output_variables_str=('{\n' + ",\n".join(f'"{v["name"]}": {"\"STRING\"" if v["type"] == "String" else "NUMBER"}' for v in self.config["output_variables"]) + '\n}'),
+                    termination_condition=self.config["termination_condition"]
+                )
+                self.config["agents"].append(information_return_agent)
     
         # initialize agents
         self.agents = [

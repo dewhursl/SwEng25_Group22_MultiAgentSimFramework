@@ -1,14 +1,10 @@
 import os
-import asyncio
-from time import sleep
 from pymongo import MongoClient
 
 from dotenv import load_dotenv
 load_dotenv()
 
 from db.simulation_queue import SimulationQueue
-from db.simulation_results import SimulationResults
-from engine.simulation import SelectorGCSimulation
 
 TEST_CONFIG = {
     "name": "Car Sale Simulation",
@@ -52,9 +48,5 @@ TEST_CONFIG = {
 
 mongo_client = MongoClient(os.environ["DB_CONNECTION_STRING"])
 queue = SimulationQueue(mongo_client)
-results = SimulationResults(mongo_client)
 
-queue.insert(TEST_CONFIG, 1)
-
-sim = SelectorGCSimulation(queue.retrieve_next())
-asyncio.run(sim.run())
+queue.insert(TEST_CONFIG, 10)

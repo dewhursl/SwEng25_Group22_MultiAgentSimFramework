@@ -9,6 +9,11 @@ class SimulationQueue(MongoBase):
         self.queue_collection = self.db["queue"]
 
     def insert(self, config, num_runs):
+        simulation_id = str(uuid.uuid4())[:8]
+        
+        return self.insert_with_id(simulation_id, config, num_runs)
+    
+    def insert_with_id(self, simulation_id, config, num_runs):
         # validate simulation config
         if "name" in config and config["name"] and \
             "agents" in config and len(config["agents"]) >= 2 and \
@@ -36,8 +41,6 @@ class SimulationQueue(MongoBase):
             return None
 
         # insert into database
-        simulation_id = str(uuid.uuid4())[:8]
-
         self.queue_collection.insert_one({
             "simulation_id": simulation_id,
             "timestamp": int(time.time()),
@@ -63,7 +66,7 @@ class SimulationQueue(MongoBase):
         if remaining_runs <= 0:
             self.queue_collection.delete_one(query)
 
-        # extract simulation config
+        simulation_id = oldest_object["simulation_id"]
         config = oldest_object["config"]
 
-        return config
+        return simulation_id, config

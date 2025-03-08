@@ -9,15 +9,13 @@ class SimulationResults(MongoBase):
         # validate simulation results
         if "messages" in results and "output_variables" in results:
             for message in results["messages"]:
-                if "agent" in message and message["agent"] and \
-                    "message" in message and message["message"]:
+                if "agent" in message and message["agent"] and "message" in message:
                     continue
                 else:
                     return None
                 
             for variable in results["output_variables"]:
-                if "name" in variable and variable["name"] and \
-                    "value" in variable and variable["value"]:
+                if "name" in variable and variable["name"] and "value" in variable:
                     continue
                 else:
                     return None
