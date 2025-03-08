@@ -58,18 +58,21 @@ test_config = {
 #    print(agent["prompt"])
 
 results = SimulationResults(mongo_client)
-
-print(results.insert("f85d1053", {
+"""
+print(results.insert("a85d1053", {
     "messages": [
         {
-            "agent": "test",
-            "message": "test"
+            "agent": "test2",
+            "message": "test2"
         }
     ],
     "output_variables": [
         {
-            "name": "test",
-            "value": 999
+            "name": "test2",
+            "value": 111
         }
     ]
-}))
+}))"
+"""
+
+print(results.retrieve("f85d1053"))

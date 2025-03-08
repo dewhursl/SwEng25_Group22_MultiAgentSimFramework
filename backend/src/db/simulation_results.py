@@ -36,4 +36,4 @@ class SimulationResults(MongoBase):
     def retrieve(self, simulation_id):
         # retrieve all results of provided simulation
         query = {"simulation_id": simulation_id}
-        return self.results_collection.find(query)
+        return list(self.results_collection.find(query))
