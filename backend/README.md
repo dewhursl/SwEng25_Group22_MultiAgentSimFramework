@@ -1,51 +1,106 @@
 # Multi-Agent Simulation Backend
 
-## Running simulation
+## Running Backend Service
 
-- Required Python modules must be installed. (`pip install -r backend/src/requirements.txt`)
-- Create file `backend/src/.env`
+1. Install required python modules: \
+`pip install -r backend/src/requirements.txt`
+2. Populate required environment variables in `backend/src/.env`:
 ```
-TOGETHER_API_KEY="..."
 OPENAI_API_KEY="..."
-DB_CONNECTION_STRING="..."
+DB_CONNECTION_STRING="mongodb://xxx:yyy"
 ```
-- Inside `backend/src` run `python run_sim.py <int: num_runs> <str: sim_config_name>`
-
-## Running API
-
-- MongoDB must be available via `DB_CONNECTION_STRING` variable in .env
-- Inside `backend/src` run `flask --app api.app run` (make sure `requirements.txt` are installed)
+3. Run service: \
+`python backend/src/main.py`
 
 ## API Endpoints
 
-### Simulation Configuration
-**Route:** `/report/output?id=<sim_id>`
+**GET** `/sim/catalog`
+
+Get catalog of all simulations, running and completed.
+
+**Response Format:**
+```json
+[
+    {
+        "expected_runs": 999,
+        "name": "placeholder",
+        "progress_percentage": 100,
+        "simulation_id": "<simulation_id>"
+    },
+    {
+        "expected_runs": 999,
+        "name": "placeholder",
+        "progress_percentage": 25,
+        "simulation_id": "<simulation_id>"
+    }
+]
+```
+
+**GET** `/sim/output?id=<simulation_id>`
+
+Get results from all runs of a particular simulation.
 
 **Optional GET Parameters:**
-- `i=<index>` (Fetch only the specified element of the output array)
-- `log=yes/no` (Include or exclude chat logs; default is `yes`)
+- `i=<index>` - Fetch only the specified element of the output array
+- `show_messages=yes/no` - Include or exclude message logs (default is `yes`)
 
 **Response Format:**
 ```json
 {
-  "id": "<ID (sim_id)>",
-  "num_runs" : "<Number>",
+  "id": "<simulation_id>",
+  "num_runs": 999,
   "runs": [
     {
-      "num_messages": "<Number>",
-      "chat_log": [
+      "num_messages": 999,
+      "messages": [
         {
-          "agent": "<String>",
-          "message": "<String>"
+          "agent": "placeholder",
+          "message": "placeholder"
         }
       ],
       "output_variables": [
         {
-          "name": "<String>",
-          "value": "<String | Number>"
+          "name": "placeholder",
+          "value": "placeholder"
+        },
+        {
+          "name": "placeholder2",
+          "value": 999
         }
       ]
     }
   ]        
-}   
+} 
+```
+
+**POST/PUT** `/sim/create`
+
+Create a new simulation. Simulations are queued and executed from oldest to newest.
+
+**Request Format**
+```json
+{
+    "num_runs": 999,
+    "config": {
+        "name": "placeholder",
+        "agents": [
+            {
+                "name": "PlaceholderAgent",
+                "description": "placeholder",
+                "prompt": "placeholder"
+            }
+        ],
+        "termination_condition": "placeholder",
+        "output_variables": [
+            {
+                "name": "placeholder",
+                "type": "String"
+            },
+            {
+                "name": "placeholder2",
+                "type": "Number"
+            }
+        ]
+    }
+}
 ```
