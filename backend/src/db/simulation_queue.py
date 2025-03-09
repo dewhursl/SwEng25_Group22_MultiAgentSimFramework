@@ -70,7 +70,3 @@ class SimulationQueue(MongoBase):
         config = oldest_object["config"]
 
         return simulation_id, config
-    
-    def is_in_queue(self, simulation_id):
-        query = {"simulation_id": simulation_id}
-        return self.queue_collection.find_one(query) is not None

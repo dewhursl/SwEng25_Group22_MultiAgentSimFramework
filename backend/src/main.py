@@ -6,6 +6,7 @@ load_dotenv()
 
 if not "OPENAI_API_KEY" in os.environ:
     print("OPENAI_API_KEY required!")
+    
 if not "DB_CONNECTION_STRING" in os.environ:
     print("DB_CONNECTION_STRING required!")
 

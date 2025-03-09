@@ -11,13 +11,15 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 load_dotenv()
 
-from engine.simulation import SelectorGCSimulation
-from db.simulation_results import SimulationResults
 from db.simulation_queue import SimulationQueue
+from db.simulation_results import SimulationResults
+from db.simulation_catalog import SimulationCatalog
+from engine.simulation import SelectorGCSimulation
 
 mongo_client = MongoClient(os.environ["DB_CONNECTION_STRING"])
 simulation_queue = SimulationQueue(mongo_client)
 simulation_results = SimulationResults(mongo_client)
+simulation_catalog = SimulationCatalog(mongo_client)
 
 executor = None
 
@@ -61,6 +63,7 @@ async def run_simulation(simulation_id, simulation_config):
     if processed_results:
         print(f"Saving results for run of simulation ID: {simulation_id}...", end="")
         simulation_results.insert(simulation_id, processed_results)
+        simulation_catalog.update_progress(simulation_id)
         print(" Done!")
     else:
         print(f"Run failed! Queueing retry run for simulation ID {simulation_id}...", end="")
@@ -68,9 +71,14 @@ async def run_simulation(simulation_id, simulation_config):
         print(" Done!")
 
 def start_simulation(simulation_id, simulation_config):
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(run_simulation(simulation_id, simulation_config))
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(run_simulation(simulation_id, simulation_config))
+    except RuntimeError:
+        print(f"Run failed! Queueing retry run for simulation ID {simulation_id}...", end="")
+        simulation_queue.insert_with_id(simulation_id, simulation_config, 1)
+        print(" Done!")
 
 def orchestrator(max_threads=4):
     print("Listening for simulations...")

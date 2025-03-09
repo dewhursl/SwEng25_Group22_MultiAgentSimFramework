@@ -14,7 +14,28 @@ DB_CONNECTION_STRING="mongodb://xxx:yyy"
 
 ## API Endpoints
 
-### Simulation Configuration
+**GET** `/sim/catalog`
+
+Get catalog of all simulations, running and completed.
+
+**Response Format:**
+```json
+[
+    {
+        "expected_runs": 999,
+        "name": "placeholder",
+        "progress_percentage": 100,
+        "simulation_id": "<simulation_id>"
+    },
+    {
+        "expected_runs": 999,
+        "name": "placeholder",
+        "progress_percentage": 25,
+        "simulation_id": "<simulation_id>"
+    }
+]
+```
+
 **GET** `/sim/output?id=<simulation_id>`
 
 Get results from all runs of a particular simulation.

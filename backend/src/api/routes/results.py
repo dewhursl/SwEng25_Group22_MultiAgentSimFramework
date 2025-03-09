@@ -3,11 +3,11 @@ from pymongo import MongoClient
 from flask import Blueprint, request, jsonify
 
 from db.simulation_results import SimulationResults
-from db.simulation_queue import SimulationQueue
+from db.simulation_catalog import SimulationCatalog
 
 mongo_client = MongoClient(os.environ["DB_CONNECTION_STRING"])
 simulation_results = SimulationResults(mongo_client)
-simulation_queue = SimulationQueue(mongo_client)
+simulation_catalog = SimulationCatalog(mongo_client)
 
 results_bp = Blueprint("results", __name__)
 
@@ -19,7 +19,7 @@ def get_results():
 
     results = simulation_results.retrieve(simulation_id)
     if len(results) == 0:
-        if simulation_queue.is_in_queue(simulation_id):
+        if simulation_catalog.exists(simulation_id):
             return jsonify({
                 "id": simulation_id,
                 "num_runs": 0,
