@@ -5,6 +5,7 @@ import Scene2D2 from './components/2D2/index';
 import Navbar from './components/Navbar';
 import conversationData from '../constants/conversation.json'; // Import JSON file
 
+
 const Renderer = () => {
   // Fetch the data for simulation
   const data = SIMULATION_DATA;
@@ -44,20 +45,23 @@ const Renderer = () => {
 }, [conversation.length, isPaused]);
 
 
-const handlePlay = () => {
-  setIsPaused(false);
-  window.isGamePaused = false; // global variable to control game pause
-};
-
-const handlePause = () => {
-  setIsPaused(true);
-  window.isGamePaused = true; 
-};
-
 const handleRestart = () => {
   setIsPaused(false);
+  window.isGamePaused = false; 
   setCurrentMessageIndex(0);
 };
+
+  const handleTogglePlayPause = () => {
+    if (isPaused) {
+      // Start the game (unpause)
+      setIsPaused(false);
+      window.isGamePaused = false; // Set global variable to resume the game
+    } else {
+      // Pause the game
+      setIsPaused(true);
+      window.isGamePaused = true; // Set global variable to pause the game
+    }
+  };
 
 
   // Toggle context (2D or 3D)
@@ -97,22 +101,18 @@ const handleRestart = () => {
         {/* Playback Controls */}
         <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-6">
           <button
-            onClick={handlePlay}
+            onClick={handleTogglePlayPause}
             className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
           >
-            Play
+            {isPaused ? '▶' : '⏸'}
+            
           </button>
-          <button
-            onClick={handlePause}
-            className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
-          >
-            Pause
-          </button>
+ 
           <button
             onClick={handleRestart}
             className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
           >
-            Restart
+            ↺  
           </button>
         </div>
 
