@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { SIMULATION_DATA } from '../constants/simulationData';
-import Scene2D from './components/Scene2D';
 import Scene3D from './components/Scene3D';
 import Scene2D2 from './components/2D2/index';
 import Navbar from './components/Navbar';
@@ -16,6 +15,9 @@ const Renderer = () => {
   // State to hold all the conversation messages
   const [conversation, setConversation] = useState([]);
 
+  const [isPaused, setIsPaused] = useState(false);
+
+
   // State to keep track of the index of the current message to show
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
@@ -26,20 +28,37 @@ const Renderer = () => {
   }, []);
 
   useEffect(() => {
-    // timer to show each message one by one
-    const messageInterval = setInterval(() => {
-      setCurrentMessageIndex((prevIndex) => {
-        // If all messages are shown, stop interval
-        if (prevIndex + 1 >= conversation.length) {
-          clearInterval(messageInterval);
-          return prevIndex;
-        }
-        return prevIndex + 1;
-      });
-    }, 3000); // 3000ms (3 seconds) interval
-
+    let messageInterval;
+    if (!isPaused) {
+      messageInterval = setInterval(() => {
+        setCurrentMessageIndex((prevIndex) => {
+          if (prevIndex + 1 >= conversation.length) {
+            clearInterval(messageInterval);
+            return prevIndex;
+          }
+          return prevIndex + 1;
+        });
+      }, 3000);
+    }
     return () => clearInterval(messageInterval);
-  }, [conversation.length]);
+}, [conversation.length, isPaused]);
+
+
+const handlePlay = () => {
+  setIsPaused(false);
+  window.isGamePaused = false; // global variable to control game pause
+};
+
+const handlePause = () => {
+  setIsPaused(true);
+  window.isGamePaused = true; 
+};
+
+const handleRestart = () => {
+  setIsPaused(false);
+  setCurrentMessageIndex(0);
+};
+
 
   // Toggle context (2D or 3D)
   const toggleContext = () => {
@@ -73,7 +92,29 @@ const Renderer = () => {
       {/* Scene and side Panel */}
       <div className="flex flex-row flex-1 w-full mt-16 overflow-hidden">
         {/* Scene Container (takes remaining space) */}
-        <div className="flex flex-1 justify-center items-center">{getScene()}</div>
+        <div className="flex flex-1 flex-col justify-center items-center relative">{getScene()}</div>
+
+        {/* Playback Controls */}
+        <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-6">
+          <button
+            onClick={handlePlay}
+            className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
+          >
+            Play
+          </button>
+          <button
+            onClick={handlePause}
+            className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
+          >
+            Pause
+          </button>
+          <button
+            onClick={handleRestart}
+            className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
+          >
+            Restart
+          </button>
+        </div>
 
         {/* side Conversation Panel (only visible in 2D render) */}
         {context === '2d' && (
