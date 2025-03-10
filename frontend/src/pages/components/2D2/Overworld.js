@@ -22,11 +22,19 @@ export class Overworld {
             //Clear off the canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-            //console.log("overworld.js- Is scene paused?", window.isGamePaused); 
+            //console.log("Canvas Context:", this.ctx);
 
 
             //Establish the camera person
             const cameraPerson = this.map.gameObjects.hero;
+
+            //Update all objects
+            Object.values(this.map.gameObjects).forEach(object => {
+                object.update({
+                    arrow: this.directionInput.direction,
+                    map: this.map,
+                })
+            })
 
             //Draw Lower layer
             this.map.drawLowerImage(this.ctx, cameraPerson);
@@ -43,15 +51,14 @@ export class Overworld {
 
             //Update all objects
             Object.values(this.map.gameObjects).forEach(object => {
-                if (!window.isGamePaused) { // Only update when playback is is not paused
-                  object.update({
+
+                object.update({
                     arrow: this.directionInput.direction,
                     map: this.map,
                     ctx: this.ctx,
                     deltaTime: deltaTime / 1000 // Convert to seconds
-                  });
-                }
-              });
+                })
+            })
 
             requestAnimationFrame(() => {
                 step();
