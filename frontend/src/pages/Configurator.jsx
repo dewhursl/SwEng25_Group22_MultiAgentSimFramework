@@ -1,38 +1,52 @@
 import { useState } from 'react';
 
-/* 
-  **************************************************
-  UI elements used to build the configuration panels
-  ************************************************** 
-*/
+const TextField = ({ children }) => {
+  const [value, setValue] = useState('');
 
-// Simple button wrappers with varialbe background color
-const AddButton = ({ children, onClick }) => (
-  <button className="p-1 rounded-lg min-w-20 bg-green-600 hover:bg-green-300" onClick={onClick}>
-    {children}
-  </button>
-);
-
-const RemoveButton = ({ children, onClick }) => (
-  <button className="p-1 rounded-lg min-w-20 bg-red-600 hover:bg-red-300" onClick={onClick}>
-    {children}
-  </button>
-);
-
-// Displays children as a sequence with an indent line on the left
-const Sequence = ({ children }) => {
-  return <div className="pl-1 border-gray-500 border-l-1">{children}</div>;
+  return (
+    <label className="flex flex-col mt-1 p-2 border-1 border-transparent rounded-lg text-white bg-slate-800 hover:border-white">
+      {children}
+      <input
+        className="mt-1 rounded-lg outline-none bg-slate-700 focus:bg-slate-600"
+        type="text"
+        defaultValue={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+    </label>
+  );
 };
 
-// Container for sequence elements
-const SequenceElement = ({ children }) => <div className="m-1 p-1 rounded-lg">{children}</div>;
+const Button = ({ children, onClick }) => (
+  <button
+    className="p-1 mt-1 rounded-lg font-bold text-white bg-slate-800 hover:bg-green-600"
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
 
-// A field where the user can add and remove elements from the field. The parent object contains
-// the state and provides a buidler method for building a new element
-const SequenceField = ({ children, elements, setElements, elementBuilder }) => {
-  const addElement = () => {
-    setElements((prev) => [...prev, elementBuilder()]);
-  };
+const AcceptButton = ({ children, onClick }) => (
+  <button
+    className="p-1 mt-1 rounded-lg font-bold text-white bg-green-800 hover:bg-green-600"
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
+
+const RejectButton = ({ children, onClick }) => (
+  <button
+    className="p-1 mt-1 rounded-lg font-bold text-white bg-red-800 hover:bg-red-600"
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
+
+const Sequence = ({ children, elementBuilder }) => {
+  const [elements, setElements] = useState([]);
+
+  const addElement = () => setElements((prev) => [...prev, elementBuilder()]);
 
   const removeElement = (index) => {
     setElements((prev) => {
@@ -43,119 +57,51 @@ const SequenceField = ({ children, elements, setElements, elementBuilder }) => {
   };
 
   return (
-    <div className="">
+    <div className="flex flex-col p-2 mt-1 border-1 border-transparent rounded-lg text-white bg-slate-800">
       {children}
-      <AddButton onClick={() => addElement()}>Add</AddButton>
-      <Sequence>
+      <AcceptButton onClick={addElement}>Add</AcceptButton>
+      <ul className="mt-1">
         {elements.map((element, index) => (
-          <SequenceElement key={index}>
-            <div className="">
-              <RemoveButton onClick={() => removeElement(index)}>Remove</RemoveButton>
-              {element}
-            </div>
-          </SequenceElement>
+          <li key={index} className="flex flex-col mt-2 ml-1 p-1 border-l-1  rounded-lg">
+            {element}
+            <RejectButton onClick={(index) => removeElement(index)}>Remove</RejectButton>
+          </li>
         ))}
-      </Sequence>
+      </ul>
     </div>
   );
 };
 
-// Wrapper for an input field
-const Input = ({ children, type, value, setValue }) => (
-  <label className="p-1">
-    {children}
-    <input
-      className="m-1 border bg-stale-800"
-      type={type}
-      defaultValue={value}
-      onChange={(e) => setValue(e.target.value)}
-    ></input>
-  </label>
-);
-
-// Container for a configuration panel
-const Panel = ({ children }) => <div className="flex flex-col">{children}</div>;
-
-/*
-  ****************************************
-  Definitions for the configuration panels
-  ****************************************
-*/
-
-const Parameter = () => {
-  const [name, setName] = useState('');
-  const [value, setValue] = useState('');
-
-  return (
-    <Panel>
-      <Input type="text" value={name} setValue={setName}>
-        Name
-      </Input>
-      <Input type="text" value={value} setValue={setValue}>
-        Value
-      </Input>
-    </Panel>
-  );
-};
-
-const Agent = () => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [freePrompt, setFreePrompt] = useState('');
-  const [parameters, setParameters] = useState([]);
-
-  return (
-    <Panel>
-      <Input type="text" value={name} setValue={setName}>
-        Name
-      </Input>
-      <Input type="text" value={description} setDescription={setDescription}>
-        Description
-      </Input>
-      <Input type="text" value={freePrompt} setValue={setFreePrompt}>
-        Free Prompt
-      </Input>
-      <SequenceField
-        elements={parameters}
-        setElements={setParameters}
-        elementBuilder={() => <Parameter />}
-      >
-        Parameters
-      </SequenceField>
-    </Panel>
-  );
-};
-
-const Simulation = () => {
-  const [numRuns, setNumRuns] = useState('');
-  const [agents, setAgents] = useState([]);
-
-  return (
-    <Panel>
-      <Input type="number" value={numRuns} setValue={setNumRuns}>
-        Number of Runs
-      </Input>
-      <SequenceField elements={agents} setElements={setAgents} elementBuilder={() => <Agent />}>
-        Agents
-      </SequenceField>
-    </Panel>
-  );
-};
-
 const Configurator = () => {
-  const [simulations, setSimulations] = useState([]);
+  const instanceBuilder = () => (
+    <>
+      <TextField>
+        <h1 className="font-bold">Name</h1>
+        <p>The name used to reference this parameter</p>
+      </TextField>
+      <TextField>
+        <h1 className="font-bold">Value</h1>
+        <p>Prompt describing this parameter</p>
+      </TextField>
+    </>
+  );
+
+  const generateSimulation = null;
+
+  const runSimulation = null;
 
   return (
-    <div className="text-white">
-      <Panel>
-        <SequenceField
-          elements={simulations}
-          setElements={setSimulations}
-          elementBuilder={() => <Simulation />}
-        >
-          Simulations
-        </SequenceField>
-      </Panel>
+    <div className="flex flex-col">
+      <TextField>
+        <h1 className="font-bold">Description</h1>
+        <p>Prompt describing the simulation</p>
+      </TextField>
+      <Sequence elementBuilder={instanceBuilder}>
+        <h1 className="font-bold">Instances</h1>
+        <p>Parameters for each instance of the simulation</p>
+      </Sequence>
+      <AcceptButton onClick={generateSimulation}>Generate Simulation Configuration</AcceptButton>
+      <AcceptButton onClick={runSimulation}>Run Simulation</AcceptButton>
     </div>
   );
 };
