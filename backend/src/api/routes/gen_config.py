@@ -26,7 +26,7 @@ def run_sim(def_prompt, json_prompt, desc_prompt):
         )
 
         response_str = response.choices[0].message.content.replace("\n", "").replace("```json", "").replace("```", "")
-        print(response_str)
+        #print(response_str)
 
         json_match = re.search(r'\{.*\}', response_str, re.DOTALL)
         if not json_match:
@@ -42,12 +42,11 @@ def run_sim(def_prompt, json_prompt, desc_prompt):
 
         return response_str
 
-# TODO: Change to POST/PUT
-@gen_config_bp.route("/gen_config", methods=["GET"])
+@gen_config_bp.route("/gen_config", methods=["POST"])
 def generate_config():
-    # desc : Description of the simulation setting
+    request_json = request.get_json()
 
-    desc = request.args.get("desc")
+    desc = request_json["desc"]
     if not desc:
         return jsonify({"message": "desc not given"}), 400
     
@@ -75,8 +74,10 @@ def generate_config():
     
     DEFAULT_PROMPT = """
         You are an AI Assistent who converts a plain text description of a multi-agent AI simulation into a valid JSON config file.
-        You should insert one agent into the config for each person or sentient entity in the description.
+        You should insert one agent into the config for each person or sentient entity in the description. All humans should be given a unique name such as "Teacher" or "Sarah", but not "Agent 3".
         You should also include as many output variables as needed to determine the result of the simulation.
+        Output variables should be concrete and not vague, the name alone should describe the units, range or any other information such that all simulations will fill the variables with comparable data.
+        If an output variable is a percentage that should be mentioned in the name explicitly. Do not write output variables in snake case, pascal case, etc.
     """
 
     prompt = "\n\nThis is your simulation description: " + desc + "\n\nDo not write anything except the JSON" 
