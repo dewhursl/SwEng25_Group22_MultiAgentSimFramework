@@ -6,9 +6,6 @@ from api.routes.gen_config import gen_config_bp
 
 from flask_cors import CORS
 
-from dotenv import load_dotenv
-load_dotenv()
-
 app = Flask(__name__)
 
 CORS(app, supports_credentials=True)
