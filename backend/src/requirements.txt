@@ -8,3 +8,4 @@ autogen_core
 autogen_agentchat
 pymongo
 flask
+flask-cors
