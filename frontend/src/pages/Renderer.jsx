@@ -61,8 +61,8 @@ const Renderer = () => {
   // Toggle context (2D or 3D)
   const toggleContext = () => {
     setContext((prev) => (prev === '2d' ? '3d' : '2d'));
-  };
-
+  };   
+  
   // Function to render the appropriate scene
   const getScene = () => {
     switch (context) {
