@@ -5,7 +5,6 @@ import Scene2D2 from './components/2D2/index';
 import Navbar from './components/Navbar';
 import conversationData from '../constants/conversation.json'; // Import JSON file
 
-
 const Renderer = () => {
   // Fetch the data for simulation
   const data = SIMULATION_DATA;
@@ -16,8 +15,7 @@ const Renderer = () => {
   // State to hold all the conversation messages
   const [conversation, setConversation] = useState([]);
 
-  const [isPaused, setIsPaused] = useState(false);
-
+  const [isPaused, setIsPaused] = useState(true);
 
   // State to keep track of the index of the current message to show
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
@@ -39,17 +37,14 @@ const Renderer = () => {
           }
           return prevIndex + 1;
         });
-      }, 3000);
+      }, 2000);
     }
     return () => clearInterval(messageInterval);
-}, [conversation.length, isPaused]);
+  }, [conversation.length, isPaused]);
 
-
-const handleRestart = () => {
-  setIsPaused(false);
-  window.isGamePaused = false; 
-  setCurrentMessageIndex(0);
-};
+  const handleRestart = () => {
+    setCurrentMessageIndex(0);
+  };
 
   const handleTogglePlayPause = () => {
     if (isPaused) {
@@ -63,12 +58,11 @@ const handleRestart = () => {
     }
   };
 
-
   // Toggle context (2D or 3D)
   const toggleContext = () => {
     setContext((prev) => (prev === '2d' ? '3d' : '2d'));
-  };
-
+  };   
+  
   // Function to render the appropriate scene
   const getScene = () => {
     switch (context) {
@@ -81,8 +75,21 @@ const handleRestart = () => {
     }
   };
 
+  const handleNextMessage = () => {
+    if (currentMessageIndex + 1 < conversation.length) {
+      setCurrentMessageIndex(currentMessageIndex + 1);
+    }
+  };
+
+  const handlePrevMessage = () => {
+    if (currentMessageIndex > 0) {
+      setCurrentMessageIndex(currentMessageIndex - 1);
+    }
+  };
+
+
   return (
-    <div className="w-full flex flex-col h-screen overflow-hidden">
+    <div className="w-full flex flex-col mb-2 h-screen overflow-hidden">
       <Navbar />
 
       {/* Toggle Button */}
@@ -96,24 +103,42 @@ const handleRestart = () => {
       {/* Scene and side Panel */}
       <div className="flex flex-row flex-1 w-full mt-16 overflow-hidden">
         {/* Scene Container (takes remaining space) */}
-        <div className="flex flex-1 flex-col justify-center items-center relative">{getScene()}</div>
+        <div className="flex flex-1 flex-col justify-center items-center relative">
+          {getScene()}
+        </div>
 
         {/* Playback Controls */}
         <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-6">
+
+          <button
+            onClick={handleRestart}
+            className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
+          >
+            ↺
+          </button>
+
+          {/* Step buttons */}
+          <button
+            onClick={handlePrevMessage}
+            className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
+          >
+            «  
+          </button>
+
           <button
             onClick={handleTogglePlayPause}
             className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
           >
             {isPaused ? '▶' : '⏸'}
-            
           </button>
- 
+
           <button
-            onClick={handleRestart}
+            onClick={handleNextMessage}
             className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
           >
-            ↺  
+            » 
           </button>
+
         </div>
 
         {/* side Conversation Panel (only visible in 2D render) */}

@@ -29,6 +29,16 @@ def generate_fake_transac_history():
 def generate_fake_price():
     return round(random.uniform(5.0, 500.0), 2)
 
+import random
+
+def generate_fake_loan():
+    return {
+        "Loan ID": random.randint(10000, 99999),  # Random 5-digit Loan ID
+        "Amount": f"${round(random.uniform(500.0, 50000.0), 2)}",  # Random loan amount
+        "Interest Rate": f"{round(random.uniform(1.0, 15.0), 2)}%",  # Random interest rate
+        "Duration": f"{random.randint(1, 30)} years"  # Random duration
+    }
+
 def streaming_bankbot(user_input):
     try:
         print(end="", flush=True)
@@ -49,6 +59,10 @@ def chatbot_response(user_input):
     elif "My History" in user_input:
         fake_history = generate_fake_transac_history()  # Keep dictionary format
         response = "\n".join([f"{key}: {value}" for key, value in fake_history.items()])  # Format properly
+        return response
+    elif "Loan" in user_input:
+        fake_loan = generate_fake_loan()  # Ensure this returns a dictionary
+        response = "\n".join([f"{key}: {value}" for key, value in fake_loan.items()])  # Use .items() instead of .float()
         return response
     else:
         # Use Ollama to generate a chatbot response
@@ -93,6 +107,9 @@ def main():
                     print(response)
         elif option == "3":
                 print("You chose Loan Inquiry")
+                print("\nPlease select:")
+                print("\n- Loan")
+                print("\n- Exit")
                 user_input = input("\nYou: ")
                 if ("Exit" in user_input):
                      continue

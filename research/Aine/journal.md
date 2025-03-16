@@ -6,7 +6,8 @@
 - Set up Autogen
 - Experimented with Autogen by using mock code from https://ollama.com/blog/openai-compatibility
 - Created a fully working debating bot where the user picks a topic and the AI debates back and forth
-
+- Created fully working bank support bot
+- Working on working medical support bot using autogen
 
 ## What I want to do:
 ---
@@ -19,8 +20,7 @@
 
 ## Issues:
 ---
-- Haven't got banking support bot working fully - doesn't display fake account information of customer 
-- UPDATE - got fake account information working
+- Having got Autogen working fully with Ollama using my own prototype 
 
 ## Note
 ---
