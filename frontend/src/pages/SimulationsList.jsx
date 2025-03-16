@@ -23,7 +23,8 @@ const StatusBadge = ({ progress }) => {
   );
 };
 
-const SimulationItem = ({ simulation, onViewResults }) => {
+// const SimulationItem = ({ simulation, onViewResults }) => {
+const SimulationItem = ({ simulation, onViewRenderer, onViewDashboard }) => {
   // Calculate estimated completion time based on progress
   const getEstimatedCompletion = (progress) => {
     if (progress === 100) return null;
@@ -61,12 +62,26 @@ const SimulationItem = ({ simulation, onViewResults }) => {
         </div>
         <div className="flex flex-col gap-2">
           {simulation.progress_percentage === 100 && (
-            <button
-              onClick={() => onViewResults(simulation.simulation_id)}
-              className="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded transition-colors"
-            >
-              View Results
-            </button>
+            // <button
+            //   onClick={() => onViewResults(simulation.simulation_id)}
+            //   className="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded transition-colors"
+            // >
+            //   View Results
+            // </button>
+            <>
+              <button
+                onClick={() => onViewRenderer(simulation.simulation_id)}
+                className="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded transition-colors"
+              >
+                View Rendering
+              </button>
+              <button
+                onClick={() => onViewDashboard(simulation.simulation_id)}
+                className="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded transition-colors"
+              >
+                View Dashboard
+              </button>
+            </>
           )}
         </div>
       </div>
@@ -120,6 +135,16 @@ const SimulationsList = () => {
     navigate(`/renderer/${simulationId}`);
   };
 
+  const handleViewRenderer = (simulationId) => {
+    // Navigate to the renderer view for this simulation
+    navigate(`/renderer/${simulationId}`);
+  };
+
+  const handleViewDashboard = (simulationId) => {
+    // Navifate to the dashboard view for this simulation
+    navigate(`/dashboard/${simulationId}`);
+  };
+
   return (
     <div className="flex justify-center min-h-screen bg-slate-900 py-8">
       <div className="w-full max-w-4xl px-4">
@@ -161,7 +186,9 @@ const SimulationsList = () => {
                   <SimulationItem
                     key={sim.simulation_id}
                     simulation={sim}
-                    onViewResults={handleViewResults}
+                    // onViewResults={handleViewResults}
+                    onViewRenderer={handleViewRenderer}
+                    onViewDashboard={handleViewDashboard}
                   />
                 ))}
               </div>
