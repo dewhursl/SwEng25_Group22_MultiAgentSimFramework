@@ -6,19 +6,14 @@ import Navbar from './components/Navbar';
 import conversationData from '../constants/conversation.json'; // Import JSON file
 
 const Renderer = () => {
-  // Fetch the data for simulation
   const data = SIMULATION_DATA;
-
-  // State to control the current context (2D or 3D)
   const [context, setContext] = useState('2d');
-
-  // State to hold all the conversation messages
   const [conversation, setConversation] = useState([]);
-
   const [isPaused, setIsPaused] = useState(true);
-
-  // State to keep track of the index of the current message to show
+  const [isSimulationOver, setIsSimulationOver] = useState(false);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const [isPanelVisible, setIsPanelVisible] = useState(true);
+
 
   useEffect(() => {
     // Flatten the conversation data
@@ -28,11 +23,13 @@ const Renderer = () => {
 
   useEffect(() => {
     let messageInterval;
-    if (!isPaused) {
+    if (!isPaused && !isSimulationOver) {
       messageInterval = setInterval(() => {
         setCurrentMessageIndex((prevIndex) => {
           if (prevIndex + 1 >= conversation.length) {
             clearInterval(messageInterval);
+            setIsSimulationOver(true);
+            setIsPaused(true);
             return prevIndex;
           }
           return prevIndex + 1;
@@ -40,21 +37,22 @@ const Renderer = () => {
       }, 2000);
     }
     return () => clearInterval(messageInterval);
-  }, [conversation.length, isPaused]);
+  }, [conversation.length, isPaused, isSimulationOver]);
 
   const handleRestart = () => {
     setCurrentMessageIndex(0);
+    setIsSimulationOver(false);
   };
 
   const handleTogglePlayPause = () => {
-    if (isPaused) {
+    if (isPaused && !isSimulationOver) {
       // Start the game (unpause)
       setIsPaused(false);
-      window.isGamePaused = false; // Set global variable to resume the game
+      window.isSimPaused = false; // Set global variable to resume the game
     } else {
       // Pause the game
       setIsPaused(true);
-      window.isGamePaused = true; // Set global variable to pause the game
+      window.isSimPaused = true; // Set global variable to pause the game
     }
   };
 
@@ -62,6 +60,10 @@ const Renderer = () => {
   const toggleContext = () => {
     setContext((prev) => (prev === '2d' ? '3d' : '2d'));
   };   
+
+  const togglePanel = () => {
+    setIsPanelVisible((prev) => !prev);
+  };
   
   // Function to render the appropriate scene
   const getScene = () => {
@@ -78,6 +80,9 @@ const Renderer = () => {
   const handleNextMessage = () => {
     if (currentMessageIndex + 1 < conversation.length) {
       setCurrentMessageIndex(currentMessageIndex + 1);
+    } else {
+      setIsSimulationOver(true);
+      setIsPaused(true);
     }
   };
 
@@ -95,10 +100,12 @@ const Renderer = () => {
       {/* Toggle Button */}
       <button
         onClick={toggleContext}
-        className="absolute top-25 left-1/2 transform -translate-x-1/2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center z-10"
+        className="absolute top-20 left-1/2 transform -translate-x-1/2 bg-white hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center z-10"
       >
         {context === '2d' ? 'Switch to 3D' : 'Switch to 2D'} Render
       </button>
+
+
 
       {/* Scene and side Panel */}
       <div className="flex flex-row flex-1 w-full mt-16 overflow-hidden">
@@ -107,7 +114,9 @@ const Renderer = () => {
           {getScene()}
         </div>
 
+
         {/* Playback Controls */}
+        {context === '2d' && (
         <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-6">
 
           <button
@@ -140,11 +149,26 @@ const Renderer = () => {
           </button>
 
         </div>
+        )}
+                
+        {/* Panel Toggle Button */}
+        <button
+          onClick={togglePanel}
+          className={`fixed top-20 ${isPanelVisible ? 'right-110' : 'right-5'} 
+            bg-white hover:bg-gray-300  font-bold px-4 py-2 rounded shadow-md z-20`}
+        >
+          ☰
+        </button>
+
+        
 
         {/* side Conversation Panel (only visible in 2D render) */}
-        {context === '2d' && (
+        {context === '2d' && isPanelVisible && (
           <div className="w-120 max-h-screen bg-midnight p-4 overflow-y-auto border shadow-lg shadow-violet-600/60">
-            <h2 className="text-lg font-bold mt-4 mb-2 text-white">Conversation</h2>
+            
+            
+            <h2 className="text-lg font-bold mt-15 mb-2 text-white">Conversation</h2>
+            
             <div className="space-y-4">
               {conversation.slice(0, currentMessageIndex + 1).map((msg, index) => (
                 <div key={index} className="flex items-start space-x-4">
@@ -169,6 +193,23 @@ const Renderer = () => {
           </div>
         )}
       </div>
+
+     {/* Simulation Over Message */}
+     {isSimulationOver && (
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="bg-white p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-2xl text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Simulation Over</h2>
+          <p className="text-lg text-gray-600 mt-4">The conversation has ended.</p>
+          <button
+            onClick={handleRestart}
+            className="mt-6 bg-violet-600 text-white text-lg px-6 py-3 rounded-lg shadow-lg hover:bg-violet-700"
+          >
+            Restart
+          </button>
+        </div>
+      </div>
+    )}
+
     </div>
   );
 };
