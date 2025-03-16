@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService.js';
 
@@ -107,12 +107,15 @@ const SimulationsList = () => {
   const [simulations, setSimulations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const scrollPosition = useRef(0);
 
   useEffect(() => {
     // Fetch simulations from API
     const fetchSimulations = async () => {
       setLoading(true);
       try {
+        scrollPosition.current = pageYOffset; // Preserve scroll position
+
         const data = await apiService.getSimulationsCatalog();
         setSimulations(data);
         setLoading(false);
@@ -125,10 +128,19 @@ const SimulationsList = () => {
     fetchSimulations();
 
     // Set up polling to refresh data periodically
-    const intervalId = setInterval(fetchSimulations, 30000); // Refresh every 30 seconds
+    const intervalId = setInterval(fetchSimulations, 3000); // Refresh every 30 seconds
 
     return () => clearInterval(intervalId); // Clean up on unmount
   }, []);
+
+  useEffect(() => {
+    // Restore scroll position when simulations are updated
+    scrollTo({
+      top: scrollPosition.current,
+      left: 0,
+      behavior: 'instant',
+    });
+  });
 
   const handleViewResults = (simulationId) => {
     // Navigate to the renderer view for this simulation
