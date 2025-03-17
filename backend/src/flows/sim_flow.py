@@ -111,7 +111,7 @@ def simulation_flow(sim_config_file_name: str):
     info_model_client = agent_model_client
     gc_model_client = agent_model_client
     
-    print("🛠 Setting up agents...")
+    print("Setting up agents...")
     gc = setup_agents(config, agent_model_client, info_model_client, gc_model_client)
     print("Agents set up!")
 
