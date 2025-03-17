@@ -3,18 +3,9 @@ import os
 
 sys.path.append(os.path.abspath("/home/aine/sweng25/sweng25_group22_multiagentsimframework/backend/src"))
 
-from util.config import SimConfigLoader
+from OLD.util.config import SimConfigLoader
 
-#import re
 import os
-import asyncio
-from datetime import datetime
-
-#AIRFLOW_ENABLED = True
-
-#if (AIRFLOW_ENABLED):
-#    from airflow import DAG
-#    from airflow.operators.python import EmptyOperator
 
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermination
@@ -131,35 +122,6 @@ class Simulation:
 
     async def run(self):
         return await Console(self.gc.run_stream())
-
-    #def run_airflow_task(self):
-    #    with DAG(
-    #        "simulation_task",
-    #        schedule_interval=None,  
-    #        start_date=datetime(2025, 2, 18),  
-    #        catchup=False,
-    #    ) as dag:
-    #        sim_task = PythonOperator(
-    #            task_id="sim_task",
-    #            python_callable=run
-    #        )
-    #    sim_task
-        #import ipdb; ipdb.set_trace()
-
-#    if (AIRFLOW_ENABLED):
-#        with DAG(
-#        "simulation_task",
-#        schedule_interval=None,  
-#        start_date=datetime(2025, 2, 18),  
-#        catchup=False,
-#        ) as dag:
-#           sim_task = PythonOperator(
-#            task_id="sim_task",
-#            python_callable=run,
-#        )
-#        sim_task  
-
-    #print("this is my local change with remote changes")
 
 
     # def parse_output_variables(self):
