@@ -98,10 +98,10 @@ def setup_agents(config, agent_model_client, info_model_client, gc_model_client)
 
 @flow
 def simulation_flow(sim_config_file_name: str):
-    print("🚀 Starting simulation flow...")  # Debug log
+    print("Starting simulation flow...")  # Debug log
     
     config = load_simulation_config(sim_config_file_name)
-    print("✅ Config loaded:", config)
+    print("Config loaded:", config)
     
     gpt_model = init_gpt_model_client()
     together_model = init_together_model_client()
@@ -113,10 +113,10 @@ def simulation_flow(sim_config_file_name: str):
     
     print("🛠 Setting up agents...")
     gc = setup_agents(config, agent_model_client, info_model_client, gc_model_client)
-    print("✅ Agents set up!")
+    print("Agents set up!")
 
-    print("▶️ Running the conversation...")
+    print("Running the conversation...")
     return Console(gc.run_stream())
 
 if __name__ == "__main__":
-    simulation_flow("your_config_file.json")
+    simulation_flow("sim_config.json")
