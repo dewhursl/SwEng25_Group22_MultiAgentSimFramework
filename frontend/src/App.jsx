@@ -13,7 +13,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/renderer" element={<Renderer />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+        <Route path="/dashboard/:simulationId" element={<Dashboard />} />
         <Route path="/configurator" element={<Configurator />} />
         <Route path="/simulations" element={<SimulationsList />} />
       </Routes>

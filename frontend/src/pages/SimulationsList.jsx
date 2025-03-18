@@ -154,7 +154,7 @@ const SimulationsList = () => {
 
   const handleViewDashboard = (simulationId) => {
     // Navifate to the dashboard view for this simulation
-    navigate(`/dashboard/${simulationId}`);
+    navigate(`/dashboard/:${simulationId}`);
   };
 
   return (
