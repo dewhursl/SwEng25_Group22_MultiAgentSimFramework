@@ -32,12 +32,13 @@ const Dashboard = () => {
       .then((data) => {
         // Assuming the API returns an array of run objects,
         // we transform it into the expected structure.
-        const simulation = {
-          id: simId,
-          num_runs: data.length,
-          runs: data,
-        };
-        setSimulationData(simulation);
+        // const simulation = {
+        //   id: simId,
+        //   num_runs: data.length,
+        //   runs: data,
+        // };
+        // setSimulationData(simulation);
+        setSimulationData(data);
       })
       .catch((error) => {
         console.error('Error fetching simulation data:', error);
@@ -50,7 +51,8 @@ const Dashboard = () => {
 
   // Assume simulationData has structure: { id, num_runs, runs: [ ... ] }
   const runs = simulationData.runs || [];
-  console.log(runs)
+  console.log('runs', runs);
+  console.log('data', simulationData);
 
   // Function to extract unique output variable names from all runs
   const getUniqueVariableNames = (runs) => {
@@ -174,7 +176,10 @@ const Dashboard = () => {
         <div className="p-2 bg-violet-600/5 border border-violet-400 rounded mb-4">
           <p>
             <span className="font-bold">Agents: </span>
-            {Array.from(new Set(runs.flatMap((run) => run.chat_log.map((msg) => msg.agent)))).join(
+            {/* {Array.from(new Set(runs.flatMap((run) => run.chat_log.map((msg) => msg.agent)))).join(
+              ', '
+            )} */}
+            {Array.from(new Set(runs.flatMap((run) => run.messages.map((msg) => msg.agent)))).join(
               ', '
             )}
           </p>
