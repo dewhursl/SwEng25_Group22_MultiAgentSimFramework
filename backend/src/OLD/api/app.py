@@ -1,10 +1,13 @@
+import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 from flask import Flask, request, jsonify
 
 from dotenv import load_dotenv
 load_dotenv()
 
-import util.database_api as database_api
+from OLD.util import database_api
 
 app = Flask(__name__)
 
