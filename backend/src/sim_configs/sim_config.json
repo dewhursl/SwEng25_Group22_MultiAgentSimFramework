@@ -1,25 +1,40 @@
 {
-    "name": "Simulation Example",
+    "name": "Car Sales Simulation",
     "models": {
         "GPT": "gpt-4",
         "Together": "together-model"
     },
     "agents": [
         {
-            "name": "Agent1",
-            "description": "This is Agent 1",
-            "parameters": {"param1": "value1"},
-            "free_prompt": "What is the weather?"
+            "name": "SalesAgent",
+            "description": "Agent responsible for providing car sales information",
+            "parameters": {
+                "inventory": ["Sedan", "SUV", "Truck", "Electric"],
+                "region": "North America",
+                "sales_target": 1000
+            },
+            "free_prompt": "Can you tell me about the latest car models?"
         },
         {
-            "name": "Agent2",
-            "description": "This is Agent 2",
-            "parameters": {"param2": "value2"},
-            "free_prompt": "What is the news?"
+            "name": "CustomerAgent",
+            "description": "Agent acting as a customer browsing for a car",
+            "parameters": {
+                "preferred_model": "Sedan",
+                "budget": 30000,
+                "interest": ["fuel_efficiency", "price"]
+            },
+            "free_prompt": "What are the most fuel-efficient cars within my budget?"
         }
     ],
-    "termination_condition": "max_messages",
+    "termination_condition": "max_sales_target_reached",
     "output_variables": [
-        {"name": "response", "type": "string"}
+        {
+            "name": "car_recommendation",
+            "type": "string"
+        },
+        {
+            "name": "sale_result",
+            "type": "boolean"
+        }
     ]
 }
