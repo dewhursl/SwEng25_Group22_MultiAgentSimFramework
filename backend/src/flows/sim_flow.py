@@ -1,8 +1,13 @@
-import sys
 import os
+import sys
 from prefect import flow, task
 
-sys.path.append(os.path.abspath("/home/aine/sweng25/sweng25_group22_multiagentsimframework/backend/src"))
+from dotenv import load_dotenv
+load_dotenv()
+
+sys.path.append("sweng25/sweng25_group22_multiagentsimframework/backend/src")
+
+api_key = os.getenv("TOGETHER_API_KEY")
 
 from OLD.util.config import SimConfigLoader
 from autogen_agentchat.agents import AssistantAgent
@@ -93,7 +98,10 @@ def setup_agents(config, agent_model_client, info_model_client, gc_model_client)
 
 @flow
 def simulation_flow(sim_config_file_name: str):
+    print("Starting simulation flow...")  # Debug log
+    
     config = load_simulation_config(sim_config_file_name)
+    print("Config loaded:", config)
     
     gpt_model = init_gpt_model_client()
     together_model = init_together_model_client()
@@ -103,9 +111,12 @@ def simulation_flow(sim_config_file_name: str):
     info_model_client = agent_model_client
     gc_model_client = agent_model_client
     
+    print("Setting up agents...")
     gc = setup_agents(config, agent_model_client, info_model_client, gc_model_client)
-    
+    print("Agents set up!")
+
+    print("Running the conversation...")
     return Console(gc.run_stream())
 
 if __name__ == "__main__":
-    simulation_flow("config.py")
+    simulation_flow("sim_config.json")

@@ -1,0 +1,25 @@
+{
+    "name": "Simulation Example",
+    "models": {
+        "GPT": "gpt-4",
+        "Together": "together-model"
+    },
+    "agents": [
+        {
+            "name": "Agent1",
+            "description": "This is Agent 1",
+            "parameters": {"param1": "value1"},
+            "free_prompt": "What is the weather?"
+        },
+        {
+            "name": "Agent2",
+            "description": "This is Agent 2",
+            "parameters": {"param2": "value2"},
+            "free_prompt": "What is the news?"
+        }
+    ],
+    "termination_condition": "max_messages",
+    "output_variables": [
+        {"name": "response", "type": "string"}
+    ]
+}
