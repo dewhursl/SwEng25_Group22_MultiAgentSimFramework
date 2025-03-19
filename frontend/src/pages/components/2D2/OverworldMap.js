@@ -3,11 +3,18 @@ import { utils } from "./utils.js";
 import { GameObject } from "./GameObject.js";
 import { OverworldEvent } from "./OverworldEvent.js";
 import { NPC } from "./NPC.js";
+// import { loadConfigFromFile } from "vite";
+
+// Files in public directory are served on root path
+const placeholderImages = '/placeholderImages'
 
 export class OverworldMap {
     constructor(config) {
         this.gameObjects = config.gameObjects;
         this.walls = config.walls || {};
+
+        // console.log('Image lower', config.lowerSrc);
+        // config.lowerSrc = '/public/placeholderImages/maps/DemoLower.png';
 
         this.lowerImage = new Image();
         this.lowerImage.src = config.lowerSrc;
@@ -29,7 +36,8 @@ export class OverworldMap {
             console.log(`Loaded image: ${this.upperImage.src}`);
           };
 
-          this.lowerImage.onerror = () => {
+        //   this.lowerImage.onerror = () => {
+            this.upperImage.onerror = () => {
             console.error(`Failed to load image: ${config.upperSrc}`);
           };
 
@@ -128,13 +136,16 @@ export class OverworldMap {
 
 window.OverworldMaps = {
     DemoRoom: {
-        lowerSrc: "placeholderImages/maps/DemoLower.png",
-        upperSrc: "placeholderImages/maps/DemoUpper.png",
+        // lowerSrc: "placeholderImages/maps/DemoLower.png",
+        // upperSrc: "placeholderImages/maps/DemoUpper.png",
+        lowerSrc: `${placeholderImages}/maps/DemoLower.png`,
+        upperSrc: `${placeholderImages}/maps/DemoUpper.png`,
         gameObjects: {
             hero: new Person({
                 isPlayerControlled: true,
                 x: utils.withGrid(7),
                 y: utils.withGrid(4),
+                src: `${placeholderImages}/characters/people/hero.png`
             }),
             salesman: new Person({
                 x: utils.withGrid(6),
@@ -143,7 +154,8 @@ window.OverworldMaps = {
                     dialogueQueue: [{ text: "test" }],
                     // other NPC-specific configurations can go here
                 },
-                src: "placeholderImages/characters/people/npc1.png",
+                // src: "placeholderImages/characters/people/npc1.png",
+                src: `${placeholderImages}/characters/people/npc1.png`,
                 behaviourLoop: [
                     { type: "stand", direction: "left", time: 3200 },
                     { type: "stand", direction: "up", time: 3200 },
@@ -160,7 +172,8 @@ window.OverworldMaps = {
                     // other NPC-specific configurations can go here
                 },
                 
-                src: "placeholderImages/characters/people/npc3.png",
+                // src: "placeholderImages/characters/people/npc3.png",
+                src: `${placeholderImages}/characters/people/npc3.png`,
                 behaviourLoop: [
                     { type: "stand", direction: "up", time: 3200 },
                     { type: "stand", direction: "right", time: 3200 },
@@ -191,8 +204,10 @@ window.OverworldMaps = {
         }
     },
     Kitchen: {
-        lowerSrc: "placeholderImages/maps/KitchenLower.png",
-        upperSrc: "placeholderImages/maps/KitchenUpper.png",
+        // lowerSrc: "placeholderImages/maps/KitchenLower.png",
+        // upperSrc: "placeholderImages/maps/KitchenUpper.png",
+        lowerSrc: `${placeholderImages}/maps/KitchenLower.png`,
+        upperSrc: `${placeholderImages}/maps/KitchenUpper.png`,
         gameObjects: {
             hero: new GameObject({
                 x: 3,
@@ -201,12 +216,14 @@ window.OverworldMaps = {
             npcA: new GameObject({
                 x: 9,
                 y: 6,
-                src: "placeholderImages/characters/people/npc2.png"
+                // src: "placeholderImages/characters/people/npc2.png"
+                src: `${placeholderImages}/characters/people/npc2.png`
             }),
             npcB: new NPC({
                 x: 10,
                 y: 8,
-                src: "placeholderImages/characters/people/npc3.png",
+                // src: "placeholderImages/characters/people/npc3.png",
+                src: `${placeholderImages}/characters/people/npc3.png`,
                 npcConfig: {
                     dialogueQueue: [{ text: "test" }]
                 }
