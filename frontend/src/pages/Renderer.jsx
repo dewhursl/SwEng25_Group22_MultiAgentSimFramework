@@ -7,8 +7,7 @@ import Navbar from './components/Navbar';
 import conversationData from '../constants/conversation.json'; // Import JSON file
 
 const Renderer = () => {
-  // const data = SIMULATION_DATA;
-  const [data, setData] = useState(null);
+  const data = SIMULATION_DATA;
   const [context, setContext] = useState('2d');
   const [conversation, setConversation] = useState([]);
   const [isPaused, setIsPaused] = useState(true);
@@ -23,18 +22,21 @@ const Renderer = () => {
     fetch(`http://127.0.0.1:5000/sim/results?id=${simulationId}`)
       .then((response) => response.json())
       .then((data) => {
-        setData(data);
+        // setData(data);
         console.log('Set simulation data', data);
+
+        const formattedConversation = data.runs.flatMap((run) => run.messages);
+        setConversation(formattedConversation);
       })
       .catch((error) => console.log('Error fetching simulation data:', error));
   }, []);
 
-  useEffect(() => {
-    // Flatten the conversation data
-    // const formattedConversation = conversationData.runs.flatMap((run) => run.chat_log);
-    const formattedConversation = conversationData.runs.flatMap((run) => run.messages);
-    setConversation(formattedConversation);
-  }, []);
+  // useEffect(() => {
+  // Flatten the conversation data
+  // const formattedConversation = conversationData.runs.flatMap((run) => run.chat_log);
+  //   const formattedConversation = conversationData.runs.flatMap((run) => run.messages);
+  //   setConversation(formattedConversation);
+  // }, []);
 
   useEffect(() => {
     let messageInterval;
