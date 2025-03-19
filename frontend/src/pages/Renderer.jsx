@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { SIMULATION_DATA } from '../constants/simulationData';
 import Scene3D from './components/Scene3D';
 import Scene2D2 from './components/2D2/index';
@@ -6,7 +7,8 @@ import Navbar from './components/Navbar';
 import conversationData from '../constants/conversation.json'; // Import JSON file
 
 const Renderer = () => {
-  const data = SIMULATION_DATA;
+  // const data = SIMULATION_DATA;
+  const [data, setData] = useState(null);
   const [context, setContext] = useState('2d');
   const [conversation, setConversation] = useState([]);
   const [isPaused, setIsPaused] = useState(true);
@@ -14,10 +16,23 @@ const Renderer = () => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [isPanelVisible, setIsPanelVisible] = useState(true);
 
+  const { simulationId } = useParams();
+
+  useEffect(() => {
+    // Fetch simulation data from backend on mount
+    fetch(`http://127.0.0.1:5000/sim/results?id=${simulationId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+        console.log('Set simulation data', data);
+      })
+      .catch((error) => console.log('Error fetching simulation data:', error));
+  }, []);
 
   useEffect(() => {
     // Flatten the conversation data
-    const formattedConversation = conversationData.runs.flatMap((run) => run.chat_log);
+    // const formattedConversation = conversationData.runs.flatMap((run) => run.chat_log);
+    const formattedConversation = conversationData.runs.flatMap((run) => run.messages);
     setConversation(formattedConversation);
   }, []);
 
@@ -59,12 +74,12 @@ const Renderer = () => {
   // Toggle context (2D or 3D)
   const toggleContext = () => {
     setContext((prev) => (prev === '2d' ? '3d' : '2d'));
-  };   
+  };
 
   const togglePanel = () => {
     setIsPanelVisible((prev) => !prev);
   };
-  
+
   // Function to render the appropriate scene
   const getScene = () => {
     switch (context) {
@@ -92,7 +107,6 @@ const Renderer = () => {
     }
   };
 
-
   return (
     <div className="w-full flex flex-col mb-2 h-screen overflow-hidden">
       <Navbar />
@@ -105,8 +119,6 @@ const Renderer = () => {
         {context === '2d' ? 'Switch to 3D' : 'Switch to 2D'} Render
       </button>
 
-
-
       {/* Scene and side Panel */}
       <div className="flex flex-row flex-1 w-full mt-16 overflow-hidden">
         {/* Scene Container (takes remaining space) */}
@@ -114,43 +126,40 @@ const Renderer = () => {
           {getScene()}
         </div>
 
-
         {/* Playback Controls */}
         {context === '2d' && (
-        <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-6">
+          <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-6">
+            <button
+              onClick={handleRestart}
+              className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
+            >
+              ↺
+            </button>
 
-          <button
-            onClick={handleRestart}
-            className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
-          >
-            ↺
-          </button>
+            {/* Step buttons */}
+            <button
+              onClick={handlePrevMessage}
+              className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
+            >
+              «
+            </button>
 
-          {/* Step buttons */}
-          <button
-            onClick={handlePrevMessage}
-            className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
-          >
-            «  
-          </button>
+            <button
+              onClick={handleTogglePlayPause}
+              className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
+            >
+              {isPaused ? '▶' : '⏸'}
+            </button>
 
-          <button
-            onClick={handleTogglePlayPause}
-            className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
-          >
-            {isPaused ? '▶' : '⏸'}
-          </button>
-
-          <button
-            onClick={handleNextMessage}
-            className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
-          >
-            » 
-          </button>
-
-        </div>
+            <button
+              onClick={handleNextMessage}
+              className="bg-violet-600 text-white px-4 py-2 rounded shadow-md hover:bg-violet-700"
+            >
+              »
+            </button>
+          </div>
         )}
-                
+
         {/* Panel Toggle Button */}
         <button
           onClick={togglePanel}
@@ -160,15 +169,11 @@ const Renderer = () => {
           ☰
         </button>
 
-        
-
         {/* side Conversation Panel (only visible in 2D render) */}
         {context === '2d' && isPanelVisible && (
           <div className="w-120 max-h-screen bg-midnight p-4 overflow-y-auto border shadow-lg shadow-violet-600/60">
-            
-            
             <h2 className="text-lg font-bold mt-15 mb-2 text-white">Conversation</h2>
-            
+
             <div className="space-y-4">
               {conversation.slice(0, currentMessageIndex + 1).map((msg, index) => (
                 <div key={index} className="flex items-start space-x-4">
@@ -194,22 +199,21 @@ const Renderer = () => {
         )}
       </div>
 
-     {/* Simulation Over Message */}
-     {isSimulationOver && (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div className="bg-white p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-2xl text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Simulation Over</h2>
-          <p className="text-lg text-gray-600 mt-4">The conversation has ended.</p>
-          <button
-            onClick={handleRestart}
-            className="mt-6 bg-violet-600 text-white text-lg px-6 py-3 rounded-lg shadow-lg hover:bg-violet-700"
-          >
-            Restart
-          </button>
+      {/* Simulation Over Message */}
+      {isSimulationOver && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-2xl text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Simulation Over</h2>
+            <p className="text-lg text-gray-600 mt-4">The conversation has ended.</p>
+            <button
+              onClick={handleRestart}
+              className="mt-6 bg-violet-600 text-white text-lg px-6 py-3 rounded-lg shadow-lg hover:bg-violet-700"
+            >
+              Restart
+            </button>
+          </div>
         </div>
-      </div>
-    )}
-
+      )}
     </div>
   );
 };
