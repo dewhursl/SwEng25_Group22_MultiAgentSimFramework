@@ -1,6 +1,7 @@
 import os
 import sys
-from prefect import flow, task
+from prefect import flow, task, get_client  
+#from prefect.schemas.filters import FlowRunFilter  
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -9,6 +10,7 @@ sys.path.append("sweng25/sweng25_group22_multiagentsimframework/backend/src")
 
 api_key = os.getenv("TOGETHER_API_KEY")
 
+# Import the necessary models and agents
 from OLD.util.config import SimConfigLoader
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermination
@@ -16,6 +18,7 @@ from autogen_agentchat.teams import SelectorGroupChat
 from autogen_agentchat.ui import Console
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 
+# Define tasks and flow (the same as your original code)
 @task
 def init_gpt_model_client():
     api_key = os.environ.get("OPENAI_API_KEY")
@@ -117,6 +120,18 @@ def simulation_flow(sim_config_file_name: str):
 
     print("Running the conversation...")
     return Console(gc.run_stream())
+
+# Fetching flow runs asynchronously from the Prefect server
+async def get_flow_runs():
+    # Connect to the Prefect server using the client
+    async with get_client() as client:
+        # You can fetch flow runs without needing the `FlowRunFilter`
+        flow_runs = await client.read_flow_runs()
+        for flow_run in flow_runs:
+            print(flow_run)
+
+import asyncio
+asyncio.run(get_flow_runs())
 
 if __name__ == "__main__":
     simulation_flow("sim_config.json")
