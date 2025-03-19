@@ -13,35 +13,29 @@ export class OverworldMap {
         this.gameObjects = config.gameObjects;
         this.walls = config.walls || {};
 
-        // console.log('Image lower', config.lowerSrc);
-        // config.lowerSrc = '/public/placeholderImages/maps/DemoLower.png';
-
         this.lowerImage = new Image();
         this.lowerImage.src = config.lowerSrc;
         this.lowerImageLoaded = false;
         this.lowerImage.onload = () => {
-            this.lowerImageLoaded = true;
-            console.log(`Loaded image: ${this.lowerImage.src}`);
-          };
-
-          this.lowerImage.onerror = () => {
-            console.error(`Failed to load image: ${config.lowerSrc}`);
-          };
+                this.lowerImageLoaded = true;
+                console.log(`Loaded image: ${this.lowerImage.src}`);
+            };
+        this.lowerImage.onerror = () => {
+                console.error(`Failed to load image: ${config.lowerSrc}`);
+            };
 
         this.upperImage = new Image();
         this.upperImage.src = config.upperSrc;
         this.upperImageLoaded = false;
         this.upperImage.onload = () => {
-            this.upperImageLoaded = true;   
-            console.log(`Loaded image: ${this.upperImage.src}`);
-          };
+                this.upperImageLoaded = true;   
+                console.log(`Loaded image: ${this.upperImage.src}`);
+            };
+        this.upperImage.onerror = () => {
+                console.error(`Failed to load image: ${config.upperSrc}`);
+            };
 
-        //   this.lowerImage.onerror = () => {
-            this.upperImage.onerror = () => {
-            console.error(`Failed to load image: ${config.upperSrc}`);
-          };
-
-          this.isCutscenePlaying = false;
+        this.isCutscenePlaying = false;
     }
 
     drawLowerImage(ctx, cameraPerson) {
@@ -136,8 +130,6 @@ export class OverworldMap {
 
 window.OverworldMaps = {
     DemoRoom: {
-        // lowerSrc: "placeholderImages/maps/DemoLower.png",
-        // upperSrc: "placeholderImages/maps/DemoUpper.png",
         lowerSrc: `${placeholderImages}/maps/DemoLower.png`,
         upperSrc: `${placeholderImages}/maps/DemoUpper.png`,
         gameObjects: {
@@ -154,7 +146,6 @@ window.OverworldMaps = {
                     dialogueQueue: [{ text: "test" }],
                     // other NPC-specific configurations can go here
                 },
-                // src: "placeholderImages/characters/people/npc1.png",
                 src: `${placeholderImages}/characters/people/npc1.png`,
                 behaviourLoop: [
                     { type: "stand", direction: "left", time: 3200 },
@@ -171,8 +162,6 @@ window.OverworldMaps = {
                     dialogueQueue: [{ text: "test" }],
                     // other NPC-specific configurations can go here
                 },
-                
-                // src: "placeholderImages/characters/people/npc3.png",
                 src: `${placeholderImages}/characters/people/npc3.png`,
                 behaviourLoop: [
                     { type: "stand", direction: "up", time: 3200 },
@@ -204,8 +193,6 @@ window.OverworldMaps = {
         }
     },
     Kitchen: {
-        // lowerSrc: "placeholderImages/maps/KitchenLower.png",
-        // upperSrc: "placeholderImages/maps/KitchenUpper.png",
         lowerSrc: `${placeholderImages}/maps/KitchenLower.png`,
         upperSrc: `${placeholderImages}/maps/KitchenUpper.png`,
         gameObjects: {
@@ -216,13 +203,11 @@ window.OverworldMaps = {
             npcA: new GameObject({
                 x: 9,
                 y: 6,
-                // src: "placeholderImages/characters/people/npc2.png"
                 src: `${placeholderImages}/characters/people/npc2.png`
             }),
             npcB: new NPC({
                 x: 10,
                 y: 8,
-                // src: "placeholderImages/characters/people/npc3.png",
                 src: `${placeholderImages}/characters/people/npc3.png`,
                 npcConfig: {
                     dialogueQueue: [{ text: "test" }]

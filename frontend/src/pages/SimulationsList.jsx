@@ -25,7 +25,6 @@ const StatusBadge = ({ progress }) => {
   );
 };
 
-// const SimulationItem = ({ simulation, onViewResults }) => {
 const SimulationItem = ({ simulation, onViewRenderer, onViewDashboard, onDelete }) => {
   // Calculate estimated completion time based on progress
   const getEstimatedCompletion = (progress) => {
@@ -72,12 +71,6 @@ const SimulationItem = ({ simulation, onViewRenderer, onViewDashboard, onDelete 
           </button>
           {/* {simulation.progress_percentage === 100 && ( */}
           {isComplete && (
-            // <button
-            //   onClick={() => onViewResults(simulation.simulation_id)}
-            //   className="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded transition-colors"
-            // >
-            //   View Results
-            // </button>
             <>
               <button
                 onClick={() => onViewRenderer(simulation.simulation_id)}
@@ -135,21 +128,6 @@ const SimulationsList = () => {
   };
 
   useEffect(() => {
-    // Fetch simulations from API
-    // const fetchSimulations = async () => {
-    //   setLoading(true);
-    //   try {
-    //     scrollPosition.current = pageYOffset; // Preserve scroll position
-
-    //     const data = await apiService.getSimulationsCatalog();
-    //     setSimulations(data);
-    //     setLoading(false);
-    //   } catch (err) {
-    //     setError(`Failed to fetch simulations: ${err.message}`);
-    //     setLoading(false);
-    //   }
-    // };
-
     fetchSimulations();
 
     // Set up polling to refresh data periodically
@@ -166,12 +144,6 @@ const SimulationsList = () => {
       behavior: 'instant',
     });
   });
-
-  // OLD
-  const handleViewResults = (simulationId) => {
-    // Navigate to the renderer view for this simulation
-    navigate(`/renderer/${simulationId}`);
-  };
 
   const handleViewRenderer = (simulationId) => {
     // Navigate to the renderer view for this simulation
@@ -251,7 +223,6 @@ const SimulationsList = () => {
                   <SimulationItem
                     key={sim.simulation_id}
                     simulation={sim}
-                    // onViewResults={handleViewResults}
                     onViewRenderer={handleViewRenderer}
                     onViewDashboard={handleViewDashboard}
                     onDelete={handleDelete}
