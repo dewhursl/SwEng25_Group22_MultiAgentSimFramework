@@ -5,7 +5,7 @@ import Scene3D from './components/Scene3D';
 import Scene2D2 from './components/2D2/index';
 import Navbar from './components/Navbar';
 import conversationData from '../constants/conversation.json'; // Import JSON file
-import apiService from '../services/apiService'; 
+import apiService from '../services/apiService';
 
 const Renderer = () => {
   const data = SIMULATION_DATA;
@@ -81,9 +81,6 @@ const Renderer = () => {
     } catch (error) {
       // Catch any errors (e.g., simulation not found)
       setError('Simulation ID does not exist. Please check the ID and try again.');
-    }
-  };
-      setError("Simulation ID does not exist. Please check the ID and try again.");
     }
   };
 
@@ -234,20 +231,6 @@ const Renderer = () => {
         </div>
       )}
 
-      <div className="absolute top-20 left-1/4 transform -translate-x-1/2 z-10">
-        <select
-          value={selectedRun}
-          onChange={handleRunChange}
-          className="bg-white text-gray-800 font-bold py-2 px-4 rounded border"
-        >
-          {conversationData.runs.map((run, index) => (
-            <option key={index} value={index}>
-              {`Run ${index + 1}`}
-            </option>
-          ))}
-        </select>
-      </div>
-
       {/* Scene and side Panel */}
       <div className="flex flex-row flex-1 w-full mt-16 overflow-hidden">
         {/* Scene Container (takes remaining space) */}
@@ -334,39 +317,28 @@ const Renderer = () => {
         )}
       </div>
 
-     {/* Simulation Over Message */}
-     {isSimulationOver && (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div className="bg-white p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-2xl text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Simulation Over</h2>
-          <p className="text-lg text-gray-600 mt-4">The conversation has ended.</p>
-          
-          {/* Check for the selected run's output variables */}
-      {conversationData.runs[selectedRun]?.output_variables && (
-        <div className="mt-6 text-sm text-gray-700">
-          <h3 className="font-bold text-gray-800">End result:</h3>
-          {/* Loop through output variables and display them dynamically */}
-          {conversationData.runs[selectedRun].output_variables.map((output, index) => (
-            <div key={index}>
-              <p><strong>{output.name.replace('_', ' ').toUpperCase()}:</strong> {output.value}</p>
-            </div>
-          ))}
-        </div>
-      )}
-          
-          
-          <button
-            onClick={handleRestart}
-            className="mt-6 bg-violet-600 text-white text-lg px-6 py-3 rounded-lg shadow-lg hover:bg-violet-700"
-          >
-            Restart
-          </button>
-      {/* Simulation Over Message */}
+      {/* Simulation Over Modal */}
       {isSimulationOver && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-2xl text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Simulation Over</h2>
             <p className="text-lg text-gray-600 mt-4">The conversation has ended.</p>
+
+            {/* Check for the selected run's output variables */}
+            {simulationId === 'saved' && conversationData.runs[selectedRun]?.output_variables && (
+              <div className="mt-6 text-sm text-gray-700">
+                <h3 className="font-bold text-gray-800">End result:</h3>
+                {/* Loop through output variables and display them dynamically */}
+                {conversationData.runs[selectedRun].output_variables.map((output, index) => (
+                  <div key={index}>
+                    <p>
+                      <strong>{output.name.replace('_', ' ').toUpperCase()}:</strong> {output.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <button
               onClick={handleRestart}
               className="mt-6 bg-violet-600 text-white text-lg px-6 py-3 rounded-lg shadow-lg hover:bg-violet-700"
@@ -377,7 +349,7 @@ const Renderer = () => {
         </div>
       )}
     </div>
-  </div>
-  )};
+  );
+};
 
 export default Renderer;

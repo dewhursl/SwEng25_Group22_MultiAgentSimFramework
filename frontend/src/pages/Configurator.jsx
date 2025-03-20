@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService.js';
+import Navbar from './components/Navbar';
 
 const TextField = ({ label, description, value, onChange, placeholder }) => {
   return (
@@ -326,6 +327,7 @@ const Configurator = () => {
 
   return (
     <div className="flex justify-center min-h-screen bg-slate-900 py-8">
+      <Navbar />
       <div className="w-full max-w-3xl px-4">
         <h1 className="text-2xl font-bold text-white mb-6">Simulation Configurator</h1>
         <Button color="blue" onClick={() => navigate('/simulations')}>

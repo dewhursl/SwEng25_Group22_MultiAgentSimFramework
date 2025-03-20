@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService.js';
 
+const backendUri = 'http://127.0.0.1:5000/sim';
+
 const StatusBadge = ({ progress }) => {
   let status, bgClass;
 
@@ -67,7 +69,6 @@ const SimulationItem = ({ simulation, onViewRenderer, onViewDashboard, onDelete 
           >
             Delete
           </button>
-          {/* {simulation.progress_percentage === 100 && ( */}
           {isComplete && (
             <>
               <button
@@ -114,7 +115,7 @@ const SimulationsList = () => {
   const fetchSimulations = async () => {
     setLoading(true);
     try {
-      scrollPosition.current = pageYOffset; // Preserve scroll position
+      scrollPosition.current = window.pageYOffset; // Preserve scroll position
 
       const data = await apiService.getSimulationsCatalog();
       setSimulations(data);
@@ -136,12 +137,12 @@ const SimulationsList = () => {
 
   useEffect(() => {
     // Restore scroll position when simulations are updated
-    scrollTo({
+    window.scrollTo({
       top: scrollPosition.current,
       left: 0,
       behavior: 'instant',
     });
-  });
+  }, [simulations]);
 
   const handleViewRenderer = (simulationId) => {
     // Navigate to the renderer view for this simulation
@@ -154,15 +155,30 @@ const SimulationsList = () => {
   };
 
   const handleDelete = (simulationId, isComplete) => {
-    const handleDelete = async (response) => {
-      console.log(await response);
-      fetchSimulations();
+    // Delete results and delete catalog share request formats
+    const request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify({ id: simulationId }),
     };
 
-    // Delete simulation from results table if it's completed
-    if (isComplete) handleDelete(apiService.deleteSimulationResult(simulationId));
-    // Delete simulation from catalog
-    handleDelete(apiService.deleteSimulationCatalog(simulationId));
+    // Delete from result if it exists
+    if (isComplete)
+      fetch(`${backendUri}/del_results`, request)
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+        });
+
+    // Delete from catalog
+    fetch(`${backendUri}/del_catalog`, request)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        fetchSimulations();
+      });
   };
 
   return (
@@ -170,12 +186,26 @@ const SimulationsList = () => {
       <div className="w-full max-w-4xl px-4">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-white">Simulations</h1>
-          <Link
-            to="/configurator"
-            className="px-4 py-2 bg-green-700 hover:bg-green-600 text-white rounded-lg transition-colors"
-          >
-            Create New Simulation
-          </Link>
+          <div className="flex space-x-4">
+            <Link
+              to="/renderer"
+              className="px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white rounded-lg transition-colors"
+            >
+              Go to Renderer
+            </Link>
+            <Link
+              to="/dashboard"
+              className="px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white rounded-lg transition-colors"
+            >
+              Go to Dashboard
+            </Link>
+            <Link
+              to="/configurator"
+              className="px-4 py-2 bg-green-700 hover:bg-green-600 text-white rounded-lg transition-colors"
+            >
+              Create New Simulation
+            </Link>
+          </div>
         </div>
 
         {error && (
