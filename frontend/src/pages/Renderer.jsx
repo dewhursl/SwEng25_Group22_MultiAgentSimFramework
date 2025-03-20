@@ -4,11 +4,8 @@ import { SIMULATION_DATA } from '../constants/simulationData';
 import Scene3D from './components/Scene3D';
 import Scene2D2 from './components/2D2/index';
 import Navbar from './components/Navbar';
-<<<<<<< HEAD
 import conversationData from '../constants/conversation.json'; // Import JSON file
 import apiService from '../services/apiService'; 
-=======
->>>>>>> 89-add-navigation-to-output-in-simulation-list
 
 const Renderer = () => {
   const data = SIMULATION_DATA;
@@ -29,7 +26,6 @@ const Renderer = () => {
 
   // Fetch conversation data based on the simulation ID (API request or local JSON)
   useEffect(() => {
-<<<<<<< HEAD
     const fetchConversation = async () => {
       if (simulationId=='saved') {
         // Use local saved simulation data (e.g., from the conversation.json file)
@@ -85,21 +81,6 @@ const Renderer = () => {
       setError("Simulation ID does not exist. Please check the ID and try again.");
     }
   };
-      
-
-=======
-    // Fetch simulation data from backend on mount
-    fetch(`http://127.0.0.1:5000/sim/results?id=${simulationId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Set simulation data', data);
-
-        const formattedConversation = data.runs.flatMap((run) => run.messages);
-        setConversation(formattedConversation);
-      })
-      .catch((error) => console.log('Error fetching simulation data:', error));
-  }, []);
->>>>>>> 89-add-navigation-to-output-in-simulation-list
 
   useEffect(() => {
     let messageInterval;
@@ -172,17 +153,12 @@ const Renderer = () => {
     }
   };
 
-<<<<<<< HEAD
   // Handle run selection from dropdown
   const handleRunChange = (event) => {
     const selectedRunIndex = event.target.value;
     setSelectedRun(selectedRunIndex);
   };
 
-  
-
-=======
->>>>>>> 89-add-navigation-to-output-in-simulation-list
   return (
     <div className={`w-full flex flex-col mb-2 h-screen`}>
       <Navbar />
@@ -232,7 +208,6 @@ const Renderer = () => {
         {context === '2d' ? 'Switch to 3D' : 'Switch to 2D'} Render
       </button>
 
-<<<<<<< HEAD
       {/* Dropdown for selecting simulation run */}
       <div className="absolute top-20 left-1/4 transform -translate-x-1/2 z-10">
         <select
@@ -248,10 +223,6 @@ const Renderer = () => {
         </select>
       </div>
 
-
-
-=======
->>>>>>> 89-add-navigation-to-output-in-simulation-list
       {/* Scene and side Panel */}
       <div className="flex flex-row flex-1 w-full mt-16 overflow-hidden">
         {/* Scene Container (takes remaining space) */}
@@ -334,7 +305,6 @@ const Renderer = () => {
         )}
       </div>
 
-<<<<<<< HEAD
      {/* Simulation Over Message */}
      {isSimulationOver && (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -362,7 +332,6 @@ const Renderer = () => {
           >
             Restart
           </button>
-=======
       {/* Simulation Over Message */}
       {isSimulationOver && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -376,11 +345,10 @@ const Renderer = () => {
               Restart
             </button>
           </div>
->>>>>>> 89-add-navigation-to-output-in-simulation-list
         </div>
       )}
     </div>
-  );
-};
+  </div>
+  )};
 
 export default Renderer;
