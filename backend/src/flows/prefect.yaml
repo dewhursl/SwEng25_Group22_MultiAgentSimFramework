@@ -1,0 +1,7 @@
+deployments:
+- name: sim_flow
+  entrypoint: sim_flow.py:simulation_flow
+- name: api_flow
+  entrypoint: api_flow.py:api_flow
+- name: db_flow
+  entrypoint: db_flow.py:database_flow

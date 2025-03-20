@@ -10,6 +10,15 @@ class SimulationQueue(MongoBase):
 
     def insert(self, config, num_runs):
         simulation_id = str(uuid.uuid4())[:8]
+
+        self.queue_collection.insert_one({
+            "simulation_id": simulation_id,
+            "timestamp": int(time.time()),  # Ensure this is a valid timestamp
+            "remaining_runs": num_runs,
+            "config": config
+        })
+
+        print(f"Inserting simulation with ID {simulation_id}, config: {config}, num_runs: {num_runs}")
         
         return self.insert_with_id(simulation_id, config, num_runs)
     
@@ -21,8 +30,8 @@ class SimulationQueue(MongoBase):
             "output_variables" in config and len(config["output_variables"]) >= 1:
             for agent in config["agents"]:
                 if "name" in agent and agent["name"] and \
-                    "description" in agent and agent["description"] and \
-                    "prompt" in agent and agent["prompt"]:
+                    "description" in agent["description"] and \
+                    "prompt" in agent["prompt"]:
                     continue
                 else:
                     return None
@@ -47,26 +56,30 @@ class SimulationQueue(MongoBase):
             "remaining_runs": num_runs,
             "config": config
         })
-
+        
+        print(f"Inserted simulation: {simulation_id}")
+        
         return simulation_id
     
     def retrieve_next(self):
         # get oldest object
+        print("Checking queue collection...")
+        
         oldest_object = self.queue_collection.find_one(sort=[("timestamp", 1)])
-
+        
         if not oldest_object:
-            return {}
+            print("Queue is empty.")  
+            return None  # return None or an empty dict if nothing is found
 
-        # update remaining runs
         remaining_runs = oldest_object["remaining_runs"] - 1
         query = {"simulation_id": oldest_object["simulation_id"]}
         self.queue_collection.update_one(query, {"$inc": {"remaining_runs": -1}})
 
-        # remove object if all simulation runs are done
         if remaining_runs <= 0:
             self.queue_collection.delete_one(query)
 
         simulation_id = oldest_object["simulation_id"]
         config = oldest_object["config"]
 
+        print(f"Retrieved simulation: {simulation_id}, {config}")  
         return simulation_id, config

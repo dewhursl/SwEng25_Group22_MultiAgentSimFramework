@@ -48,3 +48,7 @@ class SimulationCatalog(MongoBase):
     def exists(self, simulation_id):
         query = {"simulation_id": simulation_id}
         return self.catalog_collection.find_one(query) is not None
+    
+    def delete(self, simulation_id):
+        result = self.catalog_collection.delete_one({"simulation_id": simulation_id})
+        return result.deleted_count

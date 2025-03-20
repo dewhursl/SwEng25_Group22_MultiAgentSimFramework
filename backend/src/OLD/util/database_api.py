@@ -26,3 +26,11 @@ class DataBaseAPI:
 
     def query_output(self, id: str):
         return self.m_coll_output.find_one({"id": id})
+    
+    def get_one_sim_id(self):
+        doc = self.m_coll_config.find_one({}, {"id": 1})
+        return doc["id"] if doc else None
+
+    
+
+
