@@ -4,11 +4,8 @@ import { SIMULATION_DATA } from '../constants/simulationData';
 import Scene3D from './components/Scene3D';
 import Scene2D2 from './components/2D2/index';
 import Navbar from './components/Navbar';
-<<<<<<< HEAD
 import conversationData from '../constants/conversation.json'; // Import JSON file
-import apiService from '../services/apiService'; 
-=======
->>>>>>> 89-add-navigation-to-output-in-simulation-list
+import apiService from '../services/apiService';
 
 const Renderer = () => {
   const data = SIMULATION_DATA;
@@ -24,16 +21,14 @@ const Renderer = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const { simulationId } = useParams();
-
+  //const { simulationId } = useParams();
 
   // Fetch conversation data based on the simulation ID (API request or local JSON)
   useEffect(() => {
-<<<<<<< HEAD
     const fetchConversation = async () => {
-      if (simulationId=='saved') {
+      if (simulationId === 'saved') {
         // Use local saved simulation data (e.g., from the conversation.json file)
-        const formattedConversation = conversationData.runs[selectedRun].messages.map(msg => ({
+        const formattedConversation = conversationData.runs[selectedRun].messages.map((msg) => ({
           agent: msg.agent,
           message: msg.message,
         }));
@@ -43,7 +38,6 @@ const Renderer = () => {
 
     fetchConversation();
   }, [simulationId, selectedRun]);
-
 
   // Handle Simulation ID input change
   const handleSimulationIdChange = (event) => {
@@ -59,54 +53,43 @@ const Renderer = () => {
   // Hide the opening screen when the simulation ID is entered or a saved simulation is selected
   const handleStartSimulation = async () => {
     if (!simulationId) {
-      setError("Simulation ID cannot be empty."); // Set error message
+      setError('Simulation ID cannot be empty.'); // Set error message
+      return;
     }
+
     try {
       // Make an API call to check if the simulation exists
-      const response = await fetch(`http://localhost:5000/sim/results?id=${simulationId}&show_messages=yes`);
+      const response = await fetch(
+        `http://localhost:5000/sim/results?id=${simulationId}&show_messages=yes`
+      );
 
       if (!response.ok) {
-        throw new Error("Simulation not found."); // If the response is not ok, throw an error
+        throw new Error('Simulation not found.'); // If the response is not ok, throw an error
       }
 
       // If the simulation is found, proceed with starting the simulation
-      setError(""); // Clear any previous errors
-      console.log("Starting simulation with ID:", simulationId);
+      setError(''); // Clear any previous errors
+      console.log('Starting simulation with ID:', simulationId);
       setIsOpeningScreenVisible(false); // Hide the opening screen
 
       const data = await response.json();
-      
-      const formattedConversation = data.runs.flatMap(run => run.messages || []);
+
+      const formattedConversation = data.runs.flatMap((run) => run.messages || []);
       setConversation(formattedConversation);
 
       // Further steps to handle the simulation data
     } catch (error) {
       // Catch any errors (e.g., simulation not found)
-      setError("Simulation ID does not exist. Please check the ID and try again.");
+      setError('Simulation ID does not exist. Please check the ID and try again.');
     }
   };
-      
-
-=======
-    // Fetch simulation data from backend on mount
-    fetch(`http://127.0.0.1:5000/sim/results?id=${simulationId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Set simulation data', data);
-
-        const formattedConversation = data.runs.flatMap((run) => run.messages);
-        setConversation(formattedConversation);
-      })
-      .catch((error) => console.log('Error fetching simulation data:', error));
-  }, []);
->>>>>>> 89-add-navigation-to-output-in-simulation-list
 
   useEffect(() => {
     let messageInterval;
     if (!isPaused && !isSimulationOver) {
       messageInterval = setInterval(() => {
         setCurrentMessageIndex((prevIndex) => {
-          if (prevIndex + 1 >= conversationData.runs[selectedRun].num_messages) {
+          if (prevIndex + 1 >= conversation.length) {
             clearInterval(messageInterval);
             setIsSimulationOver(true);
             setIsPaused(true);
@@ -158,7 +141,7 @@ const Renderer = () => {
   };
 
   const handleNextMessage = () => {
-    if (currentMessageIndex + 2 < conversationData.runs[selectedRun].num_messages) {
+    if (currentMessageIndex + 1 < conversation.length) {
       setCurrentMessageIndex(currentMessageIndex + 1);
     } else {
       setIsSimulationOver(true);
@@ -172,23 +155,20 @@ const Renderer = () => {
     }
   };
 
-<<<<<<< HEAD
   // Handle run selection from dropdown
   const handleRunChange = (event) => {
-    const selectedRunIndex = event.target.value;
+    const selectedRunIndex = parseInt(event.target.value);
     setSelectedRun(selectedRunIndex);
+    setCurrentMessageIndex(0);
+    setIsSimulationOver(false);
   };
 
-  
-
-=======
->>>>>>> 89-add-navigation-to-output-in-simulation-list
   return (
-    <div className={`w-full flex flex-col mb-2 h-screen`}>
+    <div className="w-full flex flex-col mb-2 h-screen">
       <Navbar />
 
-    {/* Opening Screen */}
-    {isOpeningScreenVisible && (
+      {/* Opening Screen */}
+      {isOpeningScreenVisible && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-2xl text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Enter Simulation ID</h2>
@@ -202,6 +182,9 @@ const Renderer = () => {
               placeholder="Enter Simulation ID"
               className="mt-4 p-2 border rounded"
             />
+
+            {/* Error Message */}
+            {error && <p className="text-red-500 mt-2">{error}</p>}
 
             {/* Buttons */}
             <div className="mt-4 space-x-4">
@@ -223,7 +206,6 @@ const Renderer = () => {
         </div>
       )}
 
-
       {/* Toggle Button */}
       <button
         onClick={toggleContext}
@@ -232,26 +214,23 @@ const Renderer = () => {
         {context === '2d' ? 'Switch to 3D' : 'Switch to 2D'} Render
       </button>
 
-<<<<<<< HEAD
       {/* Dropdown for selecting simulation run */}
-      <div className="absolute top-20 left-1/4 transform -translate-x-1/2 z-10">
-        <select
-          value={selectedRun}
-          onChange={handleRunChange}
-          className="bg-white text-gray-800 font-bold py-2 px-4 rounded border"
-        >
-          {conversationData.runs.map((run, index) => (
-            <option key={index} value={index}>
-              {`Run ${index + 1}`}
-            </option>
-          ))}
-        </select>
-      </div>
+      {simulationId === 'saved' && (
+        <div className="absolute top-20 left-1/4 transform -translate-x-1/2 z-10">
+          <select
+            value={selectedRun}
+            onChange={handleRunChange}
+            className="bg-white text-gray-800 font-bold py-2 px-4 rounded border"
+          >
+            {conversationData.runs.map((run, index) => (
+              <option key={index} value={index}>
+                {`Run ${index + 1}`}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
-
-
-=======
->>>>>>> 89-add-navigation-to-output-in-simulation-list
       {/* Scene and side Panel */}
       <div className="flex flex-row flex-1 w-full mt-16 overflow-hidden">
         {/* Scene Container (takes remaining space) */}
@@ -296,79 +275,69 @@ const Renderer = () => {
         {/* Panel Toggle Button */}
         <button
           onClick={togglePanel}
-          className={`fixed top-20 ${isPanelVisible ? 'right-110' : 'right-5'} 
-            bg-white hover:bg-gray-300  font-bold px-4 py-2 rounded shadow-md z-20`}
+          className={`fixed top-20 ${isPanelVisible ? 'right-1/4' : 'right-5'} 
+            bg-white hover:bg-gray-300 font-bold px-4 py-2 rounded shadow-md z-20`}
         >
           ☰
         </button>
 
         {/* side Conversation Panel (only visible in 2D render) */}
         {context === '2d' && isPanelVisible && (
-          <div className="w-120 max-h-screen bg-midnight p-4 overflow-y-auto border shadow-lg shadow-violet-600/60">
+          <div className="w-1/4 max-h-screen bg-midnight p-4 overflow-y-auto border shadow-lg shadow-violet-600/60">
             <h2 className="text-lg font-bold mt-15 mb-2 text-white">Conversation</h2>
 
             <div className="space-y-4">
-              {conversation.slice(0, currentMessageIndex + 1)
-              .filter((msg) => msg.agent !== 'InformationReturnAgent' || !msg.message.includes('TERMINATE'))
-              .map((msg, index) => (
-                <div key={index} className="flex items-start space-x-4">
-                  {/* Avatar Circle */}
-                  <div className="min-w-10 w-10 h-10 flex-shrink-0 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden">
-                    <img
-                      src={`/images/${msg.agent === 'CarSalesman' ? 'salesman.png' : 'customer.png'}`}
-                      alt={`${msg.agent} Avatar`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+              {conversation
+                .slice(0, currentMessageIndex + 1)
+                .filter(
+                  (msg) =>
+                    msg.agent !== 'InformationReturnAgent' || !msg.message.includes('TERMINATE')
+                )
+                .map((msg, index) => (
+                  <div key={index} className="flex items-start space-x-4">
+                    {/* Avatar Circle */}
+                    <div className="min-w-10 w-10 h-10 flex-shrink-0 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden">
+                      <img
+                        src={`/images/${msg.agent === 'CarSalesman' ? 'salesman.png' : 'customer.png'}`}
+                        alt={`${msg.agent} Avatar`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
 
-                  {/* Message */}
-                  <div className="flex-grow p-2 bg-violet-950/20 border border-violet-400 rounded-lg">
-                    <p className="text-sm text-gray-200">
-                      <strong className="text-white">{msg.agent}:</strong> {msg.message}
-                    </p>
+                    {/* Message */}
+                    <div className="flex-grow p-2 bg-violet-950/20 border border-violet-400 rounded-lg">
+                      <p className="text-sm text-gray-200">
+                        <strong className="text-white">{msg.agent}:</strong> {msg.message}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         )}
       </div>
 
-<<<<<<< HEAD
-     {/* Simulation Over Message */}
-     {isSimulationOver && (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div className="bg-white p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-2xl text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Simulation Over</h2>
-          <p className="text-lg text-gray-600 mt-4">The conversation has ended.</p>
-          
-          {/* Check for the selected run's output variables */}
-      {conversationData.runs[selectedRun]?.output_variables && (
-        <div className="mt-6 text-sm text-gray-700">
-          <h3 className="font-bold text-gray-800">End result:</h3>
-          {/* Loop through output variables and display them dynamically */}
-          {conversationData.runs[selectedRun].output_variables.map((output, index) => (
-            <div key={index}>
-              <p><strong>{output.name.replace('_', ' ').toUpperCase()}:</strong> {output.value}</p>
-            </div>
-          ))}
-        </div>
-      )}
-          
-          
-          <button
-            onClick={handleRestart}
-            className="mt-6 bg-violet-600 text-white text-lg px-6 py-3 rounded-lg shadow-lg hover:bg-violet-700"
-          >
-            Restart
-          </button>
-=======
-      {/* Simulation Over Message */}
+      {/* Simulation Over Modal */}
       {isSimulationOver && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-2xl text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Simulation Over</h2>
             <p className="text-lg text-gray-600 mt-4">The conversation has ended.</p>
+
+            {simulationId === 'saved' && conversationData.runs[selectedRun]?.output_variables && (
+              <div className="mt-6 text-sm text-gray-700">
+                <h3 className="font-bold text-gray-800">End result:</h3>
+                {/* Loop through output variables and display them dynamically */}
+                {conversationData.runs[selectedRun].output_variables.map((output, index) => (
+                  <div key={index}>
+                    <p>
+                      <strong>{output.name.replace('_', ' ').toUpperCase()}:</strong> {output.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <button
               onClick={handleRestart}
               className="mt-6 bg-violet-600 text-white text-lg px-6 py-3 rounded-lg shadow-lg hover:bg-violet-700"
@@ -376,7 +345,6 @@ const Renderer = () => {
               Restart
             </button>
           </div>
->>>>>>> 89-add-navigation-to-output-in-simulation-list
         </div>
       )}
     </div>
