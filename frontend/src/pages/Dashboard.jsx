@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactECharts from 'echarts-for-react';
 import Navbar from './components/Navbar';
-
-const backendUri = `http://127.0.0.1:5000/sim`;
+import api from '/src/services/apiService';
 
 const Dashboard = () => {
   const [simulationData, setSimulationData] = useState(null);
@@ -14,13 +13,11 @@ const Dashboard = () => {
 
   // Fetch data from API
   useEffect(() => {
-    const simId = simulationId;
-    fetch(`${backendUri}/results?id=${simId}`)
-      .then((response) => response.json())
-      .then((data) => setSimulationData(data))
-      .catch((error) => {
-        console.error('Error fetching simulation data:', error);
-      });
+    const fetchSimulationData = async () => {
+      const data = await api.getSimulationOutput(simulationId);
+      setSimulationData(data);
+    };
+    fetchSimulationData();
   }, []);
 
   if (!simulationData) {

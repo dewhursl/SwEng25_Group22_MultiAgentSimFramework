@@ -16,6 +16,15 @@ const handleResponse = async (response) => {
     return response.json();
 };
 
+// Make a request body for a delete request
+const deleteRequestBody = (simulationId) => ({
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: JSON.stringify({ id: simulationId }),
+});
+
 // Simulation API methods
 const apiService = {
     // Create a new simulation
@@ -39,7 +48,7 @@ const apiService = {
 
     // Get simulation output/results
     getSimulationOutput: async (simulationId, options = {}) => {
-        let url = `${API_BASE_URL}/output?id=${simulationId}`;
+        let url = `${API_BASE_URL}/results?id=${simulationId}`;
 
         // Add optional parameters if provided
         if (options.index !== undefined) {
@@ -51,6 +60,18 @@ const apiService = {
         }
 
         const response = await fetch(url);
+        return handleResponse(response);
+    },
+
+    // Delete a simulation result
+    deleteSimulationResult: async (simulationId) => {
+        const response = await fetch(`${API_BASE_URL}/del_results`, deleteRequestBody(simulationId));
+        return handleResponse(response);
+    },
+
+    // Delete a simulation catalog
+    deleteSimulationCatalog: async (simulationId) => {
+        const response = await fetch(`${API_BASE_URL}/del_catalog`, deleteRequestBody(simulationId));
         return handleResponse(response);
     }
 };
