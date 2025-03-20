@@ -2,8 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService.js';
 
-const backendUri = 'http://127.0.0.1:5000/sim';
-
 const StatusBadge = ({ progress }) => {
   let status, bgClass;
 
@@ -156,30 +154,15 @@ const SimulationsList = () => {
   };
 
   const handleDelete = (simulationId, isComplete) => {
-    // Delete results and delete catalog share request formats
-    const request = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: JSON.stringify({ id: simulationId }),
+    const handleDelete = async (response) => {
+      console.log(await response);
+      fetchSimulations();
     };
 
-    // Delete from result if it exists
-    if (isComplete)
-      fetch(`${backendUri}/del_results`, request)
-        .then((response) => response.json())
-        .then((json) => {
-          console.log(json);
-        });
-
-    // Deelete from catalog
-    fetch(`${backendUri}/del_catalog`, request)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        fetchSimulations();
-      });
+    // Delete simulation from results table if it's completed
+    if (isComplete) handleDelete(apiService.deleteSimulationResult(simulationId));
+    // Delete simulation from catalog
+    handleDelete(apiService.deleteSimulationCatalog(simulationId));
   };
 
   return (
