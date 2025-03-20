@@ -124,7 +124,7 @@ const SimulationsList = () => {
     <div className="flex justify-center min-h-screen bg-slate-900 py-8">
       <div className="w-full max-w-4xl px-4">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-white">Court Case Simulations</h1>
+          <h1 className="text-2xl font-bold text-white">Simulations</h1>
           <Link
             to="/configurator"
             className="px-4 py-2 bg-green-700 hover:bg-green-600 text-white rounded-lg transition-colors"
