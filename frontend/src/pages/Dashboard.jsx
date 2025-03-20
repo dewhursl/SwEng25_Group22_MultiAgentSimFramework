@@ -1,37 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ReactECharts from 'echarts-for-react';
-import mockData from '../constants/dashboardMockData.json';
 import Navbar from './components/Navbar';
+
+const backendUri = `http://127.0.0.1:5000/sim`;
 
 const Dashboard = () => {
   const [simulationData, setSimulationData] = useState(null);
   const [selectedVariable, setSelectedVariable] = useState('');
   const [selectedViz, setSelectedViz] = useState('bar'); // "bar" or "line"
 
-  useEffect(() => {
-    // Simulate fetching data from an API
-    setSimulationData(mockData);
-  }, []);
+  const { simulationId } = useParams();
 
-  // Actual fetch of data from API would look something like this
-  // useEffect(() => {
-  //   const simId = '1'; // or obtain this dynamically
-  //   fetch(`/report/output?id=${simId}&log=yes`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       // Assuming the API returns an array of run objects,
-  //       // we transform it into the expected structure.
-  //       const simulation = {
-  //         id: simId,
-  //         num_runs: data.length,
-  //         runs: data,
-  //       };
-  //       setSimulationData(simulation);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching simulation data:', error);
-  //     });
-  // }, []);
+  // Fetch data from API
+  useEffect(() => {
+    const simId = simulationId;
+    fetch(`${backendUri}/results?id=${simId}`)
+      .then((response) => response.json())
+      .then((data) => setSimulationData(data))
+      .catch((error) => {
+        console.error('Error fetching simulation data:', error);
+      });
+  }, []);
 
   if (!simulationData) {
     return <div className="p-4">Loading simulation data...</div>;
@@ -39,6 +29,8 @@ const Dashboard = () => {
 
   // Assume simulationData has structure: { id, num_runs, runs: [ ... ] }
   const runs = simulationData.runs || [];
+  console.log('runs', runs);
+  console.log('data', simulationData);
 
   // Function to extract unique output variable names from all runs
   const getUniqueVariableNames = (runs) => {
@@ -162,7 +154,7 @@ const Dashboard = () => {
         <div className="p-2 bg-violet-600/5 border border-violet-400 rounded mb-4">
           <p>
             <span className="font-bold">Agents: </span>
-            {Array.from(new Set(runs.flatMap((run) => run.chat_log.map((msg) => msg.agent)))).join(
+            {Array.from(new Set(runs.flatMap((run) => run.messages.map((msg) => msg.agent)))).join(
               ', '
             )}
           </p>

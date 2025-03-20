@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService.js';
+
+const backendUri = 'http://127.0.0.1:5000/sim';
 
 const StatusBadge = ({ progress }) => {
   let status, bgClass;
@@ -23,7 +25,7 @@ const StatusBadge = ({ progress }) => {
   );
 };
 
-const SimulationItem = ({ simulation, onViewResults }) => {
+const SimulationItem = ({ simulation, onViewRenderer, onViewDashboard, onDelete }) => {
   // Calculate estimated completion time based on progress
   const getEstimatedCompletion = (progress) => {
     if (progress === 100) return null;
@@ -47,6 +49,7 @@ const SimulationItem = ({ simulation, onViewResults }) => {
   };
 
   const estimatedCompletion = getEstimatedCompletion(simulation.progress_percentage);
+  const isComplete = simulation.progress_percentage === 100;
 
   return (
     <div className="p-4 mb-3 bg-slate-800 rounded-lg border border-gray-700 hover:border-white transition-colors">
@@ -60,13 +63,28 @@ const SimulationItem = ({ simulation, onViewResults }) => {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          {simulation.progress_percentage === 100 && (
-            <button
-              onClick={() => onViewResults(simulation.simulation_id)}
-              className="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded transition-colors"
-            >
-              View Results
-            </button>
+          <button
+            onClick={() => onDelete(simulation.simulation_id, isComplete)}
+            className="px-3 py-1 bg-red-700 hover:bg-red-600 text-white rounded transition-colors"
+          >
+            Delete
+          </button>
+          {/* {simulation.progress_percentage === 100 && ( */}
+          {isComplete && (
+            <>
+              <button
+                onClick={() => onViewRenderer(simulation.simulation_id)}
+                className="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded transition-colors"
+              >
+                View Rendering
+              </button>
+              <button
+                onClick={() => onViewDashboard(simulation.simulation_id)}
+                className="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded transition-colors"
+              >
+                View Dashboard
+              </button>
+            </>
           )}
         </div>
       </div>
@@ -92,21 +110,24 @@ const SimulationsList = () => {
   const [simulations, setSimulations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const scrollPosition = useRef(0);
+
+  // Fetch simulations from API
+  const fetchSimulations = async () => {
+    setLoading(true);
+    try {
+      scrollPosition.current = pageYOffset; // Preserve scroll position
+
+      const data = await apiService.getSimulationsCatalog();
+      setSimulations(data);
+      setLoading(false);
+    } catch (err) {
+      setError(`Failed to fetch simulations: ${err.message}`);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    // Fetch simulations from API
-    const fetchSimulations = async () => {
-      setLoading(true);
-      try {
-        const data = await apiService.getSimulationsCatalog();
-        setSimulations(data);
-        setLoading(false);
-      } catch (err) {
-        setError(`Failed to fetch simulations: ${err.message}`);
-        setLoading(false);
-      }
-    };
-
     fetchSimulations();
 
     // Set up polling to refresh data periodically
@@ -115,9 +136,50 @@ const SimulationsList = () => {
     return () => clearInterval(intervalId); // Clean up on unmount
   }, []);
 
-  const handleViewResults = (simulationId) => {
+  useEffect(() => {
+    // Restore scroll position when simulations are updated
+    scrollTo({
+      top: scrollPosition.current,
+      left: 0,
+      behavior: 'instant',
+    });
+  });
+
+  const handleViewRenderer = (simulationId) => {
     // Navigate to the renderer view for this simulation
     navigate(`/renderer/${simulationId}`);
+  };
+
+  const handleViewDashboard = (simulationId) => {
+    // Navigate to the dashboard view for this simulation
+    navigate(`/dashboard/${simulationId}`);
+  };
+
+  const handleDelete = (simulationId, isComplete) => {
+    // Delete results and delete catalog share request formats
+    const request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify({ id: simulationId }),
+    };
+
+    // Delete from result if it exists
+    if (isComplete)
+      fetch(`${backendUri}/del_results`, request)
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+        });
+
+    // Deelete from catalog
+    fetch(`${backendUri}/del_catalog`, request)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        fetchSimulations();
+      });
   };
 
   return (
@@ -161,7 +223,9 @@ const SimulationsList = () => {
                   <SimulationItem
                     key={sim.simulation_id}
                     simulation={sim}
-                    onViewResults={handleViewResults}
+                    onViewRenderer={handleViewRenderer}
+                    onViewDashboard={handleViewDashboard}
+                    onDelete={handleDelete}
                   />
                 ))}
               </div>
