@@ -39,7 +39,7 @@ const apiService = {
 
     // Get simulation output/results
     getSimulationOutput: async (simulationId, options = {}) => {
-        let url = `${API_BASE_URL}/output?id=${simulationId}`;
+        let url = `${API_BASE_URL}/results?id=${simulationId}`;
 
         // Add optional parameters if provided
         if (options.index !== undefined) {
