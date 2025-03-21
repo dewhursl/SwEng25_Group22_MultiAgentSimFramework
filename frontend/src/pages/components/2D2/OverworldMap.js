@@ -3,6 +3,7 @@ import { utils } from "./utils.js";
 import { GameObject } from "./GameObject.js";
 import { OverworldEvent } from "./OverworldEvent.js";
 import { NPC } from "./NPC.js";
+import { use } from "react";
 
 export class OverworldMap {
     constructor(config) {
