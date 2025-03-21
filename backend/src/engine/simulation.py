@@ -21,7 +21,12 @@ class SelectorGCSimulation:
             with open(os.path.join(self.config_directory, "InformationReturnAgent.json"), "r", encoding="utf-8") as file:
                 information_return_agent = json.load(file)
                 information_return_agent["prompt"] = information_return_agent["prompt"].format(
-                    output_variables_str=('{\n' + ",\n".join(f'"{v["name"]}": {"\"STRING\"" if v["type"] == "String" else "NUMBER"}' for v in self.config["output_variables"]) + '\n}'),
+                    output_variables_str = (
+                        '{\n' + ",\n".join([
+                            f'"{v["name"]}": "{ "STRING" if v["type"] == "String" else "NUMBER" }"'
+                            for v in self.config["output_variables"]
+                        ]) + '\n}'
+                    ),
                     termination_condition=self.config["termination_condition"]
                 )
                 self.config["agents"].append(information_return_agent)

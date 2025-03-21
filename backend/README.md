@@ -115,3 +115,25 @@ Generate a valid simulation config (to be used with `POST/PUT /sim/create`) from
   "desc": "Placeholder prompt."
 }
 ```
+
+**POST** `/sim/del_results`
+
+Delete a generated result
+
+**Request Format**
+```json
+{
+  "id": "Placeholder ID"
+}
+```
+
+**POST** `/sim/del_catalog`
+
+Delete a generated catalog item
+
+**Request Format**
+```json
+{
+  "id": "Placeholder ID"
+}
+```

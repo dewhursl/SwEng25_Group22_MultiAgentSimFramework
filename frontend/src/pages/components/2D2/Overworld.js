@@ -22,9 +22,6 @@ export class Overworld {
             //Clear off the canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-            //console.log("overworld.js- Is scene paused?", window.isGamePaused); 
-
-
             //Establish the camera person
             const cameraPerson = this.map.gameObjects.hero;
 
@@ -43,7 +40,7 @@ export class Overworld {
 
             //Update all objects
             Object.values(this.map.gameObjects).forEach(object => {
-                if (!window.isGamePaused) { // Only update when playback is is not paused
+                if (!window.isSimPaused) { // Only update when playback is is not paused
                   object.update({
                     arrow: this.directionInput.direction,
                     map: this.map,
@@ -80,8 +77,6 @@ export class Overworld {
 
         this.directionInput = new DirectionInput();
         this.directionInput.init();
-
-
 
         this.startGameLoop();
 

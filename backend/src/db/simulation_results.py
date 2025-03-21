@@ -35,3 +35,7 @@ class SimulationResults(MongoBase):
         # retrieve all results of provided simulation
         query = {"simulation_id": simulation_id}
         return list(self.results_collection.find(query))
+    
+    def delete(self, simulation_id):
+        result = self.results_collection.delete_one({"simulation_id": simulation_id})
+        return result.deleted_count

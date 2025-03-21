@@ -327,8 +327,10 @@ const Configurator = () => {
   return (
     <div className="flex justify-center min-h-screen bg-slate-900 py-8">
       <div className="w-full max-w-3xl px-4">
-        <h1 className="text-2xl font-bold text-white mb-6">Court Case Simulation Configurator</h1>
-
+        <h1 className="text-2xl font-bold text-white mb-6">Simulation Configurator</h1>
+        <Button color="blue" onClick={() => navigate('/simulations')}>
+          View Simulation Catalog
+        </Button>
         {error && (
           <div className="p-3 mb-4 bg-red-900 border border-red-700 text-white rounded-lg">
             {error}
@@ -373,7 +375,7 @@ const Configurator = () => {
               ? 'Creating Simulation...'
               : simulationConfig
                 ? 'Submit Simulation'
-                : 'Generate & Submit'}
+                : 'Submit & Run Simulation'}
           </Button>
         </div>
 

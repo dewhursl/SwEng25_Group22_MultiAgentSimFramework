@@ -78,6 +78,7 @@ def generate_config():
         You should also include as many output variables as needed to determine the result of the simulation.
         Output variables should be concrete and not vague, the name alone should describe the units, range or any other information such that all simulations will fill the variables with comparable data.
         If an output variable is a percentage that should be mentioned in the name explicitly. Do not write output variables in snake case, pascal case, etc.
+        You should never have only 0 or 1 agents, or no output variables
     """
 
     prompt = "\n\nThis is your simulation description: " + desc + "\n\nDo not write anything except the JSON" 
