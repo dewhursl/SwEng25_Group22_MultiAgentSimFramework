@@ -1,7 +1,8 @@
 import asyncio
 import numpy as np
+import re
 
-from sim.simulation import Simulation
+from OLD.sim.simulation import Simulation
 
 class MonteCarloSimulator:
     def __init__(self, sim_config_file_name, num_runs=5):
@@ -10,7 +11,7 @@ class MonteCarloSimulator:
         self.results = []
 
     async def run_single_simulation(self, run_id):
-        print(f"\n🟢 Running Simulation {run_id+1}/{self.num_runs}...\n")
+        print(f"\nRunning Simulation {run_id+1}/{self.num_runs}...\n")
         sim = Simulation(self.sim_config_file_name)
         return await sim.run()
 
@@ -24,8 +25,8 @@ class MonteCarloSimulator:
     # def analyze_results(self):
     #     success_rate = 100
 
-    #     print(f"\n✅ Monte Carlo Results: {self.num_runs} runs completed.")
-    #     print(f"🔍 Termination Rate: {success_rate:.2f}%\n")
+    #     print(f"\nMonte Carlo Results: {self.num_runs} runs completed.")
+    #     print(f"Termination Rate: {success_rate:.2f}%\n")
 
     #     return {"num_runs": self.num_runs, "success_rate": success_rate}
 
