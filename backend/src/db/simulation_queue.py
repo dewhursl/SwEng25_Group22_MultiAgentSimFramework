@@ -30,8 +30,8 @@ class SimulationQueue(MongoBase):
             "output_variables" in config and len(config["output_variables"]) >= 1:
             for agent in config["agents"]:
                 if "name" in agent and agent["name"] and \
-                    "description" in agent["description"] and \
-                    "prompt" in agent["prompt"]:
+                    "description" in agent and agent["description"] and \
+                    "prompt" in agent and agent["prompt"]:
                     continue
                 else:
                     return None
