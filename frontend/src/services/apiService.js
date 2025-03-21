@@ -40,6 +40,19 @@ const apiService = {
         return handleResponse(response);
     },
 
+    // Generate simulation config using LLM
+    generateSimulationConfig: async (promptData) => {
+        const response = await fetch(`${API_BASE_URL}/gen_config`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(promptData),
+        });
+
+        return handleResponse(response);
+    },
+
     // Get catalog of all simulations
     getSimulationsCatalog: async () => {
         const response = await fetch(`${API_BASE_URL}/catalog`);

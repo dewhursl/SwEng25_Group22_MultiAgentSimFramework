@@ -40,6 +40,7 @@ const Button = ({ children, onClick, color = 'green', disabled = false }) => {
     green: `${disabled ? 'bg-gray-600' : 'bg-green-800 hover:bg-green-600'}`,
     red: `${disabled ? 'bg-gray-600' : 'bg-red-800 hover:bg-red-600'}`,
     blue: `${disabled ? 'bg-gray-600' : 'bg-blue-800 hover:bg-blue-600'}`,
+    purple: `${disabled ? 'bg-gray-600' : 'bg-violet-800 hover:bg-violet-600'}`,
   };
 
   return (
@@ -222,6 +223,53 @@ const OutputVariablesList = ({ variables, setVariables }) => {
   );
 };
 
+const AIConfigGenerator = ({ onConfigGenerated, isGenerating }) => {
+  const [prompt, setPrompt] = useState('');
+  const [error, setError] = useState('');
+
+  const generateConfig = async () => {
+    if (!prompt.trim()) {
+      setError('Please enter a prompt for the AI to generate a configuration');
+      return;
+    }
+
+    try {
+      setError('');
+      const configData = await apiService.generateSimulationConfig({ desc: prompt });
+      onConfigGenerated(configData);
+    } catch (err) {
+      setError(`Failed to generate configuration: ${err.message}`);
+    }
+  };
+
+  return (
+    <div className="flex flex-col p-3 mt-3 border border-gray-700 rounded-lg text-white bg-slate-800">
+      <h1 className="font-bold text-lg">AI-Generated Configuration</h1>
+      <p className="text-gray-300 text-sm mb-2">
+        Describe your simulation in natural language, and let AI generate a configuration for you
+      </p>
+
+      {error && (
+        <div className="p-3 mb-3 bg-red-900 border border-red-700 text-white rounded-lg">
+          {error}
+        </div>
+      )}
+
+      <TextArea
+        label="Simulation Description"
+        description="Describe your simulation in detail. Include information about the agents, their roles, the scenario, and what outcomes you want to track."
+        value={prompt}
+        onChange={setPrompt}
+        placeholder="e.g., Create a court case simulation with a judge, prosecutor, and defense attorney. The simulation should track the verdict and sentence length..."
+      />
+
+      <Button color="purple" onClick={generateConfig} disabled={isGenerating}>
+        {isGenerating ? 'Generating Configuration...' : 'Generate Configuration with AI'}
+      </Button>
+    </div>
+  );
+};
+
 const JsonPreview = ({ data }) => {
   return data ? (
     <div className="mt-4 p-3 border border-gray-700 rounded-lg bg-slate-900 overflow-auto max-h-60">
@@ -231,16 +279,61 @@ const JsonPreview = ({ data }) => {
   ) : null;
 };
 
+const Tab = ({ label, isActive, onClick }) => {
+  return (
+    <button
+      className={`px-4 py-2 font-medium rounded-t-lg ${
+        isActive
+          ? 'bg-slate-800 text-white border-t border-r border-l border-gray-600'
+          : 'bg-slate-900 text-gray-400 hover:text-white'
+      }`}
+      onClick={onClick}
+    >
+      {label}
+    </button>
+  );
+};
+
 const Configurator = () => {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('manual'); // 'manual' or 'ai'
+
+  // Manual configuration state
   const [name, setName] = useState('');
   const [numRuns, setNumRuns] = useState(10);
   const [agents, setAgents] = useState([]);
   const [terminationCondition, setTerminationCondition] = useState('');
   const [outputVariables, setOutputVariables] = useState([]);
+
+  // Shared state
   const [simulationConfig, setSimulationConfig] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState('');
+
+  // Handle AI-generated configuration
+  const handleConfigGenerated = (config) => {
+    setIsGenerating(false);
+
+    if (!config || !config.config) {
+      setError('Invalid configuration generated');
+      return;
+    }
+
+    // Update form fields with the generated config
+    const generatedConfig = config.config;
+    setName(generatedConfig.name || '');
+    setNumRuns(config.num_runs || 10);
+    setAgents(generatedConfig.agents || []);
+    setTerminationCondition(generatedConfig.termination_condition || '');
+    setOutputVariables(generatedConfig.output_variables || []);
+
+    // Set the full configuration
+    setSimulationConfig(config);
+
+    // Switch to manual tab to show the generated fields
+    setActiveTab('manual');
+  };
 
   const validateForm = () => {
     if (!name.trim()) {
@@ -329,59 +422,92 @@ const Configurator = () => {
     <div className="flex justify-center min-h-screen mb-2 py-16">
       <Navbar />
       <div className="w-full max-w-3xl px-4">
-        <h1 className="text-2xl font-bold mt-8 text-white">Simulation Configurator</h1>
-        <Button color="blue" onClick={() => navigate('/simulations')}>
-          View Simulation Catalog
-        </Button>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold mt-8 text-white">Simulation Configurator</h1>
+          <Button color="blue" onClick={() => navigate('/simulations')}>
+            View Simulation Catalog
+          </Button>
+        </div>
+
         {error && (
           <div className="p-3 mb-4 bg-red-900 border border-red-700 text-white rounded-lg">
             {error}
           </div>
         )}
 
-        <TextField
-          label="Simulation Name"
-          description="Provide a descriptive name for this simulation"
-          value={name}
-          onChange={setName}
-          placeholder="e.g., Criminal Trial Simulation"
-        />
-
-        <TextField
-          label="Number of Runs"
-          description="How many times should this simulation be executed"
-          value={numRuns}
-          onChange={(value) => setNumRuns(value)}
-          placeholder="e.g., 10"
-        />
-
-        <AgentsList agents={agents} setAgents={setAgents} />
-
-        <TextArea
-          label="Termination Condition"
-          description="When should the simulation end"
-          value={terminationCondition}
-          onChange={setTerminationCondition}
-          placeholder="e.g., The judge has delivered a verdict"
-        />
-
-        <OutputVariablesList variables={outputVariables} setVariables={setOutputVariables} />
-
-        <div className="flex flex-col md:flex-row gap-3 mt-4">
-          <Button color="blue" onClick={createSimulationConfig}>
-            Generate Configuration
-          </Button>
-
-          <Button color="green" onClick={submitSimulation} disabled={isSubmitting}>
-            {isSubmitting
-              ? 'Creating Simulation...'
-              : simulationConfig
-                ? 'Submit Simulation'
-                : 'Submit & Run Simulation'}
-          </Button>
+        {/* Tab navigation */}
+        <div className="flex border-b border-gray-700 mt-6">
+          <Tab
+            label="Manual Configuration"
+            isActive={activeTab === 'manual'}
+            onClick={() => setActiveTab('manual')}
+          />
+          <Tab
+            label="AI-Generated Configuration"
+            isActive={activeTab === 'ai'}
+            onClick={() => setActiveTab('ai')}
+          />
         </div>
 
-        <JsonPreview data={simulationConfig} />
+        {/* Tab content */}
+        <div className="pt-4">
+          {activeTab === 'manual' ? (
+            // Manual configuration form
+            <>
+              <TextField
+                label="Simulation Name"
+                description="Provide a descriptive name for this simulation"
+                value={name}
+                onChange={setName}
+                placeholder="e.g., Criminal Trial Simulation"
+              />
+
+              <TextField
+                label="Number of Runs"
+                description="How many times should this simulation be executed"
+                value={numRuns}
+                onChange={(value) => setNumRuns(value)}
+                placeholder="e.g., 10"
+              />
+
+              <AgentsList agents={agents} setAgents={setAgents} />
+
+              <TextArea
+                label="Termination Condition"
+                description="When should the simulation end"
+                value={terminationCondition}
+                onChange={setTerminationCondition}
+                placeholder="e.g., The judge has delivered a verdict"
+              />
+
+              <OutputVariablesList variables={outputVariables} setVariables={setOutputVariables} />
+            </>
+          ) : (
+            // AI configuration generator
+            <AIConfigGenerator
+              onConfigGenerated={handleConfigGenerated}
+              isGenerating={isGenerating}
+            />
+          )}
+
+          <div className="flex flex-col md:flex-row gap-3 mt-4">
+            {activeTab === 'manual' && (
+              <Button color="blue" onClick={createSimulationConfig}>
+                Generate Configuration
+              </Button>
+            )}
+
+            <Button color="green" onClick={submitSimulation} disabled={isSubmitting}>
+              {isSubmitting
+                ? 'Creating Simulation...'
+                : simulationConfig
+                  ? 'Submit Simulation'
+                  : 'Submit & Run Simulation'}
+            </Button>
+          </div>
+
+          <JsonPreview data={simulationConfig} />
+        </div>
       </div>
     </div>
   );

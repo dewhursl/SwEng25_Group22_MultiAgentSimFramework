@@ -228,15 +228,17 @@ const Renderer = () => {
   }
 
   return (
-    <div className="w-full flex flex-col mb-2 h-screen">
+    <div className="w-full flex flex-col min-h-screen">
       <Navbar />
 
       {/* Opening Screen */}
       {isOpeningScreenVisible && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-2xl text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Enter Simulation ID</h2>
-            <p className="text-lg text-gray-600 mt-4">Please enter a simulation ID</p>
+        <div className="fixed inset-0 flex items-center justify-center">
+          <div className="bg-violet-900/5 backdrop-blur-3xl p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-violet-600/60 shadow-card text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-violet-400">Enter Simulation ID</h2>
+            <p className="text-lg text-gray-400 mt-4">
+              Please enter a simulation ID to view the dashboard.
+            </p>
 
             {/* Input Simulation ID */}
             <input
@@ -244,7 +246,7 @@ const Renderer = () => {
               value={simulationId}
               onChange={handleSimulationIdChange}
               placeholder="Enter Simulation ID"
-              className="mt-4 p-2 border rounded"
+              className="mt-4 mb-2 p-2 text-white border border-gray-300 rounded-lg bg-transparent focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors duration-200"
             />
 
             {/* Error Message */}
@@ -259,20 +261,20 @@ const Renderer = () => {
                 onClick={handleStartSimulation}
                 disabled={loading}
                 className={`${
-                  loading ? 'bg-gray-500' : 'bg-violet-600 hover:bg-violet-700'
-                } text-white px-6 py-3 rounded-lg shadow-lg transition-colors`}
+                  loading ? 'bg-gray-500' : 'bg-violet-800 hover:shadow-button'
+                } text-white px-6 py-3 rounded-full transition-colors cursor-pointer`}
               >
-                {loading ? 'Loading...' : 'See Simulation'}
+                {loading ? 'Loading...' : 'View Simulation'}
               </button>
 
               <button
                 onClick={handleSavedSimulation}
                 disabled={loading}
                 className={`${
-                  loading ? 'bg-gray-500' : 'bg-violet-600 hover:bg-violet-700'
-                } text-white px-6 py-3 rounded-lg shadow-lg transition-colors`}
+                  loading ? 'bg-gray-500' : 'bg-violet-800 hover:shadow-button'
+                } text-white px-6 py-3 rounded-full transition-colors cursor-pointer`}
               >
-                See Saved Simulation
+                View Saved Simulation
               </button>
             </div>
           </div>

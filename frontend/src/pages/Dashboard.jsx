@@ -95,8 +95,8 @@ const Dashboard = () => {
     return (
       <div className="w-full min-h-screen">
         <Navbar />
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-violet-600/60 shadow-card text-center">
+        <div className="fixed inset-0 flex items-center justify-center">
+          <div className="bg-violet-900/5 backdrop-blur-3xl p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-violet-600/60 shadow-card text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-violet-400">Enter Simulation ID</h2>
             <p className="text-lg text-gray-400 mt-4">
               Please enter a simulation ID to view the dashboard.
@@ -108,7 +108,7 @@ const Dashboard = () => {
               value={simulationId}
               onChange={handleSimulationIdChange}
               placeholder="Enter Simulation ID"
-              className="mt-4 p-2 text-white border rounded-lg"
+              className="mt-4 mb-2 p-2 text-white border border-gray-300 rounded-lg bg-transparent focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors duration-200"
             />
 
             {/* Error Message */}

@@ -58,7 +58,7 @@ const SimulationItem = ({ simulation, onViewRenderer, onViewDashboard, onDelete 
   const isComplete = simulation.progress_percentage === 100;
 
   return (
-    <div className="p-4 mb-3 bg-violet-950/15 rounded-lg border border-violet-400/40 hover:border-violet-400 transition-colors">
+    <div className="p-4 mb-3 bg-violet-900/5 rounded-lg border border-violet-400/40 hover:border-violet-400 transition-colors">
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-lg font-semibold text-white mb-1">{simulation.name}</h2>
