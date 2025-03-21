@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService.js';
+import Navbar from './components/Navbar';
+
+import { FaPlus } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
+import { FaChartColumn } from 'react-icons/fa6';
+import { FaImage } from 'react-icons/fa6';
 
 const backendUri = 'http://127.0.0.1:5000/sim';
 
@@ -52,35 +58,38 @@ const SimulationItem = ({ simulation, onViewRenderer, onViewDashboard, onDelete 
   const isComplete = simulation.progress_percentage === 100;
 
   return (
-    <div className="p-4 mb-3 bg-slate-800 rounded-lg border border-gray-700 hover:border-white transition-colors">
+    <div className="p-4 mb-3 bg-violet-950/15 rounded-lg border border-violet-400/40 hover:border-violet-400 transition-colors">
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-lg font-semibold text-white mb-1">{simulation.name}</h2>
-          <p className="text-gray-300 text-sm mb-2">ID: {simulation.simulation_id}</p>
+          <p className="text-gray-200 text-sm mb-2">ID: {simulation.simulation_id}</p>
           <div className="flex items-center gap-4">
             <StatusBadge progress={simulation.progress_percentage} />
-            <span className="text-gray-400 text-sm">{simulation.expected_runs} runs total</span>
+            <span className="text-gray-300 text-sm">{simulation.expected_runs} runs total</span>
           </div>
         </div>
         <div className="flex flex-col gap-2">
           <button
             onClick={() => onDelete(simulation.simulation_id, isComplete)}
-            className="px-3 py-1 bg-red-700 hover:bg-red-600 text-white rounded transition-colors"
+            className="px-3 py-1 bg-red-700 hover:bg-red-600 text-white rounded transition-colors cursor-pointer"
           >
+            <MdDelete className="h-5 w-5 inline-block mb-0.75 mr-1" />
             Delete
           </button>
           {isComplete && (
             <>
               <button
                 onClick={() => onViewRenderer(simulation.simulation_id)}
-                className="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded transition-colors"
+                className="px-3 py-1 bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors cursor-pointer"
               >
-                View Rendering
+                <FaImage className="inline-block mb-0.75 mr-2" />
+                View Render
               </button>
               <button
                 onClick={() => onViewDashboard(simulation.simulation_id)}
-                className="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded transition-colors"
+                className="px-3 py-1 bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors cursor-pointer"
               >
+                <FaChartColumn className="inline-block mb-0.75 mr-2" />
                 View Dashboard
               </button>
             </>
@@ -182,27 +191,17 @@ const SimulationsList = () => {
   };
 
   return (
-    <div className="flex justify-center min-h-screen bg-slate-900 py-8">
+    <div className="flex justify-center min-h-screen py-8">
+      <Navbar />
       <div className="w-full max-w-4xl px-4">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mt-18 mb-6">
           <h1 className="text-2xl font-bold text-white">Simulations</h1>
           <div className="flex space-x-4">
             <Link
-              to="/renderer"
-              className="px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white rounded-lg transition-colors"
-            >
-              Go to Renderer
-            </Link>
-            <Link
-              to="/dashboard"
-              className="px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white rounded-lg transition-colors"
-            >
-              Go to Dashboard
-            </Link>
-            <Link
               to="/configurator"
-              className="px-4 py-2 bg-green-700 hover:bg-green-600 text-white rounded-lg transition-colors"
+              className="px-4 py-2 bg-violet-800 hover:shadow-button text-white rounded-lg transition-colors"
             >
+              <FaPlus className="inline-block mr-2 mb-0.75" />
               Create New Simulation
             </Link>
           </div>
@@ -221,7 +220,7 @@ const SimulationsList = () => {
         ) : (
           <>
             {simulations.length === 0 ? (
-              <div className="bg-slate-800 rounded-lg p-8 text-center">
+              <div className="bg-violet-600/5 rounded-lg p-8 text-center">
                 <p className="text-gray-300 mb-4">No simulations found</p>
                 <Link
                   to="/configurator"

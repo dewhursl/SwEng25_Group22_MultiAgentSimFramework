@@ -10,6 +10,7 @@
 @theme {
   --color-midnight: #110619;
   --shadow-button: 0px 2px 8px 0px rgba(139, 92, 246, 1);
+  --shadow-card: 0px 1px 20px 0px rgba(139, 92, 246, 1);
 }
 
 * {

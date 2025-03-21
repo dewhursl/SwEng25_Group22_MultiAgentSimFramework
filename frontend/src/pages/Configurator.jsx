@@ -326,10 +326,10 @@ const Configurator = () => {
   };
 
   return (
-    <div className="flex justify-center min-h-screen bg-slate-900 py-8">
+    <div className="flex justify-center min-h-screen mb-2 py-16">
       <Navbar />
       <div className="w-full max-w-3xl px-4">
-        <h1 className="text-2xl font-bold text-white mb-6">Simulation Configurator</h1>
+        <h1 className="text-2xl font-bold mt-8 text-white">Simulation Configurator</h1>
         <Button color="blue" onClick={() => navigate('/simulations')}>
           View Simulation Catalog
         </Button>
