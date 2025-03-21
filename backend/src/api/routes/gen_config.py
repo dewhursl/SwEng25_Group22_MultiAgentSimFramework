@@ -53,21 +53,28 @@ def generate_config():
     JSON_CONFIG_PROMPT = """
         This is the config file output template:
         {
-            "name": "Name Of Simulation",
-            "agents": [
-                {
+            "num_runs": 999,
+            "config": {
+                "name": "Name Of Simulation",
+                "agents": [
+                 {
                     "name": "First AI Agents Name",
                     "description": "Description of the First AI Agent",
                     "prompt": "Prompt to be given to the First AI Agent, this should tell them who they are and what they want"
-                }
-            ],
-            "termination_condition": "The event that triggers the end of the simulation",
-            "output_variables": [
-                {
+                 }
+                ],
+                "termination_condition": "The event that triggers the end of the simulation",
+                "output_variables": [
+                 {
                     "name": "First Output Variable Name",
                     "type": "First Output Variable Type (e.g. String, Number, etc)"
-                }
-            ]
+                 },
+                 {
+                    "name": "placeholder2",
+                    "type": "Number"
+                 }
+                ]
+            }
         }
         Please replace all values in the template and do not add any keys not already written into the template. You may add as many agents or output variables as needed.
         """
