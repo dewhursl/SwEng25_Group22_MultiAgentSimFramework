@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { SIMULATION_DATA } from '../constants/simulationData';
 import Scene3D from './components/Scene3D';
@@ -21,6 +21,9 @@ const Renderer = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [initialized, setInitialized] = useState(false);
+  const agentIndexRef = useRef(0); 
+  const agentImagesRef = useRef({}); 
+
 
   // Get simulationId from URL params
   const params = useParams();
@@ -217,6 +220,36 @@ const Renderer = () => {
     setIsSimulationOver(false);
   };
 
+  
+
+  function getAgentImage(agent, avatarOptions) {
+
+    if (agentImagesRef.current[agent]) {
+      return `/images/${agentImagesRef.current[agent]}`;
+    } 
+    let assignedImage = null;
+
+    // Check if it's a new agent and assign an image accordingly
+    if (agentIndexRef.current < avatarOptions.length) {
+      // Bind the first distinct agent name to agent1.png, second to agent2.png, third to agent3.png
+      assignedImage = avatarOptions[agentIndexRef.current % avatarOptions.length];
+      agentImagesRef.current[agent] = assignedImage;
+      agentIndexRef.current++;
+    }
+
+    console.log(`/images/${assignedImage || 'default.png'}`); // This should print the image path correctly
+    console.log(`Assigned Image: '${assignedImage}'`);
+    console.log(assignedImage);
+
+
+
+    // Return the corresponding image for the agent
+    //return '/images/agent1.png';
+    return `/images/${assignedImage || 'default.png'}`;
+
+  }
+
+
   // Show a loading screen while initializing
   if (!initialized) {
     return (
@@ -262,7 +295,7 @@ const Renderer = () => {
                 disabled={loading}
                 className={`${
                   loading ? 'bg-gray-500' : 'bg-violet-800 hover:shadow-button'
-                } text-white px-6 py-3 rounded-full transition-colors cursor-pointer`}
+                } text-white px-6 py-3 rounded-full transition-colors cursor-pointer mb-4`}
               >
                 {loading ? 'Loading...' : 'View Simulation'}
               </button>
@@ -380,25 +413,44 @@ const Renderer = () => {
                       (msg) =>
                         msg.agent !== 'InformationReturnAgent' || !msg.message.includes('TERMINATE')
                     )
-                    .map((msg, index) => (
-                      <div key={index} className="flex items-start space-x-4">
-                        {/* Avatar Circle */}
-                        <div className="min-w-10 w-10 h-10 flex-shrink-0 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden">
-                          <img
-                            src={`/images/${msg.agent === 'CarSalesman' ? 'salesman.png' : 'customer.png'}`}
-                            alt={`${msg.agent} Avatar`}
-                            className="w-full h-full object-cover"
-                          />
+                    .map((msg, index) => {
+                      // Filter out unique agents excluding "InformationReturnAgent"
+                      const uniqueAgents = [
+                        ...new Set(
+                          conversation
+                            .filter((msg) => msg.agent && msg.agent !== 'InformationReturnAgent')
+                            .map((msg) => msg.agent)
+                        ),
+                      ];
+  
+                      // Decide on avatar options (2 or 3 images based on agent count)
+                      const avatarOptions =
+                        uniqueAgents.length >= 3
+                          ? ['agent1.png', 'agent2.png', 'agent3.png']
+                          : ['agent1.png', 'agent2.png'];
+  
+                      // Render the message with avatar
+                      return (
+                        <div key={index} className="flex items-start space-x-4">
+                          {/* Avatar Circle */}
+                          <div className="min-w-10 w-10 h-10 flex-shrink-0 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden">
+                          {console.log('Returned image:', getAgentImage(msg.agent, avatarOptions))}
+                            <img
+                              src={getAgentImage(msg.agent, avatarOptions)} 
+                              alt={`${msg.agent} Avatar`}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+  
+                          {/* Message */}
+                          <div className="flex-grow p-2 bg-violet-950/20 border border-violet-400 rounded-lg">
+                            <p className="text-sm text-gray-200">
+                              <strong className="text-white">{msg.agent}:</strong> {msg.message}
+                            </p>
+                          </div>
                         </div>
-
-                        {/* Message */}
-                        <div className="flex-grow p-2 bg-violet-950/20 border border-violet-400 rounded-lg">
-                          <p className="text-sm text-gray-200">
-                            <strong className="text-white">{msg.agent}:</strong> {msg.message}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                 </div>
               </div>
             )}
