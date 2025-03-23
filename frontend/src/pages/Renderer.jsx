@@ -8,7 +8,7 @@ import conversationData from '../constants/conversation.json'; // Import JSON fi
 import apiService from '../services/apiService';
 
 const Renderer = () => {
-  const data = SIMULATION_DATA;
+  const data3d = SIMULATION_DATA;
   const [simulationId, setSimulationId] = useState('');
   const [context, setContext] = useState('2d');
   const [conversation, setConversation] = useState([]);
@@ -24,6 +24,8 @@ const Renderer = () => {
   const agentIndexRef = useRef(0); 
   const agentImagesRef = useRef({}); 
   const [agentSpeaking, setAgentSpeaking] = useState('agent1');
+  const [data, setData] = useState(null); // Initialize state to store data
+
 
 
 
@@ -73,9 +75,11 @@ const Renderer = () => {
         }
 
         const data = await response.json();
+        setData(data);
         const formattedConversation = data.runs[selectedRun].messages.map((msg) => ({
           agent: msg.agent,
           message: msg.message,
+
         }));
         setConversation(formattedConversation);
         setLoading(false);
@@ -98,6 +102,8 @@ const Renderer = () => {
       loadSimulationData(simulationId);
     }
   }, [selectedRun, simulationId]);
+
+
 
   const getUniqueAgentCount = (conversation) => {
     const uniqueAgents = [
@@ -176,8 +182,13 @@ const Renderer = () => {
       setIsOpeningScreenVisible(false); // Hide the opening screen
 
       const data = await response.json();
-      const formattedConversation = data.runs.flatMap((run) => run.messages || []);
+      setData(data);
+      const formattedConversation = data.runs[selectedRun].messages.map((msg) => ({
+        agent: msg.agent,
+        message: msg.message,
+      }));
       setConversation(formattedConversation);
+
       setLoading(false);
 
       // Update the URL without refreshing the page (for bookmarking purposes)
@@ -239,14 +250,14 @@ const Renderer = () => {
       case '2d':
         return <Scene2D2 key={`2d-${Date.now()}`} />;
       case '3d':
-        return <Scene3D simulationData={data} />;
+        return <Scene3D simulationData={data3d} />;
       default:
         return <></>;
     }
   };
 
   const handleNextMessage = () => {
-    if (currentMessageIndex + 1 < conversation.length) {
+    if (currentMessageIndex + 2 < conversation.length) {
       setCurrentMessageIndex(currentMessageIndex + 1);
     } else {
       setIsSimulationOver(true);
@@ -501,21 +512,40 @@ const Renderer = () => {
                 <p className="text-lg text-gray-600 mt-4">The conversation has ended.</p>
 
                 {/* Check for the selected run's output variables */}
-                {simulationId === 'saved' &&
-                  conversationData.runs[selectedRun]?.output_variables && (
-                    <div className="mt-6 text-sm text-gray-700">
-                      <h3 className="font-bold text-gray-800">End result:</h3>
-                      {/* Loop through output variables and display them dynamically */}
-                      {conversationData.runs[selectedRun].output_variables.map((output, index) => (
-                        <div key={index}>
-                          <p>
-                            <strong>{output.name.replace('_', ' ').toUpperCase()}:</strong>{' '}
-                            {output.value}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                {simulationId === 'saved' ? (
+                conversationData.runs[selectedRun]?.output_variables ? (
+                  <div className="mt-6 text-sm text-gray-700">
+                    <h3 className="font-bold text-gray-800">End result:</h3>
+                    {/* Loop through output variables and display them dynamically */}
+                    {conversationData.runs[selectedRun].output_variables.map((output, index) => (
+                      <div key={index}>
+                        <p>
+                          <strong>{output.name.replace('_', ' ').toUpperCase()}:</strong>{' '}
+                          {output.value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                ) : null
+              ) : (
+                data.runs[selectedRun]?.output_variables ? (
+                  <div className="mt-6 text-sm text-gray-700">
+                    <h3 className="font-bold text-gray-800">End result:</h3>
+                    {/* Loop through output variables and display them dynamically */}
+                    {console.log("Output Variables: ", data.runs[selectedRun].output_variables)}
+                    {data.runs[selectedRun].output_variables.map((output, index) => (
+                      <div key={index}>
+                        <p>
+                          <strong>{output.name.replace('_', ' ').toUpperCase()}:</strong>{' '}
+                          {output.value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                ) : null
+              )}
+
+
 
                 <button
                   onClick={handleRestart}
