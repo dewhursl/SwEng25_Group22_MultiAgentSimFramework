@@ -29,7 +29,9 @@ export class Sprite {
             "walk-down" : [ [1,0],[0,0],[3,0],[0,0] ],
             "walk-right": [ [1,1],[0,1],[3,1],[0,1] ],
             "walk-up"   : [ [1,2],[0,2],[3,2],[0,2] ],
-            "walk-left" : [ [1,3],[0,3],[3,3],[0,3] ]
+            "walk-left" : [ [1,3],[0,3],[3,3],[0,3] ],
+            "talk-right" : [ [0,0],[1,0],[2,0],[3,0]],
+            "talk-left" : [ [0,1],[1,1],[2,1],[3,1]],
         }
         this.currentAnimation = "idle-right"; //config.currentAnimation || "idle-down";
         this.currentAnimationFrame = 0;
@@ -89,3 +91,12 @@ export class Sprite {
     }
 
 }
+
+// updateSprite() {
+
+//     if(this.movingProgressRemaining > 0) {
+//         this.sprite.setAnimation("walk-"+ this.direction);
+//         return;
+//     }
+//     this.sprite.setAnimation("idle-"+this.direction);
+// }

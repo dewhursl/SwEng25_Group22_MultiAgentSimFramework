@@ -1,21 +1,32 @@
 import { util } from "echarts";
 import { GameObject } from"./GameObject.js";
 import { utils } from "./utils.js";
-
+import { NPC } from "./NPC.js";
+import { Sprite } from "./Sprite.js";
 
 export class Person extends GameObject {
     constructor(config) {
         super(config);
         this.movingProgressRemaining = 0;
+        this.isSpeechBubble = config.speechBubble || false;
 
         this.isPlayerControlled = config.isPlayerControlled || false;
 
-        this.directionUpdate = {
-            "up": ["y", -0.5],
-            "down": ["y", 0.5],
-            "left": ["x", -0.5],
-            "right": ["x", 0.5],
+        if (!this.isSpeechBubble) {
+            this.speechBubble = new Person({
+                speechBubble: true,
+                x: utils.withGrid(this.x + 0.5),
+                y: utils.withGrid(this.y - 0.5),
+                src: "placeholderImages/characters/speechBubble.png",
+            });
         }
+
+        this.directionUpdate = {
+            "up": ["y", -1],
+            "down": ["y", 1],
+            "left": ["x", -1],
+            "right": ["x", 1],
+        };
     }
 
     update(state) {         
@@ -60,7 +71,7 @@ export class Person extends GameObject {
 
             //Ready to walk!
             state.map.moveWall(this.x, this.y, this.direction);
-            this.movingProgressRemaining = 32;
+            this.movingProgressRemaining = 16;
             this.updateSprite(state);
             console.log("Movement started.");
         }
