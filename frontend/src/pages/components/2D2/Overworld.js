@@ -38,8 +38,11 @@ export class Overworld {
             //Draw Upper layer
             this.map.drawUpperImage(this.ctx, cameraPerson);
 
+            
+
             //Update all objects
             Object.values(this.map.gameObjects).forEach(object => {
+                
                 if (!window.isSimPaused) { // Only update when playback is is not paused
                   object.update({
                     arrow: this.directionInput.direction,
@@ -47,6 +50,8 @@ export class Overworld {
                     ctx: this.ctx,
                     deltaTime: deltaTime / 1000 // Convert to seconds
                   });
+
+
                 }
               });
 
@@ -60,24 +65,10 @@ export class Overworld {
     init() {
         this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
         this.map.mountObjects();
-        console.log("GameObjects in map:", this.map.gameObjects);
-
-        // Automatically start NPC dialogue
-        const npc = this.map.gameObjects.salesman;
-
-        try {
-            console.log("Salesman NPC:", npc);
-            npc.dialogueQueue.forEach(dialogue => {
-                //console.log("dialog" +dialogue.text);
-            });
-            npc.startDialogue(); // Start the dialogue for the NPC
-        } catch {
-            console.log("Salesman NPC not found or is not an instance of NPC");
-        }
 
         this.directionInput = new DirectionInput();
         this.directionInput.init();
-
+  
         this.startGameLoop();
 
         // this.map.startCutscene([

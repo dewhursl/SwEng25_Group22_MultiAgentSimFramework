@@ -51,7 +51,7 @@ export class NPC extends GameObject {
     drawSpeechBubble(ctx) {
         const speechText = this.nextDialogue;
         if (speechText) {
-            //console.log("speech text: ", speechText.text);
+            console.log("speech text: ", speechText.text);
 
             // Draw the speech bubble
             const bubbleWidth = ctx.measureText(speechText.text).width; // Calculate the width of the bubble
@@ -61,10 +61,10 @@ export class NPC extends GameObject {
             const y = this.y; // Position above the NPC
             console.log("x: " + this.x);
 
-            //ctx.fillStyle = "white";
-            //ctx.fillRect(x, y, bubbleWidth, bubbleHeight); // Draw the background of the bubble
-            //ctx.strokeStyle = "black";
-            //ctx.strokeRect(x, y, bubbleWidth, bubbleHeight); // Draw the border of the bubble
+            ctx.fillStyle = "white";
+            ctx.fillRect(x, y, bubbleWidth, bubbleHeight); // Draw the background of the bubble
+            ctx.strokeStyle = "black";
+            ctx.strokeRect(x, y, bubbleWidth, bubbleHeight); // Draw the border of the bubble
 
             //ctx.fillStyle = "black";
             //ctx.font = "15px Arial";

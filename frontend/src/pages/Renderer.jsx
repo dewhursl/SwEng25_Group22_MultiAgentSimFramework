@@ -23,6 +23,8 @@ const Renderer = () => {
   const [initialized, setInitialized] = useState(false);
   const agentIndexRef = useRef(0); 
   const agentImagesRef = useRef({}); 
+  const [agentSpeaking, setAgentSpeaking] = useState('agent1');
+
 
 
   // Get simulationId from URL params
@@ -96,6 +98,47 @@ const Renderer = () => {
       loadSimulationData(simulationId);
     }
   }, [selectedRun, simulationId]);
+
+  const getUniqueAgentCount = (conversation) => {
+    const uniqueAgents = [
+      ...new Set(
+        conversation
+          .filter((msg) => msg.agent && msg.agent !== 'InformationReturnAgent')
+          .map((msg) => msg.agent)
+      ),
+    ];
+  
+    return uniqueAgents;
+  };
+
+  // update agentSpeaking
+  useEffect(() => {
+    if (conversation.length > 0) {
+      let latestAgent = 'none';
+      const uniqueAgents = getUniqueAgentCount(conversation); // Get the list of unique agents
+      // Create a map to store agent names and their assigned number
+      let agentMap = {};
+        uniqueAgents.forEach((agent, index) => {
+        agentMap[agent] = (index + 1).toString(); // Map each agent to 1, 2, 3...
+      });
+      // Find the agent speaking at the current message index
+      for (let i = currentMessageIndex; i >= 0; i--) {
+        if (conversation[i].agent && conversation[i].agent !== 'InformationReturnAgent') {
+          latestAgent = agentMap[conversation[i].agent]; // Get the agent's number from the map
+          break;
+        }
+      }
+      setAgentSpeaking(latestAgent);
+      window.agentSpeaking = latestAgent; // Update global agent speaking
+      console.log('Agent speaking:', latestAgent);
+    } else {
+      window.agentSpeaking = 'none';
+      setAgentSpeaking('none');
+    }
+  }, [currentMessageIndex, conversation]);
+
+
+
 
   // Handle Simulation ID input change
   const handleSimulationIdChange = (event) => {
@@ -422,13 +465,13 @@ const Renderer = () => {
                         uniqueAgents.length >= 3
                           ? ['agent1.png', 'agent2.png', 'agent3.png']
                           : ['agent1.png', 'agent2.png'];
+                      
   
                       // Render the message with avatar
                       return (
                         <div key={index} className="flex items-start space-x-4">
                           {/* Avatar Circle */}
                           <div className="min-w-10 w-10 h-10 flex-shrink-0 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden">
-                          {console.log('Returned image:', getAgentImage(msg.agent, avatarOptions))}
                             <img
                               src={getAgentImage(msg.agent, avatarOptions)} 
                               alt={`${msg.agent} Avatar`}

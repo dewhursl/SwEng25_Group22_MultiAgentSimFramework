@@ -19,7 +19,7 @@ export class GameObject{
     }
 
     mount(map) {
-        console.log("mounting!")
+        //console.log("mounting!")
         this.isMounted = true;
         map.gameObjects[this.id] = this; // Register the GameObject in the map
         map.addWall(this.x, this.y);
@@ -32,7 +32,7 @@ export class GameObject{
     }
 
     unmount(map) {
-        console.log("Unmounting GameObject:", this.id);
+        //console.log("Unmounting GameObject:", this.id);
         this.isMounted = false;
         if (map) {
             map.removeWall(this.x, this.y);
@@ -42,7 +42,7 @@ export class GameObject{
     }
 
     resetState() {
-        console.log("Resetting GameObject state:", this.id);
+        //console.log("Resetting GameObject state:", this.id);
         this.x = this.initialX;
         this.y = this.initialY;
         this.direction = "down"; // Reset to default direction
