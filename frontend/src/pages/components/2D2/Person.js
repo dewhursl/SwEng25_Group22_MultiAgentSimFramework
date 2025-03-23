@@ -9,6 +9,8 @@ export class Person extends GameObject {
         super(config);
         this.movingProgressRemaining = 0;
         this.isSpeechBubble = config.speechBubble || false;
+        this.agentType = config.agentType || null; 
+        this.isTalking = false;
 
         this.isPlayerControlled = config.isPlayerControlled || false;
 
@@ -29,7 +31,9 @@ export class Person extends GameObject {
         };
     }
 
-    update(state) {         
+    update(state) { 
+        super.update();
+
         if(this.movingProgressRemaining > 0) {
             this.updatePosition();
         } else {
@@ -47,6 +51,13 @@ export class Person extends GameObject {
             }
             this.updateSprite(state);
         }
+        //console.log("window.agentSpeaking: ", window.agentSpeaking);
+
+        if('agent'+ window.agentSpeaking == this.agentType && state.ctx) {
+            //console.log("I am speaking: ", this.agentType);
+            this.drawSpeechBubble(state.ctx); 
+        }
+        
     }
 
     startBehaviour(state, behaviour) {
@@ -77,7 +88,6 @@ export class Person extends GameObject {
         }
 
         if(behaviour.type === "stand") {
-            console.log("Standing in place.");
             setTimeout(() => {
                 utils.emitEvent("PersonStandComplete", {
                     whoId: this.id
@@ -101,7 +111,10 @@ export class Person extends GameObject {
         } else {
             console.warn(`Person ${this.id} unmounted; skipping walking complete event.`);
         }
-    }
+
+
+        }
+        
     }
 
     updateSprite() {
@@ -112,5 +125,41 @@ export class Person extends GameObject {
         }
         this.sprite.setAnimation("idle-"+this.direction);
     }
+/*
+    startSpeech(){
+        //console.log("start speech for ", this.agentType);
+        this.isTalking = true;
+
+    }
+    
+    stopSpeech(){
+        //console.log("stop speech for ", this.agentType);
+        this.isTalking = false;
+    }*/
+
+    drawSpeechBubble(ctx) {
+        //console.log("draw speech bubble");
+        // Draw the speech bubble
+        const bubbleHeight = 10; // Fixed height for the bubble
+            
+        const speechText = "...";
+        const bubbleWidth = speechText.length + 15;
+
+
+        const x = this.x+5; // Calculate position based on NPC's position
+        const y = this.y; // Position above the NPC
+
+        ctx.fillStyle = "white";
+        ctx.fillRect(x - bubbleWidth / 2, y-20, bubbleWidth, bubbleHeight); // Background of the bubble
+
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(x - bubbleWidth / 2, y-20, bubbleWidth, bubbleHeight); // Border of the bubble
+
+        // Draw the text inside the bubble
+        ctx.fillStyle = "black";
+        ctx.font = "12px Arial";
+        ctx.fillText(speechText, x - bubbleWidth / 4, y + bubbleHeight / 1.5 - 20);
+    }  
 
 }

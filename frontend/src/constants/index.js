@@ -3,6 +3,7 @@ import React from 'react';
 import { GrConfigure } from "react-icons/gr";
 import { MdOutline3dRotation } from "react-icons/md";
 import { MdDashboard } from "react-icons/md";
+import { FaListUl } from "react-icons/fa6";
 
 export const navLinks = [
     {
@@ -13,12 +14,18 @@ export const navLinks = [
     },
     {
         id: 2,
+        name: 'Catalog',
+        href: '/simulations',
+        icon: FaListUl,
+    },
+    {
+        id: 3,
         name: 'Renderer',
         href: '/renderer',
         icon: MdOutline3dRotation,
     },
     {
-        id: 3,
+        id: 4,
         name: 'Dashboard',
         href: '/dashboard',
         icon: MdDashboard,

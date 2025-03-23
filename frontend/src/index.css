@@ -10,7 +10,9 @@
 @theme {
   --color-midnight: #110619;
   --shadow-button: 0px 2px 8px 0px rgba(139, 92, 246, 1);
+  --shadow-card: 0px 1px 20px 0px rgba(139, 92, 246, 1);
 }
+
 
 * {
   scroll-behavior: smooth;
@@ -40,3 +42,16 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(139, 92, 246, 0.9);
 }
+
+.side-panel {
+  width: 25%; /* Set width to 25% */
+  max-height: 100vh; /* Limit height to the screen height */
+  background-color: #1a202c; /* Midnight background color (you can change this to fit your design) */
+  overflow-y: auto; /* Make the content scrollable if it overflows */
+  box-shadow: 0px 4px 6px rgba(138, 87, 255, 0.6); /* Shadow with violet color */
+  position: fixed; /* Fix the side panel in place */
+  top: 0;
+  right: 0; /* Or 'left: 0;' depending on where you want the panel */
+}
+
+w-1/4 max-h-screen bg-midnight p-4 overflow-y-auto border shadow-lg shadow-violet-600/60"

@@ -1,42 +1,154 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import ReactECharts from 'echarts-for-react';
 import Navbar from './components/Navbar';
-
-const backendUri = `http://127.0.0.1:5000/sim`;
+import api from '/src/services/apiService';
 
 const Dashboard = () => {
   const [simulationData, setSimulationData] = useState(null);
   const [selectedVariable, setSelectedVariable] = useState('');
   const [selectedViz, setSelectedViz] = useState('bar'); // "bar" or "line"
+  const [simulationId, setSimulationId] = useState('');
+  const [isOpeningScreenVisible, setIsOpeningScreenVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  const { simulationId } = useParams();
+  // Get simulationId from URL params if available
+  const params = useParams();
+  const location = useLocation();
 
-  // Fetch data from API
+  // Detect if we should show the opening screen
   useEffect(() => {
-    const simId = simulationId;
-    fetch(`${backendUri}/results?id=${simId}`)
-      .then((response) => response.json())
-      .then((data) => setSimulationData(data))
-      .catch((error) => {
-        console.error('Error fetching simulation data:', error);
-      });
-  }, []);
+    if (params.simulationId) {
+      // If simulationId exists in URL params, use it and don't show the opening screen
+      setSimulationId(params.simulationId);
+      setIsOpeningScreenVisible(false);
+    } else {
+      // If no simulationId in URL, show the opening screen
+      setIsOpeningScreenVisible(true);
+      setLoading(false);
+    }
+  }, [params.simulationId]);
 
-  if (!simulationData) {
-    return <div className="p-4">Loading simulation data...</div>;
+  // Fetch data from API when simulationId changes
+  useEffect(() => {
+    const fetchSimulationData = async () => {
+      if (!simulationId) return;
+
+      setLoading(true);
+      try {
+        const data = await api.getSimulationOutput(simulationId);
+        setSimulationData(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching simulation data:', error);
+        setError('Failed to load simulation data. Please check the ID and try again.');
+        setLoading(false);
+      }
+    };
+
+    fetchSimulationData();
+  }, [simulationId]);
+
+  // Handle Simulation ID input change
+  const handleSimulationIdChange = (event) => {
+    setSimulationId(event.target.value);
+  };
+
+  // Submit simulation ID to view dashboard
+  const handleViewDashboard = async () => {
+    if (!simulationId) {
+      setError('Simulation ID cannot be empty.');
+      return;
+    }
+
+    try {
+      // Check if the simulation exists
+      const response = await fetch(`http://localhost:5000/sim/results?id=${simulationId}`);
+
+      if (!response.ok) {
+        throw new Error('Simulation not found.');
+      }
+
+      // If simulation exists, hide the opening screen and update URL
+      setError('');
+      setIsOpeningScreenVisible(false);
+
+      // Update the URL without refreshing the page (for bookmarking purposes)
+      window.history.pushState({}, '', `/dashboard/${simulationId}`);
+    } catch (error) {
+      setError('Simulation ID does not exist. Please check the ID and try again.');
+    }
+  };
+
+  if (loading && !isOpeningScreenVisible) {
+    return (
+      <div className="w-full min-h-screen bg-slate-900 flex flex-col justify-center items-center">
+        <Navbar />
+        <div className="text-white text-xl mt-20">Loading dashboard data...</div>
+      </div>
+    );
+  }
+
+  // Render opening screen if no simulation ID is provided
+  if (isOpeningScreenVisible) {
+    return (
+      <div className="w-full min-h-screen">
+        <Navbar />
+        <div className="fixed inset-0 flex items-center justify-center">
+          <div className="bg-violet-900/5 backdrop-blur-3xl p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-violet-600/60 shadow-card text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-violet-400">Enter Simulation ID</h2>
+            <p className="text-lg text-gray-400 mt-4">
+              Please enter a simulation ID to view the dashboard.
+            </p>
+
+            {/* Input Simulation ID */}
+            <input
+              type="text"
+              value={simulationId}
+              onChange={handleSimulationIdChange}
+              placeholder="Enter Simulation ID"
+              className="mt-4 mb-2 p-2 text-white border border-gray-300 rounded-lg bg-transparent focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors duration-200"
+            />
+
+            {/* Error Message */}
+            {error && <p className="text-red-500 mt-2">{error}</p>}
+
+            {/* View Dashboard Button */}
+            <div className="mt-4">
+              <button
+                onClick={handleViewDashboard}
+                className="bg-violet-800 text-white px-6 py-3 rounded-full hover:shadow-button cursor-pointer"
+              >
+                View Dashboard
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // If there's no simulation data, show an error
+  if (!simulationData && !loading) {
+    return (
+      <div className="w-full min-h-screen bg-slate-900 p-4">
+        <Navbar />
+        <div className="mt-20 text-red-500 text-center">
+          Error loading simulation data. Please check the simulation ID and try again.
+        </div>
+      </div>
+    );
   }
 
   // Assume simulationData has structure: { id, num_runs, runs: [ ... ] }
-  const runs = simulationData.runs || [];
-  console.log('runs', runs);
-  console.log('data', simulationData);
+  const runs = simulationData?.runs || [];
 
   // Function to extract unique output variable names from all runs
   const getUniqueVariableNames = (runs) => {
     const varSet = new Set();
     runs.forEach((run) => {
-      run.output_variables.forEach((variable) => {
+      run.output_variables?.forEach((variable) => {
         varSet.add(variable.name);
       });
     });
@@ -49,7 +161,7 @@ const Dashboard = () => {
   const getValuesForVariable = (variableName) => {
     return runs
       .map((run) => {
-        const found = run.output_variables.find((v) => v.name === variableName);
+        const found = run.output_variables?.find((v) => v.name === variableName);
         return found ? found.value : null;
       })
       .filter((val) => val !== null);
@@ -77,7 +189,7 @@ const Dashboard = () => {
 
   // Data preparation for number of messages chart
   const messageLabels = runs.map((_, index) => `Run ${index + 1}`);
-  const messagesData = runs.map((run) => Number(run.num_messages));
+  const messagesData = runs.map((run) => Number(run.num_messages || 0));
 
   const messagesChartOption = {
     title: {
@@ -147,16 +259,20 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="w-full min-h-screen p-4">
       <Navbar />
-      <h1 className=" text-2xl text-white font-bold mb-4 mt-22">Simulation Dashboard</h1>
+      <h1 className="text-2xl text-white font-bold mb-4 mt-22">Simulation Dashboard</h1>
       <div className="text-white">
         <div className="p-2 bg-violet-600/5 border border-violet-400 rounded mb-4">
           <p>
+            <span className="font-bold">Simulation ID: </span>
+            {simulationId}
+          </p>
+          <p>
             <span className="font-bold">Agents: </span>
-            {Array.from(new Set(runs.flatMap((run) => run.messages.map((msg) => msg.agent)))).join(
-              ', '
-            )}
+            {Array.from(
+              new Set(runs.flatMap((run) => run.messages?.map((msg) => msg.agent) || []))
+            ).join(', ')}
           </p>
           <p>
             <span className="font-bold">Total Runs:</span> {runs.length}
@@ -174,13 +290,11 @@ const Dashboard = () => {
           <select
             value={selectedVariable}
             onChange={(e) => setSelectedVariable(e.target.value)}
-            className="p-2 border rounded"
+            className="p-2 border rounded text-black"
           >
-            <option value="" className="text-black">
-              --Select--
-            </option>
+            <option value="">--Select--</option>
             {uniqueVariables.map((variable) => (
-              <option key={variable} value={variable} className="text-black">
+              <option key={variable} value={variable}>
                 {variable}
               </option>
             ))}
@@ -192,7 +306,7 @@ const Dashboard = () => {
             <select
               value={selectedViz}
               onChange={(e) => setSelectedViz(e.target.value)}
-              className="p-2 border rounded"
+              className="p-2 border rounded text-black"
             >
               <option value="bar">Bar Chart</option>
               <option value="line">Line Chart</option>
@@ -230,7 +344,7 @@ const Dashboard = () => {
                 </thead>
                 <tbody>
                   {runs.map((run, index) => {
-                    const found = run.output_variables.find((v) => v.name === selectedVariable);
+                    const found = run.output_variables?.find((v) => v.name === selectedVariable);
                     return (
                       <tr key={index} className="even:bg-transparent odd:bg-violet-600/5">
                         <td className="text-white border px-4 py-2">{index + 1}</td>

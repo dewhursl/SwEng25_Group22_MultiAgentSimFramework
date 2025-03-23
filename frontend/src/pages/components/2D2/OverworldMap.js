@@ -134,12 +134,14 @@ window.OverworldMaps = {
         upperSrc: `${placeholderImages}/maps/DemoUpper.png`,
         gameObjects: {
             hero: new Person({
+                agentType: "agent3",
                 isPlayerControlled: true,
                 x: utils.withGrid(7),
                 y: utils.withGrid(4),
                 src: `${placeholderImages}/characters/people/hero.png`
             }),
             salesman: new Person({
+                agentType: "agent2",
                 x: utils.withGrid(6),
                 y: utils.withGrid(7),
                 npcConfig: {
@@ -156,6 +158,7 @@ window.OverworldMaps = {
                 
             }),
             customer: new Person({
+                agentType: "agent1",
                 x: utils.withGrid(4),
                 y: utils.withGrid(7),
                 npcConfig: {
