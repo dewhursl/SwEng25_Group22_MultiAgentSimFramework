@@ -309,7 +309,7 @@ const Renderer = () => {
   }
 
   return (
-    <div className="w-full flex flex-col min-h-screen">
+    <div style={{ overflow: 'auto', height: '100vh' }}>
       <Navbar />
 
       {/* Opening Screen */}
@@ -400,9 +400,9 @@ const Renderer = () => {
           
 
           {/* Scene and side Panel */}
-          <div className="flex flex-row flex-1 w-full mt-16 overflow-hidden">
+          <div className="flex flex-row flex-1 w-full mt-16 overflow:auto">
             {/* Scene Container (takes remaining space) */}
-            <div className="flex flex-1 flex-col justify-center items-center relative">
+            <div className="flex flex-1 flex-col justify-center items-center relative min-h-screen" style={{ marginTop: '-20px', overflow: 'hidden' }}>
               {getScene()}
             </div>
 
@@ -451,8 +451,19 @@ const Renderer = () => {
 
             {/* side Conversation Panel (only visible in 2D render) */}
             {context === '2d' && isPanelVisible && (
-              <div className="w-1/4 max-h-screen bg-midnight p-4 overflow-y-auto border shadow-lg shadow-violet-600/60">
-                <h2 className="text-lg font-bold mt-15 mb-2 text-white">Conversation</h2>
+             <div
+             className="w-1/4 max-h-screen bg-midnight p-4 overflow-auto border shadow-lg shadow-violet-600/60"
+             style={{
+              maxHeight: 'calc(100vh - 64px)', // Ensure the panel doesn't exceed screen height minus top margin
+              position: 'fixed', // Fix the side panel in place
+              top: '64px', // Adjust top offset for header
+              right: 0, // Position the panel on the right
+              zIndex: 10, // Make sure it appears above other content
+            }}
+
+              
+           >
+                <h2 className="text-lg font-bold mt-2 mb-2 text-white">Conversation</h2>
 
                 <div className="space-y-4">
                   {conversation
