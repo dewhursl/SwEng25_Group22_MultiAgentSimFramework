@@ -71,7 +71,10 @@ const Renderer = () => {
         }
 
         const data = await response.json();
-        const formattedConversation = data.runs.flatMap((run) => run.messages || []);
+        const formattedConversation = data.runs[selectedRun].messages.map((msg) => ({
+          agent: msg.agent,
+          message: msg.message,
+        }));
         setConversation(formattedConversation);
         setLoading(false);
       } catch (error) {
@@ -89,6 +92,8 @@ const Renderer = () => {
         message: msg.message,
       }));
       setConversation(formattedConversation);
+    } else if(simulationId){
+      loadSimulationData(simulationId);
     }
   }, [selectedRun, simulationId]);
 
@@ -229,24 +234,13 @@ const Renderer = () => {
     } 
     let assignedImage = null;
 
-    // Check if it's a new agent and assign an image accordingly
     if (agentIndexRef.current < avatarOptions.length) {
       // Bind the first distinct agent name to agent1.png, second to agent2.png, third to agent3.png
       assignedImage = avatarOptions[agentIndexRef.current % avatarOptions.length];
       agentImagesRef.current[agent] = assignedImage;
       agentIndexRef.current++;
     }
-
-    console.log(`/images/${assignedImage || 'default.png'}`); // This should print the image path correctly
-    console.log(`Assigned Image: '${assignedImage}'`);
-    console.log(assignedImage);
-
-
-
-    // Return the corresponding image for the agent
-    //return '/images/agent1.png';
     return `/images/${assignedImage || 'default.png'}`;
-
   }
 
 
@@ -335,7 +329,7 @@ const Renderer = () => {
           </button>
 
           {/* Dropdown for selecting simulation run */}
-          {simulationId === 'saved' && (
+          
             <div className="absolute top-20 left-1/4 transform -translate-x-1/2 z-10">
               <select
                 value={selectedRun}
@@ -349,7 +343,7 @@ const Renderer = () => {
                 ))}
               </select>
             </div>
-          )}
+          
 
           {/* Scene and side Panel */}
           <div className="flex flex-row flex-1 w-full mt-16 overflow-hidden">
