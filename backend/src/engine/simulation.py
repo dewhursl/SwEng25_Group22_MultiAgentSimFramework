@@ -69,10 +69,11 @@ class SelectorGCSimulation:
             try:
                 parsed_json = json.loads(json_match.group(0))
                 for variable in parsed_json:
-                    if parsed_json[variable] != None:
-                        output_variables.append({"name": variable, "value": parsed_json[variable]})
-                    else:
-                        return None
+                    # Handle both None and "Unspecified" values
+                    value = parsed_json[variable]
+                    if value is None or value == "Unspecified":
+                        value = "Unspecified"
+                    output_variables.append({"name": variable, "value": value})
             except json.JSONDecodeError:
                 return None
         else:
