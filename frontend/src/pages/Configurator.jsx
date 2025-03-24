@@ -3,13 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService.js';
 import Navbar from './components/Navbar';
 
+import { FaLongArrowAltRight } from 'react-icons/fa';
+import { FaRandom } from 'react-icons/fa';
+import { RiAiGenerate } from 'react-icons/ri';
+
 const TextField = ({ label, description, value, onChange, placeholder }) => {
   return (
-    <label className="flex flex-col mt-3 p-3 border border-gray-700 rounded-lg text-white bg-slate-800 hover:border-white">
+    <label className="flex flex-col mt-3 p-3 rounded-lg text-white hover:border-white">
       <h1 className="font-bold text-lg">{label}</h1>
       <p className="text-gray-300 text-sm mb-2">{description}</p>
       <input
-        className="mt-1 p-2 rounded-lg outline-none bg-slate-700 focus:bg-slate-600 border border-gray-600"
+        className="mt-1 p-2 rounded-lg outline-none bg-slate-700 focus:bg-slate-600"
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -19,13 +23,22 @@ const TextField = ({ label, description, value, onChange, placeholder }) => {
   );
 };
 
-const TextArea = ({ label, description, value, onChange, placeholder, height = 'min-h-24' }) => {
+const TextArea = ({
+  label,
+  description,
+  value,
+  onChange,
+  placeholder,
+  height = 'min-h-24',
+  container = '',
+  textSize = '',
+}) => {
   return (
-    <label className="flex flex-col mt-3 p-3 border border-gray-700 rounded-lg text-white bg-slate-800 hover:border-white">
-      <h1 className="font-bold text-lg">{label}</h1>
+    <label className={`flex flex-col mt-3 p-3 rounded-lg text-white ${container}`}>
+      <h1 className={`font-bold ${textSize}`}>{label}</h1>
       <p className="text-gray-300 text-sm mb-2">{description}</p>
       <textarea
-        className={`mt-1 p-2 rounded-lg outline-none bg-slate-700 focus:bg-slate-600 border border-gray-600 ${height}`}
+        className={`mt-1 p-2 rounded-lg outline-none bg-midnight border border-violet-300 ${height}`}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
@@ -35,12 +48,14 @@ const TextArea = ({ label, description, value, onChange, placeholder, height = '
 };
 
 const Button = ({ children, onClick, color = 'green', disabled = false }) => {
-  const baseClasses = 'p-2 mt-3 rounded-lg font-bold text-white transition-colors duration-200';
+  const baseClasses =
+    'p-2 mt-3 rounded-lg font-bold text-white transition-colors duration-200 cursor-pointer';
   const colorClasses = {
     green: `${disabled ? 'bg-gray-600' : 'bg-green-800 hover:bg-green-600'}`,
     red: `${disabled ? 'bg-gray-600' : 'bg-red-800 hover:bg-red-600'}`,
     blue: `${disabled ? 'bg-gray-600' : 'bg-blue-800 hover:bg-blue-600'}`,
     purple: `${disabled ? 'bg-gray-600' : 'bg-violet-800 hover:bg-violet-600'}`,
+    lightpurple: `${disabled ? 'bg-gray-600' : 'bg-violet-500 hover:bg-violet-400'}`,
   };
 
   return (
@@ -102,7 +117,7 @@ const AgentsList = ({ agents, setAgents }) => {
   };
 
   return (
-    <div className="flex flex-col p-3 mt-3 border border-gray-700 rounded-lg text-white bg-slate-800">
+    <div className="flex flex-col p-3 mt-3 border border-gray-700 rounded-lg text-white bg-violet-900/5">
       <h1 className="font-bold text-lg">Agents</h1>
       <p className="text-gray-300 text-sm">
         Define the agents that will participate in the simulation
@@ -228,27 +243,27 @@ const AIConfigGenerator = ({ onConfigGenerated, isGenerating, setIsGenerating })
   const [error, setError] = useState('');
 
   const demoPrompts = [
-    "Simulate the final moments of the O.J. Simpson trial. Include a judge, prosecutor, and defense attorney. " +
-    "Focus on the closing statements, jury verdict, and potential sentencing. Keep the conversation short, direct, " +
-    "and logical, avoiding unnecessary emotion or lengthy arguments. Track the verdict (guilty or not guilty) and " +
-    "sentence length if applicable.Keep your messages short concise and logical.",
+    'Simulate the final moments of the O.J. Simpson trial. Include a judge, prosecutor, and defense attorney. ' +
+      'Focus on the closing statements, jury verdict, and potential sentencing. Keep the conversation short, direct, ' +
+      'and logical, avoiding unnecessary emotion or lengthy arguments. Track the verdict (guilty or not guilty) and ' +
+      'sentence length if applicable.Keep your messages short concise and logical.',
 
-    "Design a business negotiation simulation with a buyer, seller, and mediator. Keep your messages short concise and logical." +
-    "They are buying a house and the seller is trying to sell it. Track the final price and whether a deal was reached.",
+    'Design a business negotiation simulation with a buyer, seller, and mediator. Keep your messages short concise and logical.' +
+      'They are buying a house and the seller is trying to sell it. Track the final price and whether a deal was reached.',
 
-    "Simulate a hospital examination scenario involving one doctor, one patient presenting flu-like symptoms, and one " +
-    "assisting nurse. The doctor conducts a structured interview, reviews symptoms, orders basic tests (like temperature " +
-    "check and blood test), and discusses findings with the nurse. The simulation should focus on reaching an accurate " +
-    "diagnosis (e.g., influenza, bacterial infection, or other condition) and formulating a treatment plan (e.g., " +
-    "medication, rest, further testing). Track what the diagnosis is and what is the cost of treatment without insurance, " +
-    " as well as the appropriateness of the treatment plan. Keep your messages short concise and logical.",
+    'Simulate a hospital examination scenario involving one doctor, one patient presenting flu-like symptoms, and one ' +
+      'assisting nurse. The doctor conducts a structured interview, reviews symptoms, orders basic tests (like temperature ' +
+      'check and blood test), and discusses findings with the nurse. The simulation should focus on reaching an accurate ' +
+      'diagnosis (e.g., influenza, bacterial infection, or other condition) and formulating a treatment plan (e.g., ' +
+      'medication, rest, further testing). Track what the diagnosis is and what is the cost of treatment without insurance, ' +
+      ' as well as the appropriateness of the treatment plan. Keep your messages short concise and logical.',
 
-    "Simulate a live political debate featuring three candidates running for national office and one moderator. " +
-    "The debate covers three key topics: healthcare, taxation, and climate policy. Each candidate presents their " +
-    "stance and responds to questions posed by the moderator, as well as rebuttals from other candidates. Track shifts " +
-    "in public opinion after each topic based on candidates' performance, clarity, and persuasiveness. Also log key " +
-    "discussion points, notable arguments, and any factual inaccuracies detected during the debate. " +
-    "Keep your messages short concise and logical.",
+    'Simulate a live political debate featuring three candidates running for national office and one moderator. ' +
+      'The debate covers three key topics: healthcare, taxation, and climate policy. Each candidate presents their ' +
+      'stance and responds to questions posed by the moderator, as well as rebuttals from other candidates. Track shifts ' +
+      "in public opinion after each topic based on candidates' performance, clarity, and persuasiveness. Also log key " +
+      'discussion points, notable arguments, and any factual inaccuracies detected during the debate. ' +
+      'Keep your messages short concise and logical.',
   ];
 
   const getRandomPrompt = () => {
@@ -274,7 +289,7 @@ const AIConfigGenerator = ({ onConfigGenerated, isGenerating, setIsGenerating })
   };
 
   return (
-    <div className="flex flex-col p-3 mt-3 border border-gray-700 rounded-lg text-white bg-slate-800 relative">
+    <div className="flex flex-col p-3 mt-3 border border-violet-400/40 rounded-lg text-white bg-violet-900/5 relative">
       {isGenerating && (
         <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-10 rounded-lg">
           <div className="text-center">
@@ -285,10 +300,16 @@ const AIConfigGenerator = ({ onConfigGenerated, isGenerating, setIsGenerating })
         </div>
       )}
 
-      <h1 className="font-bold text-lg">AI-Generated Configuration</h1>
-      <p className="text-gray-300 text-sm mb-2">
-        Describe your simulation in natural language, and let AI generate a configuration for you
-      </p>
+      <h1 className="font-bold text-lg">Automatic Configuration</h1>
+      <ul className="list-disc list-inside mt-2 pl-3">
+        <li className="text-gray-300 text-sm">
+          Describe your simulation in natural language, and let us generate a configuration for you.
+        </li>
+        <li className="text-gray-300 text-sm">
+          Remember to include the agents, their roles, termination condition and the expected
+          outcomes.
+        </li>
+      </ul>
 
       {error && (
         <div className="p-3 mb-3 bg-red-900 border border-red-700 text-white rounded-lg">
@@ -298,20 +319,23 @@ const AIConfigGenerator = ({ onConfigGenerated, isGenerating, setIsGenerating })
 
       <TextArea
         label="Simulation Description"
-        description="Describe your simulation in detail. Include information about the agents, their roles, the scenario, and what outcomes you want to track."
         value={prompt}
         onChange={setPrompt}
         placeholder="e.g., Create a court case simulation with a judge, prosecutor, and defense attorney. The simulation should track the verdict and sentence length..."
         height="min-h-48"
+        container="bg-transparent"
+        textSize="text-md"
       />
 
-      <div className="flex items-center gap-3 mt-3">
-        <Button color="blue" onClick={getRandomPrompt}>
+      <div className="flex items-center justify-center gap-3 mb-2">
+        <Button color="lightpurple" onClick={getRandomPrompt}>
+          <FaRandom className="mr-2 inline-block mb-0.5" />
           Random Prompt
         </Button>
-        <span className="text-white text-xl">→</span>
+        <FaLongArrowAltRight className="mt-3 text-white h-7 w-7" />
         <Button color="purple" onClick={generateConfig} disabled={isGenerating}>
-          {isGenerating ? 'Generating Configuration...' : 'Generate Configuration with AI'}
+          <RiAiGenerate className="mr-2 inline-block mb-0.5 h-5 w-5" />
+          {isGenerating ? 'Generating Configuration...' : 'Generate Configuration'}
         </Button>
       </div>
     </div>
@@ -379,7 +403,7 @@ const Configurator = () => {
     // Set the full configuration with 10 runs
     setSimulationConfig({
       ...config,
-      num_runs: 10
+      num_runs: 10,
     });
 
     // Log the simulation ID
@@ -506,7 +530,7 @@ const Configurator = () => {
             onClick={() => setActiveTab('manual')}
           />
           <Tab
-            label="AI-Generated Configuration"
+            label="Automatic Configuration"
             isActive={activeTab === 'ai'}
             onClick={() => setActiveTab('ai')}
           />
