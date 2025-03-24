@@ -19,13 +19,13 @@ const TextField = ({ label, description, value, onChange, placeholder }) => {
   );
 };
 
-const TextArea = ({ label, description, value, onChange, placeholder }) => {
+const TextArea = ({ label, description, value, onChange, placeholder, height = 'min-h-24' }) => {
   return (
     <label className="flex flex-col mt-3 p-3 border border-gray-700 rounded-lg text-white bg-slate-800 hover:border-white">
       <h1 className="font-bold text-lg">{label}</h1>
       <p className="text-gray-300 text-sm mb-2">{description}</p>
       <textarea
-        className="mt-1 p-2 rounded-lg outline-none bg-slate-700 focus:bg-slate-600 border border-gray-600 min-h-24"
+        className={`mt-1 p-2 rounded-lg outline-none bg-slate-700 focus:bg-slate-600 border border-gray-600 ${height}`}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
@@ -223,9 +223,43 @@ const OutputVariablesList = ({ variables, setVariables }) => {
   );
 };
 
-const AIConfigGenerator = ({ onConfigGenerated, isGenerating }) => {
+const AIConfigGenerator = ({ onConfigGenerated, isGenerating, setIsGenerating }) => {
   const [prompt, setPrompt] = useState('');
   const [error, setError] = useState('');
+
+  const demoPrompts = [
+    "Simulate the final moments of the O.J. Simpson trial. Include a judge, prosecutor, and defense attorney. " +
+    "Focus on the closing statements, jury verdict, and potential sentencing. Keep the conversation short, direct, " +
+    "and logical, avoiding unnecessary emotion or lengthy arguments. Track the verdict (guilty or not guilty) and " +
+    "sentence length if applicable.",
+
+    "Design a business negotiation simulation with a buyer, seller, and mediator. " +
+    "They are buying a house and the seller is trying to sell it. Track the final price and whether a deal was reached.",
+
+    "Simulate a high school mathematics classroom focused on teaching algebra. Include one teacher and a group of 10 " +
+    "students with varying skill levels. The teacher delivers a lesson on solving linear equations and interacts with " +
+    "students by asking questions and assigning practice problems. Track each student's participation (e.g., number of " +
+    "questions answered, engagement level) and learning outcomes (e.g., quiz scores, improvement over the lesson). " +
+    "Include possible classroom events like students asking clarifying questions or struggling with specific concepts.",
+
+    "Simulate a hospital examination scenario involving one doctor, one patient presenting flu-like symptoms, and one " +
+    "assisting nurse. The doctor conducts a structured interview, reviews symptoms, orders basic tests (like temperature " +
+    "check and blood test), and discusses findings with the nurse. The simulation should focus on reaching an accurate " +
+    "diagnosis (e.g., influenza, bacterial infection, or other condition) and formulating a treatment plan (e.g., " +
+    "medication, rest, further testing). Track the accuracy of the diagnosis based on provided symptoms and test " +
+    "results, as well as the appropriateness of the treatment plan",
+
+    "Simulate a live political debate featuring three candidates running for national office and one moderator. " +
+    "The debate covers three key topics: healthcare, taxation, and climate policy. Each candidate presents their " +
+    "stance and responds to questions posed by the moderator, as well as rebuttals from other candidates. Track shifts " +
+    "in public opinion after each topic based on candidates' performance, clarity, and persuasiveness. Also log key " +
+    "discussion points, notable arguments, and any factual inaccuracies detected during the debate."
+  ];
+
+  const getRandomPrompt = () => {
+    const randomIndex = Math.floor(Math.random() * demoPrompts.length);
+    setPrompt(demoPrompts[randomIndex]);
+  };
 
   const generateConfig = async () => {
     if (!prompt.trim()) {
@@ -235,15 +269,27 @@ const AIConfigGenerator = ({ onConfigGenerated, isGenerating }) => {
 
     try {
       setError('');
+      setIsGenerating(true);
       const configData = await apiService.generateSimulationConfig({ desc: prompt });
       onConfigGenerated(configData);
     } catch (err) {
       setError(`Failed to generate configuration: ${err.message}`);
+      setIsGenerating(false);
     }
   };
 
   return (
-    <div className="flex flex-col p-3 mt-3 border border-gray-700 rounded-lg text-white bg-slate-800">
+    <div className="flex flex-col p-3 mt-3 border border-gray-700 rounded-lg text-white bg-slate-800 relative">
+      {isGenerating && (
+        <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-10 rounded-lg">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-white mb-2"></div>
+            <p className="text-white">Generating Configuration...</p>
+            <p className="text-gray-400 text-sm mt-2">This may take a few moments</p>
+          </div>
+        </div>
+      )}
+
       <h1 className="font-bold text-lg">AI-Generated Configuration</h1>
       <p className="text-gray-300 text-sm mb-2">
         Describe your simulation in natural language, and let AI generate a configuration for you
@@ -261,11 +307,17 @@ const AIConfigGenerator = ({ onConfigGenerated, isGenerating }) => {
         value={prompt}
         onChange={setPrompt}
         placeholder="e.g., Create a court case simulation with a judge, prosecutor, and defense attorney. The simulation should track the verdict and sentence length..."
+        height="min-h-48"
       />
 
-      <Button color="purple" onClick={generateConfig} disabled={isGenerating}>
-        {isGenerating ? 'Generating Configuration...' : 'Generate Configuration with AI'}
-      </Button>
+      <div className="flex gap-3 mt-3">
+        <Button color="purple" onClick={generateConfig} disabled={isGenerating}>
+          {isGenerating ? 'Generating Configuration...' : 'Generate Configuration with AI'}
+        </Button>
+        <Button color="blue" onClick={getRandomPrompt}>
+          Random Prompt
+        </Button>
+      </div>
     </div>
   );
 };
@@ -330,9 +382,6 @@ const Configurator = () => {
 
     // Set the full configuration
     setSimulationConfig(config);
-
-    // Switch to manual tab to show the generated fields
-    setActiveTab('manual');
   };
 
   const validateForm = () => {
@@ -487,6 +536,7 @@ const Configurator = () => {
             <AIConfigGenerator
               onConfigGenerated={handleConfigGenerated}
               isGenerating={isGenerating}
+              setIsGenerating={setIsGenerating}
             />
           )}
 
