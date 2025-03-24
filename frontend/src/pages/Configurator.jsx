@@ -231,29 +231,24 @@ const AIConfigGenerator = ({ onConfigGenerated, isGenerating, setIsGenerating })
     "Simulate the final moments of the O.J. Simpson trial. Include a judge, prosecutor, and defense attorney. " +
     "Focus on the closing statements, jury verdict, and potential sentencing. Keep the conversation short, direct, " +
     "and logical, avoiding unnecessary emotion or lengthy arguments. Track the verdict (guilty or not guilty) and " +
-    "sentence length if applicable.",
+    "sentence length if applicable.Keep your messages short concise and logical.",
 
-    "Design a business negotiation simulation with a buyer, seller, and mediator. " +
+    "Design a business negotiation simulation with a buyer, seller, and mediator. Keep your messages short concise and logical." +
     "They are buying a house and the seller is trying to sell it. Track the final price and whether a deal was reached.",
-
-    "Simulate a high school mathematics classroom focused on teaching algebra. Include one teacher and a group of 10 " +
-    "students with varying skill levels. The teacher delivers a lesson on solving linear equations and interacts with " +
-    "students by asking questions and assigning practice problems. Track each student's participation (e.g., number of " +
-    "questions answered, engagement level) and learning outcomes (e.g., quiz scores, improvement over the lesson). " +
-    "Include possible classroom events like students asking clarifying questions or struggling with specific concepts.",
 
     "Simulate a hospital examination scenario involving one doctor, one patient presenting flu-like symptoms, and one " +
     "assisting nurse. The doctor conducts a structured interview, reviews symptoms, orders basic tests (like temperature " +
     "check and blood test), and discusses findings with the nurse. The simulation should focus on reaching an accurate " +
     "diagnosis (e.g., influenza, bacterial infection, or other condition) and formulating a treatment plan (e.g., " +
-    "medication, rest, further testing). Track the accuracy of the diagnosis based on provided symptoms and test " +
-    "results, as well as the appropriateness of the treatment plan",
+    "medication, rest, further testing). Track what the diagnosis is and what is the cost of treatment without insurance, " +
+    " as well as the appropriateness of the treatment plan. Keep your messages short concise and logical.",
 
     "Simulate a live political debate featuring three candidates running for national office and one moderator. " +
     "The debate covers three key topics: healthcare, taxation, and climate policy. Each candidate presents their " +
     "stance and responds to questions posed by the moderator, as well as rebuttals from other candidates. Track shifts " +
     "in public opinion after each topic based on candidates' performance, clarity, and persuasiveness. Also log key " +
-    "discussion points, notable arguments, and any factual inaccuracies detected during the debate."
+    "discussion points, notable arguments, and any factual inaccuracies detected during the debate. " +
+    "Keep your messages short concise and logical.",
   ];
 
   const getRandomPrompt = () => {
@@ -310,12 +305,13 @@ const AIConfigGenerator = ({ onConfigGenerated, isGenerating, setIsGenerating })
         height="min-h-48"
       />
 
-      <div className="flex gap-3 mt-3">
-        <Button color="purple" onClick={generateConfig} disabled={isGenerating}>
-          {isGenerating ? 'Generating Configuration...' : 'Generate Configuration with AI'}
-        </Button>
+      <div className="flex items-center gap-3 mt-3">
         <Button color="blue" onClick={getRandomPrompt}>
           Random Prompt
+        </Button>
+        <span className="text-white text-xl">→</span>
+        <Button color="purple" onClick={generateConfig} disabled={isGenerating}>
+          {isGenerating ? 'Generating Configuration...' : 'Generate Configuration with AI'}
         </Button>
       </div>
     </div>
@@ -375,13 +371,31 @@ const Configurator = () => {
     // Update form fields with the generated config
     const generatedConfig = config.config;
     setName(generatedConfig.name || '');
-    setNumRuns(config.num_runs || 1);
+    setNumRuns(10); // Set to 10 runs by default
     setAgents(generatedConfig.agents || []);
     setTerminationCondition(generatedConfig.termination_condition || '');
     setOutputVariables(generatedConfig.output_variables || []);
 
-    // Set the full configuration
-    setSimulationConfig(config);
+    // Set the full configuration with 10 runs
+    setSimulationConfig({
+      ...config,
+      num_runs: 10
+    });
+
+    // Log the simulation ID
+    console.log(`Retrieved simulation: ${config.id}\n`);
+
+    // Log the simulation data in a structured format
+    console.log(`Simulation Name: ${generatedConfig.name}\n`);
+    console.log(`Termination Condition: ${generatedConfig.termination_condition}\n`);
+    console.log(`Agents:\n`);
+
+    // Use console.table for better visualization of agents
+    console.table(generatedConfig.agents);
+
+    // Log output variables
+    console.log(`Output Variables:\n`);
+    console.table(generatedConfig.output_variables);
   };
 
   const validateForm = () => {
