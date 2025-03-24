@@ -296,11 +296,11 @@ const Tab = ({ label, isActive, onClick }) => {
 
 const Configurator = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('manual'); // 'manual' or 'ai'
+  const [activeTab, setActiveTab] = useState('ai'); // Changed from 'manual' to 'ai'
 
   // Manual configuration state
   const [name, setName] = useState('');
-  const [numRuns, setNumRuns] = useState(10);
+  const [numRuns, setNumRuns] = useState(1);
   const [agents, setAgents] = useState([]);
   const [terminationCondition, setTerminationCondition] = useState('');
   const [outputVariables, setOutputVariables] = useState([]);
@@ -323,7 +323,7 @@ const Configurator = () => {
     // Update form fields with the generated config
     const generatedConfig = config.config;
     setName(generatedConfig.name || '');
-    setNumRuns(config.num_runs || 10);
+    setNumRuns(config.num_runs || 1);
     setAgents(generatedConfig.agents || []);
     setTerminationCondition(generatedConfig.termination_condition || '');
     setOutputVariables(generatedConfig.output_variables || []);
