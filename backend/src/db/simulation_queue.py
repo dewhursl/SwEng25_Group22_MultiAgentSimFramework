@@ -10,17 +10,16 @@ class SimulationQueue(MongoBase):
 
     def insert(self, config, num_runs):
         simulation_id = str(uuid.uuid4())[:8]
-
-        self.queue_collection.insert_one({
-            "simulation_id": simulation_id,
-            "timestamp": int(time.time()),  # Ensure this is a valid timestamp
-            "remaining_runs": num_runs,
-            "config": config
-        })
-
-        print(f"Inserting simulation with ID {simulation_id}, config: {config}, num_runs: {num_runs}")
         
-        return self.insert_with_id(simulation_id, config, num_runs)
+        # First validate and process the config
+        processed_id = self.insert_with_id(simulation_id, config, num_runs)
+        
+        if processed_id:
+            print(f"Successfully inserted simulation with ID {simulation_id}")
+            return processed_id
+        else:
+            print(f"Failed to insert simulation with ID {simulation_id}")
+            return None
     
     def insert_with_id(self, simulation_id, config, num_runs):
         # validate simulation config
@@ -32,6 +31,8 @@ class SimulationQueue(MongoBase):
                 if "name" in agent and agent["name"] and \
                     "description" in agent and agent["description"] and \
                     "prompt" in agent and agent["prompt"]:
+                    # Replace spaces with underscores in agent names
+                    agent["name"] = agent["name"].replace(" ", "_")
                     continue
                 else:
                     return None
