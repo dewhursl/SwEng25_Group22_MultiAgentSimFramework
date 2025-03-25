@@ -1,19 +1,21 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService.js';
 import Navbar from './components/Navbar';
 
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { FaRandom } from 'react-icons/fa';
 import { RiAiGenerate } from 'react-icons/ri';
+import { MdOutlineQueuePlayNext } from 'react-icons/md';
+import { FaListUl } from 'react-icons/fa6';
 
 const TextField = ({ label, description, value, onChange, placeholder }) => {
   return (
-    <label className="flex flex-col mt-3 p-3 rounded-lg text-white hover:border-white">
+    <label className="flex flex-col mt-3 p-3 rounded-lg text-white bg-transparent border border-violet-400/40 hover:border-violet-400">
       <h1 className="font-bold text-lg">{label}</h1>
       <p className="text-gray-300 text-sm mb-2">{description}</p>
       <input
-        className="mt-1 p-2 rounded-lg outline-none bg-slate-700 focus:bg-slate-600"
+        className="mt-1 p-2 rounded-lg outline-none bg-violet-900/10"
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -32,13 +34,14 @@ const TextArea = ({
   height = 'min-h-24',
   container = '',
   textSize = '',
+  textArea = '',
 }) => {
   return (
     <label className={`flex flex-col mt-3 p-3 rounded-lg text-white ${container}`}>
       <h1 className={`font-bold ${textSize}`}>{label}</h1>
       <p className="text-gray-300 text-sm mb-2">{description}</p>
       <textarea
-        className={`mt-1 p-2 rounded-lg outline-none bg-midnight border border-violet-300 ${height}`}
+        className={`mt-1 p-2 rounded-lg outline-none bg-midnight ${height} ${textArea}`}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
@@ -53,7 +56,7 @@ const Button = ({ children, onClick, color = 'green', disabled = false }) => {
   const colorClasses = {
     green: `${disabled ? 'bg-gray-600' : 'bg-green-800 hover:bg-green-600'}`,
     red: `${disabled ? 'bg-gray-600' : 'bg-red-800 hover:bg-red-600'}`,
-    blue: `${disabled ? 'bg-gray-600' : 'bg-blue-800 hover:bg-blue-600'}`,
+    darkviolet: `${disabled ? 'bg-gray-600' : 'bg-violet-950 hover:bg-violet-800'}`,
     purple: `${disabled ? 'bg-gray-600' : 'bg-violet-800 hover:bg-violet-600'}`,
     lightpurple: `${disabled ? 'bg-gray-600' : 'bg-violet-500 hover:bg-violet-400'}`,
   };
@@ -71,11 +74,11 @@ const Button = ({ children, onClick, color = 'green', disabled = false }) => {
 
 const Select = ({ label, description, options, value, onChange }) => {
   return (
-    <label className="flex flex-col mt-3 p-3 border border-gray-700 rounded-lg text-white bg-slate-800 hover:border-white">
+    <label className="flex flex-col mt-3 p-3 border border-violet-400/40 rounded-lg text-white bg-transparent hover:border-violet-400">
       <h1 className="font-bold text-lg">{label}</h1>
       <p className="text-gray-300 text-sm mb-2">{description}</p>
       <select
-        className="mt-1 p-2 rounded-lg outline-none bg-slate-700 focus:bg-slate-600 border border-gray-600"
+        className="mt-1 p-2 rounded-lg outline-none bg-violet-700 focus:bg-slate-600 border border-gray-600"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
@@ -117,12 +120,12 @@ const AgentsList = ({ agents, setAgents }) => {
   };
 
   return (
-    <div className="flex flex-col p-3 mt-3 border border-gray-700 rounded-lg text-white bg-violet-900/5">
+    <div className="flex flex-col p-3 mt-3 border border-violet-400/40 rounded-lg text-white bg-transparent">
       <h1 className="font-bold text-lg">Agents</h1>
       <p className="text-gray-300 text-sm">
         Define the agents that will participate in the simulation
       </p>
-      <Button color="green" onClick={addAgent}>
+      <Button color="purple" onClick={addAgent}>
         Add Agent
       </Button>
 
@@ -193,12 +196,12 @@ const OutputVariablesList = ({ variables, setVariables }) => {
   };
 
   return (
-    <div className="flex flex-col p-3 mt-3 border border-gray-700 rounded-lg text-white bg-slate-800">
+    <div className="flex flex-col p-3 mt-3 border border-violet-400/40 rounded-lg text-white bg-transparent">
       <h1 className="font-bold text-lg">Output Variables</h1>
       <p className="text-gray-300 text-sm">
         Define the variables to be extracted from the simulation
       </p>
-      <Button color="green" onClick={addVariable}>
+      <Button color="purple" onClick={addVariable}>
         Add Variable
       </Button>
 
@@ -291,7 +294,7 @@ const AIConfigGenerator = ({ onConfigGenerated, isGenerating, setIsGenerating })
   return (
     <div className="flex flex-col p-3 mt-3 border border-violet-400/40 rounded-lg text-white bg-violet-900/5 relative">
       {isGenerating && (
-        <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-10 rounded-lg">
+        <div className="absolute inset-0 bg-violet-950/10 backdrop-blur-md flex items-center justify-center z-10 rounded-lg">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-white mb-2"></div>
             <p className="text-white">Generating Configuration...</p>
@@ -325,6 +328,7 @@ const AIConfigGenerator = ({ onConfigGenerated, isGenerating, setIsGenerating })
         height="min-h-48"
         container="bg-transparent"
         textSize="text-md"
+        textArea="border border-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
       />
 
       <div className="flex items-center justify-center gap-3 mb-2">
@@ -344,9 +348,9 @@ const AIConfigGenerator = ({ onConfigGenerated, isGenerating, setIsGenerating })
 
 const JsonPreview = ({ data }) => {
   return data ? (
-    <div className="mt-4 p-3 border border-gray-700 rounded-lg bg-slate-900 overflow-auto max-h-60">
+    <div className="mt-4 p-3 border border-violet-400/40 rounded-lg bg-violet-950/5 overflow-auto max-h-60">
       <h2 className="font-bold text-white mb-2">Generated JSON Configuration:</h2>
-      <pre className="text-green-400 text-sm">{JSON.stringify(data, null, 2)}</pre>
+      <pre className="text-violet-400 text-sm">{JSON.stringify(data, null, 2)}</pre>
     </div>
   ) : null;
 };
@@ -354,10 +358,10 @@ const JsonPreview = ({ data }) => {
 const Tab = ({ label, isActive, onClick }) => {
   return (
     <button
-      className={`px-4 py-2 font-medium rounded-t-lg ${
+      className={`cursor-pointer px-4 py-2 font-medium rounded-t-lg ${
         isActive
-          ? 'bg-slate-800 text-white border-t border-r border-l border-gray-600'
-          : 'bg-slate-900 text-gray-400 hover:text-white'
+          ? 'bg-violet-900/20 text-white border-t border-r border-l border-violet-300'
+          : 'bg-violet-900/10 text-gray-400 hover:text-white'
       }`}
       onClick={onClick}
     >
@@ -506,14 +510,18 @@ const Configurator = () => {
   };
 
   return (
-    <div className="flex justify-center min-h-screen mb-2 py-16">
+    <div className="flex justify-center min-h-screen py-16">
       <Navbar />
       <div className="w-full max-w-3xl px-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-6">
           <h1 className="text-2xl font-bold mt-8 text-white">Simulation Configurator</h1>
-          <Button color="blue" onClick={() => navigate('/simulations')}>
+          <Link
+            to="/simulations"
+            className="mt-6 px-4 py-2 bg-violet-800 hover:shadow-button text-white rounded-lg transition-colors"
+          >
+            <FaListUl className="inline-block mr-2 mb-0.75 h-4 w-4" />
             View Simulation Catalog
-          </Button>
+          </Link>
         </div>
 
         {error && (
@@ -523,7 +531,7 @@ const Configurator = () => {
         )}
 
         {/* Tab navigation */}
-        <div className="flex border-b border-gray-700 mt-6">
+        <div className="flex justify-center items-center border-b border-violet-300 mt-6">
           <Tab
             label="Manual Configuration"
             isActive={activeTab === 'manual'}
@@ -565,6 +573,8 @@ const Configurator = () => {
                 value={terminationCondition}
                 onChange={setTerminationCondition}
                 placeholder="e.g., The judge has delivered a verdict"
+                container="border border-violet-400/40"
+                textArea="bg-violet-900/10"
               />
 
               <OutputVariablesList variables={outputVariables} setVariables={setOutputVariables} />
@@ -578,23 +588,24 @@ const Configurator = () => {
             />
           )}
 
-          <div className="flex flex-col md:flex-row gap-3 mt-4">
+          <JsonPreview data={simulationConfig} />
+
+          <div className="flex flex-col md:flex-row gap-3 mt-4 items-center justify-center">
             {activeTab === 'manual' && (
-              <Button color="blue" onClick={createSimulationConfig}>
+              <Button color="lightpurple" onClick={createSimulationConfig}>
                 Generate Configuration
               </Button>
             )}
 
-            <Button color="green" onClick={submitSimulation} disabled={isSubmitting}>
+            <Button color="darkviolet" onClick={submitSimulation} disabled={isSubmitting}>
+              <MdOutlineQueuePlayNext className="mr-2 inline-block mb-0.5 h-5 w-5" />
               {isSubmitting
                 ? 'Creating Simulation...'
                 : simulationConfig
-                  ? 'Submit Simulation'
+                  ? 'Run Simulation'
                   : 'Submit & Run Simulation'}
             </Button>
           </div>
-
-          <JsonPreview data={simulationConfig} />
         </div>
       </div>
     </div>
