@@ -131,7 +131,7 @@ const AgentsList = ({ agents, setAgents }) => {
 
       <div className="mt-3 space-y-4">
         {agents.map((agent, index) => (
-          <div key={index} className="p-3 border border-gray-700 rounded-lg bg-slate-700">
+          <div key={index} className="p-3 border border-violet-400/40 rounded-lg">
             <div className="flex justify-between items-center mb-2">
               <h2 className="font-semibold">Agent #{index + 1}</h2>
               <Button color="red" onClick={() => removeAgent(index)}>
@@ -207,7 +207,7 @@ const OutputVariablesList = ({ variables, setVariables }) => {
 
       <div className="mt-3 space-y-4">
         {variables.map((variable, index) => (
-          <div key={index} className="p-3 border border-gray-700 rounded-lg bg-slate-700">
+          <div key={index} className="p-3 border border-violet-400/40 rounded-lg">
             <div className="flex justify-between items-center mb-2">
               <h2 className="font-semibold">Variable #{index + 1}</h2>
               <Button color="red" onClick={() => removeVariable(index)}>
