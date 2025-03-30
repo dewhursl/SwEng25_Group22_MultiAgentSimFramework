@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import os
 
 class DataBaseAPI:
     def __init__(self, conn_str):
@@ -31,6 +32,16 @@ class DataBaseAPI:
         doc = self.m_coll_config.find_one({}, {"id": 1})
         return doc["id"] if doc else None
 
-    
+if __name__ == "__main__":
+    from dotenv import load_dotenv
+    import os
 
+    load_dotenv()
+    db = DataBaseAPI(os.environ['DB_CONNECTION_STRING'])
 
+    print("All sim IDs in config collection:")
+    for config in db.m_coll_config.find():
+        print(config["_id"])
+
+for output in db.m_coll_output.find():
+    print(output["_id"])

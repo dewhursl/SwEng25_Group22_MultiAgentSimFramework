@@ -4,12 +4,13 @@ from dotenv import load_dotenv
 import subprocess
 import time
 import sys
+from prefect.artifacts import create_markdown_artifact
 
 load_dotenv()
 
 sys.path.append("sweng25/sweng25_group22_multiagentsimframework/backend/src")
 
-BASE_URL = "http://127.0.0.1:5000"
+BASE_URL = "http://127.0.0.1:4200"
 
 # Start Flask app in a separate process
 @task
@@ -50,6 +51,16 @@ def fetch_output(sim_id, i=None, log="yes"):
     else:
         raise ValueError(f"Failed to fetch output: {response.text}")
     
+@task
+def log_token_artifact(usage):
+    content = f"""
+    ### Token Usage
+    - Prompt Tokens: {usage['prompt_tokens']}
+    - Completion Tokens: {usage['completion_tokens']}
+    - Total Tokens: {usage['total_tokens']}
+    """
+    create_markdown_artifact(content=content, key="token-usage")
+
 def get_valid_sim_id():
     response = requests.get(f"{BASE_URL}/list_sim_ids")
     if response.status_code == 200:

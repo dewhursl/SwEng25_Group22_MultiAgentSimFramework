@@ -1,9 +1,7 @@
 import openai
 import promptlayer
 import os
-import uuid  # For generating a unique request_id
 from dotenv import load_dotenv
-from promptlayer import track
 
 # Load environment variables
 load_dotenv()

@@ -9,3 +9,4 @@ autogen_agentchat
 pymongo
 flask
 flask-cors
+prefect
