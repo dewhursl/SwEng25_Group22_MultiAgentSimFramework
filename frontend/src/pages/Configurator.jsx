@@ -59,6 +59,7 @@ const Button = ({ children, onClick, color = 'green', disabled = false }) => {
     darkviolet: `${disabled ? 'bg-gray-600' : 'bg-violet-950 hover:bg-violet-800'}`,
     purple: `${disabled ? 'bg-gray-600' : 'bg-violet-800 hover:bg-violet-600'}`,
     lightpurple: `${disabled ? 'bg-gray-600' : 'bg-violet-500 hover:bg-violet-400'}`,
+    darkpurple: `${disabled ? 'bg-gray-600' : 'bg-violet-900/40 hover:bg-violet-900/50'}`,
   };
 
   return (
@@ -125,7 +126,7 @@ const AgentsList = ({ agents, setAgents }) => {
       <p className="text-gray-300 text-sm">
         Define the agents that will participate in the simulation
       </p>
-      <Button color="purple" onClick={addAgent}>
+      <Button color="darkpurple" onClick={addAgent}>
         Add Agent
       </Button>
 
@@ -201,7 +202,7 @@ const OutputVariablesList = ({ variables, setVariables }) => {
       <p className="text-gray-300 text-sm">
         Define the variables to be extracted from the simulation
       </p>
-      <Button color="purple" onClick={addVariable}>
+      <Button color="darkpurple" onClick={addVariable}>
         Add Variable
       </Button>
 
@@ -533,14 +534,14 @@ const Configurator = () => {
         {/* Tab navigation */}
         <div className="flex justify-center items-center border-b border-violet-300 mt-6">
           <Tab
-            label="Manual Configuration"
-            isActive={activeTab === 'manual'}
-            onClick={() => setActiveTab('manual')}
-          />
-          <Tab
             label="Automatic Configuration"
             isActive={activeTab === 'ai'}
             onClick={() => setActiveTab('ai')}
+          />
+          <Tab
+            label="Manual Configuration"
+            isActive={activeTab === 'manual'}
+            onClick={() => setActiveTab('manual')}
           />
         </div>
 
@@ -592,19 +593,26 @@ const Configurator = () => {
 
           <div className="flex flex-col md:flex-row gap-3 mt-4 items-center justify-center">
             {activeTab === 'manual' && (
-              <Button color="lightpurple" onClick={createSimulationConfig}>
+              <Button color="purple" onClick={createSimulationConfig}>
+                <RiAiGenerate className="mr-2 inline-block mb-0.5 h-5 w-5" />
                 Generate Configuration
               </Button>
             )}
 
-            <Button color="darkviolet" onClick={submitSimulation} disabled={isSubmitting}>
+            {/* <Button color="darkviolet" onClick={submitSimulation} disabled={isSubmitting}>
               <MdOutlineQueuePlayNext className="mr-2 inline-block mb-0.5 h-5 w-5" />
               {isSubmitting
                 ? 'Creating Simulation...'
                 : simulationConfig
                   ? 'Run Simulation'
                   : 'Submit & Run Simulation'}
-            </Button>
+            </Button> */}
+            {simulationConfig && (
+              <Button color="darkviolet" onClick={submitSimulation} disabled={isSubmitting}>
+                <MdOutlineQueuePlayNext className="mr-2 inline-block mb-0.5 h-5 w-5" />
+                {isSubmitting ? 'Creating Simulation...' : 'Run Simulation'}
+              </Button>
+            )}
           </div>
         </div>
       </div>

@@ -69,13 +69,6 @@ const SimulationItem = ({ simulation, onViewRenderer, onViewDashboard, onDelete 
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <button
-            onClick={() => onDelete(simulation.simulation_id, isComplete)}
-            className="px-3 py-1 bg-red-700 hover:bg-red-600 text-white rounded transition-colors cursor-pointer"
-          >
-            <MdDelete className="h-5 w-5 inline-block mb-0.75 mr-1" />
-            Delete
-          </button>
           {isComplete && (
             <>
               <button
@@ -94,6 +87,13 @@ const SimulationItem = ({ simulation, onViewRenderer, onViewDashboard, onDelete 
               </button>
             </>
           )}
+          <button
+            onClick={() => onDelete(simulation.simulation_id, isComplete)}
+            className="px-3 py-1 bg-red-700 hover:bg-red-600 text-white rounded transition-colors cursor-pointer"
+          >
+            <MdDelete className="h-5 w-5 inline-block mb-0.75 mr-1" />
+            Delete
+          </button>
         </div>
       </div>
 
