@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import ReactECharts from 'echarts-for-react';
 import Navbar from './components/Navbar';
 import api from '/src/services/apiService';
@@ -10,6 +10,13 @@ const Dashboard = () => {
   const [isOpeningScreenVisible, setIsOpeningScreenVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+  // State for simulation catalog
+  const [simulationCatalog, setSimulationCatalog] = useState([]);
+  const [catalogLoading, setCatalogLoading] = useState(false);
+
+  // For navigation
+  const navigate = useNavigate();
 
   // Enhanced visualization state
   const [chartConfig, setChartConfig] = useState({
@@ -74,6 +81,7 @@ const Dashboard = () => {
     } else {
       // If no simulationId in URL, show the opening screen
       setIsOpeningScreenVisible(true);
+      fetchSimulationCatalog();
       setLoading(false);
     }
   }, [params.simulationId]);
@@ -544,6 +552,25 @@ const Dashboard = () => {
     };
   };
 
+  // Fetch simulation catalog
+  const fetchSimulationCatalog = async () => {
+    setCatalogLoading(true);
+    try {
+      const catalog = await api.getSimulationsCatalog();
+      setSimulationCatalog(catalog);
+      setCatalogLoading(false);
+    } catch (error) {
+      console.error('Error fetching simulation catalog:', error);
+      setError('Failed to load simulation catalog. Please try again later.');
+      setCatalogLoading(false);
+    }
+  };
+
+  // Handle direct simulation selection (when clicking a card)
+  const handleDirectSimulationSelect = (id) => {
+    navigate(`/dashboard/${id}`);
+  };
+
   if (loading && !isOpeningScreenVisible) {
     return (
       <div className="w-full min-h-screen bg-transparent flex flex-col justify-center items-center">
@@ -560,28 +587,44 @@ const Dashboard = () => {
         <Navbar />
         <div className="fixed inset-0 flex items-center justify-center">
           <div className="bg-violet-900/5 backdrop-blur-3xl p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-violet-600/60 shadow-card text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-violet-400">Enter Simulation ID</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-violet-400">Select a simulation</h2>
             <p className="text-lg text-gray-400 mt-4">
-              Please enter a simulation ID to view the dashboard.
+              Pick the simulation that you want to analyse.
             </p>
 
-            {/* Input Simulation ID */}
-            <input
-              type="text"
-              value={simulationId}
-              onChange={handleSimulationIdChange}
-              placeholder="Enter Simulation ID"
-              className="mt-4 mb-2 p-2 text-white border border-gray-300 rounded-lg bg-transparent focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors duration-200"
-            />
+            {/* Simulation List as Cards */}
+            <div className="mt-6">
+              {simulationCatalog.map((sim) => (
+                <div
+                  key={sim.simulation_id}
+                  onClick={() => setSimulationId(sim.simulation_id)}
+                  className={`p-3 my-2 flex justify-between items-center bg-violet-900/15 border rounded-lg text-left cursor-pointer transition-colors duration-200 ${
+                    simulationId === sim.simulation_id
+                      ? 'bg-violet-900/30 border border-violet-500'
+                      : 'border border-violet-400/50 hover:bg-violet-900/30'
+                  }`}
+                >
+                  <p className="text-white">{sim.name || `Simulation ${sim.simulation_id}`}</p>
+                  {simulationId === sim.simulation_id && (
+                    <span className="text-emerald-500 text-xl">&#x2713;</span> // Checkmark icon
+                  )}
+                </div>
+              ))}
+            </div>
 
             {/* Error Message */}
-            {error && <p className="text-red-500 mt-2">{error}</p>}
+            {error && <p className="text-red-500 mt-4">{error}</p>}
 
             {/* View Dashboard Button */}
-            <div className="mt-4">
+            <div className="mt-6">
               <button
-                onClick={handleViewDashboard}
-                className="bg-violet-800 text-white px-6 py-3 rounded-full hover:shadow-button cursor-pointer"
+                onClick={() => handleDirectSimulationSelect(simulationId)}
+                disabled={!simulationId}
+                className={`${
+                  !simulationId
+                    ? 'bg-violet-900/50 cursor-not-allowed'
+                    : 'bg-violet-800 hover:shadow-button'
+                } text-white px-6 py-3 rounded-full transition-colors duration-200 cursor-pointer`}
               >
                 View Dashboard
               </button>
