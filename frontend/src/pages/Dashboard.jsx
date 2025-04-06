@@ -249,6 +249,11 @@ const Dashboard = () => {
       runIndex: index + 1,
     }));
 
+    // New code for bar charts
+    const isBarChart = chartConfig.type === 'bar';
+    const barCategories = dataPoints.map((p) => String(p.x));
+    const barValues = dataPoints.map((p) => p.y);
+
     // Apply filters if enabled
     if (filterOptions.enabled) {
       dataPoints = applyFilters(dataPoints);
@@ -276,6 +281,7 @@ const Dashboard = () => {
       series.push({
         name: chartConfig.yAxis,
         type: chartConfig.type === 'area' ? 'line' : chartConfig.type,
+        barMaxWidth: chartConfig.type === 'bar' ? '60%' : undefined,
         areaStyle: chartConfig.type === 'area' ? { color: primaryColor, opacity: 0.3 } : undefined,
         itemStyle: { color: primaryColor },
         data: dataPoints.map((point) => [point.x, point.y]),
@@ -337,6 +343,7 @@ const Dashboard = () => {
       series.push({
         name: chartConfig.yAxis,
         type: chartConfig.type === 'area' ? 'line' : chartConfig.type,
+        barMaxWidth: chartConfig.type === 'bar' ? '60%' : undefined,
         areaStyle: chartConfig.type === 'area' ? { color: primaryColor, opacity: 0.3 } : undefined,
         itemStyle: { color: primaryColor },
         data: dataPoints.map((point) => [point.x, point.y]),
@@ -376,10 +383,11 @@ const Dashboard = () => {
       series.push({
         name: chartConfig.yAxis,
         type: chartConfig.type === 'area' ? 'line' : chartConfig.type,
+        barMaxWidth: chartConfig.type === 'bar' ? '60%' : undefined,
         areaStyle: chartConfig.type === 'area' ? { color: primaryColor, opacity: 0.3 } : undefined,
         itemStyle: { color: primaryColor },
         smooth: chartConfig.type === 'line' || chartConfig.type === 'area',
-        data: dataPoints.map((point) => [point.x, point.y]),
+        data: isBarChart ? barValues : dataPoints.map((point) => [point.x, point.y]),
         emphasis: { focus: 'series' },
         label: {
           show: chartConfig.showDataLabels,
@@ -407,13 +415,14 @@ const Dashboard = () => {
       title: {
         text: `${chartConfig.yAxis} vs ${chartConfig.xAxis}`,
         left: 'center',
+        top: 10,
         textStyle: { color: '#fff' },
       },
       grid: {
-        left: '10%', // Increased to prevent left overflow
+        left: '5%', // Increased to prevent left overflow
         right: secondaryYAxis.enabled ? '10%' : '5%', // Increased for secondary axis
         bottom: '15%', // Increased to prevent bottom overflow
-        top: '15%', // Increased to prevent top overflow
+        top: '18%', // Increased to prevent top overflow
         containLabel: true, // Ensures labels are contained within the grid
       },
       tooltip: {
@@ -425,10 +434,13 @@ const Dashboard = () => {
           },
         },
         formatter: function (params) {
-          const runIndex = params[0].dataIndex + 1;
-          let result = `Run ${runIndex}<br/>`;
+          let result = '';
           params.forEach((param) => {
-            result += `${param.seriesName}: ${param.value[1]}<br/>`;
+            // For bar charts, param.value is a single number
+            // For line/scatter, param.value is an [x,y] array
+            const val = Array.isArray(param.value) ? param.value[1] : param.value;
+            const runIndex = param.dataIndex + 1;
+            result += `Run ${runIndex}<br/>${param.seriesName}: ${val}<br/><br/>`;
           });
           return result;
         },
@@ -441,6 +453,8 @@ const Dashboard = () => {
       },
       legend: {
         data: series.map((s) => s.name),
+        top: 40,
+        left: 'center',
         textStyle: { color: '#fff' },
         show: chartConfig.showLegend,
         type: 'scroll', // Enable scrolling for many items
@@ -454,31 +468,6 @@ const Dashboard = () => {
           color: '#a78bfa', // violet-400
         },
       },
-      dataZoom: [
-        // Add zooming capability for large datasets
-        {
-          type: 'inside', // Allow mouse wheel zooming
-          start: 0,
-          end: 100,
-          filterMode: 'filter',
-        },
-        {
-          type: 'slider', // Add slider at the bottom
-          start: 0,
-          end: 100,
-          height: 20,
-          bottom: 0,
-          borderColor: '#8b5cf6', // violet-500
-          textStyle: {
-            color: '#fff',
-          },
-          fillerColor: 'rgba(139, 92, 246, 0.2)', // Light violet
-          handleStyle: {
-            color: '#8b5cf6', // violet-500
-            borderColor: '#fff',
-          },
-        },
-      ],
       toolbox: {
         feature: {
           saveAsImage: {
@@ -502,7 +491,9 @@ const Dashboard = () => {
         itemGap: 10,
       },
       xAxis: {
-        type: xNumeric ? 'value' : 'category',
+        type: isBarChart ? 'category' : xNumeric ? 'value' : 'category',
+        data: isBarChart ? barCategories : undefined,
+        boundaryGap: isBarChart, // true for bar charts, false otherwise
         name: chartConfig.xAxis,
         nameLocation: 'middle',
         nameGap: 30,
@@ -562,6 +553,7 @@ const Dashboard = () => {
             },
           },
           scale: true, // Better scale for numeric data to prevent edge clipping
+          min: 0,
         },
         secondaryYAxis.enabled
           ? {
@@ -591,6 +583,7 @@ const Dashboard = () => {
               },
               position: 'right',
               scale: true, // Better scale for numeric data to prevent edge clipping
+              min: 0,
             }
           : undefined,
       ].filter(Boolean),
@@ -666,10 +659,10 @@ const Dashboard = () => {
         },
       },
       grid: {
-        left: '10%',
+        left: '5%',
         right: '5%',
         bottom: '15%',
-        top: '15%',
+        top: '18%',
         containLabel: true,
       },
       xAxis: {
@@ -736,29 +729,6 @@ const Dashboard = () => {
         itemSize: 20, // Larger icon
         itemGap: 10,
       },
-      dataZoom: [
-        {
-          type: 'inside',
-          start: 0,
-          end: 100,
-        },
-        {
-          type: 'slider',
-          start: 0,
-          end: 100,
-          height: 20,
-          bottom: 0,
-          borderColor: '#8b5cf6', // violet-500
-          textStyle: {
-            color: '#fff',
-          },
-          fillerColor: 'rgba(139, 92, 246, 0.2)', // Light violet
-          handleStyle: {
-            color: '#8b5cf6', // violet-500
-            borderColor: '#fff',
-          },
-        },
-      ],
       series: [
         {
           type: 'line',
