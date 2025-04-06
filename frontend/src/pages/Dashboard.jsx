@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
 import ReactECharts from 'echarts-for-react';
 import Navbar from './components/Navbar';
 import api from '/src/services/apiService';
+
+import { TbArrowBackUp } from 'react-icons/tb';
+import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
+import { IoMdSave } from 'react-icons/io';
 
 const Dashboard = () => {
   const [simulationData, setSimulationData] = useState(null);
@@ -261,13 +265,19 @@ const Dashboard = () => {
     // Generate series
     let series = [];
 
+    // Define chart colors that match the site's palette
+    const primaryColor = '#a78bfa'; // violet-400
+    const secondaryColor = '#27ddc6'; // teal color shown in the code
+    const accentColor = '#8b5cf6'; // violet-500
+
     // Handle comparison mode
     if (comparison.enabled && comparison.variable && comparison.runs.length > 0) {
       // Main series
       series.push({
         name: chartConfig.yAxis,
         type: chartConfig.type === 'area' ? 'line' : chartConfig.type,
-        areaStyle: chartConfig.type === 'area' ? {} : undefined,
+        areaStyle: chartConfig.type === 'area' ? { color: primaryColor, opacity: 0.3 } : undefined,
+        itemStyle: { color: primaryColor },
         data: dataPoints.map((point) => [point.x, point.y]),
         emphasis: { focus: 'series' },
         label: {
@@ -292,13 +302,18 @@ const Dashboard = () => {
       // Comparison series
       const compareData = getDataForVariable(comparison.variable);
 
-      comparison.runs.forEach((runIndex) => {
+      comparison.runs.forEach((runIndex, idx) => {
         const actualIndex = runIndex - 1;
+        // Use different shades of the accent color for each comparison
+        const comparisonColor = `rgba(139, 92, 246, ${0.5 + idx * 0.1})`; // violet-500 with varying opacity
+
         series.push({
           name: `Run ${runIndex} - ${comparison.variable}`,
           type: 'line',
+          itemStyle: { color: comparisonColor },
           markPoint: {
             symbolSize: 15,
+            itemStyle: { color: comparisonColor },
             data: [
               {
                 name: `Run ${runIndex}`,
@@ -322,7 +337,8 @@ const Dashboard = () => {
       series.push({
         name: chartConfig.yAxis,
         type: chartConfig.type === 'area' ? 'line' : chartConfig.type,
-        areaStyle: chartConfig.type === 'area' ? {} : undefined,
+        areaStyle: chartConfig.type === 'area' ? { color: primaryColor, opacity: 0.3 } : undefined,
+        itemStyle: { color: primaryColor },
         data: dataPoints.map((point) => [point.x, point.y]),
         emphasis: { focus: 'series' },
         label: {
@@ -350,11 +366,9 @@ const Dashboard = () => {
         name: secondaryYAxis.variable,
         type: 'line',
         yAxisIndex: 1,
+        itemStyle: { color: secondaryColor },
         data: dataPoints.map((point) => [point.x, secondaryYData[point.index]]),
         emphasis: { focus: 'series' },
-        itemStyle: {
-          color: 'rgba(39, 221, 206, 0.8)',
-        },
       });
     }
     // Standard single series
@@ -362,7 +376,8 @@ const Dashboard = () => {
       series.push({
         name: chartConfig.yAxis,
         type: chartConfig.type === 'area' ? 'line' : chartConfig.type,
-        areaStyle: chartConfig.type === 'area' ? {} : undefined,
+        areaStyle: chartConfig.type === 'area' ? { color: primaryColor, opacity: 0.3 } : undefined,
+        itemStyle: { color: primaryColor },
         smooth: chartConfig.type === 'line' || chartConfig.type === 'area',
         data: dataPoints.map((point) => [point.x, point.y]),
         emphasis: { focus: 'series' },
@@ -395,10 +410,11 @@ const Dashboard = () => {
         textStyle: { color: '#fff' },
       },
       grid: {
-        left: '5%',
-        right: secondaryYAxis.enabled ? '8%' : '5%',
-        bottom: '10%',
-        containLabel: true,
+        left: '10%', // Increased to prevent left overflow
+        right: secondaryYAxis.enabled ? '10%' : '5%', // Increased for secondary axis
+        bottom: '15%', // Increased to prevent bottom overflow
+        top: '15%', // Increased to prevent top overflow
+        containLabel: true, // Ensures labels are contained within the grid
       },
       tooltip: {
         trigger: 'axis',
@@ -416,16 +432,74 @@ const Dashboard = () => {
           });
           return result;
         },
+        textStyle: {
+          color: '#fff',
+        },
+        backgroundColor: 'rgba(80, 60, 130, 0.9)', // Dark violet background
+        borderColor: '#8b5cf6', // violet-500
+        borderWidth: 1,
       },
       legend: {
         data: series.map((s) => s.name),
         textStyle: { color: '#fff' },
         show: chartConfig.showLegend,
+        type: 'scroll', // Enable scrolling for many items
+        pageButtonPosition: 'end', // Position of page buttons
+        pageButtonItemGap: 5, // Gap between page buttons
+        pageButtonGap: 5, // Gap between page buttons and page info
+        pageIconColor: '#a78bfa', // violet-400
+        pageIconInactiveColor: '#4c1d95', // violet-900
+        pageIconSize: 12, // Size of page buttons
+        pageTextStyle: {
+          color: '#a78bfa', // violet-400
+        },
       },
+      dataZoom: [
+        // Add zooming capability for large datasets
+        {
+          type: 'inside', // Allow mouse wheel zooming
+          start: 0,
+          end: 100,
+          filterMode: 'filter',
+        },
+        {
+          type: 'slider', // Add slider at the bottom
+          start: 0,
+          end: 100,
+          height: 20,
+          bottom: 0,
+          borderColor: '#8b5cf6', // violet-500
+          textStyle: {
+            color: '#fff',
+          },
+          fillerColor: 'rgba(139, 92, 246, 0.2)', // Light violet
+          handleStyle: {
+            color: '#8b5cf6', // violet-500
+            borderColor: '#fff',
+          },
+        },
+      ],
       toolbox: {
         feature: {
-          saveAsImage: { title: 'Save as Image' },
+          saveAsImage: {
+            icon: 'path://M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l2.007-7.454c.158-.474.457-.85.85-1.093A2.25 2.25 0 018 6h8v9zm-1-7a1 1 0 10-2 0 1 1 0 002 0z',
+            title: 'Save as Image',
+            iconStyle: {
+              color: '#a78bfa', // violet-400
+              borderColor: '#fff',
+              borderWidth: 1,
+            },
+            emphasis: {
+              iconStyle: {
+                color: '#8b5cf6', // violet-500 on hover
+              },
+            },
+          },
         },
+        right: 20,
+        top: 20,
+        itemSize: 20, // Larger icon
+        itemGap: 10,
       },
       xAxis: {
         type: xNumeric ? 'value' : 'category',
@@ -438,6 +512,24 @@ const Dashboard = () => {
         axisLabel: {
           color: '#fff',
           formatter: xNumeric ? (value) => value : null,
+          margin: 15, // Extra margin to prevent cutoff
+          rotate: xData.length > 10 ? 45 : 0, // Rotate labels if there are many points
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#6d28d9', // violet-700 for axis lines
+          },
+        },
+        axisTick: {
+          lineStyle: {
+            color: '#6d28d9', // violet-700 for ticks
+          },
+        },
+        splitLine: {
+          lineStyle: {
+            color: '#4c1d95', // violet-900 for grid lines
+            opacity: 0.3,
+          },
         },
       },
       yAxis: [
@@ -449,7 +541,27 @@ const Dashboard = () => {
           nameTextStyle: {
             color: '#fff',
           },
-          axisLabel: { color: '#fff' },
+          axisLabel: {
+            color: '#fff',
+            margin: 15, // Extra margin to prevent cutoff
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#6d28d9', // violet-700 for axis lines
+            },
+          },
+          axisTick: {
+            lineStyle: {
+              color: '#6d28d9', // violet-700 for ticks
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              color: '#4c1d95', // violet-900 for grid lines
+              opacity: 0.3,
+            },
+          },
+          scale: true, // Better scale for numeric data to prevent edge clipping
         },
         secondaryYAxis.enabled
           ? {
@@ -458,10 +570,27 @@ const Dashboard = () => {
               nameLocation: 'middle',
               nameGap: 50,
               nameTextStyle: {
-                color: '#fff',
+                color: '#27ddc6', // Teal for secondary axis
               },
-              axisLabel: { color: '#fff' },
+              axisLabel: {
+                color: '#27ddc6',
+                margin: 15, // Extra margin to prevent cutoff
+              },
+              axisLine: {
+                lineStyle: {
+                  color: '#27ddc6', // Teal for secondary axis
+                },
+              },
+              axisTick: {
+                lineStyle: {
+                  color: '#27ddc6', // Teal for secondary axis
+                },
+              },
+              splitLine: {
+                show: false, // Don't show secondary grid lines to reduce clutter
+              },
               position: 'right',
+              scale: true, // Better scale for numeric data to prevent edge clipping
             }
           : undefined,
       ].filter(Boolean),
@@ -529,22 +658,127 @@ const Dashboard = () => {
       },
       tooltip: {
         trigger: 'axis',
+        backgroundColor: 'rgba(80, 60, 130, 0.9)',
+        borderColor: '#8b5cf6',
+        borderWidth: 1,
+        textStyle: {
+          color: '#fff',
+        },
+      },
+      grid: {
+        left: '10%',
+        right: '5%',
+        bottom: '15%',
+        top: '15%',
+        containLabel: true,
       },
       xAxis: {
         type: 'category',
         data: messageLabels,
-        axisLabel: { color: '#fff' },
+        axisLabel: {
+          color: '#fff',
+          margin: 10,
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#6d28d9', // violet-700
+          },
+        },
+        axisTick: {
+          lineStyle: {
+            color: '#6d28d9', // violet-700
+          },
+        },
       },
       yAxis: {
         type: 'value',
-        axisLabel: { color: '#fff' },
+        axisLabel: {
+          color: '#fff',
+          margin: 10,
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#6d28d9', // violet-700
+          },
+        },
+        axisTick: {
+          lineStyle: {
+            color: '#6d28d9', // violet-700
+          },
+        },
+        splitLine: {
+          lineStyle: {
+            color: '#4c1d95', // violet-900
+            opacity: 0.3,
+          },
+        },
+        scale: true, // Better scale for numeric data
       },
+      toolbox: {
+        feature: {
+          saveAsImage: {
+            icon: 'path://M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l2.007-7.454c.158-.474.457-.85.85-1.093A2.25 2.25 0 018 6h8v9zm-1-7a1 1 0 10-2 0 1 1 0 002 0z',
+            title: 'Save as Image',
+            iconStyle: {
+              color: '#a78bfa', // violet-400
+              borderColor: '#fff',
+              borderWidth: 1,
+            },
+            emphasis: {
+              iconStyle: {
+                color: '#8b5cf6', // violet-500 on hover
+              },
+            },
+          },
+        },
+        right: 20,
+        top: 20,
+        itemSize: 20, // Larger icon
+        itemGap: 10,
+      },
+      dataZoom: [
+        {
+          type: 'inside',
+          start: 0,
+          end: 100,
+        },
+        {
+          type: 'slider',
+          start: 0,
+          end: 100,
+          height: 20,
+          bottom: 0,
+          borderColor: '#8b5cf6', // violet-500
+          textStyle: {
+            color: '#fff',
+          },
+          fillerColor: 'rgba(139, 92, 246, 0.2)', // Light violet
+          handleStyle: {
+            color: '#8b5cf6', // violet-500
+            borderColor: '#fff',
+          },
+        },
+      ],
       series: [
         {
           type: 'line',
           data: messagesData,
+          smooth: true,
           itemStyle: {
-            color: 'rgba(39, 221, 206, 0.8)',
+            color: '#27ddc6', // Teal color
+          },
+          areaStyle: {
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                { offset: 0, color: 'rgba(39, 221, 206, 0.5)' },
+                { offset: 1, color: 'rgba(39, 221, 206, 0)' },
+              ],
+            },
           },
         },
       ],
@@ -623,7 +857,7 @@ const Dashboard = () => {
                 className={`${
                   !simulationId
                     ? 'bg-violet-900/50 cursor-not-allowed'
-                    : 'bg-violet-800 hover:shadow-button'
+                    : 'bg-violet-800 hover:bg-violet-700 hover:shadow-button'
                 } text-white px-6 py-3 rounded-full transition-colors duration-200 cursor-pointer`}
               >
                 View Dashboard
@@ -651,8 +885,16 @@ const Dashboard = () => {
   return (
     <div className="w-full min-h-screen p-4 bg-transparent">
       <Navbar />
-      <h1 className="text-2xl text-white font-bold mb-4 mt-22">Simulation Dashboard</h1>
-
+      <div className="flex justify-between items-center mb-4 mt-22">
+        <h1 className="text-2xl text-white font-bold">Simulation Dashboard</h1>
+        <Link
+          to="/simulations"
+          className="px-4 py-2 bg-violet-800 hover:bg-violet-700 hover:shadow-button text-white rounded-lg transition-colors cursor-pointer"
+        >
+          <TbArrowBackUp className="inline-block -ml-2 mr-2 mb-0.75 h-5 w-5" />
+          Return to Catalog
+        </Link>
+      </div>
       {/* Simulation Info Panel */}
       <div className="text-white">
         <div className="p-2 bg-violet-600/5 border border-violet-400 rounded mb-4">
@@ -664,7 +906,9 @@ const Dashboard = () => {
             <span className="font-bold">Agents: </span>
             {Array.from(
               new Set(
-                simulationData.runs.flatMap((run) => run.messages?.map((msg) => msg.agent) || [])
+                simulationData.runs
+                  .flatMap((run) => run.messages?.map((msg) => msg.agent) || [])
+                  .filter((agent) => agent !== 'InformationReturnAgent')
               )
             ).join(', ')}
           </p>
@@ -709,9 +953,13 @@ const Dashboard = () => {
           <h2 className="text-xl text-white font-semibold">Chart Configuration</h2>
           <button
             onClick={() => toggleSection('chartConfig')}
-            className="bg-violet-700 hover:bg-violet-600 text-white px-3 py-1 rounded-md transition-colors"
+            className="p-2 bg-violet-700 hover:bg-violet-600 text-white rounded-md transition-colors"
           >
-            {collapsibleSections.chartConfig ? 'Hide' : 'Show'}
+            {collapsibleSections.chartConfig ? (
+              <IoEyeOffOutline size={20} />
+            ) : (
+              <IoEyeOutline size={20} />
+            )}
           </button>
         </div>
 
@@ -1005,6 +1253,7 @@ const Dashboard = () => {
               option={generateChartOptions()}
               style={{ height: '500px', width: '100%' }}
               className="bg-transparent"
+              opts={{ renderer: 'canvas' }}
             />
           </div>
         ) : (
@@ -1024,9 +1273,13 @@ const Dashboard = () => {
             <h2 className="text-xl text-white font-semibold">Statistics for {chartConfig.yAxis}</h2>
             <button
               onClick={() => toggleSection('statistics')}
-              className="bg-violet-700 hover:bg-violet-600 text-white px-3 py-1 rounded-md transition-colors"
+              className="p-2 bg-violet-700 hover:bg-violet-600 text-white rounded-md transition-colors"
             >
-              {collapsibleSections.statistics ? 'Hide' : 'Show'}
+              {collapsibleSections.statistics ? (
+                <IoEyeOffOutline size={20} />
+              ) : (
+                <IoEyeOutline size={20} />
+              )}
             </button>
           </div>
 
@@ -1079,9 +1332,13 @@ const Dashboard = () => {
           <h2 className="text-xl text-white font-semibold">All Variables Summary</h2>
           <button
             onClick={() => toggleSection('variables')}
-            className="bg-violet-700 hover:bg-violet-600 text-white px-3 py-1 rounded-md transition-colors"
+            className="p-2 bg-violet-700 hover:bg-violet-600 text-white rounded-md transition-colors"
           >
-            {collapsibleSections.variables ? 'Hide' : 'Show'}
+            {collapsibleSections.variables ? (
+              <IoEyeOffOutline size={20} />
+            ) : (
+              <IoEyeOutline size={20} />
+            )}
           </button>
         </div>
 
@@ -1127,9 +1384,13 @@ const Dashboard = () => {
           <h2 className="text-xl text-white font-semibold">Data Table</h2>
           <button
             onClick={() => toggleSection('dataTable')}
-            className="bg-violet-700 hover:bg-violet-600 text-white px-3 py-1 rounded-md transition-colors"
+            className="p-2 bg-violet-700 hover:bg-violet-600 text-white rounded-md transition-colors"
           >
-            {collapsibleSections.dataTable ? 'Hide' : 'Show'}
+            {collapsibleSections.dataTable ? (
+              <IoEyeOffOutline size={20} />
+            ) : (
+              <IoEyeOutline size={20} />
+            )}
           </button>
         </div>
 

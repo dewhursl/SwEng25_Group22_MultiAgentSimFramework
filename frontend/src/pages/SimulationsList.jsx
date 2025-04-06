@@ -73,14 +73,14 @@ const SimulationItem = ({ simulation, onViewRenderer, onViewDashboard, onDelete 
             <>
               <button
                 onClick={() => onViewRenderer(simulation.simulation_id)}
-                className="px-3 py-1 bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors cursor-pointer"
+                className="px-3 py-1 bg-violet-900 hover:bg-violet-800 text-white rounded transition-colors cursor-pointer"
               >
                 <FaImage className="inline-block mb-0.75 mr-2" />
                 View Render
               </button>
               <button
                 onClick={() => onViewDashboard(simulation.simulation_id)}
-                className="px-3 py-1 bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors cursor-pointer"
+                className="px-3 py-1 bg-violet-600 hover:bg-violet-500 text-white rounded transition-colors cursor-pointer"
               >
                 <FaChartColumn className="inline-block mb-0.75 mr-2" />
                 View Dashboard
