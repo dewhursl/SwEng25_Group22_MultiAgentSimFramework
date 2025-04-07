@@ -1,6 +1,8 @@
 import sys
 import os
 
+import asyncio
+
 sys.path.append(os.path.abspath("/home/aine/sweng25/sweng25_group22_multiagentsimframework/backend/src"))
 
 from OLD.util.config import SimConfigLoader
@@ -99,7 +101,7 @@ class Simulation:
             "InformationReturnAgent",
             description="An agent that returns information about the conversation when the specified termination condition is reached.",
             model_client=self.info_model_client,
-            system_message=(
+            system_message=( 
                 f"Do not act like a human.\n"
                 f"You are a system that extracts the following information from the conversation when the termination condition: \"{self.config['termination_condition']}\" is satisfied:\n\n"
                 f"{output_variables_str}\n\n"
@@ -107,7 +109,6 @@ class Simulation:
                 f"After this, send 'TERMINATE'\n"
             )
         )
-
         self.agents.append(information_return_agent)
 
         print("Setting up SelectorGroupChat")
@@ -155,3 +156,7 @@ class Simulation:
     #             partial_match = True
         
     #     return results, partial_match, full_match
+
+if __name__ == "__main__":
+    sim = Simulation("backend/src/sim_configs/sim_config.json")  
+    asyncio.run(sim.run())
