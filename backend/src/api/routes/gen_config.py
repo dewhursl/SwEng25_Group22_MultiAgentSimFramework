@@ -67,7 +67,7 @@ def generate_config():
                 "output_variables": [
                  {
                     "name": "First Output Variable Name",
-                    "type": "First Output Variable Type (e.g. String, Number, etc)"
+                    "type": "First Output Variable Type (e.g. String, Number, Boolean)"
                  },
                  {
                     "name": "placeholder2",
