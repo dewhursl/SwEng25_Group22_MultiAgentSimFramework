@@ -74,7 +74,6 @@ const Dashboard = () => {
 
   // Get simulationId from URL params if available
   const params = useParams();
-  const location = useLocation();
 
   // Detect if we should show the opening screen
   useEffect(() => {
@@ -791,9 +790,9 @@ const Dashboard = () => {
         <Navbar />
         <div className="fixed inset-0 flex items-center justify-center">
           <div className="bg-violet-900/5 backdrop-blur-3xl p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-violet-600/60 shadow-card text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-violet-400">Select a simulation</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-violet-400">Select a Simulation</h2>
             <p className="text-lg text-gray-400 mt-4">
-              Pick the simulation that you want to analyse.
+              Choose the simulation that you want to analyse.
             </p>
 
             {/* Simulation List as Cards */}

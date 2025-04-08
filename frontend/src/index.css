@@ -13,7 +13,6 @@
   --shadow-card: 0px 1px 20px 0px rgba(139, 92, 246, 1);
 }
 
-
 * {
   scroll-behavior: smooth;
 }
@@ -53,5 +52,3 @@ body {
   top: 0;
   right: 0; /* Or 'left: 0;' depending on where you want the panel */
 }
-
-w-1/4 max-h-screen bg-midnight p-4 overflow-y-auto border shadow-lg shadow-violet-600/60"

@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { GrConfigure } from "react-icons/gr";
-import { MdOutline3dRotation } from "react-icons/md";
-import { MdDashboard } from "react-icons/md";
 import { FaListUl } from "react-icons/fa6";
+import { FaImage } from 'react-icons/fa6';
+import { RiDashboardHorizontalFill } from "react-icons/ri";
 
 export const navLinks = [
     {
@@ -22,13 +22,13 @@ export const navLinks = [
         id: 3,
         name: 'Renderer',
         href: '/renderer',
-        icon: MdOutline3dRotation,
+        icon: FaImage,
     },
     {
         id: 4,
         name: 'Dashboard',
         href: '/dashboard',
-        icon: MdDashboard,
+        icon: RiDashboardHorizontalFill,
     },
 ];
 
@@ -43,12 +43,12 @@ export const features = [
         title: '3D Simulation Renderer',
         description:
             'Visualize multi-agent interactions in real-time, including adversarial or partial-information scenarios.',
-        icon: MdOutline3dRotation,
+        icon: FaImage,
     },
     {
         title: 'Analytics & Insights',
         description:
             'Track performance metrics, outcome distributions, and refine your approach with continuous feedback.',
-        icon: MdDashboard,
+        icon: RiDashboardHorizontalFill,
     },
 ];

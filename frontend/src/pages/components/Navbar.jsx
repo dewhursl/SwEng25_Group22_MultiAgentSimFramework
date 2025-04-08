@@ -14,7 +14,9 @@ const Navbar = () => {
                 href;
               }}
             >
-              <Icon className="text-violet-500 text-xl" />
+              <Icon
+                className={`text-violet-500 ${name === 'Dashboard' ? 'h-6 w-6 -mr-0.75' : 'h-5 w-5'}`}
+              />
               {name}
             </a>
           </li>

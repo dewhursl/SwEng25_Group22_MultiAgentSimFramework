@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { SIMULATION_DATA } from '../constants/simulationData';
 import Scene3D from './components/Scene3D';
 import Scene2D2 from './components/2D2/index';
@@ -21,16 +21,37 @@ const Renderer = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [initialized, setInitialized] = useState(false);
-  const agentIndexRef = useRef(0); 
-  const agentImagesRef = useRef({}); 
+  const agentIndexRef = useRef(0);
+  const agentImagesRef = useRef({});
   const [agentSpeaking, setAgentSpeaking] = useState('agent1');
   const [data, setData] = useState(null); // Initialize state to store data
 
-
-
+  // State for simulation catalog
+  const [simulationCatalog, setSimulationCatalog] = useState([]);
+  const [catalogLoading, setCatalogLoading] = useState(false);
 
   // Get simulationId from URL params
   const params = useParams();
+  const navigate = useNavigate();
+
+  // Fetch simulation catalog
+  const fetchSimulationCatalog = async () => {
+    setCatalogLoading(true);
+    try {
+      const catalog = await apiService.getSimulationsCatalog();
+      setSimulationCatalog(catalog);
+      setCatalogLoading(false);
+    } catch (error) {
+      console.error('Error fetching simulation catalog:', error);
+      setError('Failed to load simulation catalog. Please try again later.');
+      setCatalogLoading(false);
+    }
+  };
+
+  // Handle direct simulation selection (when clicking a card)
+  const handleDirectSimulationSelect = (simulationId) => {
+    navigate(`/renderer/${simulationId}`);
+  };
 
   // Check for URL parameters on component mount
   useEffect(() => {
@@ -44,9 +65,11 @@ const Renderer = () => {
     } else {
       // If no simulationId in URL, show the opening screen
       setIsOpeningScreenVisible(true);
+      fetchSimulationCatalog();
+      setLoading(false);
     }
     setInitialized(true);
-  }, []);
+  }, [params.simulationId]);
 
   // Function to load simulation data based on ID
   const loadSimulationData = async (id) => {
@@ -79,7 +102,6 @@ const Renderer = () => {
         const formattedConversation = data.runs[selectedRun].messages.map((msg) => ({
           agent: msg.agent,
           message: msg.message,
-
         }));
         setConversation(formattedConversation);
         setLoading(false);
@@ -98,12 +120,10 @@ const Renderer = () => {
         message: msg.message,
       }));
       setConversation(formattedConversation);
-    } else if(simulationId){
+    } else if (simulationId) {
       loadSimulationData(simulationId);
     }
   }, [selectedRun, simulationId]);
-
-
 
   const getUniqueAgentCount = (conversation) => {
     const uniqueAgents = [
@@ -113,7 +133,7 @@ const Renderer = () => {
           .map((msg) => msg.agent)
       ),
     ];
-  
+
     return uniqueAgents;
   };
 
@@ -124,7 +144,7 @@ const Renderer = () => {
       const uniqueAgents = getUniqueAgentCount(conversation); // Get the list of unique agents
       // Create a map to store agent names and their assigned number
       let agentMap = {};
-        uniqueAgents.forEach((agent, index) => {
+      uniqueAgents.forEach((agent, index) => {
         agentMap[agent] = (index + 1).toString(); // Map each agent to 1, 2, 3...
       });
       // Find the agent speaking at the current message index
@@ -142,9 +162,6 @@ const Renderer = () => {
       setAgentSpeaking('none');
     }
   }, [currentMessageIndex, conversation]);
-
-
-
 
   // Handle Simulation ID input change
   const handleSimulationIdChange = (event) => {
@@ -279,13 +296,10 @@ const Renderer = () => {
     setIsSimulationOver(false);
   };
 
-  
-
   function getAgentImage(agent, avatarOptions) {
-
     if (agentImagesRef.current[agent]) {
       return `/images/${agentImagesRef.current[agent]}`;
-    } 
+    }
     let assignedImage = null;
 
     if (agentIndexRef.current < avatarOptions.length) {
@@ -296,7 +310,6 @@ const Renderer = () => {
     }
     return `/images/${assignedImage || 'default.png'}`;
   }
-
 
   // Show a loading screen while initializing
   if (!initialized) {
@@ -314,49 +327,53 @@ const Renderer = () => {
 
       {/* Opening Screen */}
       {isOpeningScreenVisible && (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-violet-900/5 backdrop-blur-3xl p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-violet-600/60 shadow-card text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-violet-400">Enter Simulation ID</h2>
-            <p className="text-lg text-gray-400 mt-4">
-              Please enter a simulation ID to view the dashboard.
-            </p>
+        <div className="w-full min-h-screen">
+          <div className="fixed inset-0 flex items-center justify-center">
+            <div className="bg-violet-900/5 backdrop-blur-3xl p-10 w-96 md:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-center rounded-xl shadow-violet-600/60 shadow-card text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-violet-400">
+                Select a Simulation
+              </h2>
+              <p className="text-lg text-gray-400 mt-4">
+                Choose the simulation that you would like to render.
+              </p>
 
-            {/* Input Simulation ID */}
-            <input
-              type="text"
-              value={simulationId}
-              onChange={handleSimulationIdChange}
-              placeholder="Enter Simulation ID"
-              className="mt-4 mb-2 p-2 text-white border border-gray-300 rounded-lg bg-transparent focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors duration-200"
-            />
+              {/* Simulation List as Cards */}
+              <div className="mt-6">
+                {simulationCatalog.map((sim) => (
+                  <div
+                    key={sim.simulation_id}
+                    onClick={() => setSimulationId(sim.simulation_id)}
+                    className={`p-3 my-2 flex justify-between items-center bg-violet-900/15 border rounded-lg text-left cursor-pointer transition-colors duration-200 ${
+                      simulationId === sim.simulation_id
+                        ? 'bg-violet-900/30 border border-violet-500'
+                        : 'border border-violet-400/50 hover:bg-violet-900/30'
+                    }`}
+                  >
+                    <p className="text-white">{sim.name || `Simulation ${sim.simulation_id}`}</p>
+                    {simulationId === sim.simulation_id && (
+                      <span className="text-emerald-500 text-xl">&#x2713;</span> // Checkmark icon
+                    )}
+                  </div>
+                ))}
+              </div>
 
-            {/* Error Message */}
-            {error && <p className="text-red-500 mt-2">{error}</p>}
+              {/* Error Message */}
+              {error && <p className="text-red-500 mt-4">{error}</p>}
 
-            {/* Loading indicator */}
-            {loading && <p className="text-blue-500 mt-2">Loading simulation data...</p>}
-
-            {/* Buttons */}
-            <div className="mt-4 space-x-4">
-              <button
-                onClick={handleStartSimulation}
-                disabled={loading}
-                className={`${
-                  loading ? 'bg-gray-500' : 'bg-violet-800 hover:shadow-button'
-                } text-white px-6 py-3 rounded-full transition-colors cursor-pointer mb-4`}
-              >
-                {loading ? 'Loading...' : 'View Simulation'}
-              </button>
-
-              <button
-                onClick={handleSavedSimulation}
-                disabled={loading}
-                className={`${
-                  loading ? 'bg-gray-500' : 'bg-violet-800 hover:shadow-button'
-                } text-white px-6 py-3 rounded-full transition-colors cursor-pointer`}
-              >
-                View Saved Simulation
-              </button>
+              {/* View Render Button */}
+              <div className="mt-6">
+                <button
+                  onClick={() => handleDirectSimulationSelect(simulationId)}
+                  disabled={!simulationId}
+                  className={`${
+                    !simulationId
+                      ? 'bg-violet-900/50 cursor-not-allowed'
+                      : 'bg-violet-800 hover:bg-violet-700 hover:shadow-button'
+                  } text-white px-6 py-3 rounded-full transition-colors duration-200 cursor-pointer`}
+                >
+                  View Render
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -383,26 +400,28 @@ const Renderer = () => {
           </button>
 
           {/* Dropdown for selecting simulation run */}
-          
-            <div className="absolute top-20 left-1/4 transform -translate-x-1/2 z-10">
-              <select
-                value={selectedRun}
-                onChange={handleRunChange}
-                className="bg-white text-gray-800 font-bold py-2 px-4 rounded border"
-              >
-                {conversationData.runs.map((run, index) => (
-                  <option key={index} value={index}>
-                    {`Run ${index + 1}`}
-                  </option>
-                ))}
-              </select>
-            </div>
-          
+
+          <div className="absolute top-20 left-1/4 transform -translate-x-1/2 z-10">
+            <select
+              value={selectedRun}
+              onChange={handleRunChange}
+              className="bg-white text-gray-800 font-bold py-2 px-4 rounded border"
+            >
+              {conversationData.runs.map((run, index) => (
+                <option key={index} value={index}>
+                  {`Run ${index + 1}`}
+                </option>
+              ))}
+            </select>
+          </div>
 
           {/* Scene and side Panel */}
           <div className="flex flex-row flex-1 w-full mt-16 overflow:auto">
             {/* Scene Container (takes remaining space) */}
-            <div className="flex flex-1 flex-col justify-center items-center relative min-h-screen" style={{ marginTop: '-20px', overflow: 'hidden' }}>
+            <div
+              className="flex flex-1 flex-col justify-center items-center relative min-h-screen"
+              style={{ marginTop: '-20px', overflow: 'hidden' }}
+            >
               {getScene()}
             </div>
 
@@ -451,18 +470,16 @@ const Renderer = () => {
 
             {/* side Conversation Panel (only visible in 2D render) */}
             {context === '2d' && isPanelVisible && (
-             <div
-             className="w-1/4 max-h-screen bg-midnight p-4 overflow-auto border shadow-lg shadow-violet-600/60"
-             style={{
-              maxHeight: 'calc(100vh - 64px)', // Ensure the panel doesn't exceed screen height minus top margin
-              position: 'fixed', // Fix the side panel in place
-              top: '64px', // Adjust top offset for header
-              right: 0, // Position the panel on the right
-              zIndex: 10, // Make sure it appears above other content
-            }}
-
-              
-           >
+              <div
+                className="w-1/4 max-h-screen bg-midnight p-4 overflow-auto border shadow-lg shadow-violet-600/60"
+                style={{
+                  maxHeight: 'calc(100vh - 64px)', // Ensure the panel doesn't exceed screen height minus top margin
+                  position: 'fixed', // Fix the side panel in place
+                  top: '64px', // Adjust top offset for header
+                  right: 0, // Position the panel on the right
+                  zIndex: 10, // Make sure it appears above other content
+                }}
+              >
                 <h2 className="text-lg font-bold mt-2 mb-2 text-white">Conversation</h2>
 
                 <div className="space-y-4">
@@ -481,26 +498,25 @@ const Renderer = () => {
                             .map((msg) => msg.agent)
                         ),
                       ];
-  
+
                       // Decide on avatar options (2 or 3 images based on agent count)
                       const avatarOptions =
                         uniqueAgents.length >= 3
                           ? ['agent1.png', 'agent2.png', 'agent3.png']
                           : ['agent1.png', 'agent2.png'];
-                      
-  
+
                       // Render the message with avatar
                       return (
                         <div key={index} className="flex items-start space-x-4">
                           {/* Avatar Circle */}
                           <div className="min-w-10 w-10 h-10 flex-shrink-0 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden">
                             <img
-                              src={getAgentImage(msg.agent, avatarOptions)} 
+                              src={getAgentImage(msg.agent, avatarOptions)}
                               alt={`${msg.agent} Avatar`}
                               className="w-full h-full object-cover"
                             />
                           </div>
-  
+
                           {/* Message */}
                           <div className="flex-grow p-2 bg-violet-950/20 border border-violet-400 rounded-lg">
                             <p className="text-sm text-gray-200">
@@ -524,26 +540,25 @@ const Renderer = () => {
 
                 {/* Check for the selected run's output variables */}
                 {simulationId === 'saved' ? (
-                conversationData.runs[selectedRun]?.output_variables ? (
+                  conversationData.runs[selectedRun]?.output_variables ? (
+                    <div className="mt-6 text-sm text-gray-700">
+                      <h3 className="font-bold text-gray-800">End result:</h3>
+                      {/* Loop through output variables and display them dynamically */}
+                      {conversationData.runs[selectedRun].output_variables.map((output, index) => (
+                        <div key={index}>
+                          <p>
+                            <strong>{output.name.replace('_', ' ').toUpperCase()}:</strong>{' '}
+                            {output.value}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null
+                ) : data.runs[selectedRun]?.output_variables ? (
                   <div className="mt-6 text-sm text-gray-700">
                     <h3 className="font-bold text-gray-800">End result:</h3>
                     {/* Loop through output variables and display them dynamically */}
-                    {conversationData.runs[selectedRun].output_variables.map((output, index) => (
-                      <div key={index}>
-                        <p>
-                          <strong>{output.name.replace('_', ' ').toUpperCase()}:</strong>{' '}
-                          {output.value}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                ) : null
-              ) : (
-                data.runs[selectedRun]?.output_variables ? (
-                  <div className="mt-6 text-sm text-gray-700">
-                    <h3 className="font-bold text-gray-800">End result:</h3>
-                    {/* Loop through output variables and display them dynamically */}
-                    {console.log("Output Variables: ", data.runs[selectedRun].output_variables)}
+                    {console.log('Output Variables: ', data.runs[selectedRun].output_variables)}
                     {data.runs[selectedRun].output_variables.map((output, index) => (
                       <div key={index}>
                         <p>
@@ -553,10 +568,7 @@ const Renderer = () => {
                       </div>
                     ))}
                   </div>
-                ) : null
-              )}
-
-
+                ) : null}
 
                 <button
                   onClick={handleRestart}
