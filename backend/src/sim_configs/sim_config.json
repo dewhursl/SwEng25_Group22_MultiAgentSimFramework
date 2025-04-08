@@ -8,7 +8,7 @@
     "agents": [
       {
         "name": "SalesAgent",
-        "description": "Agent responsible for providing car sales information",
+        "description": "Agent responsible for providing car sales information, provide concise 1-2 sentences, with relevant information",
         "parameters": {
           "inventory": ["Sedan", "SUV", "Truck", "Electric"],
           "region": "North America",
@@ -18,7 +18,7 @@
       },
       {
         "name": "CustomerAgent",
-        "description": "Agent acting as a customer browsing for a car",
+        "description": "Agent acting as a customer browsing for a car, provide concise 1-2 sentences",
         "parameters": {
           "preferred_model": "Sedan",
           "budget": 30000,
