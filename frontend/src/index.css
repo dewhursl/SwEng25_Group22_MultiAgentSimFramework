@@ -52,3 +52,15 @@ body {
   top: 0;
   right: 0; /* Or 'left: 0;' depending on where you want the panel */
 }
+
+.custom-select option {
+  background-color: #250b47;
+  /* deep violet */
+  color: #ffffff;
+  /* white text */
+}
+
+.custom-select option:hover {
+  background-color: #7c2ae8;
+  /* lighter violet on hover? */
+}

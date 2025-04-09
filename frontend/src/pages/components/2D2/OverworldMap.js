@@ -1,4 +1,4 @@
-import  { Person } from "./Person.js";
+import { Person } from "./Person.js";
 import { utils } from "./utils.js";
 import { GameObject } from "./GameObject.js";
 import { OverworldEvent } from "./OverworldEvent.js";
@@ -17,32 +17,32 @@ export class OverworldMap {
         this.lowerImage.src = config.lowerSrc;
         this.lowerImageLoaded = false;
         this.lowerImage.onload = () => {
-                this.lowerImageLoaded = true;
-                console.log(`Loaded image: ${this.lowerImage.src}`);
-            };
+            this.lowerImageLoaded = true;
+            console.log(`Loaded image: ${this.lowerImage.src}`);
+        };
         this.lowerImage.onerror = () => {
-                console.error(`Failed to load image: ${config.lowerSrc}`);
-            };
+            console.error(`Failed to load image: ${config.lowerSrc}`);
+        };
 
         this.upperImage = new Image();
         this.upperImage.src = config.upperSrc;
         this.upperImageLoaded = false;
         this.upperImage.onload = () => {
-                this.upperImageLoaded = true;   
-                console.log(`Loaded image: ${this.upperImage.src}`);
-            };
+            this.upperImageLoaded = true;
+            console.log(`Loaded image: ${this.upperImage.src}`);
+        };
         this.upperImage.onerror = () => {
-                console.error(`Failed to load image: ${config.upperSrc}`);
-            };
+            console.error(`Failed to load image: ${config.upperSrc}`);
+        };
 
         this.isCutscenePlaying = false;
     }
 
     drawLowerImage(ctx, cameraPerson) {
-        if(this.lowerImageLoaded) {
+        if (this.lowerImageLoaded) {
             //console.log("Drawing lower image...");
             ctx.drawImage(
-                this.lowerImage, 
+                this.lowerImage,
                 0,//utils.withGrid(10.5) - cameraPerson.x,
                 0,//utils.withGrid(6) - cameraPerson.y
             )
@@ -50,10 +50,10 @@ export class OverworldMap {
     }
 
     drawUpperImage(ctx, cameraPerson) {
-        if(this.upperImageLoaded) {
+        if (this.upperImageLoaded) {
             //console.log("Drawing upper image...");
             ctx.drawImage(
-                this.upperImage, 
+                this.upperImage,
                 0,//utils.withGrid(10.5) - cameraPerson.x,
                 0,//utils.withGrid(6) - cameraPerson.y
             )
@@ -61,7 +61,7 @@ export class OverworldMap {
     }
 
     isSpaceTaken(currentX, currentY, direction) {
-        const {x,y} = utils.nextPosition(currentX, currentY, direction);
+        const { x, y } = utils.nextPosition(currentX, currentY, direction);
         return this.walls[`${x},${y}`] || false;
     }
 
@@ -83,12 +83,12 @@ export class OverworldMap {
             }
         });
         this.gameObjects = {}; // Clear all game objects
-    }   
+    }
 
     async startCutscene(events) {
         this.isCutscenePlaying = true;
 
-        for(let i = 0; i < events.length; i++) {
+        for (let i = 0; i < events.length; i++) {
             const eventHandler = new OverworldEvent({
                 event: events[i],
                 map: this,
@@ -99,17 +99,17 @@ export class OverworldMap {
         this.isCutscenePlaying = false;
     }
 
-    addWall(x,y) {
+    addWall(x, y) {
         this.walls[`${x},${y}`] = true;
     }
-    removeWall(x,y) {
+    removeWall(x, y) {
         delete this.walls[`${x},${y}`]
     }
     moveWall(wasX, wasY, direction) {
         console.log(`Moving wall from (${wasX}, ${wasY}) in direction: ${direction}`);
         this.removeWall(wasX, wasY);
-        const {x,y} = utils.nextPosition(wasX, wasY, direction);
-        this.addWall(x,y);
+        const { x, y } = utils.nextPosition(wasX, wasY, direction);
+        this.addWall(x, y);
     }
 
     destroy() {
@@ -155,7 +155,7 @@ window.OverworldMaps = {
                     { type: "stand", direction: "right", time: 4800 },
                     { type: "stand", direction: "up", time: 1200 },
                 ]
-                
+
             }),
             customer: new Person({
                 agentType: "agent1",
@@ -175,24 +175,24 @@ window.OverworldMaps = {
             }),
         },
         walls: {
-            [utils.asGridCoord(7,6)] : true, [utils.asGridCoord(1,3)] : true, 
-            [utils.asGridCoord(8,6)] : true, [utils.asGridCoord(2,3)] : true, 
-            [utils.asGridCoord(7,7)] : true, [utils.asGridCoord(3,4)] : true, 
-            [utils.asGridCoord(8,7)] : true, [utils.asGridCoord(4,4)] : true, 
-            [utils.asGridCoord(5,3)] : true, [utils.asGridCoord(8,10)] : true, 
-            [utils.asGridCoord(6,4)] : true, [utils.asGridCoord(7,10)] : true, 
-            [utils.asGridCoord(7,3)] : true, [utils.asGridCoord(6,10)] : true, 
-            [utils.asGridCoord(8,4)] : true, [utils.asGridCoord(5,11)] : true, 
-            [utils.asGridCoord(9,3)] : true, [utils.asGridCoord(4,10)] : true, 
-            [utils.asGridCoord(10,3)] : true, [utils.asGridCoord(3,10)] : true, 
-            [utils.asGridCoord(11,4)] : true, [utils.asGridCoord(2,10)] : true, 
-            [utils.asGridCoord(11,5)] : true, [utils.asGridCoord(1,10)] : true, 
-            [utils.asGridCoord(11,6)] : true, [utils.asGridCoord(0,9)] : true, 
-            [utils.asGridCoord(11,7)] : true, [utils.asGridCoord(0,8)] : true, 
-            [utils.asGridCoord(11,8)] : true, [utils.asGridCoord(0,7)] : true, 
-            [utils.asGridCoord(11,9)] : true, [utils.asGridCoord(0,6)] : true, 
-            [utils.asGridCoord(10,10)] : true, [utils.asGridCoord(0,5)] : true, 
-            [utils.asGridCoord(9,10)] : true, [utils.asGridCoord(0,4)] : true, 
+            [utils.asGridCoord(7, 6)]: true, [utils.asGridCoord(1, 3)]: true,
+            [utils.asGridCoord(8, 6)]: true, [utils.asGridCoord(2, 3)]: true,
+            [utils.asGridCoord(7, 7)]: true, [utils.asGridCoord(3, 4)]: true,
+            [utils.asGridCoord(8, 7)]: true, [utils.asGridCoord(4, 4)]: true,
+            [utils.asGridCoord(5, 3)]: true, [utils.asGridCoord(8, 10)]: true,
+            [utils.asGridCoord(6, 4)]: true, [utils.asGridCoord(7, 10)]: true,
+            [utils.asGridCoord(7, 3)]: true, [utils.asGridCoord(6, 10)]: true,
+            [utils.asGridCoord(8, 4)]: true, [utils.asGridCoord(5, 11)]: true,
+            [utils.asGridCoord(9, 3)]: true, [utils.asGridCoord(4, 10)]: true,
+            [utils.asGridCoord(10, 3)]: true, [utils.asGridCoord(3, 10)]: true,
+            [utils.asGridCoord(11, 4)]: true, [utils.asGridCoord(2, 10)]: true,
+            [utils.asGridCoord(11, 5)]: true, [utils.asGridCoord(1, 10)]: true,
+            [utils.asGridCoord(11, 6)]: true, [utils.asGridCoord(0, 9)]: true,
+            [utils.asGridCoord(11, 7)]: true, [utils.asGridCoord(0, 8)]: true,
+            [utils.asGridCoord(11, 8)]: true, [utils.asGridCoord(0, 7)]: true,
+            [utils.asGridCoord(11, 9)]: true, [utils.asGridCoord(0, 6)]: true,
+            [utils.asGridCoord(10, 10)]: true, [utils.asGridCoord(0, 5)]: true,
+            [utils.asGridCoord(9, 10)]: true, [utils.asGridCoord(0, 4)]: true,
         }
     },
     Kitchen: {

@@ -826,7 +826,7 @@ const Dashboard = () => {
                 className={`${
                   !simulationId
                     ? 'bg-violet-900/50 cursor-not-allowed'
-                    : 'bg-violet-800 hover:bg-violet-700 hover:shadow-button'
+                    : 'bg-violet-800 hover:shadow-button'
                 } text-white px-6 py-3 rounded-full transition-colors duration-200 cursor-pointer`}
               >
                 View Dashboard
@@ -858,7 +858,7 @@ const Dashboard = () => {
         <h1 className="text-2xl text-white font-bold">Simulation Dashboard</h1>
         <Link
           to="/simulations"
-          className="px-4 py-2 bg-violet-800 hover:bg-violet-700 hover:shadow-button text-white rounded-lg transition-colors cursor-pointer"
+          className="px-4 py-2 bg-violet-800 hover:shadow-button text-white rounded-lg transition-colors cursor-pointer"
         >
           <TbArrowBackUp className="inline-block -ml-2 mr-2 mb-0.75 h-5 w-5" />
           Return to Catalog

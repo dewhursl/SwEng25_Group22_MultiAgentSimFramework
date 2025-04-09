@@ -79,7 +79,7 @@ const Select = ({ label, description, options, value, onChange }) => {
       <h1 className="font-bold text-lg">{label}</h1>
       <p className="text-gray-300 text-sm mb-2">{description}</p>
       <select
-        className="mt-1 p-2 rounded-lg outline-none bg-violet-700 focus:bg-slate-600 border border-gray-600"
+        className="custom-select mt-1 p-2 rounded-lg outline-none bg-violet-900/10 focus:bg-violet-900/20 border border-violet-400/40"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
@@ -121,7 +121,7 @@ const AgentsList = ({ agents, setAgents }) => {
   };
 
   return (
-    <div className="flex flex-col p-3 mt-3 border border-violet-400/40 rounded-lg text-white bg-transparent">
+    <div className="flex flex-col p-3 mt-3 border border-violet-400/40 rounded-lg text-white bg-transparent hover:border-violet-400">
       <h1 className="font-bold text-lg">Agents</h1>
       <p className="text-gray-300 text-sm">
         Define the agents that will participate in the simulation
@@ -162,6 +162,8 @@ const AgentsList = ({ agents, setAgents }) => {
               value={agent.prompt}
               onChange={(value) => updateAgent(index, 'prompt', value)}
               placeholder="e.g., You are a judge presiding over a court case..."
+              container="bg-transparent border border-violet-400/40 hover:border-violet-400"
+              textArea="bg-violet-900/10"
             />
           </div>
         ))}
@@ -197,7 +199,7 @@ const OutputVariablesList = ({ variables, setVariables }) => {
   };
 
   return (
-    <div className="flex flex-col p-3 mt-3 border border-violet-400/40 rounded-lg text-white bg-transparent">
+    <div className="flex flex-col p-3 mt-3 border border-violet-400/40 rounded-lg text-white bg-transparent hover:border-violet-400">
       <h1 className="font-bold text-lg">Output Variables</h1>
       <p className="text-gray-300 text-sm">
         Define the variables to be extracted from the simulation
@@ -574,7 +576,7 @@ const Configurator = () => {
                 value={terminationCondition}
                 onChange={setTerminationCondition}
                 placeholder="e.g., The judge has delivered a verdict"
-                container="border border-violet-400/40"
+                container="border border-violet-400/40 hover:border-violet-400"
                 textArea="bg-violet-900/10"
               />
 

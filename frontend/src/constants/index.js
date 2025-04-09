@@ -36,17 +36,17 @@ export const features = [
     {
         title: 'Agent Configurator',
         description:
-            'Define roles, goals, and hyperparameters. Quickly tweak parameters for repeated simulations.',
+            'Define roles, goals, and hyperparameters. Queue your simulation. Let us do the rest.',
         icon: GrConfigure,
     },
     {
-        title: '3D Simulation Renderer',
+        title: 'Simulation Renderer',
         description:
-            'Visualize multi-agent interactions in real-time, including adversarial or partial-information scenarios.',
+            'Visualize multi-agent interactions, including adversarial or partial-information scenarios.',
         icon: FaImage,
     },
     {
-        title: 'Analytics & Insights',
+        title: 'Analytics Dashboard',
         description:
             'Track performance metrics, outcome distributions, and refine your approach with continuous feedback.',
         icon: RiDashboardHorizontalFill,

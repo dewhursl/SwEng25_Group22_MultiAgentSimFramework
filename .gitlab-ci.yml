@@ -35,8 +35,8 @@ test_simulation:
     - python3 --version
     - pip3 install -r backend/src/requirements.txt
   script:
-    # - python3 backend/src/main.py
-    - echo "temporarily disabled"
+    # -python3 backend/src/main.py
+    echo "temporarily disabled"
 
 install_dependencies:
   <<: *frontend_template

@@ -17,7 +17,7 @@ const Scene2D2 = () => {
   }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
-    <div className="game-container ">
+    <div className="game-container">
       <canvas className="game-canvas" width="352" height="198"></canvas>
     </div>
   );
