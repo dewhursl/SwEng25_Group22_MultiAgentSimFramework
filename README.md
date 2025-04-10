@@ -26,13 +26,12 @@
 
 To run this project locally, ensure you have the following installed:
 
-<ul>
-    <li>Node.js with 'npm' installed</li>
-    <li>Python 3.8+ with 'pip' installed</li>
-    <li>MongoDB – a local MongoDB instance is required for database operations.</li>
-    <strong>(Optional):</strong> MongoDB Compass is recommended to visualize how the queue, catalog, and output syncs with the backend.
-    <li>OpenAI API Key</li>
-</ul>
+- Node.js with 'npm' installed
+- Python 3.8+ with 'pip' installed
+- MongoDB – a local MongoDB instance is required for database operations.
+- OpenAI API Key
+
+**(Optional):** MongoDB Compass is recommended to visualize how the queue, catalog, and output syncs with the backend.
 
 ## 🚀 Getting Started
 
