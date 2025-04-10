@@ -84,3 +84,7 @@ Here are some planned improvements and future considerations for the project:
 
 - ☁️ **Deployment & Hosting**  
   Host the full-stack application online for public access, enabling real-time usage and persistent data storage.
+
+## 🔓 License
+
+This project is licensed under the terms of the [MIT License](LICENSE).
