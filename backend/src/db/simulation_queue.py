@@ -39,7 +39,7 @@ class SimulationQueue(MongoBase):
 
             for variable in config["output_variables"]:
                 if "name" in variable and variable["name"] and \
-                    "type" in variable and (variable["type"] == "String" or variable["type"] == "Number"):
+                    "type" in variable:
                     continue
                 else:
                     return None
